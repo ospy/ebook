@@ -44,8 +44,8 @@
                         <label>
                             验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
                         <input id="reg_ValidateCode" class="text-input  typeahead validatecode" type="text" onblur="checkCode();" />&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="/Code/ValidateCode.aspx?a=1" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
-                            onclick="change(this);" />
+                        <img src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
+                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" />
                         &nbsp;&nbsp;<span id="reg_ValidateCodeTip"></span>
                     </div>
                     <div class="form_item">
@@ -98,20 +98,21 @@
                 check1 = false;
             } else {
                 var reg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-                if (!reg.test(email)) {
+               // if (!reg.test(email)) {
+                if (1==2) {
                     $("#reg_emailTip").removeClass("onCorrect");
                     $("#reg_emailTip").addClass("onError").html("电子邮箱输入有误！");
                     check1 = false;
                 } else {
                     if (email.length > 5 && email.length < 31) {
                         $.ajax({
-                            url: "/Member/CheckEmail",
+                            url: "../check.do",
                             type: 'post',
                             async: false,
                             dataType: 'text',
-                            data: { Email: email },
+                            data: { value: email,type:'email' },
                             success: function (data) {
-                                if (data == "true") {
+                                if (data == "false") {
                                     $("#reg_emailTip").removeClass("onCorrect");
                                     $("#reg_emailTip").addClass("onError").html("已使用，请更换！");
                                     check1 = false;
@@ -150,13 +151,13 @@
                         check2 = false;
                     } else {
                         $.ajax({
-                            url: "/Member/CheckName",
+                            url: "../check.do",
                             type: 'post',
                             async: false,
                             dataType: 'text',
-                            data: { uName: userName },
+                            data: { value: userName,type:'name' },
                             success: function (data) {
-                                if (data == "true") {
+                                if (data == "false") {
                                     $("#reg_usernameTip").removeClass("onCorrect");
                                     $("#reg_usernameTip").addClass("onError").html("该用户名已使用！");
                                     check2 = false;
@@ -227,7 +228,22 @@
                 check5 = false;
                 return;
             }
-            var ver_code = getCookie("VCode").toLowerCase();
+           // var ver_code = getCookie("VCode").toLowerCase();
+           var ver_code ;
+            $.ajax({
+                            url: "../code.do",
+                            type: 'post',
+                            async: false,
+                            dataType: 'text',
+                            data: { name: 'user_reg' },
+                            success: function (data) {
+                            	ver_code  = data; 
+                            },
+                            error: function () {
+                                alert("获取验证码失败，请联系管理员");
+                            }
+                        });
+
             if (ver_code == v_code.toLowerCase()) {
                 $("#reg_ValidateCodeTip").addClass("onCorrect").html("正确！");
                 check5 = true;
