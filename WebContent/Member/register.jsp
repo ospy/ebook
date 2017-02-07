@@ -106,7 +106,7 @@
                 } else {
                     if (email.length > 5 && email.length < 31) {
                         $.ajax({
-                            url: "../check.do",
+                            url: "/check.do",
                             type: 'post',
                             async: false,
                             dataType: 'text',
@@ -114,7 +114,7 @@
                             success: function (data) {
                                 if (data == "false") {
                                     $("#reg_emailTip").removeClass("onCorrect");
-                                    $("#reg_emailTip").addClass("onError").html("已使用，请更换！");
+                                    $("#reg_emailTip").addClass("onError").html("已使用！");
                                     check1 = false;
                                 } else {
                                     $("#reg_emailTip").addClass("onCorrect").html("正确！");
@@ -151,7 +151,7 @@
                         check2 = false;
                     } else {
                         $.ajax({
-                            url: "../check.do",
+                            url: "/check.do",
                             type: 'post',
                             async: false,
                             dataType: 'text',
