@@ -58,7 +58,7 @@ public class SecurityImageTool
     int codeY = height - 10;
     for (int i = 0; i < codeLength; i++) {
       g.setColor(new Color(19, 148, RandomUtils.getInt(Integer.valueOf(100), Integer.valueOf(246))));
-      g.setFont(new Font(FONT_FAMILY[RandomUtils.getInt(Integer.valueOf(0), Integer.valueOf(10))], 1, fSize));
+      g.setFont(new Font(FONT_FAMILY[RandomUtils.getInt(Integer.valueOf(0), Integer.valueOf(10))], 1, fSize+9));
       g.drawString(String.valueOf(securityCode.charAt(i)), i * 16 + 5, codeY);
     }
 
