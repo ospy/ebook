@@ -50,7 +50,7 @@ ol, ul {
 }
 
 .ui-roundstep-orange, .ui-roundstep-blue, .ui-roundstep-current em, .ui-roundstep-finish em, .ui-roundstep-todo em, .ui-roundstep-success em {
-    background-image: url("/images/reg_back.png");
+    background-image: url("/Images/reg_back.png");
     background-repeat: no-repeat;
 }
 
@@ -173,7 +173,7 @@ ol, ul {
 }
 
 .btn-personal, .tab-choose-item a, .tab-choose-item-personal .arrow, .ui-dropdown-trigger {
-    background-image: url("/images/account.png");
+    background-image: url("/Images/account.png");
     background-repeat: no-repeat;
 }
 
@@ -265,7 +265,7 @@ ol, ul {
 .reg_form {
     margin:20px auto;
     padding: 0 20px;
-    width: 560px;
+    width: 580px;
     height: 400px;
     border: 2px solid #ccc;
     border-radius: 6px;
@@ -305,8 +305,9 @@ ol, ul {
 .form_item {
     font-size: 14px;
     height: 40px;
-    margin: 10px auto;
-    width: 460px;
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 560px;
 }
 
 
@@ -338,7 +339,7 @@ ol, ul {
 form input.text-input, .reg_form table input {
     padding: 6px;
     font-size: 13px;
-    background: #fff url('/images/bg-form-field.gif') top left repeat-x;
+    background: #fff url('/Images/bg-form-field.gif') top left repeat-x;
     border: 1px solid #d5d5d5;
     color: #333;
 }
@@ -410,22 +411,6 @@ form input:focus {
 }
 
 
-/*
-	.reg_form .tips, .ui-form-content .tips {
-		clear: both;
-		display: none;
-		min-height: 22px;
-		height: 100%;
-		overflow: hidden;
-		width: 220px;
-		margin: 0;
-		padding-left: 22px;
-		background: url(/images/icons/information.png) 0 0 no-repeat;
-		line-height: 18px;
-		color: #999;
-	}
-*/
-
 .box-shadow {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -493,7 +478,7 @@ form input:focus {
         margin: 30px 0 0 120px;
         line-height: 50px;
         padding-left: 60px;
-        background: url(../images/right_big.gif) no-repeat;
+        background: url(../Images/right_big.gif) no-repeat;
     }
 
     .success p {
@@ -530,11 +515,56 @@ form input:focus {
 .fail {
     margin: 20px auto;
     padding: 0 0 0 40px;
-    background: url(/images/icons/tishi.png) no-repeat;
+    background: url(/Images/logoes/tishi.png) no-repeat;
     line-height: 30px;
 }
 
 
 /*--------------------------------fail end-----------------*/
 
+.onShow
+{
+    background:url(/Images/logoes/onShow.gif) no-repeat; 
+    padding-left:25px; 
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onFocus
+{
+    background:url(/Images/logoes/onFocus.gif) no-repeat; 
+    padding-left:25px; 
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onError
+{
+    background:url(/Images/logoes/onError.gif) 0 -4px no-repeat;
+    padding-left:25px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+    margin-left:12px;
+}
+.onCorrect
+{
+    background:url(/Images/logoes/onCorrect.gif) 0 -4px no-repeat;
+    padding-left:25px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+    margin-left:12px;
+}
+.onLoad
+{
+    background:url(/Images/logoes/onLoad.gif) no-repeat 3px 3px;
+    padding-left:25px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+} 
 
+#reg_ValidateCodeTip {
+    margin-left: 41px;
+}
