@@ -28,11 +28,11 @@ public class RandomUtils
     return (char)getInt(Integer.valueOf(97), Integer.valueOf(123));
   }
 
-  public static long getLong19(Integer len)
-  {
-	  return (Long) null;
-   // return Long.parseLong(Math.abs(r.nextLong()).substring(0, len.intValue()));
-  }
+//  public static long getLong19(Integer len)
+//  {
+//	  return null;
+//   // return Long.parseLong(Math.abs(r.nextLong()).substring(0, len.intValue()));
+//  }
 
   public static boolean getBoolean()
   {

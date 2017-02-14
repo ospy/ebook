@@ -1,6 +1,15 @@
 package com.ebook.member;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Date;
+
+import com.ebook.entity.Member;
+import com.ebook.utils.DBPool;
 import com.ebook.utils.DatabaseTools;
+import com.ebook.utils.DateUtils;
+
 
 public class LoginRegisterService {
 	/**
@@ -15,7 +24,7 @@ public class LoginRegisterService {
 		if(userName.trim().equals("")){
 			return false;
 		}
-		String sql = "SELECT COUNT(1) FROM cc_member a WHERE a.s_loginid= "+userName;
+		String sql = "SELECT COUNT(1) FROM cc_member a WHERE a.s_loginid= '"+userName+"'";
 		int count= DatabaseTools.getCount(sql);
 		if(count>0){
 			return false;
@@ -39,6 +48,36 @@ public class LoginRegisterService {
 		return bool;
 	}
 
+	
+	public static Member  registerSave(String loginid,String email,String password) {
+		Member member = null;
+		//当前时间
+		String date = DateUtils.format(null);
+		Connection connection  = DBPool.getInstance().getConnection();
+		String sql = "insert into cc_member(s_loginid,s_mail,s_password,s_create_time) values(?,?,?,?)";
+		int result = 0;
+		PreparedStatement  ptst = null;
+		try {
+			ptst = connection.prepareStatement(sql);
+			ptst.setString(1, loginid);
+			ptst.setString(2, email);
+			ptst.setString(3, password);
+			ptst.setString(4, date);
+			result = ptst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DatabaseTools.closeStatement(ptst);
+			DatabaseTools.closeConnection(connection);
+		}
+		if(result>0){
+			member = new Member();
+			member.setEmail(email);
+			member.setLoginid(loginid);
+			member.setCreateTime(date);
+		}
+		return member;
+	}
 	
 	
 }

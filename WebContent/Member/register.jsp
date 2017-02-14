@@ -1,14 +1,18 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<%@ include  file="/Master/header.jsp"%>
-<head>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>注册信息-用户注册</title>
 <link type="text/css" rel="stylesheet" href="../Css/reg.css"/>
 </head>
 <body>
+<%@ include  file="/Master/header.jsp"%>
+<%
+//System.out.println("register:");
+//System.out.println(path);
+//System.out.println(basePath);
+%>
 <div class="navibar"><a href="#">首页</a> > 注册</div>
 <div class="reg_content">
      <div class="reg_form">
@@ -69,15 +73,18 @@
             checkCode();
             if (check1 && check2 && check3 && check4 && check5) {
                 $.ajax({
-                    url: "/Member/Register",
+                    url: "<%=path%>/Member/Register",
                     type: 'post',
-                    async: false,
-                    dataType: 'json',
+              //      async: false,
+              //      dataType: 'json',
                     data: { Loginid: Loginid, Email: Email, Password: Password },
                     success: function (data) {
-                        location.href = "/Member/ActMail/" + Email;
+                      //  location.href = "<%=path%>/Member/actmail.jsp";
                     },
-                    error: function () {
+                    error: function (xhr, type, exception) {
+                    	console.log("errorxhr:"+xhr.responseText);
+                    	console.log("errortype:");
+                    	console.log("errorexception:");
                         alert("添加失败，请联系管理员");
                         return false;
                     }
@@ -106,7 +113,7 @@
                 } else {
                     if (email.length > 5 && email.length < 31) {
                         $.ajax({
-                            url: "/check.do",
+                            url: "<%=path%>/check.do",
                             type: 'post',
                             async: false,
                             dataType: 'text',
@@ -151,7 +158,7 @@
                         check2 = false;
                     } else {
                         $.ajax({
-                            url: "/check.do",
+                            url: "<%=path%>/check.do",
                             type: 'post',
                             async: false,
                             dataType: 'text',

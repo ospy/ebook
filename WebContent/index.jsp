@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@ include  file="/Master/header.jsp"%>
+<%
+System.out.println(path);
+System.out.println(basePath);
+%>
+<a href="<%=path %>/Member/register.jsp">注册</a>
 </body>
 </html>

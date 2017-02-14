@@ -15,8 +15,6 @@ import com.ebook.utils.RandomUtils;
 import com.ebook.utils.SecurityImageTool;
 
 
-
-
 @WebServlet(name = "code.do", urlPatterns = { "/code.do" })
 public class Code extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,12 +23,14 @@ public class Code extends HttpServlet {
      */
     private static final String NO_CACHE = "No-cache";
     
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		getCode(name, request, response);
 	}
 
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String captcha ="";
