@@ -1,10 +1,17 @@
 package com.ebook.entity;
 
 public class Member {
+	private String uid;
 	private String loginid;
 	private String email;
 	private String password;
 	private String createTime;
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 	public String getLoginid() {
 		return loginid;
 	}

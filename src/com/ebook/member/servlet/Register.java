@@ -43,10 +43,10 @@ public class Register extends HttpServlet {
 						LOG.info(member.getLoginid()+"注册成功！");
 						// 保存用户注册Session
 						request.getSession().setAttribute(Constant.SESSION_USER, member);
-						request.getRequestDispatcher("actmail.jsp").forward(request, response);
+//						request.getRequestDispatcher("actmail.jsp").forward(request, response);
 //						response.sendRedirect("actmail.jsp"); 
-						return;
-//						out.print(member.getLoginid()+"注册成功！");
+//						return;
+						out.print(member.getLoginid()+"注册成功！");
 					}
 				}else {
 					request.setAttribute("errorMsg", eEmail+"已被使用！");

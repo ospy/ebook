@@ -11,10 +11,10 @@
 <link type="text/css" rel="stylesheet" href="../Css/reg.css"/>
 </head>
 <%
-Member member = (Member)request.getAttribute(Constant.SESSION_USER);
-String email = member.getEmail();
-String domain = email.substring(email.indexOf("@"));
-domain = "mail."+domain;
+
+String email = request.getParameter("email");
+String domain = email.substring(email.indexOf("@")+1);
+domain = "http://mail."+domain;
 %>
 <body>
      <div class="reg_content">
@@ -23,7 +23,7 @@ domain = "mail."+domain;
                 <h2>激活邮件</h2>
                 <br>
                 <div class="actmail">
-                    <h3>激活邮件已发送到您的邮箱<%=member.getEmail() %>,请您<a href="<%=domain %>">登录邮箱</a>后点击邮件中激活链接以激活邮箱！</h3>
+                    <h3>激活邮件已发送到您的邮箱<%=email %>,请您<a href="<%=domain %>">登录邮箱</a>后点击邮件中激活链接以激活邮箱！</h3>
                 </div>
                 
                 <div class="act_tips">

@@ -79,7 +79,7 @@
               //      dataType: 'json',
                     data: { Loginid: Loginid, Email: Email, Password: Password },
                     success: function (data) {
-                      //  location.href = "<%=path%>/Member/actmail.jsp";
+                        location.href = "<%=path%>/Member/actmail.jsp?email="+Email;
                     },
                     error: function (xhr, type, exception) {
                     	console.log("errorxhr:"+xhr.responseText);
