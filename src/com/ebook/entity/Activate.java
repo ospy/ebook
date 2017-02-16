@@ -4,6 +4,7 @@ public class Activate {
 	
 	private long id;
 	private  Member member;
+	private String stype;
 	private String code;
 	private  String createTime;
 	public long getId() {
@@ -17,6 +18,12 @@ public class Activate {
 	}
 	public void setMember(Member member) {
 		this.member = member;
+	}
+	public String getStype() {
+		return stype;
+	}
+	public void setStype(String stype) {
+		this.stype = stype;
 	}
 	public String getCode() {
 		return code;

@@ -30,14 +30,20 @@ public class SendEmailUtil {
 		Member member = MemberDao.findMemberByEmail(email);
 		String loginid = member.getLoginid();
 		Activate activate = new Activate();
+		activate.setCreateTime(new Date().toString());
+		activate.setMember(member);
+		activate.setStype("MAIL");
 		// 邮箱激活验证码
 		activate.setCode(StringUtil.getvalidcode());
-		String checkCode =Md5Util.execute(email + ":"+ activate.getCode());
+		String checkCode = Md5Util.execute(member.getUid()+ ":"+ activate.getCode());
 		// 发送邮件链接地址
 		String url =  getServiceHostnew(request)+"activateAccount?activationid="   
-		        + member.getLoginid() + "&" + CHECK_CODE + "=" + checkCode; 
+		        + member.getUid() + "&" + CHECK_CODE + "=" + checkCode; 
 		LOG.info("邮箱激活连接："+url);
 		
+		//保存验证码
+		LOG.info("保存验证码");
+		MemberDao.saveActivate(activate);
 		//发送内容
 		Map<String, String> map = new HashMap<String, String>();
         if (loginid == null || loginid.equals("")) {
