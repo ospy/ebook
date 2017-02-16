@@ -1,3 +1,4 @@
+<%@page import="com.ebook.utils.SendEmailUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.ebook.constant.*" %>
@@ -15,6 +16,7 @@
 String email = request.getParameter("email");
 String domain = email.substring(email.indexOf("@")+1);
 domain = "http://mail."+domain;
+SendEmailUtil.sendEmail(email, request);
 %>
 <body>
      <div class="reg_content">

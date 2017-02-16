@@ -23,8 +23,8 @@ public class MemberDao {
 			stmt = conn.createStatement();
 			 rs = stmt.executeQuery(sql);
 			 rs.next();
-			 member.setUid(rs.getString("s_uid"));
-			 member.setEmail(rs.getString("s_email"));
+			 member.setUid(rs.getString("i_uid"));
+			 member.setEmail(rs.getString("s_mail"));
 			 member.setLoginid(rs.getString("s_loginid"));
 		} catch (SQLException e) {
 			e.printStackTrace();

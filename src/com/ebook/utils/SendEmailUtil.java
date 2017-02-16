@@ -1,9 +1,18 @@
 package com.ebook.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ebook.constant.Constant;
@@ -24,10 +33,12 @@ public class SendEmailUtil {
 		// 邮箱激活验证码
 		activate.setCode(StringUtil.getvalidcode());
 		String checkCode =Md5Util.execute(email + ":"+ activate.getCode());
-		String url =  getServiceHostnew(request)+"/activateAccount?activationid="   
+		// 发送邮件链接地址
+		String url =  getServiceHostnew(request)+"activateAccount?activationid="   
 		        + member.getLoginid() + "&" + CHECK_CODE + "=" + checkCode; 
 		LOG.info("邮箱激活连接："+url);
 		
+		//发送内容
 		Map<String, String> map = new HashMap<String, String>();
         if (loginid == null || loginid.equals("")) {
             map.put("name", "亲爱的用户");
@@ -36,7 +47,30 @@ public class SendEmailUtil {
         }
         map.put("emailActiveUrl", url);
         String[] msg = getEmailResources("account-activate.ftl",map);
-        // 发送邮件链接地址
+        String subject = msg[0];
+        String context = msg[1];
+        String []address = {email};
+        // 发送邮件
+        final Properties props = PropertiesUtils.loadProps("/config/user/emailInfo.properties");
+        props.put("mail.smtp.ssl.trust",props.getProperty("mail.smtp.host"));
+        final String addressFrom = props.getProperty("mailname");
+//      Session session = Session.getInstance(props);
+       Session session = Session.getInstance(props, new Authenticator() {
+           @Override
+           protected PasswordAuthentication getPasswordAuthentication() {
+               return new PasswordAuthentication(addressFrom, props.getProperty("mailpassword"));
+           }
+       });
+       
+       String type ="text/html;charset="+ Constant.CHARSET_DEFAULT;
+       try {
+           subject = MimeUtility.encodeText(subject, Constant.CHARSET_DEFAULT,"B");
+       } catch (UnsupportedEncodingException e) {
+           LOG.error("邮件主题转码失败！", e);
+       }
+       EmailUtils.sendEmail(session, new Date(), addressFrom, subject, context, type, null, null, address);
+       
+        
 	}
 	
 	 /**
