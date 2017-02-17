@@ -5,6 +5,12 @@ public class Activate {
 	private long id;
 	private  Member member;
 	private String stype;
+	private String sname;
+	private String sloginid;
+	private String sdest;
+	private int boverdue;
+	private int bsend;
+	private int bdeleted;
 	private String code;
 	private  String createTime;
 	public long getId() {
@@ -24,6 +30,42 @@ public class Activate {
 	}
 	public void setStype(String stype) {
 		this.stype = stype;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public String getSloginid() {
+		return sloginid;
+	}
+	public void setSloginid(String sloginid) {
+		this.sloginid = sloginid;
+	}
+	public String getSdest() {
+		return sdest;
+	}
+	public void setSdest(String sdest) {
+		this.sdest = sdest;
+	}
+	public int getBoverdue() {
+		return boverdue;
+	}
+	public void setBoverdue(int boverdue) {
+		this.boverdue = boverdue;
+	}
+	public int getBsend() {
+		return bsend;
+	}
+	public void setBsend(int bsend) {
+		this.bsend = bsend;
+	}
+	public int getBdeleted() {
+		return bdeleted;
+	}
+	public void setBdeleted(int bdeleted) {
+		this.bdeleted = bdeleted;
 	}
 	public String getCode() {
 		return code;

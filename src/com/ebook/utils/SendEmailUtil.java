@@ -30,9 +30,15 @@ public class SendEmailUtil {
 		Member member = MemberDao.findMemberByEmail(email);
 		String loginid = member.getLoginid();
 		Activate activate = new Activate();
-		activate.setCreateTime(new Date().toString());
+		activate.setCreateTime(DateUtils.format(""));
 		activate.setMember(member);
 		activate.setStype("MAIL");
+		activate.setBdeleted(0);
+		activate.setBoverdue(0);
+		activate.setBsend(0);
+		activate.setSdest(member.getEmail());
+		activate.setSloginid(loginid);
+		activate.setSname("");
 		// 邮箱激活验证码
 		activate.setCode(StringUtil.getvalidcode());
 		String checkCode = Md5Util.execute(member.getUid()+ ":"+ activate.getCode());
@@ -58,7 +64,7 @@ public class SendEmailUtil {
         String []address = {email};
         // 发送邮件
         final Properties props = PropertiesUtils.loadProps("/config/user/emailInfo.properties");
-        props.put("mail.smtp.ssl.trust",props.getProperty("mail.smtp.host"));
+//        props.put("mail.smtp.ssl.trust",props.getProperty("mail.smtp.host"));
         final String addressFrom = props.getProperty("mailname");
 //      Session session = Session.getInstance(props);
        Session session = Session.getInstance(props, new Authenticator() {

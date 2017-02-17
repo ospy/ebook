@@ -29,7 +29,8 @@ public class ActivateAccount extends HttpServlet {
 		if(checkCode1.equals(checkCode2)){
 			//激活成功
 			LOG.info("激活成功！");
-			request.getRequestDispatcher("userinfo.jsp").forward(request, response);
+			response.sendRedirect("Member/userinfo.jsp");
+//			request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
 		}
 	}
 

@@ -6,7 +6,7 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
 %> 
 <link href="../Css/header.css" rel="stylesheet" />
-<link href="../Css/main.css" rel="stylesheet" />
+<link href="<%=path %>/Css/main.css" rel="stylesheet" />
 <script  type="text/javascript" src="../Js/jquery-1.9.1.js" ></script>
 <script type="text/javascript" src="../Js/header.js" ></script>
 

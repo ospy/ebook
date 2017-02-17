@@ -100,7 +100,8 @@ public class MemberDao {
 		//保存activate
 		public static void saveActivate(Activate activate){
 			Member member = activate.getMember();
-			String sql = "insert into cc_activate(i_uid,s_loginid,s_act_code,s_create_time,s_type) values(?,?,?,?,?)";
+			String sql = "insert into cc_activate(i_uid,s_loginid,s_act_code,s_create_time,s_type,"
+					+ "s_name,s_dest,b_overdue,b_send,b_deleted) values(?,?,?,?,?,?,?,?,?,?)";
 			Connection conn = DBPool.getInstance().getConnection();
 			PreparedStatement ptst = null;
 			try {
@@ -110,6 +111,11 @@ public class MemberDao {
 				ptst.setString(3, activate.getCode());
 				ptst.setString(4, activate.getCreateTime());
 				ptst.setString(5, activate.getStype());
+				ptst.setString(6, activate.getSname());
+				ptst.setString(7, activate.getSdest());
+				ptst.setInt(8, activate.getBoverdue());
+				ptst.setInt(9, activate.getBsend());
+				ptst.setInt(10, activate.getBdeleted());
 				ptst.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
