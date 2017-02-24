@@ -6,6 +6,8 @@ public class Member {
 	private String email;
 	private String password;
 	private String createTime;
+	private int state;
+	private int online;
 	public String getUid() {
 		return uid;
 	}
@@ -35,5 +37,17 @@ public class Member {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public int getOnline() {
+		return online;
+	}
+	public void setOnline(int online) {
+		this.online = online;
 	}
 }

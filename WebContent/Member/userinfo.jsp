@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ebook.utils.StringUtil"%>
 <html>
 <%@ include  file="/Master/header.jsp"%>
 <head>
@@ -9,6 +10,14 @@
 <link type="text/css" rel="stylesheet" href="../Css/reg.css"/>
 </head>
 <body>
+<div><% 
+String checkResult = (String)request.getSession().getAttribute("checkResult");
+if(StringUtil.isBlank(checkResult)){
+	checkResult=" ";
+}
+%>
+<%=checkResult %>
+</div>
         <div class="reg_content">
      <div class="reg_form">
                 <form name="frmEmp" id="frmEmp">

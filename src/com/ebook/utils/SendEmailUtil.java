@@ -29,13 +29,21 @@ public class SendEmailUtil {
 	public static void sendEmail(String email,HttpServletRequest request) throws IOException, TemplateException{
 		Member member = MemberDao.findMemberByEmail(email);
 		String loginid = member.getLoginid();
+		String uid = member.getUid();
+		String sql = "select count(1) from cc_activate where i_uid="+uid+" and b_deleted=0";
+		int count = DatabaseTools.getCount(sql);
+		if(count>0){//将b_deleted置为1
+			sql = "update cc_activate set b_deleted=1 where i_uid="+uid+" and b_deleted=0";
+			DatabaseTools.update(sql);
+		}
+		//插入新记录		
 		Activate activate = new Activate();
 		activate.setCreateTime(DateUtils.format(""));
 		activate.setMember(member);
 		activate.setStype("MAIL");
 		activate.setBdeleted(0);
 		activate.setBoverdue(0);
-		activate.setBsend(0);
+		activate.setBsend(1);
 		activate.setSdest(member.getEmail());
 		activate.setSloginid(loginid);
 		activate.setSname("");
@@ -64,9 +72,7 @@ public class SendEmailUtil {
         String []address = {email};
         // 发送邮件
         final Properties props = PropertiesUtils.loadProps("/config/user/emailInfo.properties");
-//        props.put("mail.smtp.ssl.trust",props.getProperty("mail.smtp.host"));
         final String addressFrom = props.getProperty("mailname");
-//      Session session = Session.getInstance(props);
        Session session = Session.getInstance(props, new Authenticator() {
            @Override
            protected PasswordAuthentication getPasswordAuthentication() {
@@ -92,17 +98,13 @@ public class SendEmailUtil {
      * @return          域名
      */
     public static String getServiceHostnew(HttpServletRequest request) {
-
         String serverPort = "";
-
         if (request.getServerPort() != 80) {
             serverPort = ":" + request.getServerPort();
         }
-
         String path = request.getContextPath();
         String basePath = request.getScheme() + "://" + request.getServerName()
                 + serverPort + path + "/";
-
         return basePath;
     }
     

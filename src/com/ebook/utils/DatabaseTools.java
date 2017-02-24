@@ -27,6 +27,11 @@ public class DatabaseTools {
 		return result;
 	}
 	
+	/**
+	 * 获取记录总数
+	 * @param sql
+	 * @return 记录总数
+	 */
 	public static int getCount(String sql){
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
@@ -47,7 +52,31 @@ public class DatabaseTools {
 		return result;
 	}
 	
+	/**
+	 * 执行update更新
+	 * @param sql
+	 * @return
+	 */
+	public static int update(String sql){
+		Connection conn = DBPool.getInstance().getConnection();
+		Statement stmt = null;
+		int result =0;
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseTools.closeStatement(stmt);
+			DatabaseTools.closeConnection(conn);
+		}
+		return result;
+	}
 	
+	/**
+	 * 关闭ResultSet
+	 * @param rs
+	 */
 	public static void closeResultset(ResultSet rs){
 		if(rs != null){
 			try {
@@ -58,6 +87,10 @@ public class DatabaseTools {
 		}
 	}
 	
+	/**
+	 * 关闭Statement
+	 * @param stmt
+	 */
 	public static void closeStatement(Statement stmt){
 		if(stmt != null){
 			try {
@@ -68,7 +101,10 @@ public class DatabaseTools {
 		}
 	}
 	
-	
+	/**
+	 * 关闭Connection
+	 * @param conn
+	 */
 	public static void closeConnection(Connection conn){
 		if(conn != null){
 			try {

@@ -1,6 +1,9 @@
 package com.ebook.member.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ebook.entity.Activate;
 import com.ebook.entity.Member;
 import com.ebook.member.dao.MemberDao;
+import com.ebook.utils.DateUtils;
 import com.ebook.utils.LOG;
 import com.ebook.utils.Md5Util;
 
@@ -20,17 +24,46 @@ public class ActivateAccount extends HttpServlet {
 	private static final String CHECK_CODE = "checkCode";
 	private static final long serialVersionUID = 1L;
 
+	//邮箱激活验证
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		String checkCode1  = request.getParameter(CHECK_CODE);
 		String uid = request.getParameter("activationid");
+		String sql = "select * from cc_activate where i_uid="+uid+" and b_deleted=0";
 		Member member = MemberDao.findMemberByID(uid);
-		Activate activate = MemberDao.findActiveByUid(uid);
+		Activate activate = MemberDao.findActiveBySQL(sql);
 		String checkCode2 = Md5Util.execute(member.getUid() + ":"+ activate.getCode());
-		if(checkCode1.equals(checkCode2)){
-			//激活成功
-			LOG.info("激活成功！");
-			response.sendRedirect("Member/userinfo.jsp");
-//			request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
+		String format = "yyyy-MM-dd HH:mm:ss"; 
+		Calendar todayStart = Calendar.getInstance();  
+        todayStart.set(Calendar.HOUR_OF_DAY, 0);  
+        todayStart.set(Calendar.MINUTE, 0);  
+        todayStart.set(Calendar.SECOND, 0);  
+        todayStart.set(Calendar.MILLISECOND, 0); 
+        if(member.getState()>0){//已激活
+        	request.getSession().setAttribute("checkResult", "已激活");
+        	response.sendRedirect("Member/userinfo.jsp");
+        }else {//未激活
+        	try {//当天有效，true为失效
+    			if(DateUtils.isBefore(format, activate.getCreateTime(), format, DateUtils.format(todayStart.getTime(), format))){
+    				request.getSession().setAttribute("checkResult", "链接已失效");
+    	        	response.sendRedirect("Member/userinfo.jsp");
+    			}else { //有效
+    				if(checkCode1.equals(checkCode2)){
+    					//激活成功,更新状态
+    					LOG.info("ID:"+member.getUid()+"激活成功！");
+    					member.setState(1);
+    					MemberDao.updateMember(member);
+    					request.getSession().setAttribute("checkResult", "激活成功");
+    					response.sendRedirect("Member/userinfo.jsp");
+//    					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
+    				}else {//激活失败
+    					request.getSession().setAttribute("checkResult", "激活失败");
+    					response.sendRedirect("Member/userinfo.jsp");
+    				}
+    			}
+    		} catch (ParseException e) {
+    			e.printStackTrace();
+    		}
 		}
 	}
 

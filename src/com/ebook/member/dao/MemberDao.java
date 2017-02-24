@@ -1,11 +1,14 @@
 package com.ebook.member.dao;
 
 import java.awt.ActiveEvent;
+import java.awt.Menu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.sound.midi.MetaEventListener;
 
 import com.ebook.entity.Activate;
 import com.ebook.entity.Member;
@@ -13,9 +16,12 @@ import com.ebook.utils.DBPool;
 import com.ebook.utils.DatabaseTools;
 
 public class MemberDao {
-	
-	
-	//根据uid查找Member
+
+	/**
+	 * 根据uid查找Member
+	 * @param uid
+	 * @return
+	 */
 		public static Member findMemberByID(String uid){
 			Member member = new Member();
 			String sql = "select * from cc_member where i_uid='"+uid+"'";
@@ -29,13 +35,20 @@ public class MemberDao {
 				 member.setUid(rs.getString("i_uid"));
 				 member.setEmail(rs.getString("s_mail"));
 				 member.setLoginid(rs.getString("s_loginid"));
+				 member.setPassword(rs.getString("s_password"));
+				 member.setState(rs.getInt("i_state"));
+				 member.setOnline(rs.getInt("i_online"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			return member;
 		}
 	
-	//根据email查找Member
+		/**
+		 * 根据email查找Member
+		 * @param email
+		 * @return
+		 */
 	public static Member findMemberByEmail(String email){
 		Member member = new Member();
 		String sql = "select * from cc_member where s_mail='"+email+"'";
@@ -55,7 +68,37 @@ public class MemberDao {
 		return member;
 	}
 	
-	//根据email查找Active
+	/**
+	 * 更新Member
+	 * @param member
+	 */
+	public static void updateMember(Member member){
+		String sql = "update cc_member set s_mail=?,s_password=?,i_state=?,i_online=? where i_uid=?";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement ptst = null;
+		try {
+			ptst = conn.prepareStatement(sql);
+			ptst.setString(1, member.getEmail());
+			ptst.setString(2, member.getPassword());
+			ptst.setInt(3, member.getState());
+			ptst.setInt(4, member.getOnline());
+			ptst.setString(5, member.getUid());
+			ptst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DatabaseTools.closeStatement(ptst);
+			DatabaseTools.closeConnection(conn);
+		}
+	}
+	
+	
+	
+	/**
+	 * 根据email查找Active
+	 * @param email
+	 * @return
+	 */
 	public static Activate findActiveByEmail(String email){
 		Activate activate = new Activate();
 		String sql = "select * from cc_activate where s_mail='"+email+"' order by i_id desc";
@@ -76,7 +119,11 @@ public class MemberDao {
 	}
 	
 	
-	//根据uid查找Active
+	/**
+	 * 根据uid查找Active
+	 * @param uid
+	 * @return
+	 */
 		public static Activate findActiveByUid(String uid){
 			Activate activate = new Activate();
 			String sql = "select * from cc_activate where i_uid='"+uid+"' order by i_id desc";
@@ -96,8 +143,33 @@ public class MemberDao {
 			return activate;
 		}
 		
+		/**
+		 * 根据SQL查找Active
+		 * @param uid
+		 * @return
+		 */
+		public static Activate findActiveBySQL(String sql){
+			Activate activate = new Activate();
+			Connection conn = DBPool.getInstance().getConnection();
+			Statement stmt;
+			ResultSet rs = null;
+			try {
+				stmt = conn.createStatement();
+				 rs = stmt.executeQuery(sql);
+				 rs.next();
+				 activate.setId(rs.getLong("i_id"));
+				 activate.setCreateTime(rs.getString("s_create_time"));
+				 activate.setCode(rs.getString("s_act_code"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return activate;
+		}
 		
-		//保存activate
+		/**
+		 * 保存activate
+		 * @param activate
+		 */
 		public static void saveActivate(Activate activate){
 			Member member = activate.getMember();
 			String sql = "insert into cc_activate(i_uid,s_loginid,s_act_code,s_create_time,s_type,"
@@ -123,7 +195,6 @@ public class MemberDao {
 				DatabaseTools.closeStatement(ptst);
 				DatabaseTools.closeConnection(conn);
 			}
-			
 			
 		}
 }

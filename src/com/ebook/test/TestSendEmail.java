@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,6 +27,7 @@ import org.junit.Test;
 import org.junit.runner.Request;
 
 import com.ebook.constant.Constant;
+import com.ebook.utils.DateUtils;
 import com.ebook.utils.EmailUtils;
 import com.ebook.utils.LOG;
 import com.ebook.utils.PropertiesUtils;
@@ -35,6 +38,18 @@ public class TestSendEmail {
 
 	public static void main(String[] args) {
 
+	}
+	
+	@Test
+	public void  dateUtils() throws ParseException {
+		String format = "yyyy-MM-dd HH:mm:ss"; 
+		Calendar todayStart = Calendar.getInstance();  
+        todayStart.set(Calendar.HOUR_OF_DAY, 0);  
+        todayStart.set(Calendar.MINUTE, 0);  
+        todayStart.set(Calendar.SECOND, 0);  
+        todayStart.set(Calendar.MILLISECOND, 0);  
+        System.out.println(DateUtils.format(todayStart.getTime(), format));
+        System.out.println(DateUtils.isBefore(format, "2017-02-24 08:51:52", format, DateUtils.format(todayStart.getTime(), format)));
 	}
 	
 	@Test
