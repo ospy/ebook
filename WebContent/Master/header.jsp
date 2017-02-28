@@ -26,7 +26,7 @@
                     </ul>
                 </li>
                 <li><span id="login"><a href="/Member/Login">登&nbsp;&nbsp;录</a></span></li>
-                <li><span id="regist"><a href="/Member/SignUp">免费注册</a></span></li>
+                <li><span id="regist"><a href="<%=path %>/Member/register.jsp">免费注册</a></span></li>
             </ul>
         </div>
     </div>
