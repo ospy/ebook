@@ -522,6 +522,15 @@ form input:focus {
 
 /*--------------------------------fail end-----------------*/
 
+/*userinfo  start*/
+    #modal-body{
+     text-indent: 2em;
+    }
+  .modal-body a{
+     font-size:13px;
+    }
+/*userinfo end*/
+
 .onShow
 {
     background:url(/Images/logoes/onShow.gif) no-repeat; 

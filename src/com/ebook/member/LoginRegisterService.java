@@ -51,10 +51,11 @@ public class LoginRegisterService {
 	
 	public static Member  registerSave(String loginid,String email,String password) {
 		Member member = null;
+		int i_state=1;
 		//当前时间
 		String date = DateUtils.format(null);
 		Connection connection  = DBPool.getInstance().getConnection();
-		String sql = "insert into cc_member(s_loginid,s_mail,s_password,s_create_time) values(?,?,?,?)";
+		String sql = "insert into cc_member(s_loginid,s_mail,s_password,i_state,s_create_time) values(?,?,?,?,?)";
 		int result = 0;
 		PreparedStatement  ptst = null;
 		try {
@@ -62,7 +63,8 @@ public class LoginRegisterService {
 			ptst.setString(1, loginid);
 			ptst.setString(2, email);
 			ptst.setString(3, password);
-			ptst.setString(4, date);
+			ptst.setInt(4, i_state);
+			ptst.setString(5, date);
 			result = ptst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,6 +76,7 @@ public class LoginRegisterService {
 			member = new Member();
 			member.setEmail(email);
 			member.setLoginid(loginid);
+			member.setState(i_state);
 			member.setCreateTime(date);
 		}
 		return member;
