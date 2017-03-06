@@ -62,6 +62,9 @@ public class MemberDao {
 			 member.setUid(rs.getString("i_uid"));
 			 member.setEmail(rs.getString("s_mail"));
 			 member.setLoginid(rs.getString("s_loginid"));
+			 member.setPassword(rs.getString("s_password"));
+			 member.setState(rs.getInt("i_state"));
+			 member.setOnline(rs.getInt("i_online"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

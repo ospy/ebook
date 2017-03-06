@@ -31,39 +31,44 @@ public class ActivateAccount extends HttpServlet {
 		String uid = request.getParameter("activationid");
 		String sql = "select * from cc_activate where i_uid="+uid+" and b_deleted=0";
 		Member member = MemberDao.findMemberByID(uid);
-		Activate activate = MemberDao.findActiveBySQL(sql);
-		String checkCode2 = Md5Util.execute(member.getUid() + ":"+ activate.getCode());
-		String format = "yyyy-MM-dd HH:mm:ss"; 
-		Calendar todayStart = Calendar.getInstance();  
-        todayStart.set(Calendar.HOUR_OF_DAY, 0);  
-        todayStart.set(Calendar.MINUTE, 0);  
-        todayStart.set(Calendar.SECOND, 0);  
-        todayStart.set(Calendar.MILLISECOND, 0); 
-        if(member.getState()>0){//已激活
-        	request.getSession().setAttribute("checkResult", "已激活");
-        	response.sendRedirect("Member/userinfo.jsp");
-        }else {//未激活
-        	try {//当天有效，true为失效
-    			if(DateUtils.isBefore(format, activate.getCreateTime(), format, DateUtils.format(todayStart.getTime(), format))){
-    				request.getSession().setAttribute("checkResult", "链接已失效");
-    	        	response.sendRedirect("Member/userinfo.jsp");
-    			}else { //有效
-    				if(checkCode1.equals(checkCode2)){
-    					//激活成功,更新状态
-    					LOG.info("ID:"+member.getUid()+"激活成功！");
-    					member.setState(1);
-    					MemberDao.updateMember(member);
-    					request.getSession().setAttribute("checkResult", "激活成功");
-    					response.sendRedirect("Member/userinfo.jsp");
+		if(member ==null){
+			request.getSession().setAttribute("checkResult", "不存在此激活链接");
+			response.sendRedirect("Member/userinfo.jsp");
+		}else{
+			Activate activate = MemberDao.findActiveBySQL(sql);
+			String checkCode2 = Md5Util.execute(member.getUid() + ":"+ activate.getCode());
+			String format = "yyyy-MM-dd HH:mm:ss"; 
+			Calendar todayStart = Calendar.getInstance();  
+			todayStart.set(Calendar.HOUR_OF_DAY, 0);  
+			todayStart.set(Calendar.MINUTE, 0);  
+			todayStart.set(Calendar.SECOND, 0);  
+			todayStart.set(Calendar.MILLISECOND, 0); 
+			if(member.getState()>1){//已激活
+				request.getSession().setAttribute("checkResult", "已激活");
+				response.sendRedirect("Member/userinfo.jsp");
+			}else {//未激活
+				try {//当天有效，true为失效
+					if(DateUtils.isBefore(format, activate.getCreateTime(), format, DateUtils.format(todayStart.getTime(), format))){
+						request.getSession().setAttribute("checkResult", "链接已失效");
+						response.sendRedirect("Member/userinfo.jsp");
+					}else { //有效
+						if(checkCode1.equals(checkCode2)){
+							//激活成功,更新状态
+							LOG.info("ID:"+member.getUid()+"激活成功！");
+							member.setState(2);
+							MemberDao.updateMember(member);
+							request.getSession().setAttribute("checkResult", "激活成功");
+							response.sendRedirect("Member/userinfo.jsp");
 //    					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
-    				}else {//激活失败
-    					request.getSession().setAttribute("checkResult", "激活失败");
-    					response.sendRedirect("Member/userinfo.jsp");
-    				}
-    			}
-    		} catch (ParseException e) {
-    			e.printStackTrace();
-    		}
+						}else {//激活失败
+							request.getSession().setAttribute("checkResult", "激活失败");
+							response.sendRedirect("Member/userinfo.jsp");
+						}
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}//
 		}
 	}
 

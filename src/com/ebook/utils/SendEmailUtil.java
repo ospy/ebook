@@ -88,7 +88,10 @@ public class SendEmailUtil {
        }
        EmailUtils.sendEmail(session, new Date(), addressFrom, subject, context, type, null, null, address);
        
-        
+       //发送之后，将cc_member表i_state置为1
+        member.setState(1);
+        //更新member
+        MemberDao.updateMember(member);
 	}
 	
 	 /**
