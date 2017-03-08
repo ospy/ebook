@@ -197,7 +197,7 @@ ol, ul {
     padding: 10px 0;
     width: 100%;
     background: #FFF;
-    height: 420px;
+    height: auto;
     overflow: hidden;
 }
 
@@ -264,9 +264,9 @@ ol, ul {
 
 .reg_form {
     margin:20px auto;
-    padding: 0 20px;
+    padding: 0 20px 20px;
     width: 580px;
-    height: 400px;
+    height: auto;
     border: 2px solid #ccc;
     border-radius: 6px;
 }
@@ -304,7 +304,7 @@ ol, ul {
 
 .form_item {
     font-size: 14px;
-    height: 40px;
+    min-height: 40px;
     margin-top: 10px;
     margin-left: 30px;
     width: 560px;
@@ -334,6 +334,9 @@ ol, ul {
 
     .form_item input[type="radio"] {
         margin: 0 5px;
+    }
+        .form_item input[type="radio"]:hover {
+        cursor: pointer;
     }
 
 form input.text-input, .reg_form table input {
@@ -397,7 +400,19 @@ form input:focus {
     margin-left: 80px;
     width: 260px;
 }
-
+input[disabled].submit  {
+	cursor: default;
+    background: #eee none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 6px;
+    color: #666;
+    font-size: 16px;
+    height: 36px;
+    line-height: 30px;
+    margin-top:20px;
+    margin-left: 80px;
+    width: 260px;
+}
 
 
 .submit:hover {
@@ -528,6 +543,11 @@ form input:focus {
     }
   .modal-body a{
      font-size:13px;
+    }
+    .declare label, .declare p{
+    	font-size: 13px;
+    	color: #666;
+    	
     }
 /*userinfo end*/
 

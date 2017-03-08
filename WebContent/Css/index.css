@@ -37,6 +37,109 @@
 
 
 /*焦点图+新闻*/
+        img {
+            border: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+            a:hover {
+                color: #1974A1;
+            }
+  .douban {
+           
+            padding-top: 10px;
+            overflow: hidden;
+        }
+
+            .douban .hd {
+                height: 22px;
+                line-height: 22px;
+                overflow: hidden;
+            }
+
+                .douban .hd h2 {
+                    float: left;
+                    font: 15px Arial,Helvetica,sans-serif;
+                    color: #072;
+                    margin: 0 0 12px 0;
+                }
+
+                    .douban .hd h2 a {
+                        color: #37A;
+                        font-size: 12px;
+                        margin-left: 10px;
+                    }
+
+                .douban .hd .next, .douban .hd .prev {
+                    float: right;
+                    display: block;
+                    width: 18px;
+                    height: 18px;
+                    background: url(/Images/left_right.gif) no-repeat -6px -7px;
+                    overflow: hidden;
+                    margin-right: 6px;
+                    cursor: pointer;
+                }
+
+                .douban .hd .next {
+                    background-position: -34px -7px;
+                }
+
+                .douban .hd .prevStop {
+                    background-position: -6px -40px;
+                    cursor: default;
+                }
+
+                .douban .hd .nextStop {
+                    background-position: -34px -40px;
+                    cursor: default;
+                }
+
+                .douban .hd ul {
+                    float: right;
+                    margin: 6px 6px 0 0;
+                    zoom: 1;
+                }
+
+                    .douban .hd ul li {
+                        float: left;
+                        cursor: pointer;
+                        display: block;
+                        width: 8px;
+                        height: 8px;
+                        margin-right: 4px;
+                        _display: inline;
+                        background: url(/Images/switch_dot_small.jpg) no-repeat 0 0;
+                    }
+
+                        .douban .hd ul li.on {
+                            background-position: -12px 0;
+                        }
+
+            .douban .bd {
+                padding: 12px 0 0 0;
+            }
+
+                .douban .bd ul {
+                    overflow: hidden;
+                    zoom: 1;
+                }
+
+                    .douban .bd ul li {
+                        float: left;
+                        width: 106px;
+                        margin-right: 15px;
+                    }
+
+
+
+
+
+/*----------------------------*/
 .topmain{
 	height: auto;
 	overflow: hidden;
