@@ -265,7 +265,7 @@ ol, ul {
 .reg_form {
     margin:20px auto;
     padding: 0 20px 20px;
-    width: 580px;
+    width: 640px;
     height: auto;
     border: 2px solid #ccc;
     border-radius: 6px;
@@ -321,7 +321,10 @@ ol, ul {
         font: normal 14px/40px "Î¢ÈíÑÅºÚ";
         vertical-align: middle;
     }
-
+    .form_item .star{
+        display: inline-block;
+        width: 12px;
+    }
 
     .form_item span {
         width: 240px;

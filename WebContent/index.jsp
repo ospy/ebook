@@ -87,17 +87,18 @@
 				<h2>基础医学</h2>
 				<div class="classify">
 					<ul>
-						<li class="first">内科</li>
-						<li>呼吸内科</li>
-						<li>消化内科</li>
-						<li>血液科</li>
-						<li>心内科</li>
+						<li>医用高等数学</li>
+						<li>医用物理学</li>
+						<li>基础化学</li>
+						<li>有机化学</li>
+						<li>解剖学</li>
 					</ul>
 				</div>
 
 				<div class="classify">
 					<ul>
-						<li class="first"></li>
+						<li>生物化学与分子生物学
+</li>
 						<li>神经内科</li>
 						<li>内分泌</li>
 						<li>风湿科</li>
