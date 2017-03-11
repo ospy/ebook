@@ -68,46 +68,204 @@
 		<div class="reg_form">
 			<form name="frmEmp" id="frmEmp">
 				<h2>个人信息</h2>
-				<br>
+				
 				<div class="form_item">
-					<label> 职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：</label> <input
-						id="occu1" type="radio" name="role" value="医务人员" checked="checked" />医务人员<input
-						id="occu2" type="radio" name="role" value="教师" />教师<input
-						id="occu3" type="radio" name="role" value="研发人员" />研发人员<input
-						id="occu4" type="radio" name="role" value="学生" />学生<input
-						id="occu5" type="radio" name="role" value="其它" checked="checked" />其它
+					<span class="red star">*</span><label> 职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：</label> 
+					    <input id="occu1"  name="ocu"  type="radio"  value="1"  checked="checked"/>医务人员
+						<input id="occu2"   name="ocu"   type="radio"  value="2" />教师
+						<input id="occu3"   name="ocu"  type="radio"  value="3" />研发人员
+						<input id="occu4"   name="ocu"  type="radio"  value="4" />学生
+						<input id="occu5"   name="ocu"  type="radio"  value="5" />其它
 				</div>
 				<div class="form_item">
-					<label> 工作单位：</label> <input id="reg_username"
-						class="text-input  typeahead" type="text" onblur="checkName()" />&nbsp;&nbsp;<span
-						id="reg_usernameTip"></span>
+                        <span class="red star">*</span><label>真实姓名：</label> <input id="txtName" class="text-input  typeahead"
+                                type="text"  onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
+                    </div>
+                    <div class="form_item">
+                        <span class="red star">*</span><label>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label> <input id="txtMobile" class="text-input  typeahead"
+                                type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
+                    </div>
+				<div class="form_item">
+					<span class="star"></span><label> 工作单位：</label> <input id="txt_unit"
+						class="text-input  typeahead" type="text"  value="xx市xx区(县)xx单位"  onfocus="if (value =='xx市xx区(县)xx单位'){value =''}" onblur="checkUnit();" />&nbsp;&nbsp;<span
+						id="txt_unitTip"></span>
 				</div>
 				<div class="form_item">
-					<label> 职务职称：</label> <input id="reg_pwd"
-						class="text-input  typeahead" type="text" onblur="checkPwd()" />&nbsp;&nbsp;<span
-						id="reg_pwdTip"></span>
+					<span class="star"></span><label> 职务职称：</label> <input id="txt_Level"
+						class="text-input  typeahead" type="text" onblur="checkLevel();" />&nbsp;&nbsp;<span
+						id="txt_LevelTip"></span>
 				</div>
 				<div class="form_item">
-					<label> 学科专业：</label> <input id="reg_pwd2"
+					<span class="star"></span><label> 学科专业：</label> <input id="txt_Spe"
 						class="text-input  typeahead" type="text"
-						onblur="checkRePwd()" />&nbsp;&nbsp;<span id="reg_pwd2Tip"></span>
+						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
 				</div>
 				<div class="form_item">
-					<label> 最高学历：</label> <input id="edu1" type="radio" name="role"
-						value="专科" checked="checked" />专科<input id="edu2" type="radio"
-						name="role" value="本科" />本科<input id="edu3" type="radio"
-						name="role" value="硕士" />硕士<input id="edu4" type="radio"
-						name="role" value="博士" />博士<input id="edu5" type="radio"
-						name="role" value="其它" checked="checked" />其它
+					<span class="star red">*</span><label> 最高学历：</label> 
+					<input id="edu1" name="edu" type="radio"  value="1" />专科
+					<input id="edu2" name="edu"  type="radio"  value="2" />本科
+					<input id="edu3" name="edu"  type="radio"  value="3" />硕士
+					<input id="edu4" name="edu"  type="radio"   value="4" />博士
+					<input id="edu5" name="edu"  type="radio"   value="5"  checked="checked"/>其它
 				</div>
+				
 				<div class="form_item">
 					<input value="提    交" type="button" class="submit"
-						onclick="Sign();" />
+						onclick="check();"/>
+				</div>
+				<div class="form_item declare">
+					<label> 本站声明：</label> 
+					<p>1.本站所保存之用户个人信息仅供用户统计和联系使用，不会用于任何商业目的；</p>
+					<p>2.填写手机号码后可使用手机号码登录本站；</p>
+					<p>3.填写完整个人信息将获得**积分奖励；</p>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+
 	
+	  var state1=false;
+// 	  var state2=false;
+// 	  var state3=false;
+// 	  var state4=false;
+	  var state5=false;
+	
+	   function checkName(){
+	       var name = $("#txtName").val();
+            if (name == "" || name == null) {
+                $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("真实姓名不能为空！");
+            }
+            else if(name.length<2){
+              $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("真实姓名不能小于2个字符！");    
+            }
+	         else {
+              $("#txtNameTip").removeClass("onError").addClass("onCorrect").html("");
+             state1 = true;
+            }
+	   
+	   }
+	
+// 	  	   function checkUnit(){
+	  	   
+// 	        var unit = $("#txt_unit").val();
+//             if (unit == "" || unit == null) {
+//                  $("#txt_unit").val('xx市xx区(县)xx单位');
+//                 $("#txt_unitTip").removeClass("onCorrect").addClass("onError").html("工作单位不能为空！");
+//             }
+//             else if(unit.length<6){
+//               $("#txt_unitTip").removeClass("onCorrect").addClass("onError").html("工作单位不能小于6个字符！");    
+//             }
+// 	         else {
+//               $("#txt_unitTip").removeClass("onError").addClass("onCorrect").html("");
+//               state2 = true;
+//             }
+	   
+// 	   }
+	
+// 	 function checkLevel(){
+// 	        var level = $("#txt_Level").val();
+//             if (level == "" || level == null) {
+//                 $("#txt_LevelTip").removeClass("onCorrect").addClass("onError").html("职务职称不能为空！");
+//             }
+//             else if(level.length<2){
+//               $("#txt_LevelTip").removeClass("onCorrect").addClass("onError").html("职务职称不能小于2个字符！");    
+//             }
+//             else{
+//               $("#txt_LevelTip").removeClass("onError").addClass("onCorrect").html("");
+//                state3 = true;
+//             }
+	   
+// 	   }
+	
+// 	   function checkSpe(){
+// 	        var spe = $("#txt_Spe").val();
+//             if (spe == "" || spe == null) {
+//                 $("#txt_SpeTip").removeClass("onCorrect").addClass("onError").html("学科专业不能为空！");
+//             }
+//             else if(spe.length<2){
+//               $("#txt_SpeTip").removeClass("onCorrect").addClass("onError").html("学科专业不能小于2个字符！");    
+//             }
+// 	         else {
+//               $("#txt_SpeTip").removeClass("onError").addClass("onCorrect").html("");
+//                state4 = true;
+//             }
+	   
+// 	   }
+	
+        function checkMobile() {
+            var mobile = $("#txtMobile").val();
+            if (mobile == "" || mobile == null) {
+                $("#txtMobileTip").addClass("onError").html("输入手机号不能为空！");
+                $("#btnSendVerCode").attr("disabled", "disabled");
+                f2 = false;
+            } else {
+                var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+                if (!reg.test(mobile)) {
+                    $("#txtMobileTip").removeClass("onCorrect").html("");
+                    $("#txtMobileTip").addClass("onError").html("输入手机号错误！");
+                    $("#btnSendVerCode").attr("disabled", "disabled");
+                    f2 = false;}
+                 else {
+                    $.ajax({
+                        url: "<%=path%>/CheckMobile",
+                        type: 'post',
+                        async: false,
+                        dataType: 'text',
+                        data: { Mobile: mobile },
+                        success: function (data) {
+                            if (data == "false") {
+                                $("#txtMobileTip").removeClass("onCorrect").html("");
+                                $("#txtMobileTip").addClass("onError").html("已使用，请更换！");
+                            } else {
+                                $("#txtMobileTip").addClass("onCorrect").html("");
+                                state5 = true;
+                                return true;
+                                
+                            }
+                        },
+                        error: function (err) {
+                        
+//                             alert("检查手机号失败，请联系管理员");
+                        }
+                    });
+               }
+            }
+        }
+	
+	
+	
+	           function check() {
+	               if(  state1&&state5){
+                     $.ajax({
+                        url: "<%=path%>/SaveMemberInfo",
+                        type: 'post',
+                        async: false,
+                        dataType: 'text',
+                        data: {ocu : $("input[name=cuu]:checked").val(),name : $("#txtName").val(),mobile : $("#txtMobile").val(), unit : $("#txt_unit").val(),level : $("#txt_Level").val(), spe : $("#txt_Spe").val(),edu : $("input[name=edu]:checked").val()},
+                        success: function (data) {
+                            if (data == "true") {
+                                alert("提交成功！");
+                            } else {
+                                alert("提交失败！");
+                                return true;
+                                
+                            }
+                        },
+                        error: function (err) {
+                        
+                           
+                        }
+                    });
+             
+	               }
+	               else{
+	               return;
+	               }
+
+	           
+	           }
+	</script>
 	
 </body>
 </html>
