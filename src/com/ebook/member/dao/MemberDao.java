@@ -12,6 +12,7 @@ import javax.sound.midi.MetaEventListener;
 
 import com.ebook.entity.Activate;
 import com.ebook.entity.Member;
+import com.ebook.entity.MemberInfo;
 import com.ebook.utils.DBPool;
 import com.ebook.utils.DatabaseTools;
 
@@ -31,13 +32,16 @@ public class MemberDao {
 			try {
 				stmt = conn.createStatement();
 				 rs = stmt.executeQuery(sql);
-				 rs.next();
-				 member.setUid(rs.getString("i_uid"));
-				 member.setEmail(rs.getString("s_mail"));
-				 member.setLoginid(rs.getString("s_loginid"));
-				 member.setPassword(rs.getString("s_password"));
-				 member.setState(rs.getInt("i_state"));
-				 member.setOnline(rs.getInt("i_online"));
+				 if(rs.next()){
+					 member.setUid(rs.getString("i_uid"));
+					 member.setEmail(rs.getString("s_mail"));
+					 member.setLoginid(rs.getString("s_loginid"));
+					 member.setPassword(rs.getString("s_password"));
+					 member.setState(rs.getInt("i_state"));
+					 member.setOnline(rs.getInt("i_online"));
+				 }else{
+					 return null;
+				 }
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -191,6 +195,36 @@ public class MemberDao {
 				ptst.setInt(8, activate.getBoverdue());
 				ptst.setInt(9, activate.getBsend());
 				ptst.setInt(10, activate.getBdeleted());
+				ptst.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				DatabaseTools.closeStatement(ptst);
+				DatabaseTools.closeConnection(conn);
+			}
+			
+		}
+		
+		
+		/**
+		 * 保存MemberInfo
+		 * @param MemberInfo
+		 */
+		public static void saveMemberInfo(MemberInfo memberInfo){
+			Member member = memberInfo.getMember();
+			String sql = "insert into cc_member_info(i_uid,s_occupation,s_name,s_mobile,s_address,"
+					+ "s_capacity,s_education) values(?,?,?,?,?,?,?)";
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement ptst = null;
+			try {
+				ptst = conn.prepareStatement(sql);
+				ptst.setString(1, member.getUid());
+				ptst.setString(2, memberInfo.getOccupation());
+				ptst.setString(3, memberInfo.getName());
+				ptst.setString(4, memberInfo.getMobile());
+				ptst.setString(5, memberInfo.getAddress());
+				ptst.setString(6, memberInfo.getCapacity());
+				ptst.setString(7, memberInfo.getEducation());
 				ptst.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
