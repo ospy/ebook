@@ -208,13 +208,13 @@
                     f2 = false;}
                  else {
                     $.ajax({
-                        url: "/Member/CheckMobile",
+                        url: "<%=path%>/CheckMobile",
                         type: 'post',
                         async: false,
                         dataType: 'text',
                         data: { Mobile: mobile },
                         success: function (data) {
-                            if (data == "true") {
+                            if (data == "false") {
                                 $("#txtMobileTip").removeClass("onCorrect").html("");
                                 $("#txtMobileTip").addClass("onError").html("该手机号已使用，请更换手机号码！");
                             } else {

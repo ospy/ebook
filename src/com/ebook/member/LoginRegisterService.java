@@ -49,6 +49,22 @@ public class LoginRegisterService {
 	}
 
 	
+	/**
+	 * 检查手机号的唯一性
+	 * 
+	 * @param mobile
+	 * @return
+	 */
+	public static boolean checkMobile(String mobile) {
+		boolean bool = true;
+		String sql = "SELECT COUNT(1) FROM cc_member_info WHERE s_mobile='"+mobile+"'";
+		int count= DatabaseTools.getCount(sql);
+		if (count > 0) {
+			bool = false;
+		}
+		return bool;
+	}
+	
 	public static Member  registerSave(String loginid,String email,String password) {
 		Member member = null;
 		int i_state=1;
