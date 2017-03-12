@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ebook.constant.Constant;
 import com.ebook.entity.Activate;
 import com.ebook.entity.Member;
 import com.ebook.member.dao.MemberDao;
@@ -35,6 +36,7 @@ public class ActivateAccount extends HttpServlet {
 			request.getSession().setAttribute("checkResult", "不存在此激活链接");
 			response.sendRedirect("Member/userinfo.jsp");
 		}else{
+			request.getSession().setAttribute(Constant.SESSION_USER, member);
 			Activate activate = MemberDao.findActiveBySQL(sql);
 			String checkCode2 = Md5Util.execute(member.getUid() + ":"+ activate.getCode());
 			String format = "yyyy-MM-dd HH:mm:ss"; 

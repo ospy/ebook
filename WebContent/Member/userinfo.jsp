@@ -1,3 +1,11 @@
+<%@page import="com.ebook.entity.*"%>
+<%@page import="com.ebook.constant.*"%>
+<%
+Member member  = (Member)request.getSession().getAttribute(Constant.SESSION_USER);
+if(member==null){
+	response.sendRedirect("login.jsp");
+}
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ebook.utils.StringUtil"%>
 <html>
