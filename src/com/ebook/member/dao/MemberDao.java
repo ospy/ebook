@@ -226,6 +226,7 @@ public class MemberDao {
 				ptst.setString(6, memberInfo.getCapacity());
 				ptst.setString(7, memberInfo.getEducation());
 				ptst.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{

@@ -220,7 +220,7 @@
                             } else {
                                 $("#txtMobileTip").addClass("onCorrect").html("");
                                 state5 = true;
-                                return true;
+                               
                                 
                             }
                         },
@@ -236,19 +236,19 @@
 	
 	
 	           function check() {
-	               if(  state1&&state5){
+	               if( state1&&state5){
                      $.ajax({
                         url: "<%=path%>/SaveMemberInfo",
                         type: 'post',
                         async: false,
                         dataType: 'text',
-                        data: {ocu : $("input[name=cuu]:checked").val(),name : $("#txtName").val(),mobile : $("#txtMobile").val(), unit : $("#txt_unit").val(),level : $("#txt_Level").val(), spe : $("#txt_Spe").val(),edu : $("input[name=edu]:checked").val()},
+                        data: {ocu : $("input[name=ocu]:checked").val(),name : $("#txtName").val(),mobile : $("#txtMobile").val(), unit : $("#txt_unit").val(),level : $("#txt_Level").val(), spe : $("#txt_Spe").val(),edu : $("input[name=edu]:checked").val()},
                         success: function (data) {
                             if (data == "true") {
                                 alert("提交成功！");
                             } else {
                                 alert("提交失败！");
-                                return true;
+                     
                                 
                             }
                         },
