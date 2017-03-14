@@ -213,7 +213,7 @@ public class MemberDao {
 		public static void saveMemberInfo(MemberInfo memberInfo){
 			Member member = memberInfo.getMember();
 			String sql = "insert into cc_member_info(i_uid,s_occupation,s_name,s_mobile,s_address,"
-					+ "s_capacity,s_education) values(?,?,?,?,?,?,?)";
+					+ "s_capacity,s_education,s_create_time) values(?,?,?,?,?,?,?,?)";
 			Connection conn = DBPool.getInstance().getConnection();
 			PreparedStatement ptst = null;
 			try {
@@ -225,6 +225,7 @@ public class MemberDao {
 				ptst.setString(5, memberInfo.getAddress());
 				ptst.setString(6, memberInfo.getCapacity());
 				ptst.setString(7, memberInfo.getEducation());
+				ptst.setString(8, memberInfo.getCreatetime());
 				ptst.executeUpdate();
 				
 			} catch (SQLException e) {
