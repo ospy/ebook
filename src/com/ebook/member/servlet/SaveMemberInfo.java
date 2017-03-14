@@ -14,6 +14,7 @@ import com.ebook.constant.Constant;
 import com.ebook.entity.Member;
 import com.ebook.entity.MemberInfo;
 import com.ebook.member.dao.MemberDao;
+import com.ebook.utils.DateUtils;
 
 
 @WebServlet("/SaveMemberInfo")
@@ -44,6 +45,7 @@ public class SaveMemberInfo extends HttpServlet {
 		memberInfo.setMobile(mobile);
 		memberInfo.setName(name);
 		memberInfo.setOccupation(occupation);
+		memberInfo.setCreatetime(DateUtils.format(null));
 		MemberDao.saveMemberInfo(memberInfo);
 		
 		PrintWriter out = response.getWriter();
