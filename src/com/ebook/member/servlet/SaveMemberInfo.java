@@ -48,7 +48,7 @@ public class SaveMemberInfo extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		out.print(true);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		//request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }
