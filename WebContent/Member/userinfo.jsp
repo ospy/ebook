@@ -1,9 +1,10 @@
 <%@page import="com.ebook.entity.*"%>
 <%@page import="com.ebook.constant.*"%>
 <%
+String spath = request.getContextPath(); 
 Member member  = (Member)request.getSession().getAttribute(Constant.SESSION_USER);
 if(member==null){
-	response.sendRedirect("login.jsp");
+	response.sendRedirect(spath+"/Member/login.jsp");
 }
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,9 +16,9 @@ if(member==null){
 	pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>个人信息-用户注册</title>
-<link href="../Css/bootstrap.css" rel="stylesheet" />
-<link type="text/css" rel="stylesheet" href="../Css/reg.css" />
-<script  type="text/javascript" src="../Js/bootstrap.js" ></script>
+<link href="<%=path %>/Css/bootstrap.css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="<%=path %>/Css/reg.css" />
+<script  type="text/javascript" src="<%=path %>/Js/bootstrap.js" ></script>
 
 </head>
 <body>

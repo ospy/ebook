@@ -6,13 +6,13 @@
     pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录页</title>
-<link type="text/css" rel="stylesheet" href="../Css/Login.css"/>
+<link type="text/css" rel="stylesheet" href="<%=path %>/Css/Login.css"/>
 </head>
 <body>
 
 <div class="main">
   <div class="login_content">
-   <div class="left"><img src="../Images/login_img.png"/>
+   <div class="left"><img src="<%=path %>/Images/login_img.png"/>
    <h2>网站简介</h2>
    <ul>
 		   <li>医学、药学、生物最新图书推送</li>
