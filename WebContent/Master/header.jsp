@@ -5,12 +5,12 @@
     String path = request.getContextPath(); 
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
 %> 
-<link href="../Css/header.css" rel="stylesheet" />
+<link href="<%=path %>/Css/header.css" rel="stylesheet" />
 <link href="<%=path %>/Css/main.css" rel="stylesheet" />
 
-<script  type="text/javascript" src="../Js/jquery-1.9.1.js" ></script>
+<script  type="text/javascript" src="<%=path %>/Js/jquery-1.9.1.js" ></script>
 
-<script type="text/javascript" src="../Js/header.js" ></script>
+<script type="text/javascript" src="<%=path %>/Js/header.js" ></script>
 
     <div class="sitetop">
         <div class="loginleft">
@@ -36,7 +36,7 @@
     <div class="header">
         <div class="logo">
             <a href="/Home/Default">
-                <img src="../Images/logo.png" /></a>
+                <img src="<%=path %>/Images/logo.png" /></a>
         </div>
         <div class="search">
             <div class="searchbox">

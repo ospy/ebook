@@ -27,14 +27,18 @@ public class ActivateAccount extends HttpServlet {
 
 	//邮箱激活验证
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		String checkCode1  = request.getParameter(CHECK_CODE);
 		String uid = request.getParameter("activationid");
 		String sql = "select * from cc_activate where i_uid="+uid+" and b_deleted=0";
 		Member member = MemberDao.findMemberByID(uid);
+		String path = request.getContextPath(); 
 		if(member ==null){
 			request.getSession().setAttribute("checkResult", "不存在此激活链接");
-			response.sendRedirect("Member/userinfo.jsp");
+//			response.sendRedirect("Member/userinfo.jsp");
+			request.getRequestDispatcher("/Member/userinfo.jsp").forward(request, response);
+			
 		}else{
 			request.getSession().setAttribute(Constant.SESSION_USER, member);
 			Activate activate = MemberDao.findActiveBySQL(sql);
@@ -60,11 +64,12 @@ public class ActivateAccount extends HttpServlet {
 							member.setState(2);
 							MemberDao.updateMember(member);
 							request.getSession().setAttribute("checkResult", "激活成功");
-							response.sendRedirect("Member/userinfo.jsp");
-//    					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
+//							response.sendRedirect("Member/userinfo.jsp");
+    					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
 						}else {//激活失败
 							request.getSession().setAttribute("checkResult", "激活失败");
-							response.sendRedirect("Member/userinfo.jsp");
+//							response.sendRedirect("Member/userinfo.jsp");
+							request.getRequestDispatcher("/Member/userinfo.jsp").forward(request, response);
 						}
 					}
 				} catch (ParseException e) {

@@ -35,6 +35,7 @@ public class SaveMemberInfo extends HttpServlet {
 		String mobile = request.getParameter("mobile");
 		String address = request.getParameter("unit");
 		String capacity = request.getParameter("level");
+		String speciality = request.getParameter("spe");
 		String education = request.getParameter("edu");
 		HttpSession session = request.getSession();
 		Member member= (Member) session.getAttribute(Constant.SESSION_USER);
@@ -44,6 +45,7 @@ public class SaveMemberInfo extends HttpServlet {
 		memberInfo.setMember(member);
 		memberInfo.setMobile(mobile);
 		memberInfo.setName(name);
+		memberInfo.setSpeciality(speciality);
 		memberInfo.setOccupation(occupation);
 		memberInfo.setCreatetime(DateUtils.format(null));
 		MemberDao.saveMemberInfo(memberInfo);
