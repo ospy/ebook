@@ -8,7 +8,9 @@ public class MemberInfo {
 	String mobile ;
 	String address;
 	String capacity ;
+	String speciality;
 	String education;
+	String createtime;
 	public String getId() {
 		return id;
 	}
@@ -51,10 +53,22 @@ public class MemberInfo {
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
+	public String getSpeciality() {
+		return speciality;
+	}
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
+	}
 	public String getEducation() {
 		return education;
 	}
 	public void setEducation(String education) {
 		this.education = education;
+	}
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
 	}
 }

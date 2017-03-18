@@ -1,9 +1,9 @@
 .main{
-	margin-top:40px;
+	margin-top:30px;
 }
 .login_content{
 	margin: 0 auto;
-    padding: 40px;
+    padding: 10px;
     width: 1000px;
 }
 .left {
@@ -46,7 +46,7 @@
 .login-form {
   margin: 20px auto;
   padding: 10px;
-  width:360px;
+  width:420px;
 }
 .login-form .fieldset {
   position: relative;
@@ -105,7 +105,7 @@
   border-radius: 0.25em;
 }
 .login-form input.full-width {
-  width: 80%;
+  width: 75%;
 }
 .login-form input.full-width2 {
   width: 100%;
@@ -159,9 +159,12 @@
   background: #3599ae;
   outline: none;
 }
-
+  #loginbtn{
+  	width: 314px;
+  	margin-left: 64px;
+  }
   .login-form .fieldset {
-    margin: 2em 0;
+    margin: 0;
   }
   .login-form .fieldset:first-child {
     margin-top: 0;
@@ -170,7 +173,7 @@
     margin-bottom: 0;
   }
   .login-form input.has-padding {
-    padding: 16px 20px 16px 50px;
+    padding: 11px 20px 11px 50px;
   }
   .remember{
   	vertical-align: sub;
@@ -180,6 +183,29 @@
   	margin-left: 62px;
   }
   .login-form input[type=submit] {
-    padding: 16px 0;
+    padding: 11px 0;
   }
+.login-form .tip{
+	height: 36px;
+	line-height: 36px;
+	margin-left: 80px;
+	padding-left: 24px;
+}
+.onError
+{
+    background:url(/Images/logoes/onError.gif) 0 6px no-repeat;
+    padding-left:25px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+    margin-left:12px;
+}
+.onCorrect
+{
+    background:url(/Images/logoes/onCorrect.gif) 0 6px no-repeat;
+    padding-left:25px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+    margin-left:12px;
 }

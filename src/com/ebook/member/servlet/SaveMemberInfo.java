@@ -14,6 +14,7 @@ import com.ebook.constant.Constant;
 import com.ebook.entity.Member;
 import com.ebook.entity.MemberInfo;
 import com.ebook.member.dao.MemberDao;
+import com.ebook.utils.DateUtils;
 
 
 @WebServlet("/SaveMemberInfo")
@@ -34,6 +35,7 @@ public class SaveMemberInfo extends HttpServlet {
 		String mobile = request.getParameter("mobile");
 		String address = request.getParameter("unit");
 		String capacity = request.getParameter("level");
+		String speciality = request.getParameter("spe");
 		String education = request.getParameter("edu");
 		HttpSession session = request.getSession();
 		Member member= (Member) session.getAttribute(Constant.SESSION_USER);
@@ -43,12 +45,14 @@ public class SaveMemberInfo extends HttpServlet {
 		memberInfo.setMember(member);
 		memberInfo.setMobile(mobile);
 		memberInfo.setName(name);
+		memberInfo.setSpeciality(speciality);
 		memberInfo.setOccupation(occupation);
+		memberInfo.setCreatetime(DateUtils.format(null));
 		MemberDao.saveMemberInfo(memberInfo);
 		
 		PrintWriter out = response.getWriter();
 		out.print(true);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		//request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

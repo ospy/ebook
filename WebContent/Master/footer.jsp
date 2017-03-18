@@ -1,12 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>???????</title>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
 
-</body>
-</html>
+<div class="bottom">
+	<ul class="rightline">
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">客服中心</a></li>
+		<li><a href="#">影响因子</a></li>
+		<li  class="endline"><a href="#">友情链接</a></li>
+		<li></li>
+	</ul>
+	
+	<p>Copyright (C)2016-2017 www.medbook123.com</p>
+</div>

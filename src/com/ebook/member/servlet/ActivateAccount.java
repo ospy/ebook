@@ -64,11 +64,12 @@ public class ActivateAccount extends HttpServlet {
 							member.setState(2);
 							MemberDao.updateMember(member);
 							request.getSession().setAttribute("checkResult", "激活成功");
-							response.sendRedirect("Member/userinfo.jsp");
-//    					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
+//							response.sendRedirect("Member/userinfo.jsp");
+    					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
 						}else {//激活失败
 							request.getSession().setAttribute("checkResult", "激活失败");
-							response.sendRedirect("Member/userinfo.jsp");
+//							response.sendRedirect("Member/userinfo.jsp");
+							request.getRequestDispatcher("/Member/userinfo.jsp").forward(request, response);
 						}
 					}
 				} catch (ParseException e) {
