@@ -17,6 +17,37 @@ import com.ebook.utils.DBPool;
 import com.ebook.utils.DatabaseTools;
 
 public class MemberDao {
+	
+	/**
+	 * 登录验证
+	 * @param uid
+	 * @return
+	 */
+	public static int userLogin(String uid,String pwd){
+		Member member = new Member();
+		String sql = "select * from cc_member where i_uid='"+uid+"' and s_password ='"+pwd+"'";
+		Connection conn = DBPool.getInstance().getConnection();
+		Statement stmt;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			 rs = stmt.executeQuery(sql);
+			 if(rs.next()){
+				 member.setUid(rs.getString("i_uid"));
+				 member.setEmail(rs.getString("s_mail"));
+				 member.setLoginid(rs.getString("s_loginid"));
+				 member.setPassword(rs.getString("s_password"));
+				 member.setState(rs.getInt("i_state"));
+				 member.setOnline(rs.getInt("i_online"));
+			 }else{
+				 return 0;
+			 }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
+	
 
 	/**
 	 * 根据uid查找Member

@@ -135,13 +135,28 @@
 	
 	function login(){
 		 if(check1&&check2&&check3){
-			 
-			 
-			 
-			 
+			 var uName = $("#signin-username").val();
+	         var pwd = $("#signin-password").val();
+	            $.ajax({
+	                url: "<%=path%>/UserLogin",
+	                type: 'post',
+	                async: false,
+	                dataType: 'text',
+	                data: { uName: uName, pwd: pwd },
+	                success: function (result) {
+	                    if (result == 1) {
+	                        location.href = "/Home/Index";
+	                    } else {
+	                        $(".tip").html("用户名或密码错误！");
+	                    }
+	                },
+	                error: function () {
+	                    alert("用户登录异常，请联系管理员");
+	                    return false;
+	                }
+	            });	 
 		 }
-		
-		
+	
 	}
 	
 	
