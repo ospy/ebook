@@ -25,7 +25,7 @@ public class MemberDao {
 	 */
 	public static int userLogin(String uid,String pwd){
 		Member member = new Member();
-		String sql = "select * from cc_member where i_uid='"+uid+"' and s_password ='"+pwd+"'";
+		String sql = "select * from cc_member where s_loginid='"+uid+"' and s_password ='"+pwd+"'";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt;
 		ResultSet rs = null;

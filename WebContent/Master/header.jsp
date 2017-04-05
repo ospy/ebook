@@ -27,7 +27,7 @@
                         <li class="alt"><a href="/ReleaseDiscu/ResourceList">发布资源</a></li>
                     </ul>
                 </li>
-                <li><span id="login"><a href="/Member/Login">登&nbsp;&nbsp;录</a></span></li>
+                <li><span id="login"><a href="<%=path %>/Member/login.jsp">登&nbsp;&nbsp;录</a></span></li>
                 <li><span id="regist"><a href="<%=path %>/Member/register.jsp">免费注册</a></span></li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
     </div>
    <div class="navibar" id="navibar">
             <ul>
-                <li class="home"><a href="/Home/Default"><span></span>首  页</a></li>
+                <li class="home"><a href="/index.jsp"><span></span>首  页</a></li>
                 <li><a href="/DiscuList/DiscuList/00">医  学</a></li>
                 <li><a href="/DiscuList/DiscuList/300">药  学</a></li>
                 <li><a href="/DiscuList/DiscuList/400">生  物</a></li>

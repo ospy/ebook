@@ -144,9 +144,84 @@
 	height: auto;
 	overflow: hidden;
 }
-.focus{
-	width: 630px;
+
+/*焦点图*/
+#focus{
+	margin: 0 10px;
+	float: left;
 }
+.slideBox {
+    border: 1px solid #ddd;
+    height: 230px;
+    overflow: hidden;
+    position: relative;
+    width: 600px;
+}
+.slideBox .hd {
+    bottom: 5px;
+    height: 15px;
+    overflow: hidden;
+    position: absolute;
+    right: 5px;
+    z-index: 1;
+}
+.slideBox .hd ul {
+    float: left;
+    overflow: hidden;
+}
+.slideBox .hd ul li {
+    background: #fff none repeat scroll 0 0;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    line-height: 14px;
+    margin-right: 2px;
+    text-align: center;
+    width: 15px;
+}
+.slideBox .hd ul li.on {
+    background: #f00 none repeat scroll 0 0;
+    color: #fff;
+}
+.slideBox .bd {
+    height: 100%;
+    position: relative;
+    z-index: 0;
+}
+.slideBox .bd li {
+    vertical-align: middle;
+}
+.slideBox .bd img {
+    display: block;
+    height: 254px;
+    width: 600px;
+}
+.slideBox .prev, .slideBox .next {
+    background: rgba(0, 0, 0, 0) url("/Images/slider-arrow.png") no-repeat scroll -110px 5px;
+    display: block;
+    height: 40px;
+    left: 3%;
+    margin-top: -25px;
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    width: 32px;
+}
+.slideBox .next {
+    background-position: 8px 5px;
+    left: auto;
+    right: 3%;
+}
+.slideBox .prev:hover, .slideBox .next:hover {
+    opacity: 1;
+}
+.slideBox .prevStop {
+    display: none;
+}
+.slideBox .nextStop {
+    display: none;
+}
+/*新闻*/
 .news{
 	float: right;
 	width: 250px;
@@ -172,5 +247,156 @@
 	height: 30px;
     line-height: 30px;
 }
+/*新书栏目*/
+	.picScroll-left {
+    overflow: hidden;
+    position: relative;
+}
+.picScroll-left .hd {
+	margin-left: 10px;
+    background: #f4f4f4 none repeat scroll 0 0;
+    height: 30px;
+    overflow: hidden;
+    padding: 0 10px;
+}
+.picScroll-left .hd .prev, .picScroll-left .hd .next {
+    background: rgba(0, 0, 0, 0) url("/Images/left_right.gif") no-repeat scroll  -6px -7px;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 18px;
+    margin-right: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 18px;
+}
+.picScroll-left .hd .next {
+    background-position: -34px -7px;;
+}
+.picScroll-left .hd .prevStop {
+    background-position: -6px -40px;
+}
+.picScroll-left .hd .nextStop {
+    background-position: -34px -40px;
+}
+.picScroll-left .hd ul {
+    float: right;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.picScroll-left .hd ul li {
+    background: rgba(0, 0, 0, 0) url("/Images/icoCircle.gif") no-repeat scroll 0 -9px;
+    cursor: pointer;
+    float: left;
+    height: 9px;
+    margin-right: 5px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 9px;
+}
+.picScroll-left .hd ul li.on {
+    background-position: 0 0;
+}
+.picScroll-left .bd {
+    padding: 10px;
+}
+.picScroll-left .bd ul {
+    overflow: hidden;
+}
+.picScroll-left .bd ul li {
+    float: left;
+    margin: 0 8px;
+    overflow: hidden;
+    text-align: center;
+}
+.picScroll-left .bd ul li .pic {
+    text-align: center;
+}
+.picScroll-left .bd ul li .pic img {
+    border: 1px solid #ccc;
+    display: block;
+    height: 90px;
+    padding: 2px;
+    width: 120px;
+}
+.picScroll-left .bd ul li .pic a:hover img {
+    border-color: #999;
+}
+.picScroll-left .bd ul li .title {
+    line-height: 24px;
+}
 
-
+/*用户动态*/
+.slideTxtBox {
+    border: 1px solid #ddd;
+    text-align: left;
+    width: 318px;
+}
+.slideTxtBox .hd {
+    margin-top: 10px;
+    border-bottom: 1px solid #ddd;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px 0 20px;
+    position: relative;
+}
+.slideTxtBox .hd ul {
+    float: left;
+    height: 32px;
+    left: 20px;
+    position: absolute;
+    top: -1px;
+}
+.slideTxtBox .hd ul li {
+    cursor: pointer;
+    float: left;
+    padding: 0 15px;
+}
+.slideTxtBox .hd ul li.on {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #fff none repeat scroll 0 0;
+    border-color: #ddd #ddd #fff;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    height: 30px;
+}
+.slideTxtBox .bd ul {
+    padding: 15px;
+}
+.slideTxtBox .bd li {
+    height: 24px;
+    line-height: 24px;
+}
+.slideTxtBox .bd li .date {
+    color: #999;
+    float: right;
+}
+.slideTxtBox .arrow {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+.slideTxtBox .arrow a {
+    background: rgba(0, 0, 0, 0) url("/Images/arrow.png") no-repeat scroll 0 0;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 9px;
+    margin-right: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 5px;
+}
+.slideTxtBox .arrow .next {
+    background-position: 0 -50px;
+}
+.slideTxtBox .arrow .prevStop {
+    background-position: -60px 0;
+}
+.slideTxtBox .arrow .nextStop {
+    background-position: -60px -50px;
+}

@@ -44,7 +44,7 @@
 						<p class="fieldset">
 							<span class=title>验证码：</span> <input id="txt_ValidateCode"
 								class="text-input validatecode" onblur="checkCode();"
-								type="text"> <img src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
+								type="text"> <img id="validimg" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
                             onclick="this.src='../code.do?name=user_reg&id='+new Date();" /> <span id="codetip"></span>
 						</p>
 						<p id="tip-validatecode" class="tip red"></p>
@@ -55,7 +55,7 @@
 
 						<p class="fieldset">
 							<input id="loginbtn" class="full-width2" value="登 录"
-								type="submit" onclick="login()">
+								type="button" onclick="login()">
 						</p>
 					</form>
 
@@ -103,7 +103,7 @@
 			$("#tip-validatecode").removeClass("onCorrect").addClass("onError")
 					.html("不可为空！");
 			check3 = false;
-			return;
+			
 		}
 		// var ver_code = getCookie("VCode").toLowerCase();
 		var ver_code;
@@ -125,16 +125,19 @@
 
 		if (ver_code == v_code.toLowerCase()) {
 			$("#tip-validatecode").addClass("onCorrect").html("");
-			check3 = true;
+			state3 = true;
 		} else {
 			$("#tip-validatecode").removeClass("onCorrect").addClass("onError")
 					.html("验证码输入有误！");
-			check3 = false;
+			state3 = false;
 		}
 	}
 	
 	function login(){
-		 if(check1&&check2&&check3){
+		 checkUserName() ;
+		 checkpsw();
+		 checkCode();
+		 if(state1&&state2&&state3){
 			 var uName = $("#signin-username").val();
 	         var pwd = $("#signin-password").val();
 	            $.ajax({
@@ -145,16 +148,22 @@
 	                data: { uName: uName, pwd: pwd },
 	                success: function (result) {
 	                    if (result == 1) {
-	                        location.href = "/Home/Index";
+	                        location.href = "/index.jsp";
 	                    } else {
-	                        $(".tip").html("用户名或密码错误！");
+	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
+	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
 	                    }
 	                },
 	                error: function () {
 	                    alert("用户登录异常，请联系管理员");
-	                    return false;
+	                    return;
 	                }
 	            });	 
+		 }
+		 else{
+			 return;
+			 
 		 }
 	
 	}

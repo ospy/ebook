@@ -142,7 +142,7 @@
     height:40px;
     text-indent: 1em;
 }
-.login-form input[type=submit] {
+.login-form input[type=button] {
   padding: 16px 0;
   cursor: pointer;
   background: #2f889a;
@@ -182,7 +182,7 @@
 #remember-me{
   	margin-left: 62px;
   }
-  .login-form input[type=submit] {
+  .login-form input[type=button] {
     padding: 11px 0;
   }
 .login-form .tip{
