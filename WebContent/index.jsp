@@ -18,7 +18,7 @@
 				<h2>临床医学</h2>
 				<div class="classify">
 					<ul>
-						<li class="first">全科医学</li>
+						<li class="first">内科</li>
 						<li>内科综合</li>
 						<li>呼吸内科</li>
 						<li>消化内科</li>
@@ -163,33 +163,52 @@
 
 				<div class="hd">
 					<ul>
-						<li class="on"><a>注册</a></li>
-						<li class=""><a>访问</a></li>
-						<li class=""><a>账户</a></li>
+						<li class="on"><a>最新注册</a></li>
+						<li class=""><a>最近访问</a></li>
+						<li class=""><a>读书排行</a></li>
 					</ul>
 				</div>
 
 				<div class="bd">
+
 					<ul>
-						<li><a href="#">农业占GDP低政府支持力度大</a></li>
-						<li><a href="#">林志玲:至今珍藏本山送的手绢</a></li>
-						<li><a href="#">五粮液高管年薪超茅台近一倍</a></li>
-						<li><a href="#">视频:朝鲜导弹反复出舱</a></li>
-						<li><a href="#">《我是歌手》明晚决赛开战</a></li>
+						<li class="dyntitle"><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
+						<li><span>用户名</span><span>时间</span></li>
 					</ul>
 					<ul>
-						<li><a href="#">官方明确感染H7N9高危人群</a></li>
-						<li><a href="#">台官员:将驱离进入钓岛大陆船</a></li>
-						<li><a href="#">陈云长子吁学江泽民思想方法</a></li>
-						<li><a href="#">央视批抗日剧目:比着俗争着二</a></li>
-						<li><a href="#">网友:离3次结3次可避税国五条</a></li>
+						<li class="dyntitle"><span>用户名</span><span>访问书名</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
+						<li><span>用户名</span><span>访问书名</span><span>时间</span></li>
 					</ul>
 					<ul>
-						<li><a href="#">日:沈阳军区部队开赴中朝边境</a></li>
-						<li><a href="#">印度核潜艇经我周边未被发现</a></li>
-						<li><a href="#">中国航母战斗群重防空轻反潜</a></li>
-						<li><a href="#">日本军车爆车胎造成一死一伤</a></li>
-						<li><a href="#">韩媒称朝鲜导弹反复出仓回仓</a></li>
+						<li class="dyntitle"><span>用户名</span><span>读了</span></li>
+						<li><span>用户名</span><span>13</span></li>
+						<li><span>用户名</span><span>12</span></li>
+						<li><span>用户名</span><span>11</span></li>
+						<li><span>用户名</span><span>8</span></li>
+						<li><span>用户名</span><span>7</span></li>
+						<li><span>用户名</span><span>13</span></li>
+						<li><span>用户名</span><span>12</span></li>
+						<li><span>用户名</span><span>11</span></li>
+						<li><span>用户名</span><span>8</span></li>
+						<li><span>用户名</span><span>7</span></li>
 					</ul>
 				</div>
 				<script type="text/javascript">

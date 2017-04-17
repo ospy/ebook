@@ -79,7 +79,7 @@
                     display: block;
                     width: 18px;
                     height: 18px;
-                    background: url(/Images/left_right.gif) no-repeat -6px -7px;
+                    background: url(/Images/left_right.png) no-repeat -6px -7px;
                     overflow: hidden;
                     margin-right: 6px;
                     cursor: pointer;
@@ -159,7 +159,7 @@
 }
 .slideBox .hd {
     bottom: 5px;
-    height: 15px;
+    height: 22px;
     overflow: hidden;
     position: absolute;
     right: 5px;
@@ -170,17 +170,18 @@
     overflow: hidden;
 }
 .slideBox .hd ul li {
-    background: #fff none repeat scroll 0 0;
+    background: #f6f6f6 none repeat scroll 0 0;
     cursor: pointer;
     float: left;
-    height: 15px;
-    line-height: 14px;
-    margin-right: 2px;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 5px;
+    border-radius: 3px;
     text-align: center;
-    width: 15px;
+    width: 22px;
 }
 .slideBox .hd ul li.on {
-    background: #f00 none repeat scroll 0 0;
+    background: #538593 none repeat scroll 0 0;
     color: #fff;
 }
 .slideBox .bd {
@@ -260,13 +261,13 @@
     padding: 0 10px;
 }
 .picScroll-left .hd .prev, .picScroll-left .hd .next {
-    background: rgba(0, 0, 0, 0) url("/Images/left_right.gif") no-repeat scroll  -6px -7px;
+    background: rgba(0, 0, 0, 0) url("/Images/left_right.png") no-repeat scroll  -6px -7px;
     cursor: pointer;
     display: block;
     float: right;
     height: 18px;
     margin-right: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
     overflow: hidden;
     width: 18px;
 }
@@ -285,7 +286,7 @@
     overflow: hidden;
 }
 .picScroll-left .hd ul li {
-    background: rgba(0, 0, 0, 0) url("/Images/icoCircle.gif") no-repeat scroll 0 -9px;
+    background: rgba(0, 0, 0, 0) url("/Images/icoCircle.png") no-repeat scroll 0 -9px;
     cursor: pointer;
     float: left;
     height: 9px;
