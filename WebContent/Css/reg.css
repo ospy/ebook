@@ -343,7 +343,7 @@ ol, ul {
     }
 
 form input.text-input, .reg_form table input {
-    padding: 6px;
+    padding: 10px;
     font-size: 13px;
     background: #fff url('/Images/bg-form-field.gif') top left repeat-x;
     border: 1px solid #d5d5d5;

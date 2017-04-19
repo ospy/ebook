@@ -95,17 +95,17 @@ if(member==null){
                                 type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
                     </div>
 				<div class="form_item">
-					<span class="star"></span><label> 工作单位：</label> <input id="txt_unit"
-						class="text-input  typeahead" type="text"  value="xx市xx区(县)xx单位"  onfocus="if (value =='xx市xx区(县)xx单位'){value =''}" onblur="checkUnit();" />&nbsp;&nbsp;<span
+					<span class="red star">*</span><label> 工作单位：</label> <input id="txt_unit"
+						class="text-input  typeahead" type="text"  value="" onblur="checkUnit();" />&nbsp;&nbsp;<span
 						id="txt_unitTip"></span>
 				</div>
 				<div class="form_item">
-					<span class="star"></span><label> 职务职称：</label> <input id="txt_Level"
+					<span class="red star">*</span><label> 职务职称：</label> <input id="txt_Level"
 						class="text-input  typeahead" type="text" onblur="checkLevel();" />&nbsp;&nbsp;<span
 						id="txt_LevelTip"></span>
 				</div>
 				<div class="form_item">
-					<span class="star"></span><label> 学科专业：</label> <input id="txt_Spe"
+					<span class="red star">*</span><label> 学科专业：</label> <input id="txt_Spe"
 						class="text-input  typeahead" type="text"
 						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
 				</div>
@@ -131,22 +131,23 @@ if(member==null){
 			</form>
 		</div>
 	</div>
+	  <%@ include file="/Master/footer.jsp"%>
 	<script type="text/javascript">
 
 	
 	  var state1=false;
-// 	  var state2=false;
-// 	  var state3=false;
-// 	  var state4=false;
+ 	  var state2=false;
+      var state3=false;
+      var state4=false;
 	  var state5=false;
 	
 	   function checkName(){
 	       var name = $("#txtName").val();
             if (name == "" || name == null) {
-                $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("真实姓名不能为空！");
+                $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("输入不能小于2个字符！");
             }
             else if(name.length<2){
-              $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("真实姓名不能小于2个字符！");    
+              $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("输入不能小于2个字符！");    
             }
 	         else {
               $("#txtNameTip").removeClass("onError").addClass("onCorrect").html("");
@@ -155,66 +156,65 @@ if(member==null){
 	   
 	   }
 	
-// 	  	   function checkUnit(){
+	  	   function checkUnit(){
 	  	   
-// 	        var unit = $("#txt_unit").val();
-//             if (unit == "" || unit == null) {
-//                  $("#txt_unit").val('xx市xx区(县)xx单位');
-//                 $("#txt_unitTip").removeClass("onCorrect").addClass("onError").html("工作单位不能为空！");
-//             }
-//             else if(unit.length<6){
-//               $("#txt_unitTip").removeClass("onCorrect").addClass("onError").html("工作单位不能小于6个字符！");    
-//             }
-// 	         else {
-//               $("#txt_unitTip").removeClass("onError").addClass("onCorrect").html("");
-//               state2 = true;
-//             }
+	        var unit = $("#txt_unit").val();
+            if (unit == "" || unit == null) {
+                
+                $("#txt_unitTip").removeClass("onCorrect").addClass("onError").html("输入不能小于6个字符！");
+            }
+            else if(unit.length<6){
+              $("#txt_unitTip").removeClass("onCorrect").addClass("onError").html("输入不能小于6个字符！");    
+            }
+	         else {
+              $("#txt_unitTip").removeClass("onError").addClass("onCorrect").html("");
+              state2 = true;
+            }
 	   
-// 	   }
+	   }
 	
-// 	 function checkLevel(){
-// 	        var level = $("#txt_Level").val();
-//             if (level == "" || level == null) {
-//                 $("#txt_LevelTip").removeClass("onCorrect").addClass("onError").html("职务职称不能为空！");
-//             }
-//             else if(level.length<2){
-//               $("#txt_LevelTip").removeClass("onCorrect").addClass("onError").html("职务职称不能小于2个字符！");    
-//             }
-//             else{
-//               $("#txt_LevelTip").removeClass("onError").addClass("onCorrect").html("");
-//                state3 = true;
-//             }
+	 function checkLevel(){
+	        var level = $("#txt_Level").val();
+            if (level == "" || level == null) {
+                $("#txt_LevelTip").removeClass("onCorrect").addClass("onError").html("输入不能小于2个字符！");
+            }
+            else if(level.length<2){
+              $("#txt_LevelTip").removeClass("onCorrect").addClass("onError").html("输入不能小于2个字符！");    
+            }
+            else{
+              $("#txt_LevelTip").removeClass("onError").addClass("onCorrect").html("");
+               state3 = true;
+            }
 	   
-// 	   }
+	   }
 	
-// 	   function checkSpe(){
-// 	        var spe = $("#txt_Spe").val();
-//             if (spe == "" || spe == null) {
-//                 $("#txt_SpeTip").removeClass("onCorrect").addClass("onError").html("学科专业不能为空！");
-//             }
-//             else if(spe.length<2){
-//               $("#txt_SpeTip").removeClass("onCorrect").addClass("onError").html("学科专业不能小于2个字符！");    
-//             }
-// 	         else {
-//               $("#txt_SpeTip").removeClass("onError").addClass("onCorrect").html("");
-//                state4 = true;
-//             }
+	   function checkSpe(){
+	        var spe = $("#txt_Spe").val();
+            if (spe == "" || spe == null) {
+                $("#txt_SpeTip").removeClass("onCorrect").addClass("onError").html("输入不能为空！");
+            }
+            else if(spe.length<2){
+              $("#txt_SpeTip").removeClass("onCorrect").addClass("onError").html("输入不能小于2个字符！");    
+            }
+	         else {
+              $("#txt_SpeTip").removeClass("onError").addClass("onCorrect").html("");
+               state4 = true;
+            }
 	   
-// 	   }
+	   }
 	
         function checkMobile() {
             var mobile = $("#txtMobile").val();
             if (mobile == "" || mobile == null) {
-                $("#txtMobileTip").addClass("onError").html("输入手机号不能为空！");
+                $("#txtMobileTip").addClass("onError").html("手机号不能为空！");
                 $("#btnSendVerCode").attr("disabled", "disabled");
-                f2 = false;
             } else {
                 var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
                 if (!reg.test(mobile)) {
                     $("#txtMobileTip").removeClass("onCorrect").html("");
-                    $("#txtMobileTip").addClass("onError").html("输入手机号错误！");
+                    $("#txtMobileTip").addClass("onError").html("手机号输入错误！");
                     $("#btnSendVerCode").attr("disabled", "disabled");
-                    f2 = false;}
+                   }
                  else {
                     $.ajax({
                         url: "<%=path%>/CheckMobile",
@@ -225,7 +225,7 @@ if(member==null){
                         success: function (data) {
                             if (data == "false") {
                                 $("#txtMobileTip").removeClass("onCorrect").html("");
-                                $("#txtMobileTip").addClass("onError").html("已使用，请更换！");
+                                $("#txtMobileTip").addClass("onError").html("该号码已使用，请更换！");
                             } else {
                                 $("#txtMobileTip").addClass("onCorrect").html("");
                                 state5 = true;
@@ -235,7 +235,7 @@ if(member==null){
                         },
                         error: function (err) {
                         
-//                             alert("检查手机号失败，请联系管理员");
+                             alert("检查手机号失败，请联系管理员");
                         }
                     });
                }
@@ -245,35 +245,58 @@ if(member==null){
 	
 	
 	           function check() {
-	               if( state1&&state5){
+	               if( state1&&state2&& state3&&state4&&state5){
                      $.ajax({
                         url: "<%=path%>/SaveMemberInfo",
-                        type: 'post',
-                        async: false,
-                        dataType: 'text',
-                        data: {ocu : $("input[name=ocu]:checked").val(),name : $("#txtName").val(),mobile : $("#txtMobile").val(), unit : $("#txt_unit").val(),level : $("#txt_Level").val(), spe : $("#txt_Spe").val(),edu : $("input[name=edu]:checked").val()},
-                        success: function (data) {
-                            if (data == "true") {
-                                alert("提交成功！");
-                            } else {
-                                alert("提交失败！");
-                     
-                                
-                            }
-                        },
-                        error: function (err) {
-                        
-                           
-                        }
-                    });
-             
-	               }
-	               else{
-	               return;
-	               }
+							type : 'post',
+							async : false,
+							dataType : 'text',
+							data : {
+								ocu : $("input[name=ocu]:checked").val(),
+								name : $("#txtName").val(),
+								mobile : $("#txtMobile").val(),
+								unit : $("#txt_unit").val(),
+								level : $("#txt_Level").val(),
+								spe : $("#txt_Spe").val(),
+								edu : $("input[name=edu]:checked").val()
+							},
+							success : function(data) {
+								if (data == "true") {
+									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！提交成功<span id='second'>6</span>秒钟后将自动跳转到登录页！</div></div>");
+									$("body").find(".alert-tips").remove()
+											.end().append($copysuc);
+									timedCount();
+									$(".alert-tips").fadeOut(6000);
+									
+								} else {
+									$copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>提交失败！请发送问题至客服邮箱：****@163.com</div></div>");
+									$("body").find(".alert-tips").remove()
+											.end().append($copysuc);
+									$(".alert-tips").fadeOut(6000);
+								}
+							},
+							error : function(err) {
 
-	           
-	           }
+							}
+						});
+
+			} else {
+				return;
+			}
+		}
+		function timedCount() {
+		    var c = $('#second').html(); 
+		    c--;
+		    
+		    if(c > 0){	
+		        $('#second').html(c);			
+				setTimeout("timedCount()", 1000);
+				
+			}
+			else{
+			 location.href = "<%=path%>/Member/login.jsp";
+			}
+			}
 	</script>
 	
 </body>

@@ -58,6 +58,7 @@
                 </form>
             </div>
 </div>
+  <%@ include file="/Master/footer.jsp"%>
 <script type="text/javascript">
         var check1 = false;
         var check2 = false;
@@ -135,7 +136,7 @@
                         });
                     } else {
                         $("#reg_emailTip").removeClass("onCorrect");
-                        $("#reg_emailTip").addClass("onError").html("字符长度限制为6-30位！");
+                        $("#reg_emailTip").addClass("onError").html("长度限制为6-30位！");
                         check1 = false;
                     }
                 }
@@ -150,11 +151,10 @@
                 $("#reg_usernameTip").addClass("onError").html("不可为空！");
                 check2 = false;
             } else {
-                if (userName.length > 3 && userName.length < 31) {
+                if (userName.length > 1 && userName.length < 31) {
                     var reg = /([^0-9](.)*)/;
                     if (!reg.test(userName)) {
-                        $("#reg_usernameTip").removeClass("onCorrect");
-                        $("#reg_usernameTip").addClass("onError").html("不能全部使用数字！");
+                        $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("须使用字母+数字！");
                         check2 = false;
                     } else {
                         $.ajax({
@@ -180,8 +180,7 @@
                         });
                     }
                 } else {
-                    $("#reg_usernameTip").removeClass("onCorrect");
-                    $("#reg_usernameTip").addClass("onError").html("字符长度限制为4-30！");
+                    $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("输入长度限制为2-30！");
                     check2 = false;
                 }
 
@@ -255,7 +254,7 @@
                 $("#reg_ValidateCodeTip").addClass("onCorrect").html("正确！");
                 check5 = true;
             } else {
-                $("#reg_ValidateCodeTip").removeClass("onCorrect").html("");;
+                $("#reg_ValidateCodeTip").removeClass("onCorrect").html("");
                 $("#reg_ValidateCodeTip").addClass("onError").html("验证码输入有误！");
                 check5 = false;
             }

@@ -1,0 +1,40 @@
+1.新书速递
+
+SELECT  
+cc_discu.i_discuid,
+cc_discu.s_desc,
+cc_discu.s_create_time
+FROM
+cc_discu where b_deleted=0   order by s_create_time desc limit 0, 15 
+
+
+2.热门下载
+
+SELECT
+cc_discu.i_discuid,
+cc_discu.s_desc,
+cc_discu.i_download_times,
+cc_discu.s_create_time,
+cc_discu.b_deleted
+FROM
+cc_discu where b_deleted=0 order by i_download_times desc limit 0, 15 
+
+3.经典推荐  暂不用管，手动添加
+
+
+1.最新注册
+
+SELECT
+cc_member.i_uid,
+cc_member.s_loginid,
+cc_member.s_create_time,
+cc_member.b_deleted
+FROM
+cc_member where b_deleted=0 order by s_create_time desc limit 0, 10
+
+2.最近访问（实际是最近下载，避免未登陆人员查看）
+
+select cc_member.s_loginid,cc_discu.s_desc from (cc_integral left join cc_member on cc_integral.i_uid=cc_member.i_uid) left join cc_discu on cc_integral.i_discuid=cc_discu.i_discuid where cc_integral.s_type='下载文件' order by cc_integral.s_create_time desc limit 0, 10
+
+3.下载排行
+SELECT cc_member.s_loginid,count(*) FROM cc_integral LEFT JOIN cc_member on cc_integral.i_uid=cc_member.i_uid where cc_integral.s_type='下载文件' group  BY cc_integral.i_uid order by COUNT(*) desc limit 0, 10 

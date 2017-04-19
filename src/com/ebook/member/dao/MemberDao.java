@@ -17,9 +17,40 @@ import com.ebook.utils.DBPool;
 import com.ebook.utils.DatabaseTools;
 
 public class MemberDao {
+	
+	/**
+	 * 鐧诲綍楠岃瘉
+	 * @param uid
+	 * @return
+	 */
+	public static int userLogin(String uid,String pwd){
+		Member member = new Member();
+		String sql = "select * from cc_member where s_loginid='"+uid+"' and s_password ='"+pwd+"'";
+		Connection conn = DBPool.getInstance().getConnection();
+		Statement stmt;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			 rs = stmt.executeQuery(sql);
+			 if(rs.next()){
+				 member.setUid(rs.getString("i_uid"));
+				 member.setEmail(rs.getString("s_mail"));
+				 member.setLoginid(rs.getString("s_loginid"));
+				 member.setPassword(rs.getString("s_password"));
+				 member.setState(rs.getInt("i_state"));
+				 member.setOnline(rs.getInt("i_online"));
+			 }else{
+				 return 0;
+			 }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
+	
 
 	/**
-	 * 根据uid查找Member
+	 * 鏍规嵁uid鏌ユ壘Member
 	 * @param uid
 	 * @return
 	 */
@@ -49,7 +80,7 @@ public class MemberDao {
 		}
 	
 		/**
-		 * 根据email查找Member
+		 * 鏍规嵁email鏌ユ壘Member
 		 * @param email
 		 * @return
 		 */
@@ -76,7 +107,7 @@ public class MemberDao {
 	}
 	
 	/**
-	 * 更新Member
+	 * 鏇存柊Member
 	 * @param member
 	 */
 	public static void updateMember(Member member){
@@ -102,7 +133,7 @@ public class MemberDao {
 	
 	
 	/**
-	 * 根据email查找Active
+	 * 鏍规嵁email鏌ユ壘Active
 	 * @param email
 	 * @return
 	 */
@@ -127,7 +158,7 @@ public class MemberDao {
 	
 	
 	/**
-	 * 根据uid查找Active
+	 * 鏍规嵁uid鏌ユ壘Active
 	 * @param uid
 	 * @return
 	 */
@@ -151,7 +182,7 @@ public class MemberDao {
 		}
 		
 		/**
-		 * 根据SQL查找Active
+		 * 鏍规嵁SQL鏌ユ壘Active
 		 * @param uid
 		 * @return
 		 */
@@ -174,7 +205,7 @@ public class MemberDao {
 		}
 		
 		/**
-		 * 保存activate
+		 * 淇濆瓨activate
 		 * @param activate
 		 */
 		public static void saveActivate(Activate activate){
@@ -207,13 +238,13 @@ public class MemberDao {
 		
 		
 		/**
-		 * 保存MemberInfo
+		 * 淇濆瓨MemberInfo
 		 * @param MemberInfo
 		 */
 		public static void saveMemberInfo(MemberInfo memberInfo){
 			Member member = memberInfo.getMember();
 			String sql = "insert into cc_member_info(i_uid,s_occupation,s_name,s_mobile,s_address,"
-					+ "s_capacity,s_education,s_create_time) values(?,?,?,?,?,?,?,?)";
+					+ "s_capacity,s_spec,s_education,s_create_time) values(?,?,?,?,?,?,?,?,?)";
 			Connection conn = DBPool.getInstance().getConnection();
 			PreparedStatement ptst = null;
 			try {
@@ -224,8 +255,9 @@ public class MemberDao {
 				ptst.setString(4, memberInfo.getMobile());
 				ptst.setString(5, memberInfo.getAddress());
 				ptst.setString(6, memberInfo.getCapacity());
-				ptst.setString(7, memberInfo.getEducation());
-				ptst.setString(8, memberInfo.getCreatetime());
+				ptst.setString(7, memberInfo.getSpeciality());
+				ptst.setString(8, memberInfo.getEducation());
+				ptst.setString(9, memberInfo.getCreatetime());
 				ptst.executeUpdate();
 				
 			} catch (SQLException e) {

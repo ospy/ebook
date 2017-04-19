@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
 encoding//WebContent/Master/header.jsp=UTF-8
 encoding//WebContent/Member/login.jsp=UTF-8
+encoding//src/com/ebook/entity/MemberInfo.java=UTF-8
+encoding//src/com/ebook/member/dao/MemberDao.java=UTF-8
+encoding//src/com/ebook/member/servlet/ActivateAccount.java=UTF-8
+encoding//src/com/ebook/member/servlet/SaveMemberInfo.java=UTF-8
 encoding//src/com/ebook/test/emailInfo.properties=UTF-8
 encoding//src/config/user/emailInfo.properties=UTF-8
 encoding/<project>=UTF-8
