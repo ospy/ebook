@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="com.ebook.index.*" %>
+	<%@ page import="java.util.List" %>
+	<%@ page import="java.util.Map" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <%@ include file="/Master/header.jsp"%>
@@ -7,10 +10,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
 <script type="text/javascript"
-	src="/Js/jquery.SuperSlide.2.1.1.source.js"></script>
-<link type="text/css" rel="stylesheet" href="../Css/index.css" />
-
+	src="<%=path%>/Js/jquery.SuperSlide.2.1.1.source.js"></script>
+<link type="text/css" rel="stylesheet" href="<%=path%>/Css/index.css" />
 </head>
+<%
+List newBooks = IndexService.getNewBooks();//1.新书速递
+//List hotDownloads = IndexService.getHotDownload();//2.热门下载
+List newRegisters = IndexService.getNewRegister();//1.最新注册
+//List newVisits = IndexService.getNewVisit();//2.最近访问
+List topDownloads = IndexService.getTopDownload();//3.下载排行
+%>
 <body>
 	<div class="main">
 		<div class="leftbox">
@@ -290,19 +299,23 @@
 				</div>
 				<div class="bd">
 					<ul class="picList">
+					<%for(int i=0;i<newBooks.size();i++){  //循环显示新书start
+						Map book = (Map)newBooks.get(i);				
+					%>
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic1.jpg" /></a>
+									src="<%=path%>/images/pic1.jpg" /></a>
 							</div>
 							<div class="title">
-								<a href="http://www.SuperSlide2.com" target="_blank">效果图1</a>
+								<a href="http://www.SuperSlide2.com" target="_blank"><%=book.get("s_desc") %></a>
 							</div>
 						</li>
+						<%}   //循环显示新书end %>
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic2.jpg" /></a>
+									src="<%=path%>/images/pic2.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图2</a>
@@ -311,7 +324,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic3.jpg" /></a>
+									src="<%=path%>/images/pic3.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图3</a>
@@ -320,7 +333,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic4.jpg" /></a>
+									src="<%=path%>/images/pic4.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图4</a>
@@ -329,7 +342,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic5.jpg" /></a>
+									src="<%=path%>/images/pic5.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图5</a>
@@ -338,7 +351,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -347,7 +360,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -356,7 +369,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -365,7 +378,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -374,7 +387,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -383,7 +396,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -392,7 +405,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -401,7 +414,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -410,7 +423,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -419,7 +432,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -450,19 +463,23 @@
 				</div>
 				<div class="bd">
 					<ul class="picList">
+					<%//for(int i=0;i<hotDownloads.size();i++){  //循环显示热门下载start
+					//	Map Download = (Map)hotDownloads.get(i);				
+					%>
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic1.jpg" /></a>
+									src="<%=path%>/images/pic1.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图1</a>
 							</div>
 						</li>
+						<%//}  //循环显示热门下载end %>
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic2.jpg" /></a>
+									src="<%=path%>/images/pic2.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图2</a>
@@ -471,7 +488,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic3.jpg" /></a>
+									src="<%=path%>/images/pic3.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图3</a>
@@ -480,7 +497,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic4.jpg" /></a>
+									src="<%=path%>/images/pic4.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图4</a>
@@ -489,7 +506,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic5.jpg" /></a>
+									src="<%=path%>/images/pic5.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图5</a>
@@ -498,7 +515,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -507,7 +524,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -516,7 +533,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -525,7 +542,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -534,7 +551,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -543,7 +560,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -552,7 +569,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -561,7 +578,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -570,7 +587,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -579,7 +596,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -613,7 +630,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic1.jpg" /></a>
+									src="<%=path%>/images/pic1.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图1</a>
@@ -622,7 +639,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic2.jpg" /></a>
+									src="<%=path%>/images/pic2.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图2</a>
@@ -631,7 +648,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic3.jpg" /></a>
+									src="<%=path%>/images/pic3.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图3</a>
@@ -640,7 +657,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic4.jpg" /></a>
+									src="<%=path%>/images/pic4.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图4</a>
@@ -649,7 +666,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic5.jpg" /></a>
+									src="<%=path%>/images/pic5.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图5</a>
@@ -658,7 +675,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -667,7 +684,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -676,7 +693,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -685,7 +702,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -694,7 +711,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -703,7 +720,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -712,7 +729,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -721,7 +738,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -730,7 +747,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
@@ -739,7 +756,7 @@
 						<li>
 							<div class="pic">
 								<a href="http://www.SuperSlide2.com" target="_blank"><img
-									src="../images/pic6.jpg" /></a>
+									src="<%=path%>/images/pic6.jpg" /></a>
 							</div>
 							<div class="title">
 								<a href="http://www.SuperSlide2.com" target="_blank">效果图6</a>
