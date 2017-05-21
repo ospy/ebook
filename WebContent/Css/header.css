@@ -1,7 +1,7 @@
 
 body {
     background: #fff none repeat scroll 0 0;
-    font-family: "ËÎÌå";
+    font-family: "Microsoft YaHei";
     font-size: 12px;
     color:#333;
     margin: 0;
@@ -16,7 +16,7 @@ li {
 a,p {
     margin:0;
     padding:0;
-    color: #333;
+    color: #317082 ;
     font-size: 12px;
     text-decoration: none;
 }
@@ -38,6 +38,16 @@ h1, h2, h3,h4,h5 {
     margin:0;
     color:#333;
     font-family:'Microsoft YaHei';
+    line-height:30px;
+}
+h1 {
+    font-size:18px;
+}
+h2 {
+    font-size:16px;
+}
+h3 {
+    font-size:14px;
 }
 img {
     border:none;
@@ -84,8 +94,6 @@ img {
     background:url(/images/icons/index.png) no-repeat right 5px;
     }
 
-
-
 .logo {
     float:left;
     width:320px;
@@ -125,7 +133,7 @@ img {
 .clear {
     clear:both;
 }
-/*µ¼º½navi*/
+/*ï¿½ï¿½ï¿½ï¿½navi*/
 #navibar {
     height:38px;
     width:auto;
@@ -152,7 +160,7 @@ img {
 #navibar ul li.home{
 
     text-align: center;
-    width:320px;
+    width:250px;
    background:#317082;
 }
 #navibar ul li.home span{
@@ -160,9 +168,9 @@ img {
     display:inline-block;
     height: 24px;
     vertical-align: middle;
-    width: 30px;
-    margin-right:12px;
-    background:url("/images/index_logo.png") rgba(0, 0, 0, 0)  no-repeat scroll right 0;
+    width: 24px;
+
+    background:url("/Images/icons/home.png") 0 3px no-repeat ;
 }
 #navibar ul li a {
     display:inline-block;
@@ -198,7 +206,7 @@ img {
     margin-right:6px;
     background:url("/images/index_logo.png") rgba(0, 0, 0, 0)  no-repeat scroll -128px 0;
 }
-/*·ÖÒ³ÑùÊ½*/
+/*ï¿½ï¿½Ò³ï¿½ï¿½Ê½*/
 .pager {
     clear: both;
     margin-top: 30px;
@@ -254,12 +262,11 @@ img {
     padding: 0;
 }
 
-/*µ×²¿*/
+/*ï¿½×²ï¿½*/
 .bottom {
     margin-top:30px;
-    border-top:1px solid #eee;
+    border-top:1px solid #ccc;
     text-align:center;
-    background: #f6f6f6;
     height:auto;
     overflow: hidden;
 }
@@ -281,3 +288,8 @@ img {
     float:left;
     list-style:none;
     }
+.bottom p{
+	line-height: 22px;
+	color: #666;
+	
+}    

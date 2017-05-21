@@ -9,6 +9,7 @@
 		<li  class="endline"><a href="#">友情链接</a></li>
 		<li></li>
 	</ul>
+	<p> www.medbook123.com</p>
+	<p>Copyright (C) 2017</p>
 	
-	<p>Copyright (C)2016-2017 www.medbook123.com</p>
 </div>

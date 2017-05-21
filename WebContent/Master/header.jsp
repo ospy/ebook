@@ -35,7 +35,7 @@
 
     <div class="header">
         <div class="logo">
-            <a href="/Home/Default">
+            <a href="/index.jsp">
                 <img src="<%=path %>/Images/logo.png" /></a>
         </div>
         <div class="search">
@@ -49,10 +49,10 @@
     </div>
    <div class="navibar" id="navibar">
             <ul>
-                <li class="home"><a href="/index.jsp"><span></span>首  页</a></li>
-                <li><a href="/DiscuList/DiscuList/00">医  学</a></li>
-                <li><a href="/DiscuList/DiscuList/300">药  学</a></li>
-                <li><a href="/DiscuList/DiscuList/400">生  物</a></li>
+                <li class="home"><a href="/index.jsp"><span></span>首&nbsp;&nbsp;页</a></li>
+                <li><a href="/Classlist/classlist.jsp?classid=1">临床医学</a></li>
+                <li><a href="/Classlist/classlist.jsp?classid=2">基础医学</a></li>
+                <li><a href="/Classlist/classlist.jsp?classid=3">药&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学</a></li>
                 <li></li>
             </ul>
         </div>
