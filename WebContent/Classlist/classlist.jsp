@@ -26,9 +26,7 @@
 <script src="/Js/jquery-ui-timepicker-addon.min.js"></script>
 <script src="/Js/jquery-ui-timepicker-zh-CN.js"></script>
 </head>
-<%
-List newBooks = Classlist.getNewBooks();//1.新书速递
-%>
+
 <script type="text/javascript">
 	(function($) {
 
@@ -105,6 +103,8 @@ List newBooks = Classlist.getNewBooks();//1.新书速递
 			}
 		
 	}(jQuery));
+	
+	
 </script>
 <body>
 	<div class="main">
@@ -115,26 +115,6 @@ List newBooks = Classlist.getNewBooks();//1.新书速递
 					<a target="_blank" href="/RankingList/DownloadRanking.aspx"></a>最新书目
 				</h3>
 				<ul id="latest_publish">
-
-					
-						<%for(int i=0;i<newBooks.size();i++){  //循环显示新书start
-						Map book = (Map)newBooks.get(i);				
-					%>
-						<li class="pic"><a href="http://www.SuperSlide2.com"
-							target="_blank"> <img src="<%=book.get("s_imgurl")%>" />
-						</a> <a class="title" href="<%=book.get("i_discuid") %>"
-							target="_blank">
-								<%if(book.get("s_desc").toString().length()>16){
-									out.println(book.get("s_desc").toString().substring(0, 16));
-									
-								} 
-								else{
-									out.println(book.get("s_desc"));
-									
-								}%>
-						</a></li>
-						<%}   //循环显示新书end %>
-					
 
 				</ul>
 			</div>
@@ -349,9 +329,9 @@ List newBooks = Classlist.getNewBooks();//1.新书速递
 				  $(this).addClass("up_arrow_actived").siblings().removeClass("down_arrow_actived up_arrow_actived");
 			 })
 			
-			           GetDiscuCount(dpid);
+			           
            
-			
+			 getnewest(100);
 
 		});
 
@@ -704,66 +684,33 @@ List newBooks = Classlist.getNewBooks();//1.新书速递
 					});
 		}
 
-		//获取学科
-		function GetSpec(scid) {
-			$
-					.ajax({
-						url : "/DiscuList/GetNewDepartment",
-						type : 'post',
-						async : false,
-						dataType : 'text',
-						data : {
-							scid : scid
-						},
-						success : function(result) {
-							if (result != "") {
-								var obj = strToJson(result);
-								var str = "<li><ul class=\"secondclass\">";
-								for (var i = 0; i < obj.length; i++) {
-									str += "<li><a href='/DiscuList/DiscuList/" + obj[i].i_spid + "'>"
-											+ obj[i].s_spec + "</a></li>";
-									str += "</li>";
-								}
-								str += "</ul></li>";
-								$("#Spec").append(str);
-							}
-						},
-						error : function(err) {
-							alert("获取学科异常，请联系管理员");
-							return false;
-						}
-					});
-		}
+		//获取最新
+         function getnewest(discuID){
+		
+		
+	            $.ajax({
+	                url: "<%=path%>/ClassList",
+	                type: 'post',
+	                async: false,
+	                dataType: 'text',
+	                data: { discuID: discuID },
+	                success: function (result) {
+	                	for(var i=0;i<data.length;i++)
+             	       {                        
+             		                   alert(data[i]);
+             	        }
+	                },
+	                error: function () {
+	                    alert("用户登录异常，请联系管理员");
+	                    return;
+	                }
+	            });	 
+		 
 
-		//发布开始日期时间控件及选择日期执行js函数timeSearch()
-		$('#startTime').datetimepicker({
-			language : 'zh-CN',
-			format : 'yyyy-mm-dd',//日期的格式
-			weekStart : 1,
-			todayBtn : 1,
-			autoclose : 1,
-			todayHighlight : 1,
-			startView : 2,
-			minView : 2,
-			forceParse : 0,
-		}).on('changeDate', function(ev) {
-			timeSearch();
-		});
+	
+	}
 
-		//发布结束日期时间控件及选择日期执行js函数timeSearch()
-		$('#endTime').datetimepicker({
-			language : 'zh-CN',
-			format : 'yyyy-mm-dd',//日期的格式
-			weekStart : 1,
-			todayBtn : 1,
-			autoclose : 1,
-			todayHighlight : 1,
-			startView : 2,
-			minView : 2,
-			forceParse : 0,
-		}).on('changeDate', function(ev) {
-			timeSearch();
-		});
+		
 
 
 	</script>

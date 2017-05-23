@@ -6,7 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>搜索列表</title>
-
+<%@ page import="com.ebook.classeslist.*"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.Map"%>
 
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
 <link href="/Css/classlist.css?v=20171223" rel="stylesheet" />
@@ -17,13 +19,16 @@
 
 <script src="/Js/jquery-ui.js"></script>
 <script src="/Js/jquery.myPagination.js"></script>
-<script src="/Js/searchlist.js"></script>
+<script src="/Js/Disculist.js"></script>
 
 
 
 <script src="/Js/jquery-ui-timepicker-addon.min.js"></script>
 <script src="/Js/jquery-ui-timepicker-zh-CN.js"></script>
 </head>
+<%
+List newBooks = Classlist.getNewBooks();//1.新书速递
+%>
 <script type="text/javascript">
 	(function($) {
 
@@ -111,14 +116,25 @@
 				</h3>
 				<ul id="latest_publish">
 
-					<li><a class="img" target="_blank"
-						href="/DiscuDetail/DiscuDetail/144077"> <img
-							alt="腹部CT诊断学_周康荣2011P1088书签" src="/Pic/2016-08/144077.jpg"
-							height="150" width="150"></a>
-						<p class="name">
-							<a title="腹部CT诊断学_周康荣2011P1088书签"
-								href="/DiscuDetail/DiscuDetail/144077" target="_blank">腹部CT诊断学_周康荣2011P1088书签</a>
-						</p></li>
+					
+						<%for(int i=0;i<newBooks.size();i++){  //循环显示新书start
+						Map book = (Map)newBooks.get(i);				
+					%>
+						<li class="pic"><a href="http://www.SuperSlide2.com"
+							target="_blank"> <img src="<%=book.get("s_imgurl")%>" />
+						</a> <a class="title" href="<%=book.get("i_discuid") %>"
+							target="_blank">
+								<%if(book.get("s_desc").toString().length()>16){
+									out.println(book.get("s_desc").toString().substring(0, 16));
+									
+								} 
+								else{
+									out.println(book.get("s_desc"));
+									
+								}%>
+						</a></li>
+						<%}   //循环显示新书end %>
+					
 
 				</ul>
 			</div>
@@ -277,10 +293,10 @@
 
 
              <div class="listcontent">
-			<div class="order">
-				共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录 
+			<div class="orderbox">
+				共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录 <span class="ordercontrol">排序方式：发布时间 <a id="down_time" class="down_arrow down_arrow_actived order"></a>&nbsp;<a id="up_time" class="up_arrow  order"></a>&nbsp;&nbsp;下载次数 <a id="up_download" class="up_arrow  order"></a>&nbsp;<a id="down_download" class="down_arrow  order"></a>&nbsp;&nbsp;点击次数 <a id="up_click" class="up_arrow  order"></a>&nbsp;<a id="down_click" class="down_arrow  order"></a></span>
 			</div>
-			<div id="discuList" style="height: auto;"></div>
+			<div id="discuList"  style="height: auto;"></div>
 			<div id="foot" style="height: 40px; text-align: center;"></div>
 
 			<div id="Pager" style="width: 800px;"></div>
@@ -320,13 +336,21 @@
               }
               else{
             	  
-            	  
+            	  $(".classlist").show();
               }
-			//             GetDepartment(dpid);
-			//             GetNewDiscu();
-			//             GetDownDiscu();
-			           GetDiscuCount(dpid);
 
+			
+			 $(".down_arrow").click(function(){
+				 
+				   $(this).addClass("down_arrow_actived").siblings().removeClass("down_arrow_actived up_arrow_actived");
+			 })
+			  $(".up_arrow").click(function(){
+				 
+				  $(this).addClass("up_arrow_actived").siblings().removeClass("down_arrow_actived up_arrow_actived");
+			 })
+			
+			           GetDiscuCount(dpid);
+           
 			
 
 		});
