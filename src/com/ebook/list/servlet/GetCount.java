@@ -18,11 +18,10 @@ import com.ebook.entity.BookList;
 import com.ebook.list.dao.ListDao;
 import com.ebook.utils.ResultsetToList;
 import com.ebook.utils.RsToJson;
-import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 
 
-@WebServlet("/ClassList")
-public class ClassList extends HttpServlet {
+@WebServlet("/GetCount")
+public class GetCount extends HttpServlet {
 	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,30 +34,21 @@ public class ClassList extends HttpServlet {
 		String spid = request.getParameter("spid");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
-		int pageIndex =  Integer.parseInt(request.getParameter("pageIndex"));
-		int pageListSize =pageIndex+  Integer.parseInt(request.getParameter("pageListSize"));
-		String order = request.getParameter("order");
-		
 		String Time="";
 		
-		if(spid!=null){
-			spid="where b.i_spid="+spid;	
+		if(spid !=null){
+			spid="where b.i_spid ="+spid;	
 		}
 		else{
 			spid=" ";
-		}
-		
+		}				
 		if(startTime!=null)
-		{
-			
-			Time ="and"+ startTime+ "< cc_discu.s_create_time ";
-			
+		{			
+			Time ="and"+ startTime+ "< cc_discu.s_create_time ";			
 		}
 		else if(endTime!=null)
-		{
-			
-			Time +="<"+ endTime;
-			
+		{			
+			Time +="<"+ endTime;			
 		}
 		else{
 			Time="";
@@ -66,8 +56,8 @@ public class ClassList extends HttpServlet {
 		
         /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
-		ResultSet rs = ListDao.getBookList(spid,Time,pageIndex,pageListSize,order);
-		String result;
+        ResultSet rs = ListDao.getCount(spid,Time);
+        String result;
 		try {
 			result = RsToJson.resultSetToJson(rs);
 			PrintWriter out = response.getWriter();
@@ -83,10 +73,6 @@ public class ClassList extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-	
-	
+	      }
 	}
-
 }

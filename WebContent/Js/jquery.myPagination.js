@@ -202,7 +202,7 @@
                 currPage = getInt(currPage);
                 currIndex = (currPage - 1) * pageListSize;
                 $("#foot").html("<img src='/images/loading.gif'/>");
-                GetDiscuByPage(currIndex, pageListSize, dpid, startTime, endTime);
+                getClassList(spid,currIndex, pageListSize);
                 $("#foot").html("");
                 pageCount = getInt(pageCount);
                 var link = getLink();

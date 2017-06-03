@@ -88,9 +88,11 @@
 				changeMonth : true, // 允许选择月份     
 				changeYear : true, // 允许选择年份     
 				dateFormat : 'yy-mm-dd', // 设置日期格式   
+				defaultDate:  new Date(),
+				setDate:new Date(),
 				onClose : function(selectedDate) {
 				}
-
+			
 			});
 		});
 
@@ -142,71 +144,71 @@
 							
 							<ul class="item">
 
-								<li><a onclick="getDiscuListByDpid(1000)">内科综合</a></li>
-								<li><a onclick="getDiscuListByDpid(1001)">呼吸综合</a></li>
-								<li><a onclick="getDiscuListByDpid(1002)">消化内科</a></li>
-								<li><a onclick="getDiscuListByDpid(1003)">神经内科</a></li>
-								<li><a onclick="getDiscuListByDpid(1004)">心血管内科</a></li>
-								<li><a onclick="getDiscuListByDpid(1005)">血液内科</a></li>
-								<li><a onclick="getDiscuListByDpid(1006)">肾内科</a></li>
-								<li><a onclick="getDiscuListByDpid(1007)">内分泌科</a></li>
-								<li><a onclick="getDiscuListByDpid(1008)">风湿免疫科</a></li>
-								<li><a onclick="getDiscuListByDpid(1009)">变态反应科</a></li>
-								<li><a onclick="getDiscuListByDpid(1010)">老年病科</a></li>
+								<li><a onclick="getClassListBySpid(1000)">内科综合</a></li>
+								<li><a onclick="getClassListBySpid(1001)">呼吸综合</a></li>
+								<li><a onclick="getClassListBySpid(1002)">消化内科</a></li>
+								<li><a onclick="getClassListBySpid(1003)">神经内科</a></li>
+								<li><a onclick="getClassListBySpid(1004)">心血管内科</a></li>
+								<li><a onclick="getClassListBySpid(1005)">血液内科</a></li>
+								<li><a onclick="getClassListBySpid(1006)">肾内科</a></li>
+								<li><a onclick="getClassListBySpid(1007)">内分泌科</a></li>
+								<li><a onclick="getClassListBySpid(1008)">风湿免疫科</a></li>
+								<li><a onclick="getClassListBySpid(1009)">变态反应科</a></li>
+								<li><a onclick="getClassListBySpid(1010)">老年病科</a></li>
 							</ul>
 						</div>
 						<div class="Spec_show ">
 							<ul class="secondclass">
-								<li><a onclick="getDiscuListByDpid(2000)">外科综合</a></li>
-								<li><a onclick="getDiscuListByDpid(2001)">普通外科</a></li>
-								<li><a onclick="getDiscuListByDpid(2002)">神经外科</a></li>
-								<li><a onclick="getDiscuListByDpid(2003)">骨科</a></li>
-								<li><a onclick="getDiscuListByDpid(2004)">泌尿外科 </a></li>
-								<li><a onclick="getDiscuListByDpid(2005)">胸外科</a></li>
-								<li><a onclick="getDiscuListByDpid(2006)">心血管外科</a></li>
-								<li><a onclick="getDiscuListByDpid(2007)">烧伤科</a></li>
+								<li><a onclick="getClassListBySpid(2000)">外科综合</a></li>
+								<li><a onclick="getClassListBySpid(2001)">普通外科</a></li>
+								<li><a onclick="getClassListBySpid(2002)">神经外科</a></li>
+								<li><a onclick="getClassListBySpid(2003)">骨科</a></li>
+								<li><a onclick="getClassListBySpid(2004)">泌尿外科 </a></li>
+								<li><a onclick="getClassListBySpid(2005)">胸外科</a></li>
+								<li><a onclick="getClassListBySpid(2006)">心血管外科</a></li>
+								<li><a onclick="getClassListBySpid(2007)">烧伤科</a></li>
 							</ul>
 						</div>
 						<div class="Spec_show">
 							<ul class="item">
-								<li><a onclick="getDiscuListByDpid(3000)">全科医学</a></li>
-								<li><a onclick="getDiscuListByDpid(3100)">妇产科</a></li>
-								<li><a onclick="getDiscuListByDpid(3200)">儿科</a></li>
-								<li><a onclick="getDiscuListByDpid(3300)">眼科</a></li>
-								<li><a onclick="getDiscuListByDpid(3400)">耳鼻咽喉科</a></li>
-								<li><a onclick="getDiscuListByDpid(3500)">口腔科</a></li>
-								<li><a onclick="getDiscuListByDpid(3600)">皮肤性病科</a></li>
-								<li><a onclick="getDiscuListByDpid(3700)">整形美容科</a></li>
-								<li><a onclick="getDiscuListByDpid(3800)">传染科</a></li>
-								<li><a onclick="getDiscuListByDpid(3900)">肿瘤科</a></li>
+								<li><a onclick="getClassListBySpid(3000)">全科医学</a></li>
+								<li><a onclick="getClassListBySpid(3100)">妇产科</a></li>
+								<li><a onclick="getClassListBySpid(3200)">儿科</a></li>
+								<li><a onclick="getClassListBySpid(3300)">眼科</a></li>
+								<li><a onclick="getClassListBySpid(3400)">耳鼻咽喉科</a></li>
+								<li><a onclick="getClassListBySpid(3500)">口腔科</a></li>
+								<li><a onclick="getClassListBySpid(3600)">皮肤性病科</a></li>
+								<li><a onclick="getClassListBySpid(3700)">整形美容科</a></li>
+								<li><a onclick="getClassListBySpid(3800)">传染科</a></li>
+								<li><a onclick="getClassListBySpid(3900)">肿瘤科</a></li>
 
 							</ul>
 						</div>
 
 						<div class="Spec_show">
 							<ul class="item">
-								<li><a onclick="getDiscuListByDpid(4000)">急诊医学科</a></li>
-								<li><a onclick="getDiscuListByDpid(4100)">重症医学科</a></li>
-								<li><a onclick="getDiscuListByDpid(4200)">康复医学科</a></li>
-								<li><a onclick="getDiscuListByDpid(4300)">运动医学科</a></li>
-								<li><a onclick="getDiscuListByDpid(4400)">职业病科</a></li>
-								<li><a onclick="getDiscuListByDpid(4500)">特种医学</a></li>
-								<li><a onclick="getDiscuListByDpid(4600)">麻醉科</a></li>
-								<li><a onclick="getDiscuListByDpid(4700)">疼痛科</a></li>
-								<li><a onclick="getDiscuListByDpid(4800)">精神科</a></li>
-								<li><a onclick="getDiscuListByDpid(4900)">中医科</a></li>
+								<li><a onclick="getClassListBySpid(4000)">急诊医学科</a></li>
+								<li><a onclick="getClassListBySpid(4100)">重症医学科</a></li>
+								<li><a onclick="getClassListBySpid(4200)">康复医学科</a></li>
+								<li><a onclick="getClassListBySpid(4300)">运动医学科</a></li>
+								<li><a onclick="getClassListBySpid(4400)">职业病科</a></li>
+								<li><a onclick="getClassListBySpid(4500)">特种医学</a></li>
+								<li><a onclick="getClassListBySpid(4600)">麻醉科</a></li>
+								<li><a onclick="getClassListBySpid(4700)">疼痛科</a></li>
+								<li><a onclick="getClassListBySpid(4800)">精神科</a></li>
+								<li><a onclick="getClassListBySpid(4900)">中医科</a></li>
 							</ul>
 						</div>
 						<div class="Spec_show">
 							<ul class="item">
-								<li><a onclick="getDiscuListByDpid(5000)">中西医结合</a></li>
-								<li><a onclick="getDiscuListByDpid(5100)">护理</a></li>
-								<li><a onclick="getDiscuListByDpid(5200)">医学检验</a></li>
-								<li><a onclick="getDiscuListByDpid(5300)">病理科</a></li>
-								<li><a onclick="getDiscuListByDpid(5400)">影像科</a></li>
-								<li><a onclick="getDiscuListByDpid(5500)">营养保健科</a></li>
-								<li><a onclick="getDiscuListByDpid(5600)">流行病学与防疫</a></li>
-								<li><a onclick="getDiscuListByDpid(5700)">卫生事业管理</a></li>
+								<li><a onclick="getClassListBySpid(5000)">中西医结合</a></li>
+								<li><a onclick="getClassListBySpid(5100)">护理</a></li>
+								<li><a onclick="getClassListBySpid(5200)">医学检验</a></li>
+								<li><a onclick="getClassListBySpid(5300)">病理科</a></li>
+								<li><a onclick="getClassListBySpid(5400)">影像科</a></li>
+								<li><a onclick="getClassListBySpid(5500)">营养保健科</a></li>
+								<li><a onclick="getClassListBySpid(5600)">流行病学与防疫</a></li>
+								<li><a onclick="getClassListBySpid(5700)">卫生事业管理</a></li>
 
 							</ul>
 						</div>
@@ -217,23 +219,23 @@
 		                 <td><div class="Basic Spec_show ">
 						
 						<ul class="item">
-							<li><a onclick="getDiscuListByDpid(6000)">医用数学</a></li>
-							<li><a onclick="getDiscuListByDpid(6100)">医用物理</a></li>
-							<li><a onclick="getDiscuListByDpid(6200)">基础化学</a></li>
-							<li><a onclick="getDiscuListByDpid(6300)">有机化学</a></li>
-							<li><a onclick="getDiscuListByDpid(6400)">解剖学</a></li>
-							<li><a onclick="getDiscuListByDpid(6500)">生物化学</a></li>
-							<li><a onclick="getDiscuListByDpid(6600)">遗传学</a></li>
-							<li><a onclick="getDiscuListByDpid(6700)">细胞生物学</a></li>
-							<li><a onclick="getDiscuListByDpid(6800)">组织胚胎学</a></li>
-							<li><a onclick="getDiscuListByDpid(6900)">生物工程</a></li>
-							<li><a onclick="getDiscuListByDpid(7000)">生理学</a></li>
-							<li><a onclick="getDiscuListByDpid(7100)">微生物学</a></li>
-							<li><a onclick="getDiscuListByDpid(7200)">寄生虫学</a></li>
-							<li><a onclick="getDiscuListByDpid(7300)">医学免疫学</a></li>
-							<li><a onclick="getDiscuListByDpid(7400)">病理学</a></li>
-							<li><a onclick="getDiscuListByDpid(7500)">病理生理学</a></li>
-							<li><a onclick="getDiscuListByDpid(7600)">医学心理学</a></li>
+							<li><a onclick="getClassListBySpid(6000)">医用数学</a></li>
+							<li><a onclick="getClassListBySpid(6100)">医用物理</a></li>
+							<li><a onclick="getClassListBySpid(6200)">基础化学</a></li>
+							<li><a onclick="getClassListBySpid(6300)">有机化学</a></li>
+							<li><a onclick="getClassListBySpid(6400)">解剖学</a></li>
+							<li><a onclick="getClassListBySpid(6500)">生物化学</a></li>
+							<li><a onclick="getClassListBySpid(6600)">遗传学</a></li>
+							<li><a onclick="getClassListBySpid(6700)">细胞生物学</a></li>
+							<li><a onclick="getClassListBySpid(6800)">组织胚胎学</a></li>
+							<li><a onclick="getClassListBySpid(6900)">生物工程</a></li>
+							<li><a onclick="getClassListBySpid(7000)">生理学</a></li>
+							<li><a onclick="getClassListBySpid(7100)">微生物学</a></li>
+							<li><a onclick="getClassListBySpid(7200)">寄生虫学</a></li>
+							<li><a onclick="getClassListBySpid(7300)">医学免疫学</a></li>
+							<li><a onclick="getClassListBySpid(7400)">病理学</a></li>
+							<li><a onclick="getClassListBySpid(7500)">病理生理学</a></li>
+							<li><a onclick="getClassListBySpid(7600)">医学心理学</a></li>
 						</ul>
 					</div></td>
 		                
@@ -242,17 +244,17 @@
 		                 <td  class="top">药&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学：</td>
 		                 <td><div class="Pharmacy Spec_show">						
 						<ul class="item">
-							<li><a onclick="getDiscuListByDpid(9000)">基础药学</a></li>
-							<li><a onclick="getDiscuListByDpid(9001)">药物分析</a></li>
-							<li><a onclick="getDiscuListByDpid(9002)">药典</a></li>
-							<li><a onclick="getDiscuListByDpid(9003)">处方集</a></li>
-							<li><a onclick="getDiscuListByDpid(9004)">药物鉴定</a></li>
-							<li><a onclick="getDiscuListByDpid(9005)">天然药物学</a></li>
-							<li><a onclick="getDiscuListByDpid(9006)">药剂学</a></li>
-							<li><a onclick="getDiscuListByDpid(9007)">药事组织</a></li>
-							<li><a onclick="getDiscuListByDpid(9008)">药理学</a></li>
-							<li><a onclick="getDiscuListByDpid(9009)">药品</a></li>
-							<li><a onclick="getDiscuListByDpid(9010)">毒理学</a></li>
+							<li><a onclick="getClassListBySpid(9000)">基础药学</a></li>
+							<li><a onclick="getClassListBySpid(9001)">药物分析</a></li>
+							<li><a onclick="getClassListBySpid(9002)">药典</a></li>
+							<li><a onclick="getClassListBySpid(9003)">处方集</a></li>
+							<li><a onclick="getClassListBySpid(9004)">药物鉴定</a></li>
+							<li><a onclick="getClassListBySpid(9005)">天然药物学</a></li>
+							<li><a onclick="getClassListBySpid(9006)">药剂学</a></li>
+							<li><a onclick="getClassListBySpid(9007)">药事组织</a></li>
+							<li><a onclick="getClassListBySpid(9008)">药理学</a></li>
+							<li><a onclick="getClassListBySpid(9009)">药品</a></li>
+							<li><a onclick="getClassListBySpid(9010)">毒理学</a></li>
 
 						</ul>
 					</div></td>
@@ -269,12 +271,11 @@
 							</div></td>
 		                  </tr>
 		    </table>
-		
-
+					
 
              <div class="listcontent">
 			<div class="orderbox">
-				共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录 <span class="ordercontrol">排序方式：发布时间 <a id="down_time" class="down_arrow down_arrow_actived order"></a>&nbsp;<a id="up_time" class="up_arrow  order"></a>&nbsp;&nbsp;下载次数 <a id="up_download" class="up_arrow  order"></a>&nbsp;<a id="down_download" class="down_arrow  order"></a>&nbsp;&nbsp;点击次数 <a id="up_click" class="up_arrow  order"></a>&nbsp;<a id="down_click" class="down_arrow  order"></a></span>
+				共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录 <span class="ordercontrol">排序方式：发布时间 <a id="down_time" data="order by a.s_create_time desc" class="down_arrow down_arrow_actived order  actived"></a>&nbsp;<a id="up_time" data="order by a.s_create_time asc" class="up_arrow  order"></a>&nbsp;&nbsp;下载次数 <a id="down_download" data="order by a.i_download_times desc" class="down_arrow  order"></a>&nbsp;<a id="up_download" data="order by a.i_download_times asc" class="up_arrow  order"></a>&nbsp;&nbsp;点击次数 <a id="down_click"  data="order by a.i_click_times desc" class="down_arrow  order"></a>&nbsp;<a id="up_click" data="order by a.i_click_times asc" class="up_arrow  order"></a></span>
 			</div>
 			<div id="discuList"  style="height: auto;"></div>
 			<div id="foot" style="height: 40px; text-align: center;"></div>
@@ -293,57 +294,58 @@
 
 	</div>
 	<script type="text/javascript">
-		var dpid = 0;//dpid = 0全部学科
+		var spid = 0;//spid = 0 学科编码
 		var totalPage = 0;
-		var pageListSize = 40;//每页显示调试
+		var pageListSize = 20;//每页显示调试
 		//var uType = 0;//uType=2管理员
 		var startTime = "";
 		var endTime = "";
         var classid =$.getUrlParam('classid');
-        
+        var where ="";
+        var order ="";
 		$(function() {
               if(classid==1){
             	  $(".clinic_tr").show().siblings(".classlist").hide();
-            	  
+            	
               }
               if(classid==2){
             	  $(".basic_tr").show().siblings(".classlist").hide();
-            	  
+            	 
               }
               if(classid==3){
             	  $(".pharmacy_tr").show().siblings(".classlist").hide();
-            	  
+            	 
               }
               else{
             	  
             	  $(".classlist").show();
               }
 
-			
-			 $(".down_arrow").click(function(){
-				 
-				   $(this).addClass("down_arrow_actived").siblings().removeClass("down_arrow_actived up_arrow_actived");
+			//排序显示样式控制
+			 $(".down_arrow").click(function(){				 
+				   $(this).addClass("down_arrow_actived actived").siblings().removeClass("down_arrow_actived up_arrow_actived actived");
+				   getClassListBySpid();
 			 })
-			  $(".up_arrow").click(function(){
-				 
-				  $(this).addClass("up_arrow_actived").siblings().removeClass("down_arrow_actived up_arrow_actived");
+			  $(".up_arrow").click(function(){								 
+				  $(this).addClass("up_arrow_actived actived").siblings().removeClass("down_arrow_actived up_arrow_actived actived");			  
+				  getClassListBySpid();
 			 })
-			
+   
 			           
-           
-			 getnewest(100);
+             getClassListBySpid();
+			
 
 		});
 
 		//学科筛选
-		function getDiscuListByDpid(i_dpid) {
-			dpid = i_dpid;
-			GetDepartment(dpid);
-			$(".secondclass li a").removeClass("spec");
-			$("." + dpid).addClass("spec");
+		function getClassListBySpid(i_spid) {
+			spid = i_spid;
+			//GetDepartment(dpid);
+			//$(".secondclass li a").removeClass("spec");
+			//$("." + dpid).addClass("spec");
 
 			//时间条件限定
-			startTime = "2007-01-01";
+			startTime = $("#startTime").val();
 			var curr_time = new Date();
 			endTime = curr_time.getFullYear() + "-";
 			endTime += curr_time.getMonth() + 1 + "-";
@@ -352,30 +354,15 @@
 			if ($("#startTime").val() != "" && $("#endTime").val() == "") {
 				startTime = $("#startTime").val();
 				$("#sTime").html(startTime);
-				$("#between").html("至今");
 			}
-
 			if ($("#endTime").val() != "") {
 				endTime = $("#endTime").val();
-				$("#between").html("至");
 				$("#eTime").html(endTime);
 			}
-			//面包屑限定条件样式
-			$("#time_limit").removeClass("limit_info");
-			$("#time_limit .crumbDelete").remove();
-			if ($("#startTime").val() != "" || $("#endTime").val() != "") {
-				$("#time_limit").addClass("limit_info");
-				$("#time_limit").append(
-						'<a class="crumbDelete" onclick="ClearTime();"></a>')
-			} else {
-				$("#time_limit").removeClass("limit_info");
-				$("#time_limit .crumbDelete").remove();
-			}
+			
+			getCount(spid);
 
-			$("#foot").html("<img src='/images/loading.gif'/>");
-			GetDiscuCount(dpid);
-			//GetDiscuByPage(0, pageListSize, dpid, startTime, endTime);
-			$("#foot").html("");
+		
 		}
 
 		//时间筛选
@@ -418,7 +405,8 @@
 			}
 
 			$("#foot").html("<img src='/images/loading.gif'/>");
-			GetDiscuCount(dpid);
+			
+			
 			//GetDiscuByPage(0, pageListSize, dpid, startTime, endTime);
 
 			$("#foot").html("");
@@ -441,7 +429,7 @@
 			endTime += curr_time.getDate();
 
 			$("#foot").html("<img src='/images/loading.gif'/>");
-			GetDiscuCount(dpid);
+			getCount(dpid);
 			//GetDiscuByPage(0, pageListSize, dpid, startTime, endTime);
 
 			$("#foot").html("");
@@ -500,80 +488,6 @@
 						}
 					});
 
-		}
-
-		//列表分页查询
-		function GetDiscuByPage(pageIndex, pageListSize, dpid, startTime,
-				endTime) {
-			$
-					.ajax({
-						url : "/DiscuList/GetDiscuByPage",
-						type : 'post',
-						async : false,
-						dataType : 'text',
-						data : {
-							pageIndex : pageIndex,
-							pageListSize : pageListSize,
-							dpid : dpid,
-							startTime : startTime,
-							endTime : endTime
-						},
-						success : function(result) {
-							if (result != "") {
-								var obj = strToJson(result);
-								var str = "";
-								$("#discuList").html("");
-								//$("#Footer").html("正在加载.......");
-								for (var i = 0; i < obj.length; i++) {
-									//obj[i].s_desc = obj[i].s_desc.replace("&#183;", ".");
-
-									str += "<div class=\"listtable\"><a title=\"" + obj[i].s_desc + "\" class=\"pic\" href=\"/DiscuDetail/DiscuDetail/" + obj[i].i_discuid + "\" target=\"_blank\">";
-									str += "<img title=\"" + obj[i].s_desc + "\" src=\"/Pic/" + obj[i].s_path + "\" style=\"height: 150px; width: 150px;\"><span  class=\"property\"><span class=\"bookmark\" title=\"书签\"></span></span>";
-									str += "<span class=\"createTime\" style=\"display: none;\">"
-											+ obj[i].s_create_time
-											+ "</span></a>";
-									str += "<p class=\"firsttd\"><span class=\"icon pdf\"></span>";
-									
-								    str += "<a class=\"title\" title=\"" + obj[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + obj[i].i_discuid + "\" target=\"_blank\">"
-												+ obj[i].s_desc + "</a>";
-
-									str += "<span class=\"listtime\">&nbsp; "
-											+ obj[i].s_create_time.substring(0,
-													10) + "</span></p>";
-									str += "<p class=\"others\"><span>学&nbsp;&nbsp;&nbsp;&nbsp;科："
-											+ obj[i].s_spec + "</span></p>";
-									str += "<p class=\"others\"><span class=\"subtitle\">资源类型："
-											+ obj[i].FileType
-											+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">资源大小："
-											+ obj[i].FileSize + "</span></p>";
-									str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
-											+ obj[i].s_loginid
-											+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">资源页码："
-											+ obj[i].FilePage + "</span></p>";
-									str += "<p class=\"others\"><span class=\"subtitle\">点击次数："
-											+ obj[i].ClickTimes
-											+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">下载次数："
-											+ obj[i].DownTimes + "</span></p>";
-
-									//str += "<p class=\"datail\">摘要：<span  class=\"abstract\">《折裂牙原因、分型及保存》根据作者多年的临床经验编写而成。全书主要内容包括，折裂牙原因，牙齿折裂的分型，折裂牙的保存范围，折裂牙的保存治疗，根裂，与折裂牙保存相关的牙周手术，与劈裂牙保存相关的其他问题等。全书内容全面，结构合理，同时作者还配用大量的图片进行说明，以便于读者的阅读和理解。《折裂牙原因、分型及保存》适合具有...</span></p>";
-									str += "<p><span class=\"price\">￥"
-											+ obj[i].i_discuPrice
-											+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
-								}
-								$("#discuList").html(str);
-
-								//$("#Footer").html("");
-							} else {
-								$("#discuList")
-										.html(
-												"<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
-							}
-						},
-						error : function(err) {
-							alert("获取帖子异常，请联系管理员");
-							return false;
-						}
-					});
 		}
 
 		//最新发布
@@ -638,71 +552,108 @@
 		function strToJson(str) {
 			var json = eval('(' + str + ')');
 			return json;
-		}
+		}		
 
-		//获取帖子总数
-		function GetDiscuCount(dpid) {
-			startTime = $("#startTime").val();
-			endTime = $("#endTime").val();
-			$
-					.ajax({
-						url : "/DiscuList/GetDiscuCount",
-						type : 'post',
-						async : false,
-						dataType : 'text',
-						data : {
-							dpid : dpid,
-							startTime : startTime,
-							endTime : endTime
-						},
-						success : function(result) {
-							if (result != "") {
-								pageTotalCount = parseInt(result);//总记录数
-								$("#total").html(pageTotalCount);
-								totalPage = parseInt(pageTotalCount
-										/ pageListSize)
-										+ ((pageTotalCount % pageListSize) > 0 ? 1
-												: 0);
+         function getCount(spid){
+        	 spid = spid;       	
+        	 startTime = $("#startTime").val();
+    		 endTime = $("#endTime").val();
+    		
+	            $.ajax({
+	                url: "<%=path%>/GetCount",
+	                type: 'post',
+	                async: true,
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                dataType: 'json',
+	                data: { spid:spid,startTime:startTime,endTime:endTime },
+	                success: function (result) {
+	               
+                    if(result[0].Count !=0 ){       
+					var	pageTotalCount = parseInt(result[0].Count);//总记录数
+						$("#total").html(pageTotalCount);
+						totalPage = parseInt(pageTotalCount
+								/ pageListSize)
+								+ ((pageTotalCount % pageListSize) > 0 ? 1
+										: 0);
 
-								//mypagination
-								$("#Pager").myPagination({
-									currPage : 1,
-									pageCount : totalPage,
-									pageSize : 10
-								});
-								////分页控件
-								//$(".tcdPageCode").createPage({
-								//    pageCount: totalPage,//totalPage数据总数
-								//    current: 1,//当前第1页
-								//});
-							}
-						},
-						error : function() {
-							alert("获取帖子总数异常，请联系管理员");
-							return false;
-						}
-					});
-		}
-
-		//获取最新
-         function getnewest(discuID){
-		
-		
+						//mypagination
+						$("#Pager").show();
+						$("#Pager").myPagination({
+							currPage : 1,
+							pageCount : totalPage,
+							pageSize : 10
+						});
+                    }
+                    else{
+                    	$("#total").html("0");
+                    	$("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
+                    	$("#Pager").hide();
+                          }	                		                	
+	                },
+	                error: function () {
+	                    alert("获取记录总数异常！");
+	                    return false;
+	                }
+	            });	 
+        	 
+         }
+		//获取图书列表
+         function getClassList(spid,pageIndex, pageListSize){
+			 spid = spid;
+        	 startTime = $("#startTime").val();
+ 			 endTime = $("#endTime").val();
+ 			 
+		     order =$(".actived").attr("data");
+		    
 	            $.ajax({
 	                url: "<%=path%>/ClassList",
 	                type: 'post',
 	                async: false,
-	                dataType: 'text',
-	                data: { discuID: discuID },
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                dataType: 'json',
+	                data: { spid:spid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
 	                success: function (result) {
-	                	for(var i=0;i<data.length;i++)
-             	       {                        
-             		                   alert(data[i]);
-             	        }
+	                	$("#discuList").html("");
+	                	if (result != 0) {
+	                	var str = "";
+	                	for(var i=0;i < result.length;i++ ){
+	                		
+	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">";
+							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\"><span  class=\"property\"><span class=\"bookmark\" title=\"书签\"></span></span>";
+							str += "<span class=\"createTime\" style=\"display: none;\">"
+									+ result[i].s_create_time
+									+ "</span></a>";
+							str += "<p class=\"firsttd\"><span class=\"icon pdf\"></span>";
+							
+						    str += "<a class=\"title\" title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
+										+ result[i].s_desc + "</a>";
+
+							str += "<span class=\"listtime\">&nbsp; "
+									+ result[i].s_create_time.substring(0,
+											10) + "</span></p>";
+						
+							str += "<p class=\"others\"><span class=\"subtitle\">资源类型："
+									+ result[i].FileType+"</p>";
+							str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
+									+ result[i].s_loginid+"</p>";
+							str += "<p class=\"others\"><span class=\"subtitle\">点击次数："
+									+ result[i].i_click_times
+									+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">下载次数："
+									+ result[i].i_download_times + "</span></p>";
+
+							//str += "<p class=\"datail\">摘要：<span  class=\"abstract\">《折裂牙原因、分型及保存》根据作者多年的临床经验编写而成。全书主要内容包括，折裂牙原因，牙齿折裂的分型，折裂牙的保存范围，折裂牙的保存治疗，根裂，与折裂牙保存相关的牙周手术，与劈裂牙保存相关的其他问题等。全书内容全面，结构合理，同时作者还配用大量的图片进行说明，以便于读者的阅读和理解。《折裂牙原因、分型及保存》适合具有...</span></p>";
+							str += "<p><span class=\"price\">￥"
+									+ result[i].i_discuPrice
+									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
+						}
+						$("#discuList").html(str);
+	                	} else {
+	                        $("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
+	                    }
 	                },
 	                error: function () {
-	                    alert("用户登录异常，请联系管理员");
-	                    return;
+	                    alert("获取书目列表异常！");
+	                    return false;
 	                }
 	            });	 
 		 
