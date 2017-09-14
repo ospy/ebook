@@ -1,16 +1,21 @@
 package com.ebook.member.dao;
 
 import java.awt.ActiveEvent;
+import java.awt.List;
 import java.awt.Menu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 import javax.sound.midi.MetaEventListener;
 
 import com.ebook.entity.Activate;
+import com.ebook.entity.BookList;
 import com.ebook.entity.Member;
 import com.ebook.entity.MemberInfo;
 import com.ebook.utils.DBPool;
@@ -23,29 +28,50 @@ public class MemberDao {
 	 * @param uid
 	 * @return
 	 */
-	public static int userLogin(String uid,String pwd){
+	public static ArrayList<Member> userLogin(String uid,String pwd){
 		Member member = new Member();
 		String sql = "select * from cc_member where s_loginid='"+uid+"' and s_password ='"+pwd+"'";
 		Connection conn = DBPool.getInstance().getConnection();
-		Statement stmt;
+		Statement stmt=null;
 		ResultSet rs = null;
+		ArrayList<Member> list=new ArrayList<Member>();
 		try {
 			stmt = conn.createStatement();
 			 rs = stmt.executeQuery(sql);
 			 if(rs.next()){
+					
 				 member.setUid(rs.getString("i_uid"));
 				 member.setEmail(rs.getString("s_mail"));
 				 member.setLoginid(rs.getString("s_loginid"));
 				 member.setPassword(rs.getString("s_password"));
 				 member.setState(rs.getInt("i_state"));
 				 member.setOnline(rs.getInt("i_online"));
-			 }else{
-				 return 0;
 			 }
+			 list.add(member); 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return 1;
+		finally{
+		try {
+				rs.close();			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    try {	    		
+	    	stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    try {	    		 
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+		return list;
 	}
 	
 

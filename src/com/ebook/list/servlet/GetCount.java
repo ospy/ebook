@@ -1,6 +1,7 @@
 package com.ebook.list.servlet;
 
 
+import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
+
+import com.ebook.utils.RsToJson; 
 
 import com.ebook.entity.BookList;
 import com.ebook.list.dao.ListDao;
@@ -31,17 +34,40 @@ public class GetCount extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String search=  request.getParameter("search");
 		String spid = request.getParameter("spid");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
 		String Time="";
+		String condition="";
 		
-		if(spid !=null){
-			spid="where b.i_spid ="+spid;	
+		if(search!=""){
+		String [] searchArray = search.split("\\s+");
+		for(String ss : searchArray){
+		  condition +="and s_desc like \"%"+ss+"%\" ";
+		  }
+		}
+		
+		
+		if(spid.equals("0")){
+			spid=" ";	
+		}
+		else if(spid.equals("1")){
+			spid="where b.i_spid <= 5700";	
+		}
+		else if(spid.equals("2")){
+			spid="where  b.i_spid <=7600 and i_spid >=6000";	
+		}
+		else if(spid.equals("3")){
+			spid="where  b.i_spid <=9100 and i_spid >=9000";	
+		}
+		else if(spid==""){
+			spid=" ";
 		}
 		else{
-			spid=" ";
-		}				
+			spid="where b.i_spid="+spid;	
+		}	
+		
 		if(startTime!=null)
 		{			
 			Time ="and"+ startTime+ "< cc_discu.s_create_time ";			
@@ -56,23 +82,17 @@ public class GetCount extends HttpServlet {
 		
         /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
-        ResultSet rs = ListDao.getCount(spid,Time);
-        String result;
-		try {
-			result = RsToJson.resultSetToJson(rs);
-			PrintWriter out = response.getWriter();
-			out.print(result);
-		} catch (SQLException | JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		finally{
+       String rs0 = ListDao.getCount(condition,spid,Time);
+
 			try {
-				rs.close();
-			} catch (SQLException e) {
+			
+				PrintWriter out = response.getWriter();
+				out.print(rs0);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	      }
+
+
 	}
 }

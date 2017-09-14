@@ -5,16 +5,16 @@
 <%@ include file="/Master/header.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>分类列表</title>
+<title>搜索列表</title>
 
 
 
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
-<link href="/Css/classlist.css?v=20171223" rel="stylesheet" />
 <link href="/Css/page.css?v=20171214" rel="stylesheet" />
 <link href="/Css/bootstrap.css?v=20161214" rel="stylesheet" />
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
 <link href="/Css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+<link href="/Css/classlist.css?v=20171223" rel="stylesheet" />
 
 <script src="/Js/jquery-ui.js"></script>
 <script src="/Js/jquery.myPagination.js"></script>
@@ -98,9 +98,9 @@
 	
 			$.getUrlParam = function(name)
 		{
-			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			var r = window.location.search.substr(1).match(reg);
-		if (r!=null) return unescape(r[2]); return null;
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null) return unescape(r[2]); return null; 
 			}
 		
 	}(jQuery));
@@ -314,7 +314,9 @@
 		var startTime = "";
 		var endTime = "";
         var classid =$.getUrlParam('classid');
-        var search="";
+        var urlinfo = window.location.href;//获取url
+        var search = decodeURI(urlinfo.split("?")[1].split("=")[1]);//拆分url得到”=”后面的参数      
+       
         var where ="";
         var order ="";
 		$(function() {
@@ -344,6 +346,7 @@
 			//排序显示样式控制
 			 $(".down_arrow").click(function(){				 
 				   $(this).addClass("down_arrow_actived actived").siblings().removeClass("down_arrow_actived up_arrow_actived actived");
+				   
 				   $("#Pager").myPagination({
 						currPage : 1,
 						pageCount : totalPage,
@@ -360,8 +363,9 @@
 			 })
    
 			           
-            getClassListBySpid(spid);
-			 
+            
+			 getClassListBySpid(spid);
+			
 			 getNewByClass(spid);
              
 			 getHotByClass(spid);
@@ -372,7 +376,7 @@
 			 
 		});
 
-		//学科筛选
+		//根据搜索条件筛选
 		function getClassListBySpid(i_spid) {
 			spid = i_spid;
 			//GetDepartment(dpid);
@@ -538,9 +542,9 @@
 							if (result != "") {								
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
-									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
+									str += "<li><a class=\"img\" target=\"_blank\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" title=\"\">";
 									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
-									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
+									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
 								}
@@ -567,9 +571,9 @@
 							if (result != "") {								
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
-									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
+									str += "<li><a class=\"img\" target=\"_blank\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" title=\"\">";
 									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
-									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
+									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
 								}
@@ -596,9 +600,9 @@
 							if (result != "") {								
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
-									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
+									str += "<li><a class=\"img\" target=\"_blank\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" title=\"\">";
 									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
-									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
+									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
 								}
@@ -674,20 +678,20 @@
 		     order =$(".actived").attr("data");
 		    
 	            $.ajax({
-	                url: "<%=path%>/ClassList",
+	                url: "<%=path%>/SearchList",
 	                type: 'post',
 	                async: false,
 	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	                dataType: 'json',
-	                data: {search:search, spid:spid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
+	                data: {search:search,spid:spid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
 	                success: function (result) {
 	                	$("#discuList").html("");
 	                	if (result != 0) {
 	                	var str = "";
 	                	for(var i=0;i < result.length;i++ ){
 	                		
-	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">";
-							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\"><span  class=\"property\"><span class=\"bookmark\" title=\"书签\"></span></span>";
+	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/Detail/detail.jsp?id=/" + result[i].i_discuid + "\" target=\"_blank\">";
+							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\">";
 							str += "<span class=\"createTime\" style=\"display: none;\">"
 									+ result[i].s_create_time
 									+ "</span></a>";

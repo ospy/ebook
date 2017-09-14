@@ -44,7 +44,7 @@
 						<p class="fieldset">
 							<span class=title>验证码：</span> <input id="txt_ValidateCode"
 								class="text-input validatecode" onblur="checkCode();"
-								type="text"> <img id="validimg" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
+								type="text">&nbsp;&nbsp;&nbsp;&nbsp;<img id="validimg" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: top; font-size: 12px;"
                             onclick="this.src='../code.do?name=user_reg&id='+new Date();" /> <span id="codetip"></span>
 						</p>
 						<p id="tip-validatecode" class="tip red"></p>
@@ -54,7 +54,7 @@
 						<!-- 					</p> -->
 
 						<p class="fieldset">
-							<input id="loginbtn" class="full-width2" value="登 录"
+							<input id="loginbtn" class="full-width" value="登 录"
 								type="button" onclick="login()">
 						</p>
 					</form>

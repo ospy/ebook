@@ -30,69 +30,92 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 				<div class="leftcontent">
 					<div class="classify">
 						<ul>
-							<li class="first">内科</li>
-							<li>呼吸内科</li>
-							<li>消化内科</li>
-							<li>血液科</li>
-							<li>心内科</li>
+							<li class="first"><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">内科</a></li>
+							<li ><a  target="blank" href="/Classlist/classlist.jsp?classid=1001">呼吸内科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1002">消化内科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1003">神经内科</a></li>
+							<li ><a  target="blank" href="/Classlist/classlist.jsp?classid=1004">心血管内科</a></li>
+							
 						</ul>
 					</div>
 
 					<div class="classify">
 						<ul>
 							<li class="first"></li>
-							<li>神经内科</li>
-							<li>内分泌</li>
-							<li>风湿科</li>
-							<li>老年科</li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1005">血液科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1006">肾内科</a></li>
+							
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1007">内分泌</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1008">风湿免疫科</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1010">老年科</a></li>
 						</ul>
 					</div>
 
 					<div class="classify">
 						<ul>
-							<li class="first">外科</li>
-							<li>骨科</li>
-							<li>普外科</li>
-							<li>神经外科</li>
-							<li>泌尿外科</li>
+							<li class="first"> <a  target="blank" href="/Classlist/classlist.jsp?classid=2000">外科</a></li>
+							
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2001">普外科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2002">神经外科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2003">骨科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2004">泌尿外科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2005">胸外科</a></li>
 						</ul>
 					</div>
 
 					<div class="classify">
 						<ul>
 							<li class="first"></li>
-							<li>胸外科</li>
-							<li>烧伤科</li>
-							<li>心血管外科</li>
+							
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2006">心血管外科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2007">烧伤科</a></li>
+							
 							<li></li>
 						</ul>
 					</div>
 					<div class="classify">
 						<ul>
-							<li>妇产科</li>
-							<li>儿科</li>
-							<li>眼科</li>
-							<li>耳鼻喉</li>
-							<li>口腔科</li>
-							<li>皮肤性病科</li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3100">妇产科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3200">儿科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3300">眼科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3400">耳鼻喉</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3500">口腔科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3600">皮肤性病科</a></li>
 						</ul>
 					</div>
 					<div class="classify">
 						<ul>
-							<li>肿瘤科</li>
-							<li>急诊科</li>
-							<li>整形美容科</li>
-							<li>精神科</li>
-							<li>传染科</li>
+							
+							
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3700">整形美容科</a></li>
+							
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3800">传染科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3900">肿瘤科</a></li>
+							
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4000">急诊科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">重症医学科</a></li>
 						</ul>
 					</div>
 					<div class="classify">
 						<ul>
-							<li>中医科</li>
-							<li>麻醉科</li>
-							<li>病理科</li>
-							<li>影像科</li>
-							<li>检验科</li>
+						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">康复医学科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">运动医学科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">职业病科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">特种医学科</a></li>
+							
+						</ul>
+					</div>
+					<div class="classify">
+						<ul>
+						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">麻醉科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">疼痛科</a></li>
+						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">精神科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">中医科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">中西医结合科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">护理学</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">检验科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病理科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">影像科</a></li>
 						</ul>
 					</div>
 				</div>
@@ -102,30 +125,30 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 				<div class="leftcontent">
 					<div class="classify">
 						<ul>
-							<li>医用高数</li>
-							<li>医用物理</li>
-							<li>基础化学</li>
-							<li>有机化学</li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">医用高数</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">医用物理</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">基础化学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">有机化学</a></li>
 						
 						</ul>
 					</div>
 
 					<div class="classify">
 						<ul>
-							<li>生物化学</li>
-							<li>遗传学</li>
-							<li>细胞生物学</li>
-							<li>组织胚胎学</li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">生物化学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">遗传学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">细胞生物学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">组织胚胎学</a></li>
 
 						</ul>
 					</div>
 
 					<div class="classify">
-						<ul>	<li>解剖学</li>
+						<ul>	<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">解剖学</a></li>
 							
-							<li>生理学</li>
-							<li>病原微生物学</li>
-							<li>寄生虫学</li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">生理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病原微生物学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">寄生虫学</a></li>
 
 
 						</ul>
@@ -133,16 +156,16 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 
 					<div class="classify">
 						<ul>
-							<li>免疫学</li>
-							<li>病理学</li>
-							<li>病理生理学</li>
-							<li>生物工程</li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">免疫学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病理生理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">生物工程</a></li>
 						
 						</ul>
 					</div>
 					<div class="classify">
 						<ul>	
-							<li>医学心理学</li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">医学心理学</a></li>
 						</ul>
 					</div>
 				</div>
@@ -152,22 +175,22 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 				<div class="leftcontent">
 					<div class="classify">
 						<ul>
-							<li>基础药学</li>
-							<li>药理学</li>
-							<li>药物分析</li>
-							<li>药理学</li>
-							<li>毒理学</li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">基础药学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药物分析</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">毒理学</a></li>
 							
 							
 						</ul>
 					</div>
 
 					<div class="classify">
-						<ul><li>药物鉴定</li>
-							<li>药典</li>
-							<li>药品</li>
-							<li>天然药物学</li>
-							<li>药剂学</li>
+						<ul><li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药物鉴定</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药典</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药品</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">天然药物学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药剂学</a></li>
 
 							
 						</ul>
@@ -175,8 +198,8 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 
 					<div class="classify">
 						<ul>
-						<li>处方集</li>
-							<li>药事组织</li>
+						<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">处方集</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药事组织</a></li>
 						</ul>
 					</div>
 				</div>

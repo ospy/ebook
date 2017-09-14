@@ -1,3 +1,4 @@
+
 package com.ebook.list.servlet;
 
 
@@ -21,8 +22,8 @@ import com.ebook.utils.RsToJson;
 import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 
 
-@WebServlet("/ClassList")
-public class ClassList extends HttpServlet {
+@WebServlet("/SearchList")
+public class SearchList extends HttpServlet {
 	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,6 +33,8 @@ public class ClassList extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String search=  request.getParameter("search");
+		String condition="";
 		String spid = request.getParameter("spid");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
@@ -39,7 +42,13 @@ public class ClassList extends HttpServlet {
 		int pageListSize =Integer.parseInt(request.getParameter("pageListSize"));
 		String order = request.getParameter("order");		
 		String Time="";
-		String condition="";
+		
+		if(search!=""){
+		String [] searchArray = search.split("\\s+");
+		for(String ss : searchArray){
+		  condition +="and s_desc like \"%"+ss+"%\"";
+		  }
+		}
 		
 		if(spid.equals("0")){
 			spid=" ";	

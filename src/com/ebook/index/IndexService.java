@@ -9,6 +9,7 @@ import java.util.List;
 import com.ebook.utils.DBPool;
 import com.ebook.utils.DatabaseTools;
 import com.ebook.utils.ResultsetToList;
+import com.ebook.utils.RsToJson;
 
 public class IndexService {
 
@@ -25,7 +26,7 @@ public class IndexService {
 			e.printStackTrace();
 			return null;
 		}
-		finally{			
+		finally{		
 			DatabaseTools.closeConnection(connection);
 		}
 	}

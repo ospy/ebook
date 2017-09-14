@@ -62,7 +62,8 @@
 	text-align: right;
 	display: inline-block;
 	width: 60px;
-	font:normal 14px "Microsoft YaHei"; 
+	font:normal 14px/30px "Microsoft YaHei"; 
+	font-weight: bold;
 }
 .login-form label {
   font-size: 16px;
@@ -142,6 +143,9 @@
     height:40px;
     text-indent: 1em;
 }
+#validimg{
+    height: 40px;
+}
 .login-form input[type=button] {
   padding: 16px 0;
   cursor: pointer;
@@ -160,7 +164,7 @@
   outline: none;
 }
   #loginbtn{
-  	width: 314px;
+  
   	margin-left: 64px;
   }
   .login-form .fieldset {
@@ -188,7 +192,7 @@
 .login-form .tip{
 	height: 36px;
 	line-height: 36px;
-	margin-left: 80px;
+	margin:0 0 0 80px;
 	padding-left: 24px;
 }
 .onError

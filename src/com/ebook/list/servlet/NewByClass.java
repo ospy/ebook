@@ -21,8 +21,8 @@ import com.ebook.utils.RsToJson;
 import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 
 
-@WebServlet("/ClassList")
-public class ClassList extends HttpServlet {
+@WebServlet("/NewByClass")
+public class NewByClass extends HttpServlet {
 	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,14 +32,7 @@ public class ClassList extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String spid = request.getParameter("spid");
-		String startTime = request.getParameter("startTime");
-		String endTime = request.getParameter("endTime");
-		int pageIndex =  Integer.parseInt(request.getParameter("pageIndex"));
-		int pageListSize =Integer.parseInt(request.getParameter("pageListSize"));
-		String order = request.getParameter("order");		
-		String Time="";
-		String condition="";
+		String spid = request.getParameter("spid");						
 		
 		if(spid.equals("0")){
 			spid=" ";	
@@ -56,32 +49,15 @@ public class ClassList extends HttpServlet {
 		else if(spid==""){
 			spid=" ";
 		}
+		else if(spid.contains(",")){
+			spid="where b.i_spid in ("+spid+")";	
+		}
 		else{
 			spid="where b.i_spid="+spid;	
 		}	
-		
-		if(startTime!=null)
-		{
-			
-			Time ="and"+ startTime+ "< cc_discu.s_create_time ";
-			
-		}
-		else if(endTime!=null)
-		{
-			
-			Time +="<"+ endTime;
-			
-		}
-		else{
-			Time="";
-		}
-		
         /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
-		String result = ListDao.getBookList(condition,spid,Time,pageIndex,pageListSize,order);
-		
-	
-			
+		String result = ListDao.getNewByClass(spid);					
 			try {
 				PrintWriter out = response.getWriter();
 				out.print(result);
@@ -91,9 +67,6 @@ public class ClassList extends HttpServlet {
 			}
 	
 
-		
-	
-	
 	}
 
 }
