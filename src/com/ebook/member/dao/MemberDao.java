@@ -29,6 +29,7 @@ public class MemberDao {
 	 * @return
 	 */
 	public static ArrayList<Member> userLogin(String uid,String pwd){
+	
 		Member member = new Member();
 		String sql = "select * from cc_member where s_loginid='"+uid+"' and s_password ='"+pwd+"'";
 		Connection conn = DBPool.getInstance().getConnection();
@@ -45,6 +46,7 @@ public class MemberDao {
 				 member.setLoginid(rs.getString("s_loginid"));
 				 member.setPassword(rs.getString("s_password"));
 				 member.setState(rs.getInt("i_state"));
+				 member.setS_level(rs.getString("s_level"));
 				 member.setOnline(rs.getInt("i_online"));
 			 }
 			 list.add(member); 
@@ -285,7 +287,6 @@ public class MemberDao {
 				ptst.setString(8, memberInfo.getEducation());
 				ptst.setString(9, memberInfo.getCreatetime());
 				ptst.executeUpdate();
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{

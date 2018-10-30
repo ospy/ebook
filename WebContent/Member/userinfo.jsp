@@ -1,12 +1,12 @@
 <%@page import="com.ebook.entity.*"%>
 <%@page import="com.ebook.constant.*"%>
-<%
-String spath = request.getContextPath(); 
-Member member  = (Member)request.getSession().getAttribute(Constant.SESSION_USER);
-if(member==null){
-	response.sendRedirect(spath+"/Member/login.jsp");
-}
-%>
+<%--
+ String spath = request.getContextPath(); 
+ Member member  = (Member)request.getSession().getAttribute(Constant.SESSION_USER);
+ if(member==null){
+ 	response.sendRedirect(spath+"/Member/login.jsp");
+ }
+--%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ebook.utils.StringUtil"%>
 <html>
@@ -78,16 +78,9 @@ if(member==null){
 			<form name="frmEmp" id="frmEmp">
 				<h2>个人信息</h2>
 				
+
 				<div class="form_item">
-					<span class="red star">*</span><label> 职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：</label> 
-					    <input id="occu1"  name="ocu"  type="radio"  value="1"  checked="checked"/>医务人员
-						<input id="occu2"   name="ocu"   type="radio"  value="2" />教师
-						<input id="occu3"   name="ocu"  type="radio"  value="3" />研发人员
-						<input id="occu4"   name="ocu"  type="radio"  value="4" />学生
-						<input id="occu5"   name="ocu"  type="radio"  value="5" />其它
-				</div>
-				<div class="form_item">
-                        <span class="red star">*</span><label>真实姓名：</label> <input id="txtName" class="text-input  typeahead"
+                        <span class="red star">*</span><label>姓名：</label> <input id="txtName" class="text-input  typeahead"
                                 type="text"  onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
                     </div>
                     <div class="form_item">
@@ -108,6 +101,14 @@ if(member==null){
 					<span class="red star">*</span><label> 学科专业：</label> <input id="txt_Spe"
 						class="text-input  typeahead" type="text"
 						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
+				</div>
+				<div class="form_item">
+					<span class="red star">*</span><label> 职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：</label> 
+					    <input id="occu1"  name="ocu"  type="radio"  value="1"  checked="checked"/>医务人员
+						<input id="occu2"   name="ocu"   type="radio"  value="2" />教师
+						<input id="occu3"   name="ocu"  type="radio"  value="3" />研发人员
+						<input id="occu4"   name="ocu"  type="radio"  value="4" />学生
+						<input id="occu5"   name="ocu"  type="radio"  value="5" />其它
 				</div>
 				<div class="form_item">
 					<span class="star red">*</span><label> 最高学历：</label> 

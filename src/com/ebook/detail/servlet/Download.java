@@ -2,6 +2,9 @@ package com.ebook.detail.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Types;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +18,7 @@ import net.sf.json.JSONObject;
 
 import com.ebook.account.dao.Account;
 import com.ebook.detail.dao.DetailDao;
+import com.ebook.utils.DBPool;
 
 @WebServlet("/Download")
 public class Download extends HttpServlet {
@@ -32,17 +36,16 @@ public class Download extends HttpServlet {
 		String result = DetailDao.getDownload(bookid);
 		JSONArray jsonArray = JSONArray.fromObject(result);
 		JSONObject jsonObject = null;
-		int size = jsonArray.size();  
-
-       
-            jsonObject = jsonArray.getJSONObject(0);  
-            price= jsonObject.getString("i_base_price");  
+		
+        jsonObject = jsonArray.getJSONObject(0);  
+        price= jsonObject.getString("i_base_price");  
             
               
        
 		 
 		String balance = Account.Balance(uid);
-	    
+		
+	    if(Integer.parseInt(balance)>=Integer.parseInt(price)){
 		int newbalance = Integer.parseInt(balance)-Integer.parseInt(price);
 		String newvalue = String.valueOf(newbalance);
 		HttpSession session = request.getSession(); 
@@ -51,13 +54,28 @@ public class Download extends HttpServlet {
 		jsonArray.set(0,jsonObject);
 		result=jsonArray.toString();
 			try {
-				DetailDao.insertAccount(bookid, uid, price, balance, newvalue);
+				DetailDao.insertAccount(bookid, uid, price, balance, newvalue);				
 				PrintWriter out = response.getWriter();
 				out.print(result);
+				//下载次数加1
+				Connection conn = DBPool.getInstance().getConnection();
+				String sql = "{call AddDownTimes(?)}";
+				CallableStatement call= conn.prepareCall(sql);
+				//一次给存储过程传递参数，插入书目信息
+				call.setInt(1,Integer.parseInt(bookid));
+			
+				call.execute();
+					
+				call.close(); 
+				conn.close(); 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	    }
+	    else{
+	    	PrintWriter out = response.getWriter();
+			out.print("余额不足，请充值！");
+	    }
 	}
-
 }

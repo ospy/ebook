@@ -5,6 +5,7 @@ public class Account {
 	  String i_value;
 	  String s_type;
 	  String i_discuid;
+	  String s_desc;
 	  String s_message;
 	  String s_create_time;
 	  String i_old_value;
@@ -33,6 +34,12 @@ public class Account {
 	}
 	public void setI_discuid(String i_discuid) {
 		this.i_discuid = i_discuid;
+	}
+	public String getS_desc() {
+		return s_desc;
+	}
+	public void setS_desc(String s_desc) {
+		this.s_desc = s_desc;
 	}
 	public String getS_message() {
 		return s_message;

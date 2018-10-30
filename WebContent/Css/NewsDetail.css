@@ -1,4 +1,4 @@
-﻿.Newsbox {
+.Newsbox {
     margin:20px auto;
     width:1200px;
     border-radius:6px;
@@ -36,4 +36,30 @@
     margin:10px auto;
     padding:5px;
     width:96%;
+}
+.newtitle{
+    text-align: center;
+}
+#datetime{
+    text-align: center;
+}
+#newsdetail{
+    width:960px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    
+}
+#newsdetail .newtitle{
+    line-height: 60px;
+}
+#newsdetail hr{
+    margin: 0;
+    width: 98%;
+    border-bottom: 1px solid #333;
+}
+span.close{
+    float: left;
+    display: inline-block;
+    line-height: 16px;
+
 }

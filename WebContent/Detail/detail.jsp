@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title id="bookname"></title>
-<link href="/Css/jquery-ui.css" rel="stylesheet" />
+
 <link href="/Css/page.css" rel="stylesheet" />
 <link href="/Css/bootstrap.css" rel="stylesheet" />
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
@@ -76,40 +76,53 @@
                             <li class="col"><label>资源格式：</label><span id="format"></span></li>
                             <li class="col"><label>发布日期：</label><span id="date"></span></li>
                             <li class="col"><label>资源学科：</label><span id="speciality"></span><span id="specid"></span></li>
-                            <li class="col"><label>资源点</label><span class="download-price"></span></li>
+                            <li class="col"><label>资源页码：</label><span id="pages"></span> </li>
+                            <li class="col"><label>下载次数：</label><span id="downCount"></span> </li>
                             <li class="col"><label>点击次数：</label><span id="clickCount"></span></li>
+                            <li class="col"><label>下载价格：</label><b><span class="download-price"></span>M币</b></li>
                 </ul>
-                <ul id="manager" class="basicinfo">
-                    <li>
-                            <li class="col2"><label></label>下载次数：<span id="downCount"></span> </li>
-                            <li class="col2"><label></label>资源页码：<span id="pages"></span> </li>
-                </ul>
-                <input id="downbtn" type="button" value="文件下载" onclick="checklogin();">
-	      </div>
+                <br> 
+                <br>
+                <br>
+                <input id="downbtn" type="button" value="下载文件" onclick="checklogin();">                   
+	        </div>
+	         
 	    </div>
         <div id="bookabstract">
              <div id="downloadUrl" class="items">
-                <h2>下载地址</h2>
+                <div class="ItemTop"><h2>下载地址</h2><a class="folder">
+<img src="/Images/icons/show.png">
+</a></div>
                 <div class='ItemContent'></div>
              </div>
              <div id="seriesName" class="items">
-                <h2>丛书名</h2>
+                <div class="ItemTop"><h2>丛书名</h2><a class="folder">
+<img src="/Images/icons/show.png">
+</a></div>
                 <div class='ItemContent'></div>
              </div>
               <div id="authorName" class="items">
-                <h2>作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者</h2>
+                <div class="ItemTop"><h2>作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者</h2><a class="folder">
+<img src="/Images/icons/show.png">
+</a></div>
                 <div class='ItemContent'></div>
              </div>
               <div id="authorIntro" class="items">
-                <h2>作者简介</h2>
+                <div class="ItemTop"><h2>作者简介</h2><a class="folder">
+<img src="/Images/icons/show.png">
+</a></div>
                 <div class='ItemContent'></div>
              </div>
               <div id="contentIntro" class="items">
-                <h2>内容简介</h2>
+                <div class="ItemTop"><h2>内容简介</h2><a class="folder">
+<img src="/Images/icons/show.png">
+</a></div>
                 <div class='ItemContent'></div>
              </div>
               <div id="contentIndex" class="items">
-                <h2>目&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</h2>
+                <div class="ItemTop"><h2>目&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</h2><a class="folder">
+<img src="/Images/icons/show.png">
+</a></div>
                 <div class='ItemContent'><pre></pre></div>
              </div>
         
@@ -127,7 +140,7 @@
                <li id="bookprice"><label>价格：</label><span></span></li>
                <li id="pages"><label>页 数：</label><span></span></li>
                <li id="wordNumber"><label>字 数：</label><span></span></li>               
-               <li id="ISBN"><label>ISBN</label><span></span></li>
+               <li id="ISBN"><label>ISBN:</label><span></span></li>
                
                <li id="pressName"><label>出版社:</label><span></span></li>
                <li id="publishTime"><label>出版时间:</label><span></span></li>
@@ -247,7 +260,7 @@
 			$.ajax({
 						url : "<%=path%>/NewByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
 						data: { spid:specid},
 						success : function(result) {
@@ -276,7 +289,7 @@
 			$.ajax({
 						url : "<%=path%>/HotByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
 						data: { spid:specid},
 						success : function(result) {
@@ -284,7 +297,7 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"150\" width=\"150\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
@@ -305,7 +318,7 @@
 			$.ajax({
 						url : "<%=path%>/LatestDownByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
 						data: { spid:specid},
 						success : function(result) {
@@ -313,7 +326,7 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"150\" width=\"150\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
@@ -338,7 +351,7 @@
 		}		
 
         
-		//获取图书列表
+		//获取图书固定信息
          function getDetail(){
         	 var bookid =$.getUrlParam('id');
         	 
@@ -354,8 +367,9 @@
 	                	if (result != 0) {
 	                		$("#book_image").attr("src",result[0].s_imgurl);
 	                		$(".booktitle").html(result[0].s_desc);
+	                		$("#bookname").html(result[0].s_desc);
 	                		$("#discuId").html(result[0].i_discuid);
-	                		$("#speciality").html(result[0].s_spec);
+	                		$("#s_spec1").html(result[0].s_spec);
 	                        $("#specid").html(result[0].s_specid);
 	                		$("#format").html(result[0].s_filetypes);
 	                		
@@ -380,7 +394,7 @@
 	
 	}
 
-     	//获取图书列表
+     	//获取书目变动信息
          function getAbstract(){
         	 var bookid =$.getUrlParam('id');
         	 
@@ -404,8 +418,8 @@
 								case "authorName":$("#authorName .ItemContent").html(result[0].authorName);$("#authorName").show();
 								break;
 								
-								case "authorIntro":$("#authorName .ItemContent").html(result[0].authorIntro);$("#authorIntro").show();
-								
+								case "authorIntro":$("#authorIntro .ItemContent").html(result[0].authorIntro);$("#authorIntro").show();
+								break;
                                 case "contentIntro":$("#contentIntro .ItemContent").html(result[0].contentIntro);$("#contentIntro").show();
 								break;
 								
@@ -586,7 +600,7 @@
 	                    }
 	                },
 	                error: function () {
-	                    alert("获取下载地址异常！");
+	                    alert("获取下载地址异常！请您通知管理员：***@163.com");
 	                    return false;
 	                }
 	             });	 
@@ -675,6 +689,7 @@
 		 checkUserName() ;
 		 checkpsw();
 		 checkCode();
+		 var url = window.location.href;
 		 if(state1&&state2&&state3){
 			 var uName = $("#signin-username").val();
 	         var pwd = $("#signin-password").val();
@@ -683,10 +698,10 @@
 	                type: 'post',
 	                async: false,
 	                dataType: 'text',
-	                data: { uName: uName, pwd: pwd },
+	                data: { uName: uName, pwd: pwd,url:url},
 	                success: function (result) {
 	                    if (result == 1) {
-	                        location.href = "/index.jsp";
+	                    	  window.location.reload();
 	                    } else {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
 	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
@@ -706,7 +721,22 @@
 	
 	}
 	
-	
+    //折叠菜单
+    $(".folder").click(function () {
+
+        var control = $(this).parent().siblings(".ItemContent");
+        //control.slideToggle();
+        if (control.css("display") == "block") {
+
+            control.css("display", "none");
+            $(this).children("img").attr("src", "/Images/icons/hide.png");
+
+        } else {
+
+            control.css("display", "block");
+            $(this).children("img").attr("src", "/Images/icons/show.png");
+        };
+    });
 	
 </script>
 </body>

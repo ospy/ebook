@@ -1,4 +1,4 @@
-Ôªø.main {
+.main {
     width:1200px;
     margin:0 auto;
     height:auto;
@@ -77,7 +77,7 @@ input[type="radio"],input[type="checkbox"] {
     margin-right:10px;
     float:left;
 }
-/*Â∑¶‰æß*/
+/*◊Û≤‡*/
 .topinfo h3{
     line-height:30px;
 }
@@ -122,7 +122,7 @@ input[type="radio"],input[type="checkbox"] {
     width:160px;
 }
 
-/*Âè≥‰æß*/
+/*”“≤‡*/
 
 
 .info_list {
@@ -155,19 +155,19 @@ ul.info_list ul li .name{
    
     width:225px;
     height:35px;
-    background: url("/images/button.png") no-repeat scroll 0 0;
+    background: url("/Images/button.png") no-repeat scroll 0 0;
     border: none;
     color: #fff;
-    font-family: "ÂæÆËΩØÈõÖÈªë";
+    font-family: "Œ¢»Ì—≈∫⁄";
     font-size: 16px;
     font-weight: bold;
     margin-top:60px;
 }
 .btnDownFile:hover {
     cursor:pointer;
-    background: rgba(0, 0, 0, 0) url("/images/button.png") no-repeat scroll 0 -35px;
+    background: rgba(0, 0, 0, 0) url("/Images/button.png") no-repeat scroll 0 -35px;
 }
-/*ËØ¶ÊÉÖÈ°µÂÜÖÂÆπ*/
+/*œÍ«È“≥ƒ⁄»›*/
 .u_contents {
     margin-top:20px;
 }
@@ -198,7 +198,7 @@ ul.info_list ul li .name{
 }
 .m_l_r_top h3 {
     margin:0;
-    background: #f3f3f3 url("/images/icons/arrow.png") no-repeat scroll 5px 7px;
+    background: #f3f3f3 url("/Images/icons/arrow.png") no-repeat scroll 5px 7px;
     color: #333;
     display: block;
     float: left;
@@ -221,7 +221,7 @@ ul.info_list ul li .name{
     padding: 0 8px;
 }
 .tips {
-    background: rgba(0, 0, 0, 0) url("/images/icons/onFocus.gif") no-repeat scroll 0 4px;
+    background: rgba(0, 0, 0, 0) url("/Images/icons/onFocus.gif") no-repeat scroll 0 4px;
     border-top: 1px dashed #eee;
     color: #999;
     display: block;
@@ -230,7 +230,7 @@ ul.info_list ul li .name{
     padding-left: 24px;
 }
 .helplink {
-    background: rgba(0, 0, 0, 0) url("/images/icons/wenhao.png") no-repeat scroll 0 -2px;
+    background: rgba(0, 0, 0, 0) url("/Images/icons/wenhao.png") no-repeat scroll 0 -2px;
     line-height: 30px;
     padding-left: 20px;
 }
@@ -282,9 +282,13 @@ white-space: -o-pre-wrap; /* Opera 7 */
 .PublishInfo {
     background:#eee;
 }
-
-
-/*ÂºπÁ™óÊ†∑Âºè*/
+#filebox input{height: 30px;line-height: 24px;padding: 3px 6px;}
+#filebox div{margin-top: 5px;}
+#uploadbox{width: 360px;}
+.uploadbtn{background: #317082;color: #fff;line-height: 30px;padding: 0 5px;border-radius:0 6px 6px 0;}
+.uploadbtn:hover{background: #2c7f97;cursor: pointer;}
+#upload{display: inline-block;}
+/*µØ¥∞—˘ Ω*/
 .confirmcenter {
     height:auto;
     overflow:hidden;
@@ -294,13 +298,28 @@ white-space: -o-pre-wrap; /* Opera 7 */
     }
 .confirmcenter h3 {
     float:left;
+    color: #317082;
     font-size:16px;
     text-align:right;
     width: 40px;
     }
+.scitem{
+    margin: 10px 0;
+    height: auto;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    }
+.scitem h2{
+    font-size: 14px;
+    display: inline-block;
+    width: 40px;
+    float: left;
+    
+}
 .spec {
+    margin: 0;
     float:left;
-    width:520px;
+    width:480px;
     height:auto;
     overflow:hidden;
 }
@@ -349,7 +368,7 @@ input[type="button"],input[type="file"],input[type="submit"]:hover{
 .spec li {
             float: left;
             margin-left: 8px;
-            line-height:22px;
+            line-height:30px;
         }
 
 .list li {
@@ -384,16 +403,16 @@ input.booksearch[type="button"]:hover {
     cursor: pointer;
 }
 input.dd_net[type="button"] {
-    background: url("/images/icons/class.png") no-repeat scroll 3px -442px;
+    background: url("/Images/icons/class.png") no-repeat scroll 3px -442px;
 }
 input.jd_net[type="button"] {
-    background:  url("/images/icons/class.png") no-repeat scroll 3px -464px;
+    background:  url("/Images/icons/class.png") no-repeat scroll 3px -464px;
 }
 input.ymx_net[type="button"] {
-    background:  url("/images/icons/class.png") no-repeat scroll 3px -488px;
+    background:  url("/Images/icons/class.png") no-repeat scroll 3px -488px;
 }
 .submit {
-    margin-top: 20px;
+    margin: 20px 0;
     text-align:center;
 }
 .submit .submit_btn {

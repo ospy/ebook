@@ -9,6 +9,7 @@
   height: 30px;
   font:normal 16px/30px 'Microsoft YaHei ';
   color: #fff;
+  border-radius:6px 0 0 0; 
   background: #317082;
 }
 
@@ -20,20 +21,21 @@
 	width: 900px;
 }
 .classify{
-	margin-left: 12px;
+	margin-left: 6px;
 	height: auto;
 	overflow: hidden;
 }
 .classify ul li{
 	display: inline-block;
 	float: left;
-	margin-left: 8px;
+	padding:0 3px;
 	height: 30px;
 	line-height: 30px;
+	background: url("/Images/icons/index.png") no-repeat right 3px;
 }
 .classify ul li.first{
-	
-	width: 30px;
+	background: none;
+	width: 36px;
 }
 
 
@@ -152,10 +154,16 @@
 	background: #eeeeee;
 }
 .news ul li{
-   height:22px;
-   line-height: 22px;
+   background: rgba(0, 0, 0, 0) url("/Images/icons/index.png") no-repeat scroll left -22px; 
+   padding-left: 12px;
+   height:26px;
+   line-height: 26px;
+   border-bottom: 1px solid #eee;
 }
-
+#news li span{
+    float: right;
+    color: #eee;
+}
 /*mainbox栏目*/
 .mainitem{
 	height: auto;
@@ -176,7 +184,7 @@
     height: 30px;
     overflow: hidden;
     padding: 0 10px;
-    border-radius: 3px;
+    border-radius: 6px 0 0 0;
 }
 .picScroll-left .hd  h2{
    font:normal 16px/30px "Microsoft YaHei";
@@ -229,15 +237,18 @@
 }
 
 .picScroll-left .bd ul li.pic {
+    
 	 overflow: hidden;
     text-align: center;
-     border: 1px solid #eee;
+    
+    box-sizing:border-box;
     display: block;
     float: left;
-    height: 184px;
-    margin: 3px;
-    padding: 9px;
-    width: 150px;
+    height: 200px;
+    margin-right:10px;
+    padding: 9px 0;
+    width: 170px;
+    
 }
 .picScroll-left .bd ul li.pic img {
     height: 150px;
@@ -277,20 +288,25 @@
     float: left;
     padding: 0 15px;
 }
+.slideTxtBox .hd ul li a{
+    color: #999;
+}
 .slideTxtBox .hd ul li.on {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background: #fff none repeat scroll 0 0;
-    border-color: #ddd #ddd #fff;
+    background: #317082 none repeat scroll 0 0;
+    border-color: #317082;
     border-image: none;
-    border-style: solid;
-    border-width: 1px 1px 2px;
-    height: 30px;
+    color: #fff;
+    border-radius:3px 3px 0 0; 
+}
+.slideTxtBox .hd ul li.on a{
+    color: #fff;
 }
 .slideTxtBox .bd ul {
-    padding: 15px;
+    padding: 0 15px;
 }
 .slideTxtBox .bd li {
     height: 24px;

@@ -123,10 +123,69 @@ public static String getBasicInfo(String bookid) {
 	return result;
 
     }
+public static String getClassByBookid(int discuid) {
+
+	String sql = "SELECT i_id,s_spec,i_spid FROM cc_speciality_link_discu where i_discuid="+discuid+" and b_deleted=0 ";
+	Connection conn = DBPool.getInstance().getConnection();
+	
+	Statement stmt=null;
+	ResultSet rs = null;
+    String result=""; 
+    JSONArray jsonarray = new JSONArray();  
+	try {
+
+		stmt = conn.createStatement();
+		rs = stmt.executeQuery(sql);	
+		while(rs.next()){
+			JSONObject jsonObj = new JSONObject();
+			 String i_id =rs.getString("i_id");
+			 String i_spid =rs.getString("i_spid");  
+	         String s_spec = rs.getString("s_spec");  
+	        jsonObj.put("i_id",i_id); 
+	        jsonObj.put("i_spid", i_spid); 
+	        jsonObj.put("s_spec",s_spec); 
+	        jsonarray.add(jsonObj); 
+		        }
+      
+		
+		result = jsonarray.toString();
+		  
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+       finally{
+      	 
+    	   try {
+    		
+			rs.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	   try {
+    		 
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	   try {	    		 
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       }	
+	return result;
+
+    }
+
 
 public static String getExtraInfo(String bookid) throws UnsupportedEncodingException {
 
-	String sql = "SELECT *  from cc_discu_content_copy  where i_discuid ="+ bookid+ " and b_deleted=0";
+	String sql = "SELECT *  from cc_discu_content  where i_discuid ="+ bookid+ " and b_deleted=0";
 	Connection conn = DBPool.getInstance().getConnection();
 	
 	Statement stmt=null;
@@ -140,7 +199,8 @@ public static String getExtraInfo(String bookid) throws UnsupportedEncodingExcep
 		stmt = conn.createStatement();
 		rs2 = stmt.executeQuery(sql);
 		 
-		
+		JSONObject obj = new JSONObject();
+		String ptids="";
 		while(rs2.next()){
 			   
 //			bookabstract.setI_discuid(rs2.getInt("i_discuid"));    
@@ -153,38 +213,55 @@ public static String getExtraInfo(String bookid) throws UnsupportedEncodingExcep
 			
 			switch (rs2.getInt("i_ptid")) {
 			case 51:bookabstract.setAuthorName(temp);
+			   
 				break;
 			case 52:bookabstract.setAuthorIntro(temp);
+			
 			     break;
 			case 17:bookabstract.setContentIntro(temp);
-			break;
+			      
+			     break;
 			case 16:bookabstract.setContentIndex(temp);
+			     
 			break;
 			case 18:bookabstract.setPublishTime(temp);
+			   
 			break;
 			case 31:bookabstract.setPrice(temp);
+					
 			break;
 			case 56:bookabstract.setSeriesName(temp);
+				
 					break;
 			case 57:bookabstract.setPressName(temp);
+				
 					break;
 			case 59:bookabstract.setPages(temp);
+					
 					break;
 			case 60:bookabstract.setWordNumber(temp);
+					
 					break;
 			case 61:bookabstract.setEdition(temp);
+					
 					break;
 			case 62:bookabstract.setPrintingTime(temp);
+					
 					break;
 			case 63:bookabstract.setImpression(temp);
+					
 					break;
 			case 64:bookabstract.setBookSize(temp);
+					
 				break;
 			case 65:bookabstract.setPack(temp);
+				
 				break;
 			case 66:bookabstract.setPaper(temp);
+					
 				break;
 			case 67:bookabstract.setISBN(temp);
+					
 				break;
 			default:
 				break;
@@ -192,14 +269,18 @@ public static String getExtraInfo(String bookid) throws UnsupportedEncodingExcep
 		        }
 				
 			list.add(bookabstract); 
+ 
 			JSONArray jsonArray = JSONArray.fromObject(list);
+//			ptids=ptids.substring(0,ptids.lastIndexOf(","));
+//			obj.put("ptid",ptids);
+//			jsonArray.add(obj); 
+			
 			
 			result = jsonArray.toString();
 
 		}
 		
-		
-		  
+	  
 	 catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -251,10 +332,12 @@ public static String getDownload(String bookid) throws UnsupportedEncodingExcept
 		
 		while(rs3.next()){
 			FileInfo fileinfo = new FileInfo();   		
-			fileinfo.setI_base_price(rs3.getString("i_base_price"));  
+			fileinfo.setI_base_price(rs3.getString("i_discuPrice"));  
 			fileinfo.setS_filename(rs3.getString("s_filename")); 
 			fileinfo.setS_path(rs3.getString("s_path"));
 			fileinfo.setS_password(rs3.getString("s_password")); 
+			fileinfo.setFilesize(rs3.getString("i_size")); 
+			fileinfo.setFiletype(rs3.getString("s_filetypes")); 
 			list.add(fileinfo); 
 		        }
 		
@@ -301,7 +384,7 @@ public static void insertAccount(String bookid,String uid,String price,String ba
 	
 
 
-	String sql = "insert into cc_integral(i_uid,i_value,s_type,i_discuid,s_create_time,i_old_value,i_new_value) VALUES("+uid+","+price+",'下载文件',"+bookid+",'"+date+"',"+balance+","+newvalue+")";
+	String sql = "insert into cc_integral(i_uid,i_value,s_type,i_discuid,s_create_time,i_old_value,i_new_value) VALUES("+uid+",-"+price+",'下载文件',"+bookid+",'"+date+"',"+balance+","+newvalue+")";
 	Connection conn = DBPool.getInstance().getConnection();
 	
 	Statement stmt=null;

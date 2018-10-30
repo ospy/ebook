@@ -32,7 +32,8 @@ public class ClassList extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String spid = request.getParameter("spid");
+		String classid = "";
+		String spid = request.getParameter("classid");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
 		int pageIndex =  Integer.parseInt(request.getParameter("pageIndex"));
@@ -41,44 +42,33 @@ public class ClassList extends HttpServlet {
 		String Time="";
 		String condition="";
 		
-		if(spid.equals("0")){
-			spid=" ";	
+		if(spid.equals("0")||spid==""){
+			classid="where b_deleted=0";	
 		}
 		else if(spid.equals("1")){
-			spid="where b.i_spid <= 5700";	
+			classid="where b_deleted=0 and b.i_spid <= 5700";	
 		}
 		else if(spid.equals("2")){
-			spid="where  b.i_spid <=7600 and i_spid >=6000";	
+			classid="where b_deleted=0 and b.i_spid <=7600 and i_spid >=6000";	
 		}
 		else if(spid.equals("3")){
-			spid="where  b.i_spid <=9100 and i_spid >=9000";	
-		}
-		else if(spid==""){
-			spid=" ";
+			classid="where b_deleted=0 and b.i_spid <=9100 and i_spid >=9000";	
 		}
 		else{
-			spid="where b.i_spid="+spid;	
+			classid="where b_deleted=0 and b.i_spid="+spid;	
 		}	
 		
-		if(startTime!=null)
-		{
-			
-			Time ="and"+ startTime+ "< cc_discu.s_create_time ";
-			
+		if(startTime!=null&&startTime!="")
+		{			
+			Time +=" and s_create_time >'"+ startTime+"'";			
 		}
-		else if(endTime!=null)
-		{
-			
-			Time +="<"+ endTime;
-			
-		}
-		else{
-			Time="";
+	    if(endTime!=null&&endTime!=""){
+			Time +=" and s_create_time <'"+ endTime+"'";		
 		}
 		
         /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
-		String result = ListDao.getBookList(condition,spid,Time,pageIndex,pageListSize,order);
+		String result = ListDao.getBookList(condition,classid,Time,pageIndex,pageListSize,order);
 		
 	
 			

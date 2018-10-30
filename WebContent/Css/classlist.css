@@ -1,4 +1,4 @@
-ï»¿
+
 .main {
     width:1200px;
     margin:0 auto;
@@ -74,7 +74,7 @@
     width: 56px;
 }
 
-/*é™å®šæ¡ä»¶*/
+/*ÏŞ¶¨Ìõ¼ş*/
 .limit_info {
     
     text-indent:0;
@@ -99,16 +99,18 @@
     border:1px solid #eee;     
 }
 .limit .top{  
+    width:100px;
 	text-align: right;
     vertical-align: top;   
-    padding: 5px 0 5px 10px;
+    padding: 5px 10px;
+    font-weight: bold;
 }
 .limit tr td{  
      word-break:keep-all; /* for ie */  
     white-space:nowrap; /* for chrome */  
 }
 .limit .date_control td{
-	padding: 5px;
+	line-height: 40px;
 } 
 .level {
 	padding:3px 6px ;
@@ -123,20 +125,45 @@ tr.classlist {
     border:none;
     clear: both;
 }
-
-
-
+.scitem{
+    margin: 0 auto;
+    overflow: hidden;
+    border-bottom: 1px dashed #ddd;
+    width: 98%;
+}
+.spec {
+    float: left;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+}
+.spec li{
+    display: inline-block;
+}
+.spec li a {
+    font-size: 14px;
+    padding: 3px;
+}
+.selected{
+    padding: 3px; 
+    background: #317082;
+    color: #fff;
+}
+.lasted{
+    background: #317082;
+    color: #fff;
+}
 .Spec_show{
 	
 	height: auto;
 	overflow: hidden;
-	border-bottom:1px dashed #eee; 
+	 
 	
 }
 .Spec_show ul li{ 
 	display: inline-block;
    float: left;
-   margin-left: 12px;
+   margin-left: 6px;
    line-height: 30px;
 }
 .Spec_show ul li a{ 
@@ -145,7 +172,7 @@ tr.classlist {
 
 .more {
     float:right;
-    font:normal 12px/30px "å®‹ä½“"; 
+    font:normal 12px/30px "ËÎÌå"; 
 }
 .more:hover{
     color:#165c47;
@@ -199,12 +226,14 @@ tr.classlist {
 }
 .control-group{
    display: inline-block;
+   margin-left: 12px;
 }
 .hasDatepicker{
 	border-radius:3px;
     border: 1px solid #eee;
-    padding-left: 12px;
     height: 28px;
+   padding-left: 12px;
+    width: 100px;
 }
 .level input[type="text"]{
     height:30px;
@@ -216,7 +245,7 @@ tr.classlist {
     background:#165c47;
     padding:0 3px;
 }
-/*åˆ—è¡¨å†…å®¹*/
+/*ÁĞ±íÄÚÈİ*/
 /*.part {float:right;margin-right:20px; height:30px;
 }
 .part a{ margin-right:20px; display:block; float:right; width:43px; height:30px;}
@@ -287,7 +316,7 @@ tr.classlist {
     line-height: 30px;
     padding: 20px 80px;
 }
-/*åˆ—è¡¨é¡µå†…å®¹*/
+/*ÁĞ±íÒ³ÄÚÈİ*/
 .listtable {
     border-bottom: 1px solid #ddd;
     clear: both;
@@ -303,6 +332,7 @@ tr.classlist {
     overflow-wrap: break-word;
     word-break: break-all;
     line-height:22px;
+    margin: 0;
 }
 .listtable::after {
     clear: both;
@@ -326,10 +356,7 @@ tr.classlist {
     padding: 10px 0;
 }
 .listtable .others .subtitle{
-    display:inline-block;
-    width:160px;
-
-    
+    display:inline-block;  
 }
 .listtable .star {
     color: #666666;
@@ -348,7 +375,7 @@ tr.classlist {
 }
 .listtable .firsttd .title {
     float: left;
-    font: bold 15px/24px "å¾®è½¯é›…é»‘";
+    font: bold 15px/24px "Î¢ÈíÑÅºÚ";
 }
 .listtime {
     float: left;
@@ -362,7 +389,7 @@ tr.classlist {
     color: #cc3300;
 }
 .pic {
-    background: rgba(0, 0, 0, 0) url("/images/loading.gif") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("/Images/icons/loading.gif") no-repeat scroll center center;
     border: 1px solid #dfdede;
     float: left;
     height: 150px;

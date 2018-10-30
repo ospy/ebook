@@ -2,9 +2,10 @@ package com.ebook.entity;
 
 public class MemberInfo {
 	String id ;
-	Member member;
+	
 	String occupation ;
 	String name ;
+	String email;
 	String mobile ;
 	String address;
 	String capacity ;
@@ -17,12 +18,7 @@ public class MemberInfo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
+	
 	public String getOccupation() {
 		return occupation;
 	}
@@ -34,6 +30,12 @@ public class MemberInfo {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getMobile() {
 		return mobile;
@@ -71,4 +73,9 @@ public class MemberInfo {
 	public void setCreatetime(String createtime) {
 		this.createtime = createtime;
 	}
+	public Member getMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

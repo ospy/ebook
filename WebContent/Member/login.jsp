@@ -145,7 +145,7 @@
 	                type: 'post',
 	                async: false,
 	                dataType: 'text',
-	                data: { uName: uName, pwd: pwd },
+	                data: { uName: uName, pwd: pwd,ip:ip,city:city },
 	                success: function (result) {
 	                    if (result == 1) {
 	                        location.href = "/index.jsp";

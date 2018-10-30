@@ -1,0 +1,109 @@
+<!doctype html> 
+<html> 
+<head> 
+<meta charset="GB2312"> 
+<script src="./Js/jquery-1.9.1.js"></script> 
+</head> 
+<body> 
+<hr /> 
+<h3>解析json字符串、json数组</h3> 
+<input type="button" id="jsonBtn" name="jsonBtn" value="jsonArray" /> 
+<input type="button" id="jsonArray2" name="jsonArray2" value="jsonArray2" /> 
+<input type="button" id="jsonStr" name="jsonStr" value="jsonStr" /> 
+<input type="button" id="jsonStr2" name="jsonStr2" value="jsonStr2" /> 
+<hr /> 
+<div class="jsonText"> 
+ {"ret": 0, "msg": "", "is_lost":0, "nickname": "小米", "gender": "男", "province": "广东", "city": "广州", "year": "1990", "figureurl": "http:\/\/qzapp.qlogo.cn\/qzapp\/101152201\/D87BF108B19279F31587CE96E5648A98\/30", "figureurl_1": "http:\/\/qzapp.qlogo.cn\/qzapp\/101152201\/D87BF108B19279F31587CE96E5648A98\/50", "figureurl_2": "http:\/\/qzapp.qlogo.cn\/qzapp\/101152201\/D87BF108B19279F31587CE96E5648A98\/100", "figureurl_qq_1": "http:\/\/q.qlogo.cn\/qqapp\/101152201\/D87BF108B19279F31587CE96E5648A98\/40", "figureurl_qq_2": "http:\/\/q.qlogo.cn\/qqapp\/101152201\/D87BF108B19279F31587CE96E5648A98\/100", "is_yellow_vip": "0", "vip": "0", "yellow_vip_level": "0", "level": "0", "is_yellow_year_vip": "0"} 
+</div> 
+<hr /> 
+<div class="jsonArray"> 
+ { root: 
+  [ 
+  {name:'1',value:'0'}, 
+  {name:'6101',value:'西安市'}, 
+  {name:'6102',value:'铜川市'}, 
+  {name:'6103',value:'宝鸡市'}, 
+  {name:'6104',value:'咸阳市'}, 
+  {name:'6105',value:'渭南市'}, 
+  {name:'6106',value:'延安市'}, 
+  {name:'6107',value:'汉中市'}, 
+  {name:'6108',value:'榆林市'}, 
+  {name:'6109',value:'安康市'}, 
+  {name:'6110',value:'商洛市'} 
+  ], 
+ json: 
+  [ 
+  {name:'6103',value:'宝鸡市'}, 
+  {name:'6104',value:'咸阳市'}, 
+  {name:'6107',value:'汉中市'}, 
+  {name:'6108',value:'榆林市'}, 
+  {name:'6110',value:'商洛市'} 
+  ] 
+ } 
+</div> 
+<hr /> 
+<div class="jsonArray2"> 
+ [ 
+ {name:'1',value:'0'}, 
+ {name:'6101',value:'西安市'}, 
+ {name:'6102',value:'铜川市'}, 
+ {name:'6103',value:'宝鸡市'}, 
+ {name:'6104',value:'咸阳市'}, 
+ {name:'6105',value:'渭南市'}, 
+ {name:'6106',value:'延安市'}, 
+ {name:'6107',value:'汉中市'}, 
+ {name:'6108',value:'榆林市'}, 
+ {name:'6109',value:'安康市'}, 
+ {name:'6110',value:'商洛市'} 
+ ] 
+</div> 
+</body> 
+</html> 
+<script type="text/javascript"> 
+ ///jQuery 解析json字符串 
+ //解析复杂的json数组 
+ $("#jsonBtn").click(function(){ 
+ var data=$(".jsonArray").html(); 
+ alert("-----"+data); 
+ var dataObj=eval("("+data+")");//转换为json对象 
+ alert(dataObj.root.length);//输出root的子对象数量 
+ alert(dataObj.json.length);//输出json的子对象数量 
+  //遍历json数组 
+  $.each(dataObj.root, function(i, item) { 
+  alert(item.name+"-----root-------"+item.value); 
+  }); 
+  //遍历json数组 
+  $.each(dataObj.json, function(i, item) { 
+  alert(item.name+"-----json-------"+item.value); 
+  }); 
+ }); 
+ //解析单个的json数组 
+ $("#jsonArray2").click(function(){ 
+ var data=$(".jsonArray2").html(); 
+ alert("-----"+data); 
+ var dataObj=eval("("+data+")");//转换为json对象 
+ alert(dataObj.length);//输出root的子对象数量 
+  //遍历json数组 
+  $.each(dataObj, function(i, item) { 
+  alert(item.name+"-----jsonArray-------"+item.value); 
+  }); 
+ }); 
+ ///解析标准的Json串 方法一 
+ $("#jsonStr").click(function(){ 
+ var json=$(".jsonText").html(); 
+ alert("---2--"+json); 
+  var item = jQuery.parseJSON(json); 
+  alert(item.nickname); 
+  alert(item.ret); 
+  alert(item.figureurl ); 
+ }); 
+ ///解析标准的Json串，方法二 
+ $("#jsonStr2").click(function(){ 
+ var json=$(".jsonText").html(); 
+ alert("---2--"+json); 
+  var obj = eval("("+json+")"); 
+  alert(obj.nickname); 
+  alert(obj.ret); 
+  alert(obj.figureurl ); 
+ }); 
+</script>

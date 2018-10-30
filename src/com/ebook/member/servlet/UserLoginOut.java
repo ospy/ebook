@@ -25,10 +25,12 @@ public class UserLoginOut extends HttpServlet {
 	            response.sendRedirect("/index.jsp");  
 	            return;  
 	        }  
-	          
+
 	        session.removeAttribute("username"); 
 	        session.removeAttribute("account");
-	        session.removeAttribute("uid"); 
+	        session.removeAttribute("uid");
+	        session.removeAttribute("email");
+	        session.removeAttribute("state");
 	        response.sendRedirect("/index.jsp");  
 	}
 

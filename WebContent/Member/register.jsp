@@ -71,6 +71,7 @@
             var Loginid = $("#reg_username").val();
             var Email = $("#reg_email").val();
             var Password = $("#reg_pwd").val();
+            
             checkCode();
             if (check1 && check2 && check3 && check4 && check5) {
                 $.ajax({
@@ -78,7 +79,7 @@
                     type: 'post',
               //      async: false,
               //      dataType: 'json',
-                    data: { Loginid: Loginid, Email: Email, Password: Password },
+                    data: { Loginid: Loginid, Email: Email, Password: Password,ip:ip,city:city },
                     success: function (data) {
                         location.href = "<%=path%>/Member/actmail.jsp?email="+Email;
                     },

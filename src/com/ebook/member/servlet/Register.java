@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.ebook.constant.Constant;
 import com.ebook.entity.Member;
 import com.ebook.member.LoginRegisterService;
@@ -31,6 +33,9 @@ public class Register extends HttpServlet {
 		String Loginid = request.getParameter("Loginid");
 		String eEmail = request.getParameter("Email");
 		String Password = request.getParameter("Password");
+		String md5pwd = DigestUtils.md5Hex(Password);
+		String ip = request.getParameter("ip");
+		String city = request.getParameter("city");
 		if(Loginid != null && !Loginid.equals("") && Password != null && !Password.equals("")){
 			boolean uniqueUser = LoginRegisterService.checkUserName(Loginid);
 			//用户唯一性检查
@@ -38,7 +43,7 @@ public class Register extends HttpServlet {
 				boolean uniqueEmail =  LoginRegisterService.checkEmail(eEmail);
 				//Email唯一性检查
 				if(uniqueEmail){
-					Member member = LoginRegisterService.registerSave(Loginid, eEmail, Password);
+					Member member = LoginRegisterService.registerSave(Loginid, eEmail, md5pwd,ip,city);
 					if(member!=null){
 						LOG.info(member.getLoginid()+"注册成功！");
 						// 保存用户注册Session

@@ -25,7 +25,7 @@ public class ActivateAccount extends HttpServlet {
 	private static final String CHECK_CODE = "checkCode";
 	private static final long serialVersionUID = 1L;
 
-	//閭婵�娲婚獙璇�
+	//邮箱激活验证
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
@@ -35,7 +35,7 @@ public class ActivateAccount extends HttpServlet {
 		Member member = MemberDao.findMemberByID(uid);
 		String path = request.getContextPath(); 
 		if(member ==null){
-			request.getSession().setAttribute("checkResult", "涓嶅瓨鍦ㄦ婵�娲婚摼鎺�");
+			request.getSession().setAttribute("checkResult", "不存在此激活链接");
 //			response.sendRedirect("Member/userinfo.jsp");
 			request.getRequestDispatcher("/Member/userinfo.jsp").forward(request, response);
 			
@@ -49,25 +49,25 @@ public class ActivateAccount extends HttpServlet {
 			todayStart.set(Calendar.MINUTE, 0);  
 			todayStart.set(Calendar.SECOND, 0);  
 			todayStart.set(Calendar.MILLISECOND, 0); 
-			if(member.getState()>1){//宸叉縺娲�
-				request.getSession().setAttribute("checkResult", "宸叉縺娲�");
+			if(member.getState()>1){//已激活
+				request.getSession().setAttribute("checkResult", "已激活");
 				response.sendRedirect("Member/userinfo.jsp");
-			}else {//鏈縺娲�
-				try {//褰撳ぉ鏈夋晥锛宼rue涓哄け鏁�
+			}else {//未激活
+				try {//当天有效，true为失效
 					if(DateUtils.isBefore(format, activate.getCreateTime(), format, DateUtils.format(todayStart.getTime(), format))){
-						request.getSession().setAttribute("checkResult", "閾炬帴宸插け鏁�");
+						request.getSession().setAttribute("checkResult", "链接已失效");
 						response.sendRedirect("Member/userinfo.jsp");
-					}else { //鏈夋晥
+					}else { //有效
 						if(checkCode1.equals(checkCode2)){
-							//婵�娲绘垚鍔�,鏇存柊鐘舵��
-							LOG.info("ID:"+member.getUid()+"婵�娲绘垚鍔燂紒");
+							//激活成功,更新状态
+							LOG.info("ID:"+member.getUid()+"激活成功！");
 							member.setState(2);
 							MemberDao.updateMember(member);
-							request.getSession().setAttribute("checkResult", "婵�娲绘垚鍔�");
+							request.getSession().setAttribute("checkResult", "激活成功");
 //							response.sendRedirect("Member/userinfo.jsp");
     					request.getRequestDispatcher("Member/userinfo.jsp").forward(request, response);
-						}else {//婵�娲诲け璐�
-							request.getSession().setAttribute("checkResult", "婵�娲诲け璐�");
+						}else {//激活失败
+							request.getSession().setAttribute("checkResult", "激活失败");
 //							response.sendRedirect("Member/userinfo.jsp");
 							request.getRequestDispatcher("/Member/userinfo.jsp").forward(request, response);
 						}

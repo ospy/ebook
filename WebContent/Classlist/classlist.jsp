@@ -7,15 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>分类列表</title>
 
-
-
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
-<link href="/Css/classlist.css?v=20171223" rel="stylesheet" />
+<link href="../Css/classlist.css?v=20171223" rel="stylesheet" />
 <link href="/Css/page.css?v=20171214" rel="stylesheet" />
 <link href="/Css/bootstrap.css?v=20161214" rel="stylesheet" />
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
 <link href="/Css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
 
+<script  type="text/javascript" src="<%=path %>/Js/jquery-1.9.1.js" ></script>
 <script src="/Js/jquery-ui.js"></script>
 <script src="/Js/jquery.myPagination.js"></script>
 <script src="/Js/Disculist.js"></script>
@@ -67,38 +66,28 @@
 			};
 
 		});
-
-		$(function() {
-
-			$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
-
-			$("#StartTime").prop("readonly", false).datepicker({
-				showMonthAfterYear : true, // 月在年之后显示      
-				changeMonth : true, // 允许选择月份     
-				changeYear : true, // 允许选择年份     
-				dateFormat : 'yy-mm-dd', // 设置日期格式   
-				onClose : function(selectedDate) {
-				}
-
-			});
-
-			$("#EndTime").prop("readonly", false).datepicker({
-				showMonthAfterYear : true, // 月在年之后显示      
-				changeMonth : true, // 允许选择月份     
-				changeYear : true, // 允许选择年份     
-				dateFormat : 'yy-mm-dd', // 设置日期格式   
-				defaultDate:  new Date(),
-				setDate:new Date(),
-				onClose : function(selectedDate) {
-				}
-			
-			});
+		$.datepicker.setDefaults({
+			showButtonPanel: true,
+			beforeShow : function( input ) {
+				setTimeout(function() {
+					var buttonPane = $(input)
+					.datepicker( "widget" )
+					.find( ".ui-datepicker-buttonpane" );
+					$( "<button>", {
+						text: "清除",
+						click: function() {
+							$.datepicker._clearDate(input);
+						}
+					}).addClass("ui-state-default ui-priority-primary ui-corner-all").appendTo( buttonPane );
+				}, 1 );
+			}
 		});
 
+
 	
-			$.getUrlParam = function(name)
+			$.getUrlParam = function(classid)
 		{
-			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var reg = new RegExp("(^|&)"+ classid +"=([^&]*)(&|$)");
 			var r = window.location.search.substr(1).match(reg);
 		if (r!=null) return unescape(r[2]); return null;
 			}
@@ -108,7 +97,11 @@
 	
 </script>
 <body>
+     <div class="location">
+        首页 &gt; 分类列表 &gt; &nbsp;&nbsp;<span class="limit_info" id="select"></span>&nbsp;<span id="time_limit"><span id="sTime"></span><span id="between"></span><span id="eTime"></span></span>
+    </div>
 	<div class="main">
+	   
 		<div class="col_left">
 
 			<div class="ranking_list">
@@ -136,127 +129,24 @@
 		<div class="col_right">
 			<table class="limit">
 				<tr class="clinic_tr  classlist">
-					<td class="top">临床医学：</td>
-					<td><div class="Clinic  Spec">
-
-							<div class="Spec_show">
-
-								<ul class="item">
-
-									<li><a onclick="getClassListBySpid(1000)">内科综合</a></li>
-									<li><a onclick="getClassListBySpid(1001)">呼吸综合</a></li>
-									<li><a onclick="getClassListBySpid(1002)">消化内科</a></li>
-									<li><a onclick="getClassListBySpid(1003)">神经内科</a></li>
-									<li><a onclick="getClassListBySpid(1004)">心血管内科</a></li>
-									<li><a onclick="getClassListBySpid(1005)">血液内科</a></li>
-									<li><a onclick="getClassListBySpid(1006)">肾内科</a></li>
-									<li><a onclick="getClassListBySpid(1007)">内分泌科</a></li>
-									<li><a onclick="getClassListBySpid(1008)">风湿免疫科</a></li>
-									<li><a onclick="getClassListBySpid(1009)">变态反应科</a></li>
-									<li><a onclick="getClassListBySpid(1010)">老年病科</a></li>
-								</ul>
-							</div>
-							<div class="Spec_show ">
-								<ul class="secondclass">
-									<li><a onclick="getClassListBySpid(2000)">外科综合</a></li>
-									<li><a onclick="getClassListBySpid(2001)">普通外科</a></li>
-									<li><a onclick="getClassListBySpid(2002)">神经外科</a></li>
-									<li><a onclick="getClassListBySpid(2003)">骨科</a></li>
-									<li><a onclick="getClassListBySpid(2004)">泌尿外科 </a></li>
-									<li><a onclick="getClassListBySpid(2005)">胸外科</a></li>
-									<li><a onclick="getClassListBySpid(2006)">心血管外科</a></li>
-									<li><a onclick="getClassListBySpid(2007)">烧伤科</a></li>
-								</ul>
-							</div>
-							<div class="Spec_show">
-								<ul class="item">
-									<li><a onclick="getClassListBySpid(3000)">全科医学</a></li>
-									<li><a onclick="getClassListBySpid(3100)">妇产科</a></li>
-									<li><a onclick="getClassListBySpid(3200)">儿科</a></li>
-									<li><a onclick="getClassListBySpid(3300)">眼科</a></li>
-									<li><a onclick="getClassListBySpid(3400)">耳鼻咽喉科</a></li>
-									<li><a onclick="getClassListBySpid(3500)">口腔科</a></li>
-									<li><a onclick="getClassListBySpid(3600)">皮肤性病科</a></li>
-									<li><a onclick="getClassListBySpid(3700)">整形美容科</a></li>
-									<li><a onclick="getClassListBySpid(3800)">传染科</a></li>
-									<li><a onclick="getClassListBySpid(3900)">肿瘤科</a></li>
-
-								</ul>
-							</div>
-
-							<div class="Spec_show">
-								<ul class="item">
-									<li><a onclick="getClassListBySpid(4000)">急诊医学科</a></li>
-									<li><a onclick="getClassListBySpid(4100)">重症医学科</a></li>
-									<li><a onclick="getClassListBySpid(4200)">康复医学科</a></li>
-									<li><a onclick="getClassListBySpid(4300)">运动医学科</a></li>
-									<li><a onclick="getClassListBySpid(4400)">职业病科</a></li>
-									<li><a onclick="getClassListBySpid(4500)">特种医学</a></li>
-									<li><a onclick="getClassListBySpid(4600)">麻醉科</a></li>
-									<li><a onclick="getClassListBySpid(4700)">疼痛科</a></li>
-									<li><a onclick="getClassListBySpid(4800)">精神科</a></li>
-									<li><a onclick="getClassListBySpid(4900)">中医科</a></li>
-								</ul>
-							</div>
-							<div class="Spec_show">
-								<ul class="item">
-									<li><a onclick="getClassListBySpid(5000)">中西医结合</a></li>
-									<li><a onclick="getClassListBySpid(5100)">护理</a></li>
-									<li><a onclick="getClassListBySpid(5200)">医学检验</a></li>
-									<li><a onclick="getClassListBySpid(5300)">病理科</a></li>
-									<li><a onclick="getClassListBySpid(5400)">影像科</a></li>
-									<li><a onclick="getClassListBySpid(5500)">营养保健科</a></li>
-									<li><a onclick="getClassListBySpid(5600)">流行病学与防疫</a></li>
-									<li><a onclick="getClassListBySpid(5700)">卫生事业管理</a></li>
-
-								</ul>
-							</div>
-						</div></td>
+					<td class="top item"><a id="1" onclick="selectClass(1)">临床医学</a>：</td>
+					<td><div id="clinic-content" class="Clinic  Spec_show">
+                        </div>
+	                </td>
 					<!-- 		            <td  class="top"><span class="more">更多 <i class="more-arrow"></i></span></td> -->
 				</tr>
 				<tr class="basic_tr classlist">
-					<td class="top">基础医学：</td>
-					<td><div class="Basic Spec_show ">
+					<td class="top item"><a id="2" onclick="selectClass(2)">基础医学</a>：</td>
+					<td><div id="basic_content" class="Basic Spec_show ">
 
-							<ul class="item">
-								<li><a onclick="getClassListBySpid(6000)">医用数学</a></li>
-								<li><a onclick="getClassListBySpid(6100)">医用物理</a></li>
-								<li><a onclick="getClassListBySpid(6200)">基础化学</a></li>
-								<li><a onclick="getClassListBySpid(6300)">有机化学</a></li>
-								<li><a onclick="getClassListBySpid(6400)">解剖学</a></li>
-								<li><a onclick="getClassListBySpid(6500)">生物化学</a></li>
-								<li><a onclick="getClassListBySpid(6600)">遗传学</a></li>
-								<li><a onclick="getClassListBySpid(6700)">细胞生物学</a></li>
-								<li><a onclick="getClassListBySpid(6800)">组织胚胎学</a></li>
-								<li><a onclick="getClassListBySpid(6900)">生物工程</a></li>
-								<li><a onclick="getClassListBySpid(7000)">生理学</a></li>
-								<li><a onclick="getClassListBySpid(7100)">微生物学</a></li>
-								<li><a onclick="getClassListBySpid(7200)">寄生虫学</a></li>
-								<li><a onclick="getClassListBySpid(7300)">医学免疫学</a></li>
-								<li><a onclick="getClassListBySpid(7400)">病理学</a></li>
-								<li><a onclick="getClassListBySpid(7500)">病理生理学</a></li>
-								<li><a onclick="getClassListBySpid(7600)">医学心理学</a></li>
-							</ul>
+							
 						</div></td>
 
 				</tr>
 				<tr class="pharmacy_tr classlist">
-					<td class="top">药&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学：</td>
-					<td><div class="Pharmacy Spec_show">
-							<ul class="item">
-								<li><a onclick="getClassListBySpid(9000)">基础药学</a></li>
-								<li><a onclick="getClassListBySpid(9001)">药物分析</a></li>
-								<li><a onclick="getClassListBySpid(9002)">药典</a></li>
-								<li><a onclick="getClassListBySpid(9003)">处方集</a></li>
-								<li><a onclick="getClassListBySpid(9004)">药物鉴定</a></li>
-								<li><a onclick="getClassListBySpid(9005)">天然药物学</a></li>
-								<li><a onclick="getClassListBySpid(9006)">药剂学</a></li>
-								<li><a onclick="getClassListBySpid(9007)">药事组织</a></li>
-								<li><a onclick="getClassListBySpid(9008)">药理学</a></li>
-								<li><a onclick="getClassListBySpid(9009)">药品</a></li>
-								<li><a onclick="getClassListBySpid(9010)">毒理学</a></li>
-
-							</ul>
+					<td class="top item"><a id="3"  onclick="selectClass(3)">药&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学</a>：</td>
+					<td><div id="phar-content" class="Pharmacy Spec_show">
+							
 						</div></td>
 
 				</tr>
@@ -265,13 +155,14 @@
 					<td>
 						<div class="control-group">
 							<input id="StartTime"  value=""/>
-						</div> --
+						</div> <div class="control-group">至</div>
 						<div class="control-group">
 
 							<input id="EndTime">
 						</div>
 					</td>
 				</tr>
+				
 			</table>
 
 
@@ -296,51 +187,53 @@
 				<div id="Pager" style="width: 800px;"></div>
 			</div>
 		</div>
-
-
-
-
-
 		<div class="clear"></div>
-
 	</div>
 
-	</div>
+				
 	<script type="text/javascript">
-		var spid = 0;//spid = 0 学科编码
+	    var classcount=0;
+	    var currlimit="";
 		var totalPage = 0;
 		var pageListSize = 10;//每页显示调试
 		//var uType = 0;//uType=2管理员
 		var startTime = "";
-		var endTime = "";
-        var classid =$.getUrlParam('classid');
+		var endTime = "";		
+		var classid =$.getUrlParam('classid');
         var search="";
         var where ="";
         var order ="";
 		$(function() {
-			 if(classid==0){
-				 $(".classlist").show();
-				 spid=0;
-             }
-			
-			 else  if(classid==1){
-            	  $(".clinic_tr").show().siblings(".classlist").hide();
-            	  spid=1;
-              }
-              else if(classid==2){
-            	  $(".basic_tr").show().siblings(".classlist").hide();
-            	  spid=2;
-              }
-              else if(classid==3){
-            	  $(".pharmacy_tr").show().siblings(".classlist").hide();
-            	  spid=3;
-              }
-              else{
-            	  spid=classid;
-            	  $(".classlist").show();
-            	 
-              }
+		
+               //初始化日期时间控件
+					$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 
+					$("#StartTime").prop("readonly", false).datepicker({
+						showMonthAfterYear : true, // 月在年之后显示      
+						changeMonth : true, // 允许选择月份     
+						changeYear : true, // 允许选择年份     
+						dateFormat : 'yy-mm-dd', // 设置日期格式   
+						onClose : function(selectedDate) {
+							
+							selectClass(classid);
+						}
+
+					});
+
+					$("#EndTime").prop("readonly", false).datepicker({
+						showMonthAfterYear : true, // 月在年之后显示      
+						changeMonth : true, // 允许选择月份     
+						changeYear : true, // 允许选择年份     
+						dateFormat : 'yy-mm-dd', // 设置日期格式   
+						defaultDate:  new Date(),
+						setDate:new Date(),
+						onClose : function(selectedDate) {
+							
+							selectClass(classid);
+						}
+					
+					});
+		
 			//排序显示样式控制
 			 $(".down_arrow").click(function(){				 
 				   $(this).addClass("down_arrow_actived actived").siblings().removeClass("down_arrow_actived up_arrow_actived actived");
@@ -349,7 +242,7 @@
 						pageCount : totalPage,
 						pageSize : 10
 					});
-			 })
+			 });
 			  $(".up_arrow").click(function(){								 
 				  $(this).addClass("up_arrow_actived actived").siblings().removeClass("down_arrow_actived up_arrow_actived actived");			  
 				  $("#Pager").myPagination({
@@ -357,52 +250,169 @@
 						pageCount : totalPage,
 						pageSize : 10
 					});
-			 })
+			 });
    
 			           
-            getClassListBySpid(spid);
+			 GetSpec();
+			 selectClass(classid);
 			 
-			 getNewByClass(spid);
+			 getNewByClass(classid);
              
-			 getHotByClass(spid);
+			 getHotByClass(classid);
 			 
-			 getLatestDownByClass(spid);
+			 getLatestDownByClass(classid);
 			 
-			 
-			 
+			
 		});
-
-		//学科筛选
-		function getClassListBySpid(i_spid) {
-			spid = i_spid;
-			//GetDepartment(dpid);
-			//$(".secondclass li a").removeClass("spec");
-			//$("." + dpid).addClass("spec");
-
-			//时间条件限定
-			startTime = $("#startTime").val();
-			var curr_time = new Date();
-			endTime = curr_time.getFullYear() + "-";
-			endTime += curr_time.getMonth() + 1 + "-";
-			endTime += curr_time.getDate();
-
-			if ($("#startTime").val() != "" && $("#endTime").val() == "") {
-				startTime = $("#startTime").val();
-				$("#sTime").html(startTime);
-			}
-			if ($("#endTime").val() != "") {
-				endTime = $("#endTime").val();
-				$("#eTime").html(endTime);
-			}
+		//选择分类
+		function selectClass(id){
+			classid=id;
+			$(".item a").removeClass("selected");
+			$("#"+classid).addClass("selected");
 			
-			getCount(spid);
-			
-		    
+		    //面包屑限定条件样式
+			currlimit="";
+			if(classid==0||classid==""||classid==null){
+				currlimit="全部学科";
+			}
+			else if(classid==1){
+				currlimit="临床医学";
+			}
+			else if(classid==2){
+				currlimit="基础医学";
+			}
+			else if(classid==3){
+				currlimit="药学";
+			}
+			else{
+				if($(".selected").length!=0){
+				$(".selected").each(function(){
+					currlimit=$(this).html();			
+					});
+				 
+			    }
+				
+			}
+			$("#select").html(currlimit);
+         
+		 startTime = $("#StartTime").val();
+   		 endTime = $("#EndTime").val();
+            if ($("#StartTime").val() != "" || $("#EndTime").val() != "") {
+            	$("#time_limit").html(startTime+" 至 "+endTime);
+                $("#time_limit").addClass("limit_info");
+               // $("#time_limit").append('<a class="crumbDelete" onclick="ClearTime();"></a>')
+            }
+            else {
+                $("#time_limit").removeClass("limit_info");
+                $("#time_limit").html("");
+                //$("#time_limit .crumbDelete").remove();
+            }
+            getCount(classid);
 		}
+		//最多选择3个分类
+		function setclassid(spid,obj){
+		classcount=$(".selected").length;	
+		if(classcount<2){
+			if($(obj).attr("class").indexOf("selected") > -1){				
+				$(obj).removeClass("selected");				
+			 }
+			else{				
+				$(obj).addClass("selected");								
+			    }	
+			}
+		else if(classcount==2){	
+			if($(obj).attr("class").indexOf("selected") == -1){
+				$(obj).addClass("selected");
+				$(obj).addClass("lasted");				
+			 }
+			else if($(obj).attr("class").indexOf("selected") > -1){
+				$(obj).removeClass("selected");
+				$(obj).removeClass("lasted");				
+			 }
+			
+			}
+		else if(classcount==3){
+			if($(obj).attr("class").indexOf("selected") == -1){
+				$("ul.spec").find(".lasted").removeClass("lasted").removeClass("selected");
+				$(obj).addClass("selected");
+				$(obj).addClass("lasted");				
+			 }
+			else if($(obj).attr("class").indexOf("selected") > -1){
+				$("ul.spec").find(".lasted").removeClass("lasted");
+				$(obj).removeClass("selected");
+			 }
+	
+		   }	 
+       
+		}
+		
+		 //获取全部分类
+	    function GetSpec() {
+	    	var content1="";
+	    	var content2="";
+	    	var content3="";
+	        $.ajax({
+	        	
+	            url: "/GetSpec",
+	            type: "post",
+	            async: false,
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            dataType: "text",
+	            data: {},
+	            success: function (result) {
+	                if (result != "") {
+	                	
+	                	var Obj=eval("("+result+")");//转换为json对象 
+	                //临床医学1-3区		 
+	                   for(var i=1;i<4;i++){
+	                	content1+="<div class='scitem'><ul class='spec item'>";
+	                	var root="区"+i;	                	               	 
+			               	  //遍历json数组 
+			               	  $.each(Obj[root], function(j, item) { 
+			               	  content1+="<li><a id=\'"+item.i_spid+"\' class=\'"+item.i_spid+"\' onclick='selectClass("+item.i_spid+")' >"+item.s_spec+"</a></li>"; 	               
+	               	  }); 
+	                 	content1+="</ul></div>";
+	                   }
+	                   $("#clinic-content").html(content1);
+	                   //基础医学4区	                   
+		                	content2+="<div class='scitem'><ul class='spec item'>";
+		                	var root="区4";	                	               	 
+				               	  //遍历json数组 
+				               	  $.each(Obj[root], function(j, item) { 
+				               	  content2+="<li><a id=\'"+item.i_spid+"\' class=\'"+item.i_spid+"\' onclick='selectClass("+item.i_spid+")' >"+item.s_spec+"</a></li>"; 	               
+		               	  }); 
+		                 	content2+="</ul></div>";
+			
+	                		$("#basic_content").html(content2); //分割后的字符输出 
+	                     
+	                   //药学5区		                   
+	                	content3+="<div class='scitem'><ul class='spec item'>";
+	                	var root="区5";	                	               	 
+			               	  //遍历json数组 
+			               	  $.each(Obj[root], function(j, item) { 
+			               	  content3+="<li><a id=\'"+item.i_spid+"\' class=\'"+item.i_spid+"\' onclick='selectClass("+item.i_spid+")' >"+item.s_spec+"</a></li>"; 	               
+	               	  }); 
+	                 	content3+="</ul></div>";
+		
+	            		$("#phar-content").html(content3); //分割后的字符输出 
+                 }
+	                else{ 
+	                	    
+	                	 alert("获取学科分类为空！") ;  
+	                		
+	                	} 
+
+	            },
+	            error: function () {
+	                alert("获取学科分类异常！");
+	                return false;
+	            }
+	        });
+	    }
 
 		//时间筛选
 		function timeSearch() {
-			GetDepartment(dpid);
+			GetDepartment(classid);
 			//时间条件限定
 			startTime = "2007-01-01";
 
@@ -457,14 +467,14 @@
 			$("#time_limit").removeClass("limit_info");
 			$("#time_limit .crumbDelete").remove();
 
-			startTime = "2007-01-01";
+			startTime = "2008-01-01";
 			var curr_time = new Date();
 			endTime = curr_time.getFullYear() + "-";
 			endTime += curr_time.getMonth() + 1 + "-";
 			endTime += curr_time.getDate();
 
 			$("#foot").html("<img src='/images/loading.gif'/>");
-			getCount(dpid);
+			getCount(classid);
 			//GetDiscuByPage(0, pageListSize, dpid, startTime, endTime);
 
 			$("#foot").html("");
@@ -489,51 +499,25 @@
 				$("#between").html("至");
 				$("#eTime").html(endTime);
 			}
-			$(".secondclass li a").removeClass("spec");
+			$(".spec li a").removeClass("selected");
 			$("#select").html("全部学科");
 			$("#foot").html("<img src='/images/loading.gif'/>");
-			GetDiscuCount(0);
+			getCount(0);
 			//GetDiscuByPage(0, pageListSize, 0, startTime, endTime);
 
 			$("#foot").html("");
 		}
 
-		//根据学科编号获取学科名称
-		function GetDepartment(dpid) {
-			$
-					.ajax({
-						url : "/DiscuList/GetDepartment",
-						type : 'post',
-						async : false,
-						dataType : 'text',
-						data : {
-							dpid : dpid
-						},
-						success : function(result) {
-							if (result != "") {
-								$("#select")
-										.html(
-												result
-														+ '<a class="crumbDelete" onclick="ClearSpec();"></a>');
-							}
-						},
-						error : function(err) {
-							alert("获取学科异常，请联系管理员");
-							return false;
-						}
-					});
-
-		}
-
+		
 		//分类下最新发布图书
-		function getNewByClass(spid) {
+		function getNewByClass(classid) {
 			
 			$.ajax({
-						url : "<%=path%>/NewByClass",
+						url : "/NewByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
-						data: { spid:spid},
+						data: { spid:classid},
 						success : function(result) {
 							if (result != "") {								
 								var str = "";
@@ -544,10 +528,11 @@
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
 								}
-								$("#latest_publish").append(str);
+								
 							}
+							$("#latest_publish").html(str);
 						},
-						error : function(err) {
+						error : function() {
 							alert("获取最新发布帖子异常，请联系管理员");
 							return false;
 						}
@@ -555,14 +540,14 @@
 		}
         
 		//分类下下载次数最多图书
-		function getHotByClass(spid) {
+		function getHotByClass(classid) {
 		
 			$.ajax({
-						url : "<%=path%>/HotByClass",
+						url : "/HotByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
-						data: { spid:spid},
+						data: { spid:classid},
 						success : function(result) {
 							if (result != "") {								
 								var str = "";
@@ -573,25 +558,25 @@
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
 								}
-								$("#max_download").append(str);
+								$("#max_download").html(str);
 							}
 						},
-						error : function(err) {
-							alert("获取最新发布帖子异常，请联系管理员");
+						error : function() {
+							alert("获取分类下下载次数最多异常，请联系管理员");
 							return false;
 						}
 					});
 		}
 		
 		//分类下最新下载图书
-		function getLatestDownByClass(spid) {
+		function getLatestDownByClass(classid) {
 		
 			$.ajax({
-						url : "<%=path%>/LatestDownByClass",
+						url : "/LatestDownByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
-						data: { spid:spid},
+						data: { spid:classid},
 						success : function(result) {
 							if (result != "") {								
 								var str = "";
@@ -602,11 +587,11 @@
 											+ result[i].s_desc.substring(0, 40)
 											+ "</a></p> </li>";
 								}
-								$("#latest_download").append(str);
+								$("#latest_download").html(str);
 							}
 						},
-						error : function(err) {
-							alert("获取最新发布帖子异常，请联系管理员");
+						error : function() {
+							alert("获取分类下最新下载异常，请联系管理员");
 							return false;
 						}
 					});
@@ -621,18 +606,18 @@
 			return json;
 		}		
 
-         function getCount(spid){
-        	 spid = spid;       	
-        	 startTime = $("#startTime").val();
-    		 endTime = $("#endTime").val();
+         function getCount(classid){
+        	   	
+        	 startTime = $("#StartTime").val();
+    		 endTime = $("#EndTime").val();
     		
 	            $.ajax({
 	                url: "<%=path%>/GetCount",
 	                type: 'post',
-	                async: true,
+	                async: false,
 	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	                dataType: 'text',
-	                data: {search:search, spid:spid,startTime:startTime,endTime:endTime },
+	                data: {search:search,classid:classid,startTime:startTime,endTime:endTime },
 	                success : function(result) {
 					 
 		                    if(result !=0 ){       
@@ -666,10 +651,10 @@
         	 
          }
 		//获取图书列表
-         function getClassList(spid,pageIndex, pageListSize){
-			 spid = spid;
-        	 startTime = $("#startTime").val();
- 			 endTime = $("#endTime").val();
+         function getClassList(classid,pageIndex){
+			
+        	 startTime = $("#StartTime").val();
+ 			 endTime = $("#EndTime").val();
  			 
 		     order =$(".actived").attr("data");
 		    
@@ -679,7 +664,7 @@
 	                async: false,
 	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	                dataType: 'json',
-	                data: {search:search, spid:spid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
+	                data: {search:search, classid:classid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
 	                success: function (result) {
 	                	$("#discuList").html("");
 	                	if (result != 0) {
@@ -687,7 +672,7 @@
 	                	for(var i=0;i < result.length;i++ ){
 	                		
 	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">";
-							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\"><span  class=\"property\"><span class=\"bookmark\" title=\"书签\"></span></span>";
+							str += "<img title=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\"><span  class=\"property\"><span class=\"bookmark\" title=\"书签\"></span></span>";
 							str += "<span class=\"createTime\" style=\"display: none;\">"
 									+ result[i].s_create_time
 									+ "</span></a>";
@@ -711,7 +696,7 @@
 							str += "<p><span class=\"price\">￥"
 									+ result[i].i_discuPrice
 									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
-						}
+						};
 						$("#discuList").html(str);
 	                	} else {
 	                        $("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
@@ -726,8 +711,6 @@
 
 	
 	}
-
-		
 
 
 	</script>

@@ -201,8 +201,8 @@
             function updateView() {
                 currPage = getInt(currPage);
                 currIndex = (currPage - 1) * pageListSize;
-                $("#foot").html("<img src='/images/loading.gif'/>");
-                getClassList(spid,currIndex, pageListSize);
+                $("#foot").html("<img src='/Images/icons/loading.gif'/>");
+                getClassList(classid,currIndex);
                 $("#foot").html("");
                 pageCount = getInt(pageCount);
                 var link = getLink();

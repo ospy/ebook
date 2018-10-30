@@ -7,7 +7,15 @@ public class FileInfo {
 	String s_filename;
 	String s_path;
 	String s_password;
+	String filesize;
+	String filetype;
 	
+	public String getFilesize() {
+		return filesize;
+	}
+	public void setFilesize(String filesize) {
+		this.filesize = filesize;
+	}
 	public String getNewbalance() {
 		return newbalance;
 	}
@@ -43,6 +51,12 @@ public class FileInfo {
 	}
 	public void setI_spec_price(String i_spec_price) {
 		this.i_spec_price = i_spec_price;
+	}
+	public String getFiletype() {
+		return filetype;
+	}
+	public void setFiletype(String filetype) {
+		this.filetype = filetype;
 	}
 	
 }

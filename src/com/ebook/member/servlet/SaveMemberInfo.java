@@ -42,7 +42,7 @@ public class SaveMemberInfo extends HttpServlet {
 		memberInfo.setAddress(address);
 		memberInfo.setCapacity(capacity);
 		memberInfo.setEducation(education);
-		memberInfo.setMember(member);
+		//memberInfo.setMember(member);
 		memberInfo.setMobile(mobile);
 		memberInfo.setName(name);
 		memberInfo.setSpeciality(speciality);

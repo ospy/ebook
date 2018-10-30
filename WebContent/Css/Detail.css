@@ -24,7 +24,7 @@
     }
 
 .left_list  h3 {
-    background: #f0f0f0 url("/images/icons/index.png") no-repeat scroll 6px -85px;
+    background: #f0f0f0 url("/Images/icons/index.png") no-repeat scroll 6px -85px;
     color: #333333;
     font-size: 14px;
     font-weight: bold;
@@ -36,7 +36,7 @@
 }
 
 .left_list ul li .more {
-    background: rgba(0, 0, 0, 0) url("/images/icons/index.png") no-repeat scroll 0 -380px;
+    background: rgba(0, 0, 0, 0) url("/Images/icons/index.png") no-repeat scroll 0 -380px;
     float: right;
     height: 34px;
     line-height: 34px;
@@ -128,16 +128,46 @@
     margin-left: 20px;
     width:500px;
 }
-
+#book_intro{
+    height: auto;
+    overflow: hidden;
+}
 ul.info_list li {
     height: 40px;
     line-height: 40px;
 }
 
 .basicinfo li.col{
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
 	display:inline-block;
     float: left;
     width: 50%;
+}
+.basicinfo li.col label{
+   font-weight: normal;
+}
+#downbtn{
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: block;
+    font-family: "Hiragino Sans GB","microsoft yahei",sans-serif;
+    font-size: 16px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    width: 180px;
+   
+    background: #4d8797 url('/Images/icons/download.png') no-repeat 12px 10px;
+    border-color: #317082;
+    color: #fff;
+}
+#downbtn:hover{
+    background: #317082 url('/Images/icons/download.png') no-repeat 12px 10px;
+    border-color: #104555;
 }
 #specid{display:none;}
 /*µ¯´°ÑùÊ½*/
@@ -184,31 +214,31 @@ ul.info_list li {
     color:#165c47;
 }
 #ordinaryAddress i {
-    background:url("/images/icons/linklogo.png") -97px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png") -97px 2px no-repeat;
 }
 .baiduhas i{
-    background:url("/images/icons/linklogo.png")  -97px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png")  -97px 2px no-repeat;
 }
 #xunleiAddress i {
-    background:url("/images/icons/linklogo.png") -2px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png") -2px 2px no-repeat;
 }
 #baiduAddress {
     clear:both;
 }
 #baiduAddress  i{
-    background:url("/images/icons/linklogo.png")  -27px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png")  -27px 2px no-repeat;
 }
 .xunleihas i{
-    background:url("/images/icons/linklogo.png") -2px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png") -2px 2px no-repeat;
 }
 .xunleino i{
-    background:url("/images/icons/linklogo.png") -50px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png") -50px 2px no-repeat;
 }
 .baiduhas i{
-    background:url("/images/icons/linklogo.png")  -27px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png")  -27px 2px no-repeat;
 }
 .baiduno i{
-    background:url("/images/icons/linklogo.png") -72px 2px no-repeat;
+    background:url("/Images/icons/linklogo.png") -72px 2px no-repeat;
 }
 
 #m_l_row5 {
@@ -233,20 +263,44 @@ ul.info_list li {
 	height:auto;
 	overflow:hidden;
 }
+.ItemTop{
+    height:auto;
+    overflow: hidden;
+    background: #eee;
+    border-radius: 6px 0 0;
+    }
 #bookabstract h2{
+    float: left;
+    width:118px;
 	text-indent:20px;
 	height:26px;
 	line-height:26px;
 	color:#fff;
-	background:url("/Images/icons/Items.png") 0 0 no-repeat;
-	border-bottom:2px solid #317082;
+	background:url("/Images/icons/Items.png") 0 1px no-repeat;
+	
 }
+.folder {
+    margin:5px 5px 0 0;
+    display: block;
+    float: right;
+  
+}
+
 .items{
+    margin-top: 5px;
 	display:none;
+}
+#contentIndex p{
+    margin: 0;
+    padding: 0;
+    text-indent: 2em;
+    line-height: 22px;
+    height: 20px;
 }
 #bookabstract .ItemContent{
 	padding:10px;
 }
+
 #publishinfo{
 	margin-top:30px;
 }

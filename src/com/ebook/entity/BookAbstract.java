@@ -1,9 +1,12 @@
 package com.ebook.entity;
 
 public class BookAbstract {
+	String BookId;
+	String BookTitle;
+	String PicUrl;//图片地址	
 String SeriesName;//丛书名
 String AuthorName;//作者
-String AuthorIntro;//作者
+String AuthorIntro;//作者简介
 String ContentIndex;//目录
 String ContentIntro;//内容简介
 
@@ -18,9 +21,27 @@ String BookSize;//开本
 String Paper;//纸张
 String Impression;//印次
 String ISBN;//ISBN
+String Language;//语种
 String Pack;//包装
 
-
+public String getBookId() {
+	return BookId;
+}
+public void setBookId(String bookId) {
+	BookId = bookId;
+}
+public String getBookTitle() {
+	return BookTitle;
+}
+public void setBookTitle(String bookTitle) {
+	BookTitle = bookTitle;
+}
+public String getPicUrl() {
+	return PicUrl;
+}
+public void setPicUrl(String picUrl) {
+	PicUrl = picUrl;
+}
 public String getSeriesName() {
 	return SeriesName;
 }
@@ -118,6 +139,12 @@ public void setISBN(String iSBN) {
 	ISBN = iSBN;
 }
 
+public String getLanguage() {
+	return Language;
+}
+public void setLanguage(String language) {
+	Language = language;
+}
 public String getPack() {
 	return Pack;
 }

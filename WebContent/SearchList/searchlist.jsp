@@ -78,6 +78,7 @@
 				changeYear : true, // 允许选择年份     
 				dateFormat : 'yy-mm-dd', // 设置日期格式   
 				onClose : function(selectedDate) {
+					selectClass(classid);
 				}
 
 			});
@@ -90,12 +91,29 @@
 				defaultDate:  new Date(),
 				setDate:new Date(),
 				onClose : function(selectedDate) {
+					selectClass(classid);
 				}
 			
 			});
 		});
 
-	
+		$.datepicker.setDefaults({
+			showButtonPanel: true,
+			beforeShow : function( input ) {
+				setTimeout(function() {
+					var buttonPane = $(input)
+					.datepicker( "widget" )
+					.find( ".ui-datepicker-buttonpane" );
+					$( "<button>", {
+						text: "清除",
+						click: function() {
+							$.datepicker._clearDate(input);
+						}
+					}).addClass("ui-state-default ui-priority-primary ui-corner-all").appendTo( buttonPane );
+				}, 1 );
+			}
+		});
+		
 			$.getUrlParam = function(name)
 		{
 				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -109,6 +127,9 @@
 </script>
 <body>
 	<div class="main">
+	  <div class="location">
+        首页 &gt; 分类列表 &gt; &nbsp;&nbsp;<span class="limit_info" id="select"></span>&nbsp;<span id="time_limit"><span id="sTime"></span><span id="between"></span><span id="eTime"></span></span>
+    </div>
 		<div class="col_left">
 
 			<div class="ranking_list">
@@ -136,127 +157,20 @@
 		<div class="col_right">
 			<table class="limit">
 				<tr class="clinic_tr  classlist">
-					<td class="top">临床医学：</td>
-					<td><div class="Clinic  Spec">
-
-							<div class="Spec_show">
-
-								<ul class="item">
-
-									<li><a onclick="getClassListBySpid(1000)">内科综合</a></li>
-									<li><a onclick="getClassListBySpid(1001)">呼吸综合</a></li>
-									<li><a onclick="getClassListBySpid(1002)">消化内科</a></li>
-									<li><a onclick="getClassListBySpid(1003)">神经内科</a></li>
-									<li><a onclick="getClassListBySpid(1004)">心血管内科</a></li>
-									<li><a onclick="getClassListBySpid(1005)">血液内科</a></li>
-									<li><a onclick="getClassListBySpid(1006)">肾内科</a></li>
-									<li><a onclick="getClassListBySpid(1007)">内分泌科</a></li>
-									<li><a onclick="getClassListBySpid(1008)">风湿免疫科</a></li>
-									<li><a onclick="getClassListBySpid(1009)">变态反应科</a></li>
-									<li><a onclick="getClassListBySpid(1010)">老年病科</a></li>
-								</ul>
-							</div>
-							<div class="Spec_show ">
-								<ul class="secondclass">
-									<li><a onclick="getClassListBySpid(2000)">外科综合</a></li>
-									<li><a onclick="getClassListBySpid(2001)">普通外科</a></li>
-									<li><a onclick="getClassListBySpid(2002)">神经外科</a></li>
-									<li><a onclick="getClassListBySpid(2003)">骨科</a></li>
-									<li><a onclick="getClassListBySpid(2004)">泌尿外科 </a></li>
-									<li><a onclick="getClassListBySpid(2005)">胸外科</a></li>
-									<li><a onclick="getClassListBySpid(2006)">心血管外科</a></li>
-									<li><a onclick="getClassListBySpid(2007)">烧伤科</a></li>
-								</ul>
-							</div>
-							<div class="Spec_show">
-								<ul class="item">
-									<li><a onclick="getClassListBySpid(3000)">全科医学</a></li>
-									<li><a onclick="getClassListBySpid(3100)">妇产科</a></li>
-									<li><a onclick="getClassListBySpid(3200)">儿科</a></li>
-									<li><a onclick="getClassListBySpid(3300)">眼科</a></li>
-									<li><a onclick="getClassListBySpid(3400)">耳鼻咽喉科</a></li>
-									<li><a onclick="getClassListBySpid(3500)">口腔科</a></li>
-									<li><a onclick="getClassListBySpid(3600)">皮肤性病科</a></li>
-									<li><a onclick="getClassListBySpid(3700)">整形美容科</a></li>
-									<li><a onclick="getClassListBySpid(3800)">传染科</a></li>
-									<li><a onclick="getClassListBySpid(3900)">肿瘤科</a></li>
-
-								</ul>
-							</div>
-
-							<div class="Spec_show">
-								<ul class="item">
-									<li><a onclick="getClassListBySpid(4000)">急诊医学科</a></li>
-									<li><a onclick="getClassListBySpid(4100)">重症医学科</a></li>
-									<li><a onclick="getClassListBySpid(4200)">康复医学科</a></li>
-									<li><a onclick="getClassListBySpid(4300)">运动医学科</a></li>
-									<li><a onclick="getClassListBySpid(4400)">职业病科</a></li>
-									<li><a onclick="getClassListBySpid(4500)">特种医学</a></li>
-									<li><a onclick="getClassListBySpid(4600)">麻醉科</a></li>
-									<li><a onclick="getClassListBySpid(4700)">疼痛科</a></li>
-									<li><a onclick="getClassListBySpid(4800)">精神科</a></li>
-									<li><a onclick="getClassListBySpid(4900)">中医科</a></li>
-								</ul>
-							</div>
-							<div class="Spec_show">
-								<ul class="item">
-									<li><a onclick="getClassListBySpid(5000)">中西医结合</a></li>
-									<li><a onclick="getClassListBySpid(5100)">护理</a></li>
-									<li><a onclick="getClassListBySpid(5200)">医学检验</a></li>
-									<li><a onclick="getClassListBySpid(5300)">病理科</a></li>
-									<li><a onclick="getClassListBySpid(5400)">影像科</a></li>
-									<li><a onclick="getClassListBySpid(5500)">营养保健科</a></li>
-									<li><a onclick="getClassListBySpid(5600)">流行病学与防疫</a></li>
-									<li><a onclick="getClassListBySpid(5700)">卫生事业管理</a></li>
-
-								</ul>
-							</div>
+					<td class="top item"><a id="1" onclick="selectClass(1)">临床医学</a>：</td>
+					<td><div id="clinic-content" class="Clinic  Spec_show">
 						</div></td>
 					<!-- 		            <td  class="top"><span class="more">更多 <i class="more-arrow"></i></span></td> -->
 				</tr>
-				<tr class="basic_tr classlist">
-					<td class="top">基础医学：</td>
-					<td><div class="Basic Spec_show ">
-
-							<ul class="item">
-								<li><a onclick="getClassListBySpid(6000)">医用数学</a></li>
-								<li><a onclick="getClassListBySpid(6100)">医用物理</a></li>
-								<li><a onclick="getClassListBySpid(6200)">基础化学</a></li>
-								<li><a onclick="getClassListBySpid(6300)">有机化学</a></li>
-								<li><a onclick="getClassListBySpid(6400)">解剖学</a></li>
-								<li><a onclick="getClassListBySpid(6500)">生物化学</a></li>
-								<li><a onclick="getClassListBySpid(6600)">遗传学</a></li>
-								<li><a onclick="getClassListBySpid(6700)">细胞生物学</a></li>
-								<li><a onclick="getClassListBySpid(6800)">组织胚胎学</a></li>
-								<li><a onclick="getClassListBySpid(6900)">生物工程</a></li>
-								<li><a onclick="getClassListBySpid(7000)">生理学</a></li>
-								<li><a onclick="getClassListBySpid(7100)">微生物学</a></li>
-								<li><a onclick="getClassListBySpid(7200)">寄生虫学</a></li>
-								<li><a onclick="getClassListBySpid(7300)">医学免疫学</a></li>
-								<li><a onclick="getClassListBySpid(7400)">病理学</a></li>
-								<li><a onclick="getClassListBySpid(7500)">病理生理学</a></li>
-								<li><a onclick="getClassListBySpid(7600)">医学心理学</a></li>
-							</ul>
+				<tr  class="basic_tr classlist">
+					<td class="top item"><a id="2" onclick="selectClass(2)">基础医学</a>：</td>
+					<td><div id="basic_content" class="Basic Spec_show ">
 						</div></td>
 
 				</tr>
-				<tr class="pharmacy_tr classlist">
-					<td class="top">药&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学：</td>
-					<td><div class="Pharmacy Spec_show">
-							<ul class="item">
-								<li><a onclick="getClassListBySpid(9000)">基础药学</a></li>
-								<li><a onclick="getClassListBySpid(9001)">药物分析</a></li>
-								<li><a onclick="getClassListBySpid(9002)">药典</a></li>
-								<li><a onclick="getClassListBySpid(9003)">处方集</a></li>
-								<li><a onclick="getClassListBySpid(9004)">药物鉴定</a></li>
-								<li><a onclick="getClassListBySpid(9005)">天然药物学</a></li>
-								<li><a onclick="getClassListBySpid(9006)">药剂学</a></li>
-								<li><a onclick="getClassListBySpid(9007)">药事组织</a></li>
-								<li><a onclick="getClassListBySpid(9008)">药理学</a></li>
-								<li><a onclick="getClassListBySpid(9009)">药品</a></li>
-								<li><a onclick="getClassListBySpid(9010)">毒理学</a></li>
-
-							</ul>
+				<tr id="pharmacy_content" class="pharmacy_tr classlist">
+					<td class="top item"><a id="3" onclick="selectClass(3)">药&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学</a>：</td>
+					<td><div id="phar-content" class="Pharmacy Spec_show">
 						</div></td>
 
 				</tr>
@@ -305,44 +219,22 @@
 
 	</div>
 
-	</div>
+	
 	<script type="text/javascript">
-		var spid = 0;//spid = 0 学科编码
+		
 		var totalPage = 0;
 		var pageListSize = 10;//每页显示调试
 		//var uType = 0;//uType=2管理员
 		var startTime = "";
 		var endTime = "";
-        var classid =$.getUrlParam('classid');
+        var classid =0;
         var urlinfo = window.location.href;//获取url
         var search = decodeURI(urlinfo.split("?")[1].split("=")[1]);//拆分url得到”=”后面的参数      
        
         var where ="";
         var order ="";
 		$(function() {
-			 if(classid==0){
-				 $(".classlist").show();
-				 spid=0;
-             }
 			
-			 else  if(classid==1){
-            	  $(".clinic_tr").show().siblings(".classlist").hide();
-            	  spid=1;
-              }
-              else if(classid==2){
-            	  $(".basic_tr").show().siblings(".classlist").hide();
-            	  spid=2;
-              }
-              else if(classid==3){
-            	  $(".pharmacy_tr").show().siblings(".classlist").hide();
-            	  spid=3;
-              }
-              else{
-            	  spid=classid;
-            	  $(".classlist").show();
-            	 
-              }
-
 			//排序显示样式控制
 			 $(".down_arrow").click(function(){				 
 				   $(this).addClass("down_arrow_actived actived").siblings().removeClass("down_arrow_actived up_arrow_actived actived");
@@ -364,15 +256,17 @@
    
 			           
             
-			 getClassListBySpid(spid);
 			
-			 getNewByClass(spid);
+			 GetSpec();
+			 selectClass(classid);
+			 
+			 getNewByClass(classid);
              
-			 getHotByClass(spid);
+			 getHotByClass(classid);
 			 
-			 getLatestDownByClass(spid);
+			 getLatestDownByClass(classid);
 			 
-			 
+			
 			 
 		});
 
@@ -399,11 +293,223 @@
 				$("#eTime").html(endTime);
 			}
 			
-			getCount(spid);
+			getCount(classid);
 			
 		    
 		}
+		 //获取全部分类
+	    function GetSpec() {
+	    	var content1="";
+	    	var content2="";
+	    	var content3="";
+	        $.ajax({
+	        	
+	            url: "/GetSpec",
+	            type: "post",
+	            async: false,
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            dataType: "text",
+	            data: {},
+	            success: function (result) {
+	                if (result != "") {
+	                	
+	                	var Obj=eval("("+result+")");//转换为json对象 
+	                //临床医学1-3区		 
+	                   for(var i=1;i<4;i++){
+	                	content1+="<div class='scitem'><ul class='spec item'>";
+	                	var root="区"+i;	                	               	 
+			               	  //遍历json数组 
+			               	  $.each(Obj[root], function(j, item) { 
+			               	  content1+="<li><a id=\'"+item.i_spid+"\' class=\'"+item.i_spid+"\' onclick='selectClass("+item.i_spid+")' >"+item.s_spec+"</a></li>"; 	               
+	               	  }); 
+	                 	content1+="</ul></div>";
+	                   }
+	                   $("#clinic-content").html(content1);
+	                   //基础医学4区	                   
+		                	content2+="<div class='scitem'><ul class='spec item'>";
+		                	var root="区4";	                	               	 
+				               	  //遍历json数组 
+				               	  $.each(Obj[root], function(j, item) { 
+				               	  content2+="<li><a id=\'"+item.i_spid+"\' class=\'"+item.i_spid+"\' onclick='selectClass("+item.i_spid+")' >"+item.s_spec+"</a></li>"; 	               
+		               	  }); 
+		                 	content2+="</ul></div>";
+			
+	                		$("#basic_content").html(content2); //分割后的字符输出 
+	                     
+	                   //药学5区		                   
+	                	content3+="<div class='scitem'><ul class='spec item'>";
+	                	var root="区5";	                	               	 
+			               	  //遍历json数组 
+			               	  $.each(Obj[root], function(j, item) { 
+			               	  content3+="<li><a id=\'"+item.i_spid+"\' class=\'"+item.i_spid+"\' onclick='selectClass("+item.i_spid+")' >"+item.s_spec+"</a></li>"; 	               
+	               	  }); 
+	                 	content3+="</ul></div>";
+		
+	            		$("#phar-content").html(content3); //分割后的字符输出 
+                 }
+	                else{ 
+	                	    
+	                	 alert("获取学科分类为空！") ;  
+	                		
+	                	} 
 
+	            },
+	            error: function () {
+	                alert("获取学科分类异常！");
+	                return false;
+	            }
+	        });
+	    }
+	  //选择分类
+		function selectClass(id){
+			classid=id;
+			$(".item a").removeClass("selected");
+			$("#"+classid).addClass("selected");
+			
+		    //面包屑限定条件样式
+			currlimit="";
+			if(classid==0||classid==""||classid==null){
+				currlimit="全部学科";
+			}
+			else if(classid==1){
+				currlimit="临床医学";
+			}
+			else if(classid==2){
+				currlimit="基础医学";
+			}
+			else if(classid==3){
+				currlimit="药学";
+			}
+			else{
+				if($(".selected").length!=0){
+				$(".selected").each(function(){
+					currlimit=$(this).html();			
+					});
+				 
+			    }
+				
+			}
+			$("#select").html(currlimit);
+         
+		 startTime = $("#StartTime").val();
+   		 endTime = $("#EndTime").val();
+            if ($("#StartTime").val() != "" || $("#EndTime").val() != "") {
+            	$("#time_limit").html(startTime+" 至 "+endTime);
+                $("#time_limit").addClass("limit_info");
+               // $("#time_limit").append('<a class="crumbDelete" onclick="ClearTime();"></a>')
+            }
+            else {
+                $("#time_limit").removeClass("limit_info");
+                $("#time_limit").html("");
+                //$("#time_limit .crumbDelete").remove();
+            }
+            getCount(classid);
+		}
+	    function getCount(classid){
+       	      	
+       	 startTime = $("#startTime").val();
+   		 endTime = $("#endTime").val();
+   		
+	            $.ajax({
+	                url: "<%=path%>/GetCount",
+	                type: 'post',
+	                async: false,
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                dataType: 'text',
+	                data: {search:search, classid:classid,startTime:startTime,endTime:endTime },
+	                success : function(result) {
+					 
+		                    if(result !=0 ){       
+							var	pageTotalCount = parseInt(result);//总记录数
+								$("#total").html(pageTotalCount);
+								totalPage = parseInt(pageTotalCount
+										/ pageListSize)
+										+ ((pageTotalCount % pageListSize) > 0 ? 1
+												: 0);
+		
+								//mypagination
+								$("#Pager").show();
+								$("#Pager").myPagination({
+									currPage : 1,
+									pageCount : totalPage,
+									pageSize : 10
+								});
+                             }
+                   else{
+                   	$("#total").html("0");
+                   	$("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
+                   	$("#Pager").hide();
+                         }	                		                	
+						
+						},
+	                error: function () {
+	                    alert("获取记录总数异常！");
+	                    return false;
+	                }
+	            });	 
+       	 
+        }
+		//获取图书列表
+        function getClassList(classid,pageIndex){
+			
+       	 startTime = $("#startTime").val();
+			 endTime = $("#endTime").val();
+			 
+		     order =$(".actived").attr("data");
+		    
+	            $.ajax({
+	                url: "<%=path%>/SearchList",
+	                type: 'post',
+	                async: false,
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                dataType: 'json',
+	                data: {search:search,classid:classid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
+	                success: function (result) {
+	                	$("#discuList").html("");
+	                	if (result != 0) {
+	                	var str = "";
+	                	for(var i=0;i < result.length;i++ ){
+	                		
+	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/Detail/detail.jsp?id=/" + result[i].i_discuid + "\" target=\"_blank\">";
+							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\">";
+							str += "<span class=\"createTime\" style=\"display: none;\">"
+									+ result[i].s_create_time
+									+ "</span></a>";
+							str += "<p class=\"firsttd\"><span class=\"icon pdf\"></span>";
+							
+						    str += "<a class=\"title\" title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
+										+ result[i].s_desc + "</a>";
+
+							str += "<span class=\"listtime\">&nbsp; "+ result[i].s_create_time+ "</span></p>";
+						
+							str += "<p class=\"others\"><span class=\"subtitle\">资源类型："
+									+ result[i].s_filetypes+"</p>";
+							str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
+									+ result[i].s_loginid+"</p>";
+							str += "<p class=\"others\"><span class=\"subtitle\">点击次数："
+									+ result[i].i_click_times
+									+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">下载次数："
+									+ result[i].i_download_times + "</span></p>";
+
+							str += "<p class=\"others\"><span class=\"subtitle\">"+ result[i].s_spec+"</span></p>";
+							str += "<p><span class=\"price\">￥"
+									+ result[i].i_discuPrice
+									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
+						}
+						$("#discuList").html(str);
+	                	} else {
+	                        $("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
+	                    }
+	                },
+	                error: function () {
+	                    alert("获取书目列表异常！");
+	                    return false;
+	                }
+	            });	 
+		 
+
+	
+	}
 		//时间筛选
 		function timeSearch() {
 			GetDepartment(dpid);
@@ -535,7 +641,7 @@
 			$.ajax({
 						url : "<%=path%>/NewByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
 						data: { spid:spid},
 						success : function(result) {
@@ -564,7 +670,7 @@
 			$.ajax({
 						url : "<%=path%>/HotByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
 						data: { spid:spid},
 						success : function(result) {
@@ -593,7 +699,7 @@
 			$.ajax({
 						url : "<%=path%>/LatestDownByClass",
 						type : 'post',
-						async : false,
+						async : true,
 						dataType : 'json',
 						data: { spid:spid},
 						success : function(result) {
@@ -616,122 +722,12 @@
 					});
 		}
 		
-		
-		
 
 		//字符串转json
 		function strToJson(str) {
 			var json = eval('(' + str + ')');
 			return json;
 		}		
-
-         function getCount(spid){
-        	 spid = spid;       	
-        	 startTime = $("#startTime").val();
-    		 endTime = $("#endTime").val();
-    		
-	            $.ajax({
-	                url: "<%=path%>/GetCount",
-	                type: 'post',
-	                async: true,
-	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-	                dataType: 'text',
-	                data: {search:search, spid:spid,startTime:startTime,endTime:endTime },
-	                success : function(result) {
-					 
-		                    if(result !=0 ){       
-							var	pageTotalCount = parseInt(result);//总记录数
-								$("#total").html(pageTotalCount);
-								totalPage = parseInt(pageTotalCount
-										/ pageListSize)
-										+ ((pageTotalCount % pageListSize) > 0 ? 1
-												: 0);
-		
-								//mypagination
-								$("#Pager").show();
-								$("#Pager").myPagination({
-									currPage : 1,
-									pageCount : totalPage,
-									pageSize : 10
-								});
-                              }
-                    else{
-                    	$("#total").html("0");
-                    	$("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
-                    	$("#Pager").hide();
-                          }	                		                	
-						
-						},
-	                error: function () {
-	                    alert("获取记录总数异常！");
-	                    return false;
-	                }
-	            });	 
-        	 
-         }
-		//获取图书列表
-         function getClassList(spid,pageIndex, pageListSize){
-			 spid = spid;
-        	 startTime = $("#startTime").val();
- 			 endTime = $("#endTime").val();
- 			 
-		     order =$(".actived").attr("data");
-		    
-	            $.ajax({
-	                url: "<%=path%>/SearchList",
-	                type: 'post',
-	                async: false,
-	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-	                dataType: 'json',
-	                data: {search:search,spid:spid,startTime:startTime,endTime:endTime,pageIndex:pageIndex,pageListSize:pageListSize,order:order },
-	                success: function (result) {
-	                	$("#discuList").html("");
-	                	if (result != 0) {
-	                	var str = "";
-	                	for(var i=0;i < result.length;i++ ){
-	                		
-	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/Detail/detail.jsp?id=/" + result[i].i_discuid + "\" target=\"_blank\">";
-							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\">";
-							str += "<span class=\"createTime\" style=\"display: none;\">"
-									+ result[i].s_create_time
-									+ "</span></a>";
-							str += "<p class=\"firsttd\"><span class=\"icon pdf\"></span>";
-							
-						    str += "<a class=\"title\" title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
-										+ result[i].s_desc + "</a>";
-
-							str += "<span class=\"listtime\">&nbsp; "+ result[i].s_create_time+ "</span></p>";
-						
-							str += "<p class=\"others\"><span class=\"subtitle\">资源类型："
-									+ result[i].s_filetypes+"</p>";
-							str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
-									+ result[i].s_loginid+"</p>";
-							str += "<p class=\"others\"><span class=\"subtitle\">点击次数："
-									+ result[i].i_click_times
-									+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">下载次数："
-									+ result[i].i_download_times + "</span></p>";
-
-							str += "<p class=\"others\"><span class=\"subtitle\">"+ result[i].s_spec+"</span></p>";
-							str += "<p><span class=\"price\">￥"
-									+ result[i].i_discuPrice
-									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
-						}
-						$("#discuList").html(str);
-	                	} else {
-	                        $("#discuList").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
-	                    }
-	                },
-	                error: function () {
-	                    alert("获取书目列表异常！");
-	                    return false;
-	                }
-	            });	 
-		 
-
-	
-	}
-
-		
 
 
 	</script>

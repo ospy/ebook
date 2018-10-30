@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import org.json.*;
 
 import net.sf.json.JSONArray;
+
 import com.ebook.entity.BookList;
 import com.ebook.utils.DBPool;
 import com.ebook.utils.RsToJson;
@@ -29,9 +31,60 @@ public class ListDao {
 	 * @param uid
 	 * @return
 	 */
-	public static String getCount(String condition,String spid, String Time) {
+	public static String getClass(String scid) {
 
-		String sql = "SELECT count(*) as Count   from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b " + spid + ") "+condition+"" + Time + "";
+		String sql = "SELECT i_spid,s_spec FROM med_speciality"+scid+" and b_deleted=0";
+		Connection conn = DBPool.getInstance().getConnection();
+		Statement stmt=null;
+		ResultSet rs = null;
+		String result="";
+		try {
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			result = RsToJson.resultSetToJson(rs);
+           
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       finally{
+    	 
+    	   try {
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	   try {
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	   try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       }
+		  return result;
+		
+
+	}
+	
+	
+	
+	
+	
+	public static String getCount(String condition,String classid, String Time) {
+
+		String sql = "SELECT count(*) as Count   from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b " + classid + ") "+condition+"" + Time + "";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs0 = null;
@@ -74,9 +127,9 @@ public class ListDao {
 
 	}
 //分类列表页查询	
-	public static String getBookList(String condition,String spid, String Time,	int pageIndex, int pageListSize, String order) {
+	public static String getBookList(String condition,String classid, String Time,	int pageIndex, int pageListSize, String order) {
 
-		String sql = "SELECT a.i_discuid,a.s_desc,a.i_discuPrice,a.i_click_times,a.i_download_times,a.s_filetypes,a.s_loginid,a.s_imgurl,a.s_create_time  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ spid+ ") "+condition+"  "+ Time+ "  "+ order+ " LIMIT "+ pageIndex+","+ pageListSize +"";
+		String sql = "SELECT a.i_discuid,a.s_desc,a.i_discuPrice,a.i_click_times,a.i_download_times,a.s_filetypes,a.s_loginid,a.s_imgurl,a.s_create_time  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ classid+ ") "+condition+"  "+ Time+ "  "+ order+ " LIMIT "+ pageIndex+","+ pageListSize +"";
 		Connection conn = DBPool.getInstance().getConnection();
 		
 		Statement stmt=null;

@@ -12,11 +12,10 @@
 <link type="text/css" rel="stylesheet" href="../Css/reg.css"/>
 </head>
 <%
-
-String email = request.getParameter("email");
-String domain = email.substring(email.indexOf("@")+1);
+String mail = request.getParameter("email");
+String domain = mail.substring(mail.indexOf("@")+1);
 domain = "http://mail."+domain;
-SendEmailUtil.sendEmail(email, request);
+SendEmailUtil.sendEmail(mail, request);
 %>
 <body>
      <div class="reg_content">
@@ -25,7 +24,7 @@ SendEmailUtil.sendEmail(email, request);
                 <h2>激活邮件</h2>
                 <br>
                 <div class="actmail">
-                    <h3>激活邮件已发送到您的邮箱<%=email %>,请您<a href="<%=domain %>">登录邮箱</a>后点击邮件中激活链接以激活邮箱！</h3>
+                    <h3>激活邮件已发送到您的邮箱<%=mail %>,请您<a href="<%=domain %>">登录邮箱</a>后点击邮件中激活链接以激活邮箱！</h3>
                 </div>
                 
                 <div class="act_tips">

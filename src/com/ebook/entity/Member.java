@@ -2,18 +2,24 @@ package com.ebook.entity;
 
 public class Member {
 	private String uid;
+	
 	private String loginid;
 	private String email;
-	private String password;
+	private String password;	
+	private String s_level;
 	private String createTime;
+	private String ip;
+	private String city;	
 	private int state;
 	private int online;
+	
 	public String getUid() {
 		return uid;
 	}
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	
 	public String getLoginid() {
 		return loginid;
 	}
@@ -38,16 +44,34 @@ public class Member {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public int getState() {
 		return state;
 	}
-	public void setState(int state) {
-		this.state = state;
+	public void setState(int i_state) {
+		this.state = i_state;
 	}
 	public int getOnline() {
 		return online;
 	}
 	public void setOnline(int online) {
 		this.online = online;
+	}
+	public String getS_level() {
+		return s_level;
+	}
+	public void setS_level(String s_level) {
+		this.s_level = s_level;
 	}
 }

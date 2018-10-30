@@ -69,8 +69,7 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 							
 							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2006">心血管外科</a></li>
 							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=2007">烧伤科</a></li>
-							
-							<li></li>
+
 						</ul>
 					</div>
 					<div class="classify">
@@ -93,29 +92,29 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=3900">肿瘤科</a></li>
 							
 							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4000">急诊科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">重症医学科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4100">重症医学科</a></li>
 						</ul>
 					</div>
 					<div class="classify">
 						<ul>
-						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">康复医学科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">运动医学科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">职业病科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">特种医学科</a></li>
+						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4200">康复医学科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4300">运动医学科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4400">职业病科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4500">特种医学科</a></li>
 							
 						</ul>
 					</div>
 					<div class="classify">
 						<ul>
-						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">麻醉科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">疼痛科</a></li>
-						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">精神科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">中医科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">中西医结合科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">护理学</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">检验科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病理科</a></li>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">影像科</a></li>
+						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4600">麻醉科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4700">疼痛科</a></li>
+						<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4800">精神科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=4900">中医科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=5000">中西医结合科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=5100">护理学</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=5200">检验科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=5300">病理科</a></li>
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=5400">影像科</a></li>
 						</ul>
 					</div>
 				</div>
@@ -125,49 +124,47 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 				<div class="leftcontent">
 					<div class="classify">
 						<ul>
-							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=1000">医用高数</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">医用物理</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">基础化学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">有机化学</a></li>
-						
+							<li> <a  target="blank" href="/Classlist/classlist.jsp?classid=6000">医用高数</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6100">医用物理</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6200">基础化学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6300">有机化学</a></li>
+						 <li><a  target="blank" href="/Classlist/classlist.jsp?classid=6400">解剖学</a></li>
 						</ul>
 					</div>
 
 					<div class="classify">
 						<ul>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">生物化学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">遗传学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">细胞生物学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">组织胚胎学</a></li>
-
+						   
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6500">生物化学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6600">遗传学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6700">细胞生物学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6800">组织胚胎学</a></li>
+                            <li><a  target="blank" href="/Classlist/classlist.jsp?classid=7300">免疫学</a></li>
 						</ul>
 					</div>
 
-					<div class="classify">
-						<ul>	<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">解剖学</a></li>
-							
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">生理学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病原微生物学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">寄生虫学</a></li>
-
-
-						</ul>
-					</div>
-
-					<div class="classify">
-						<ul>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">免疫学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病理学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">病理生理学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">生物工程</a></li>
-						
-						</ul>
-					</div>
 					<div class="classify">
 						<ul>	
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">医学心理学</a></li>
+							
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=6900">生物工程</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=7000">生理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=7100">病原微生物学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=7200">寄生虫学</a></li>
+                            
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=7400">病理学</a></li>
+                            <li><a  target="blank" href="/Classlist/classlist.jsp?classid=7500">病理生理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=7600">医学心理学</a></li>
 						</ul>
 					</div>
+
+					<div class="classify">
+						<ul>
+							
+							
+						
+						</ul>
+					</div>
+
 				</div>
 			</div>
 			<div class="drugclass leftitem">
@@ -175,33 +172,29 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 				<div class="leftcontent">
 					<div class="classify">
 						<ul>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">基础药学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药理学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药物分析</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药理学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">毒理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9000">基础药学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9001">药物分析</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9002">药典</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9003">处方集</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9004">药物鉴定</a></li>
 							
 							
 						</ul>
 					</div>
 
 					<div class="classify">
-						<ul><li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药物鉴定</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药典</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药品</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">天然药物学</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药剂学</a></li>
+						<ul><li><a  target="blank" href="/Classlist/classlist.jsp?classid=9005">天然药物</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9006">药剂学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9007">药事组织</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9008">药理学</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9009">药品</a></li>
+							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=9010">毒理学</a></li>
 
 							
 						</ul>
 					</div>
 
-					<div class="classify">
-						<ul>
-						<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">处方集</a></li>
-							<li><a  target="blank" href="/Classlist/classlist.jsp?classid=1000">药事组织</a></li>
-						</ul>
-					</div>
+
 				</div>
 
 			</div>
@@ -212,7 +205,7 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 					<ul>
 						<li class="on"><a>最新注册</a></li>
 						<li class=""><a>账户变化</a></li>
-						<li class=""><a>读书排行</a></li>
+						<li class=""><a>阅读排行</a></li>
 					</ul>
 				</div>
 
@@ -310,17 +303,8 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 
 				<div class="news">
 					<h2>News</h2>
-					<ul>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
-						<li><a href="#">系想你想你信息</a></li>
+					<ul id="news">
+
 					</ul>
 				</div>
 			</div>
@@ -333,16 +317,16 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 					<a class="next"></a>
 					<ul></ul>
 					<a class="prev"></a>
-					<h2>新书速递</h2>
+					<h2>最新上传</h2>
 				</div>
 				<div class="bd">
 					<ul class="picList">
 						<%for(int i=0;i<newBooks.size();i++){  //循环显示新书start
 						Map book = (Map)newBooks.get(i);				
 					%>
-						<li class="pic"><a href="http://www.SuperSlide2.com"
+						<li class="pic"><a title="上传时间<%=book.get("s_create_time") %>" href="/Detail/detail.jsp?id=<%=book.get("i_discuid") %>"
 							target="_blank"> <img src="<%=book.get("s_imgurl")%>" />
-						</a> <a class="title" href="<%=book.get("i_discuid") %>"
+						</a> <a class="title" href="/Detail/detail.jsp?id=<%=book.get("i_discuid") %>"
 							target="_blank">
 								<%if(book.get("s_desc").toString().length()>16){
 									out.println(book.get("s_desc").toString().substring(0, 16));
@@ -384,10 +368,10 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 					%>
 						<li class="pic"><a
 							title="总下载次数<%=Download.get("i_download_times")%>"
-							href="http://www.SuperSlide2.com" target="_blank"><img
+							href="/Detail/detail.jsp?id=<%=Download.get("i_discuid") %>" target="_blank"><img
 								src="<%=Download.get("s_imgurl")%>" /></a> <a class="title"
 							title="总下载次数<%=Download.get("i_download_times")%>"
-							href="<%=Download.get("i_discuid") %>" target="_blank">
+							href="/Detail/detail.jsp?id=<%=Download.get("i_discuid") %>" target="_blank">
 								<%if(Download.get("s_desc").toString().length()>16){
 									out.println(Download.get("s_desc").toString().substring(0, 16));
 									
@@ -428,8 +412,8 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 						Map newVisit = (Map)newVisits.get(i);				
 					%>
 						<li class="pic">
-						<a href=""  target="_blank"><img src='<%=newVisit.get("s_imgurl")%>' /> </a>
-						<a class="title" title='<%=newVisit.get("s_desc") %>' href='<%=newVisit.get("i_discuid") %>'
+						<a title="访问时间<%=newVisit.get("s_create_time")%>" href="/Detail/detail.jsp?id=<%=newVisit.get("i_discuid") %>"  target="_blank"><img src='<%=newVisit.get("s_imgurl")%>' /> </a>
+						<a class="title" title='<%=newVisit.get("s_desc") %>' href="/Detail/detail.jsp?id=<%=newVisit.get("i_discuid") %>"
 							target="_blank"><%=newVisit.get("s_desc") %></a></li>
 						<%} %>
 					</ul>
@@ -450,6 +434,39 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 		</div>
 
 	</div>
+	<script>
+	
+	getnews();
+	
+	function getnews() {
+		var uid="<%=uid%>";
+ 	   $.ajax({
+           url: "<%=path%>/News",
+           type: 'post',
+           async: false,
+           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+           dataType: 'json',
+           data: {uid:uid},
+           success: function (result) {
+           	
+           	if (result!= "") {
+           		var str="";
+           		for(var i=0;i<result.length;i++){
+        			
+            		str+="<li><a title="+result[i].title+" target=_blank href='/News/newsdetail.jsp?id="+result[i].id+"'>"+result[i].title.substring(0,14)+"</a><span title="+result[i].datetime.substring(0,10)+">"+result[i].datetime.substring(5,10)+"</span></li>";
+            		
+            		}
+           		$("#news").html(str);
+           	} 
+           },
+           error: function () {
+               alert("获取新闻异常！");
+               return false;
+           }
+        });	
+		
+	}
+	</script>
 	<%@ include file="/Master/footer.jsp"%>
 </body>
 </html>

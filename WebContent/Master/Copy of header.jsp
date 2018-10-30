@@ -20,7 +20,7 @@
         <div class="loginright">
             <ul class="loginright_ul">
 
-                <li id="center" class="dropdown" style="display: none"><a id="menuClick" href="#">个人中心</a><b class=""></b>
+                <li id="mycenter" class="dropdown" ><a  href="#">个人中心</a><b class="navitriangel"></b>
                     <ul id="dropdown_menu" class="dropdown_menu">
                         <li class="alt"><a href="/Center/ResourceManage">资源管理</a></li>
                         <li class="alt"><a href="/Center/AccountsDetail">账务中心</a></li>
