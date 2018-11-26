@@ -43,8 +43,11 @@ public class UpdatePwd extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String uid  = request.getParameter("UID");
 		String pwd  = request.getParameter("PWD");
+		
 		PrintWriter out = response.getWriter();
 		String result="0";
+		if(!uid.equals("null")&&uid!=null){
+		
 		 Connection conn = DBPool.getInstance().getConnection(); 
 			String sql1 = "{call updatepwd(?,?)}";
 			CallableStatement call1;
@@ -63,6 +66,10 @@ public class UpdatePwd extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else{
+			 result="0";
+		}
 			out.print(result);	
 	}
 

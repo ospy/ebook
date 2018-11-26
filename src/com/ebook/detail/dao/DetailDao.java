@@ -314,7 +314,7 @@ public static String getExtraInfo(String bookid) throws UnsupportedEncodingExcep
     }
 
 public static String getDownload(String bookid) throws UnsupportedEncodingException {
-
+    //从视图中获取下载文件属性信息，一本书对应多个下载文件，写的不太好！lxq--20181121
 	String sql = "SELECT *  from view_link_file  where i_key ="+ bookid+" ";
 	Connection conn = DBPool.getInstance().getConnection();
 	
@@ -379,25 +379,20 @@ public static String getDownload(String bookid) throws UnsupportedEncodingExcept
 
     }
 
-public static void insertAccount(String bookid,String uid,String price,String balance,String newvalue) throws UnsupportedEncodingException {
+public static boolean insertAccount(String bookid,String uid,String price,String balance,String newvalue) throws UnsupportedEncodingException {
 	String date = DateUtils.format(null);
 	
-
-
-	String sql = "insert into cc_integral(i_uid,i_value,s_type,i_discuid,s_create_time,i_old_value,i_new_value) VALUES("+uid+",-"+price+",'下载文件',"+bookid+",'"+date+"',"+balance+","+newvalue+")";
+	String sql = "insert into cc_integral(i_uid,i_value,s_type,i_discuid,s_create_time,i_old_value,i_new_value) VALUES("+uid+",'-"+price+"','5',"+bookid+",'"+date+"',"+balance+","+newvalue+")";
 	Connection conn = DBPool.getInstance().getConnection();
 	
 	Statement stmt=null;
-	
-   
-    
-   
+	boolean result=false;
+
 	try {
 
 		stmt = conn.createStatement();
 		stmt.executeUpdate(sql);
-		 
-
+		result = true;
 		}
 		  
 	 catch (SQLException e) {
@@ -419,7 +414,7 @@ public static void insertAccount(String bookid,String uid,String price,String ba
 			e.printStackTrace();
 		}
        }	
-	
+	return result;
 
     }
 }

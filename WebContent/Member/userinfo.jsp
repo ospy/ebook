@@ -1,5 +1,12 @@
 <%@page import="com.ebook.entity.*"%>
 <%@page import="com.ebook.constant.*"%>
+<%@page import="com.ebook.constant.Constant"%>
+<%@page import="com.ebook.entity.Activate"%>
+<%@page import="com.ebook.entity.Member"%>
+<%@page import="com.ebook.member.dao.MemberDao"%>
+<%@page import="com.ebook.utils.DateUtils"%>
+<%@page import="com.ebook.utils.LOG"%>
+<%@page import="com.ebook.utils.Md5Util"%>
 <%--
  String spath = request.getContextPath(); 
  Member member  = (Member)request.getSession().getAttribute(Constant.SESSION_USER);
@@ -21,6 +28,29 @@
 <script  type="text/javascript" src="<%=path %>/Js/bootstrap.js" ></script>
 
 </head>
+<script type="text/javascript">
+	(function($) {
+
+			$.getUrlParam = function(name)
+		{
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+		if (r!=null) return unescape(r[2]); return null;
+			}
+		
+	}(jQuery));
+	//回车登录
+	$(document).ready(function () {
+
+		$(document).keyup(function (evnet) {
+		if (evnet.keyCode == '13') {
+			login();
+		}
+		});
+
+		});
+	
+</script>
 <body>
     <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -40,70 +70,73 @@
   </div>
 </div>
 
-
-
-
-
 	<%
-		String checkResult = (String) request.getSession().getAttribute(
-				"checkResult");
+		String checkResult = (String) request.getSession().getAttribute("checkResult");
+	    String actmail = (String) request.getSession().getAttribute("email");
+	    String i_uid = (String) request.getSession().getAttribute("uid");
+	    String loginid =  (String) request.getSession().getAttribute("loginid");
+	    
 		if (StringUtil.isBlank(checkResult)) {
 			checkResult = " ";
 		}
 	%>
-	
+
 	<script type="text/javascript">
 
-		var check;
+		var check,actmail,i_uid,loginid;
 		check ="<%=checkResult%>";
-		if (check == "已激活") {
-                $('#modal-body').html("<b>该账户已激活！请<a href=\"/Member/login.jsp\">登录<\/a>网站。<\/b>");
+		actmail="<%=actmail%>";
+		i_uid="<%=i_uid%>";
+		loginid="<%=loginid%>";
+		
+
+		
+		if (check == "已激活"||check=="激活成功") {
+                $('#modal-body').html("<b>邮箱已激活！请完善个人信息。<\/b>");
 				$('#myModal').modal('show');
-		} else if(check == "链接已失效"){
-		       $('#modal-body').html("<b>该链接已失效！请重新发送激活邮件链接。关闭本页面后返回首页。</b>");
-				$('#myModal').modal('show');
-		} else if(check == "激活失败"){
-		         $('#modal-body').html("<b>激活失败！请检查激活邮件中激活链接地址是否无误。关闭本页面后返回首页。</b>");
-				$('#myModal').modal('show');
+		} 
+		else{
+			location.href = "/Member/login.jsp";
 		}
 		;
-        $('.back-index').click(function(){
-             location.href = "/index.jsp";
-});
+
 	</script>
 
-
+    
 	<div class="reg_content">
 		<div class="reg_form">
 			<form name="frmEmp" id="frmEmp">
 				<h2>个人信息</h2>
 				
-
-				<div class="form_item">
-                        <span class="red star">*</span><label>姓名：</label> <input id="txtName" class="text-input  typeahead"
-                                type="text"  onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
+                <div class="form_item">
+                        <label>用户名：</label> <span id="loginid"></span>&nbsp;&nbsp;&nbsp;&nbsp;<label>注册邮箱：</label> <span id="email"></span>
                     </div>
-                    <div class="form_item">
-                        <span class="red star">*</span><label>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label> <input id="txtMobile" class="text-input  typeahead"
+                     <div class="form_item">
+                        <label><span class="red star">*</span>手机：</label> <input id="txtMobile" class="text-input  typeahead"
                                 type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
                     </div>
 				<div class="form_item">
-					<span class="red star">*</span><label> 工作单位：</label> <input id="txt_unit"
+                        <label><span class="red star">*</span>姓名：</label> <input id="txtName" class="text-input  typeahead"
+                                type="text"  onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
+                    </div>
+                   
+				<div class="form_item">
+					<label> <span class="red star">*</span>工作单位：</label> <input id="txt_unit"
 						class="text-input  typeahead" type="text"  value="" onblur="checkUnit();" />&nbsp;&nbsp;<span
 						id="txt_unitTip"></span>
 				</div>
 				<div class="form_item">
-					<span class="red star">*</span><label> 职务职称：</label> <input id="txt_Level"
+					<label><span class="red star">*</span>职务职称：</label> <input id="txt_Level"
 						class="text-input  typeahead" type="text" onblur="checkLevel();" />&nbsp;&nbsp;<span
 						id="txt_LevelTip"></span>
 				</div>
 				<div class="form_item">
-					<span class="red star">*</span><label> 学科专业：</label> <input id="txt_Spe"
+					<label><span class="red star">*</span>学科专业：</label> <input id="txt_Spe"
 						class="text-input  typeahead" type="text"
 						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
 				</div>
 				<div class="form_item">
-					<span class="red star">*</span><label> 职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：</label> 
+					<label><span class="red star">*</span>职业：</label> 
 					    <input id="occu1"  name="ocu"  type="radio"  value="1"  checked="checked"/>医务人员
 						<input id="occu2"   name="ocu"   type="radio"  value="2" />教师
 						<input id="occu3"   name="ocu"  type="radio"  value="3" />研发人员
@@ -111,12 +144,12 @@
 						<input id="occu5"   name="ocu"  type="radio"  value="5" />其它
 				</div>
 				<div class="form_item">
-					<span class="star red">*</span><label> 最高学历：</label> 
+					<label><span class="star red">*</span>最高学历：</label> 
 					<input id="edu1" name="edu" type="radio"  value="1" />专科
-					<input id="edu2" name="edu"  type="radio"  value="2" />本科
+					<input id="edu2" name="edu"  type="radio"  value="2" checked="checked"/>本科
 					<input id="edu3" name="edu"  type="radio"  value="3" />硕士
 					<input id="edu4" name="edu"  type="radio"   value="4" />博士
-					<input id="edu5" name="edu"  type="radio"   value="5"  checked="checked"/>其它
+					<input id="edu5" name="edu"  type="radio"   value="5"  />其它
 				</div>
 				
 				<div class="form_item">
@@ -125,16 +158,17 @@
 				</div>
 				<div class="form_item declare">
 					<label> 本站声明：</label> 
-					<p>1.本站所保存之用户个人信息仅供用户统计和联系使用，不会用于任何商业目的；</p>
+					<p>1.请如实填写个人信息，本站所保存之用户个人信息仅供用户统计和联系使用，不会用于任何商业目的；</p>
 					<p>2.填写手机号码后可使用手机号码登录本站；</p>
-					<p>3.填写完整个人信息将获得**积分奖励；</p>
+					<p>3.完整填写个人信息将获赠10下载点；</p>
 				</div>
 			</form>
 		</div>
 	</div>
 	  <%@ include file="/Master/footer.jsp"%>
 	<script type="text/javascript">
-
+		$('#loginid').html(loginid);
+		$('#email').html(actmail);
 	
 	  var state1=false;
  	  var state2=false;
@@ -246,7 +280,13 @@
 	
 	
 	           function check() {
-	               if( state1&&state2&& state3&&state4&&state5){
+	        	   checkMobile();
+	        	   checkName();
+	        	   checkUnit();
+	        	   checkLevel();
+	        	   checkSpe();
+	        	   
+	               if( state1&&state2&&state3&&state4&&state5){
                      $.ajax({
                         url: "<%=path%>/SaveMemberInfo",
 							type : 'post',
@@ -263,21 +303,24 @@
 							},
 							success : function(data) {
 								if (data == "true") {
-									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！提交成功<span id='second'>6</span>秒钟后将自动跳转到登录页！</div></div>");
+									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！注册成功，请登录。<span id='second'>10</span>秒钟后将自动跳转到登录页！</div></div>");
 									$("body").find(".alert-tips").remove()
 											.end().append($copysuc);
 									timedCount();
-									$(".alert-tips").fadeOut(6000);
+									$(".alert-tips").fadeOut(10000);
 									
-								} else {
-									$copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>提交失败！请发送问题至客服邮箱：****@163.com</div></div>");
-									$("body").find(".alert-tips").remove()
-											.end().append($copysuc);
-									$(".alert-tips").fadeOut(6000);
+								}
+								else if (data == "会话过期") {						
+									alert("session已过期！请重新点击激活邮件中的链接");
+								}
+								else {
+									alert("提交失败！请发送问题至客服邮箱：imed120@163.com");
 								}
 							},
-							error : function(err) {
-
+							error : function(XMLHttpRequest, textStatus) {
+								alert(XMLHttpRequest.status);  
+		                    	alert(XMLHttpRequest.readyState);  
+		                    	alert(textStatus);
 							}
 						});
 

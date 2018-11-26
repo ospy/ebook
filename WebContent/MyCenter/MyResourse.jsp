@@ -19,6 +19,9 @@
   } );
   </script>
 <body>
+<div class="limitbox location">
+					共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录</div>
+				</div>
    <div id="tabs">
   <div id="tab_btn_box">
 	  <ul id="tab_btn">
@@ -28,9 +31,7 @@
    </div>
   <div id="tabs-1">
      		<div class="listcontent">
-				<div class="limitbox">
-					共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录</div>
-				</div>
+				
 				<div id="downloadList" style="height: auto;"></div>
 				
 
@@ -96,7 +97,7 @@
         	 }
         	 else{
         		 
-        		 alert("请登录！");
+        		 window.location.href="/Member/login.jsp";
         	 } 
          }
 		//获取已下载列表

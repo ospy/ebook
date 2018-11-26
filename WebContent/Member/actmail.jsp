@@ -15,7 +15,7 @@
 String mail = request.getParameter("email");
 String domain = mail.substring(mail.indexOf("@")+1);
 domain = "http://mail."+domain;
-SendEmailUtil.sendEmail(mail, request);
+
 %>
 <body>
      <div class="reg_content">
@@ -32,8 +32,8 @@ SendEmailUtil.sendEmail(mail, request);
                         <ul>
 		                        <li>1. 检查Email地址是否填写错误？<a href="register.jsp">重新申请</a></li>								
 								<li>2. 过几分钟后再重新查看收件箱，还没有收到？<a href="#">重发邮件</a></li>
-								<li>2. 看看是否在邮箱的“垃圾箱“里</li>
-								<li>4. 发送邮件给我们查找原因</li>
+								<li>2. 看看是否在邮箱的"垃圾箱"里?</li>
+								<li>4. 发送邮件给我们查找原因,email：imed120@163.com</li>
 					  </ul>
                     </div>
             </div>

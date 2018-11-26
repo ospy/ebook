@@ -26,9 +26,10 @@ public class EmailUtils
 {
   public static final String contentType = "text/html;charset=UTF-8";
 
-  public static void sendEmail(Session session, Date date, String address_from, String subject, String context, String type, BodyPart[] bodyParts, Address[] address_tos)
+  public static boolean sendEmail(Session session, Date date, String address_from, String subject, String context, String type, BodyPart[] bodyParts, Address[] address_tos)
   {
     MimeMessage message = new MimeMessage(session);
+    boolean result=false;
     try
     {
       message.setSubject(subject);
@@ -48,6 +49,7 @@ public class EmailUtils
       }
 
       Transport.send(message);
+      result=true;
     }
     catch (AuthenticationFailedException e) {
       LOG.error("用户名或密码错误！", e);
@@ -56,10 +58,13 @@ public class EmailUtils
     } catch (Exception e) {
       LOG.error("发送邮件失败！", e);
     }
+    return result;
   }
 
-  public static void sendEmail(Session session, Date date, String address_from, String subject, String context, String type, Collection<String> names, Collection<String> filePathNames, String[] address)
+  public static boolean sendEmail(Session session, Date date, String address_from, String subject, String context, String type, Collection<String> names, Collection<String> filePathNames, String[] address)
   {
+	  boolean result=false; 
+	  
     BodyPart[] bodyParts = null;
 
     if ((names != null) && (filePathNames != null) && (names.size() > 0) && (filePathNames.size() > 0))
@@ -97,7 +102,7 @@ public class EmailUtils
     catch (AddressException e) {
       LOG.error("邮箱地址不存在！", e);
     }
-
-    sendEmail(session, date, address_from, subject, context, type, bodyParts, address_tos);
+    result= sendEmail(session, date, address_from, subject, context, type, bodyParts, address_tos);
+    return result;
   }
 }

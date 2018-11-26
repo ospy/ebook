@@ -265,7 +265,7 @@ ol, ul {
 .reg_form {
     margin:20px auto;
     padding: 0 20px 20px;
-    width: 640px;
+    width: 680px;
     height: auto;
     border: 2px solid #ccc;
     border-radius: 6px;
@@ -305,9 +305,8 @@ ol, ul {
 .form_item {
     font-size: 14px;
     min-height: 40px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: 30px;
-    width: 560px;
 }
 
 
@@ -315,7 +314,7 @@ ol, ul {
     .form_item label {
         height: 40px;
         display: inline-block;
-        width: 80px;
+        width: 100px;
         padding-right: 10px;
         text-align: right;
         font: normal 14px/40px "Î¢ÈíÑÅºÚ";
@@ -343,7 +342,7 @@ ol, ul {
     }
 
 form input.text-input, .reg_form table input {
-    padding: 10px;
+    padding: 8px;
     font-size: 13px;
     background: #fff url('/Images/bg-form-field.gif') top left repeat-x;
     border: 1px solid #d5d5d5;
@@ -399,8 +398,8 @@ form input:focus {
     font-size: 16px;
     height: 36px;
     line-height: 30px;
-    margin-top:20px;
-    margin-left: 80px;
+    margin-top:10px;
+    margin-left: 100px;
     width: 260px;
 }
 input[disabled].submit  {
@@ -447,7 +446,7 @@ input[disabled].submit  {
 	padding: 40px 0;
 }
 .actmail h3{
-	width: 500px;
+	width: 600px;
 	line-height: 30px;
     margin: 0 auto;
     text-indent: 2em;

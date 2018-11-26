@@ -59,7 +59,7 @@ public class GetMemberInfo extends HttpServlet {
 						CallableStatement call1= conn.prepareCall(sql1);
 						call1.registerOutParameter(2,Types.INTEGER); 
 						call1.setInt(1, uid);
-						//一次给存储过程传递参数，插入书目信息
+						//一次给存储过程传递参数，插入个人信息
 						ResultSet rs = call1.executeQuery();
 						
 						while(rs.next()){

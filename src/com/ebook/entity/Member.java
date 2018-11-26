@@ -12,6 +12,7 @@ public class Member {
 	private String city;	
 	private int state;
 	private int online;
+	private int b_deleted;
 	
 	public String getUid() {
 		return uid;
@@ -73,5 +74,11 @@ public class Member {
 	}
 	public void setS_level(String s_level) {
 		this.s_level = s_level;
+	}
+	public int getB_deleted() {
+		return b_deleted;
+	}
+	public void setB_deleted(int b_deleted) {
+		this.b_deleted = b_deleted;
 	}
 }

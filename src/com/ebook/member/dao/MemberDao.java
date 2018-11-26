@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 import javax.sound.midi.MetaEventListener;
+import javax.servlet.http.HttpSession;
 
+import com.ebook.constant.Constant;
 import com.ebook.entity.Activate;
 import com.ebook.entity.BookList;
 import com.ebook.entity.Member;
@@ -31,7 +33,7 @@ public class MemberDao {
 	public static ArrayList<Member> userLogin(String uid,String pwd){
 	
 		Member member = new Member();
-		String sql = "select * from cc_member where s_loginid='"+uid+"' and s_password ='"+pwd+"'";
+		String sql = "select i_uid,s_mail,s_loginid,s_password,s_level,i_state,s_mobile from m_userlist where (s_loginid='"+uid+"' or s_mail='"+uid+"' or s_mobile='"+uid+"') and s_password ='"+pwd+"' and b_deleted=0";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs = null;
@@ -47,7 +49,7 @@ public class MemberDao {
 				 member.setPassword(rs.getString("s_password"));
 				 member.setState(rs.getInt("i_state"));
 				 member.setS_level(rs.getString("s_level"));
-				 member.setOnline(rs.getInt("i_online"));
+				 //member.setOnline(rs.getInt("i_online"));
 			 }
 			 list.add(member); 
 		} catch (SQLException e) {
@@ -94,6 +96,8 @@ public class MemberDao {
 				 if(rs.next()){
 					 member.setUid(rs.getString("i_uid"));
 					 member.setEmail(rs.getString("s_mail"));
+					 member.setIp(rs.getString("ip"));
+					 member.setCity(rs.getString("city"));
 					 member.setLoginid(rs.getString("s_loginid"));
 					 member.setPassword(rs.getString("s_password"));
 					 member.setState(rs.getInt("i_state"));
@@ -114,7 +118,7 @@ public class MemberDao {
 		 */
 	public static Member findMemberByEmail(String email){
 		Member member = new Member();
-		String sql = "select * from cc_member where s_mail='"+email+"'";
+		String sql = "select * from cc_member where s_mail='"+email+"' and b_deleted=0";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt;
 		ResultSet rs = null;
@@ -127,19 +131,49 @@ public class MemberDao {
 			 member.setLoginid(rs.getString("s_loginid"));
 			 member.setPassword(rs.getString("s_password"));
 			 member.setState(rs.getInt("i_state"));
-			 member.setOnline(rs.getInt("i_online"));
+			 member.setB_deleted(rs.getInt("i_state"));
+			 //member.setOnline(rs.getInt("i_online"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return member;
 	}
+	/**
+	 * 鏍规嵁email鏌ユ壘Member
+	 * @param email
+	 * @return
+	 */
+public static Member findNewMemberByEmail(String email){
+	//查询新插入用户记录，如果邮件发送成功才将状态设置为可用i_state=1 and b_deleted=0
+	Member member = new Member();
+	String sql = "select * from cc_member where s_mail='"+email+"' and i_state=0 and b_deleted=1 ORDER BY i_uid desc LIMIT 1";
+	Connection conn = DBPool.getInstance().getConnection();
+	Statement stmt;
+	ResultSet rs = null;
+	try {
+		stmt = conn.createStatement();
+		 rs = stmt.executeQuery(sql);
+		 rs.next();
+		 member.setUid(rs.getString("i_uid"));
+		 member.setEmail(rs.getString("s_mail"));
+		 member.setLoginid(rs.getString("s_loginid"));
+		 member.setPassword(rs.getString("s_password"));
+		 member.setState(rs.getInt("i_state"));
+		 member.setB_deleted(rs.getInt("i_state"));
+		 //member.setOnline(rs.getInt("i_online"));
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return member;
+}
 	
 	/**
 	 * 鏇存柊Member
 	 * @param member
 	 */
-	public static void updateMember(Member member){
-		String sql = "update cc_member set s_mail=?,s_password=?,i_state=?,i_online=? where i_uid=?";
+	public static boolean updateMember(Member member){
+		boolean result=false;
+		String sql = "update cc_member set s_mail=?,s_password=?,i_state=?,i_online=?,b_deleted=? where i_uid=?";
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement ptst = null;
 		try {
@@ -148,14 +182,17 @@ public class MemberDao {
 			ptst.setString(2, member.getPassword());
 			ptst.setInt(3, member.getState());
 			ptst.setInt(4, member.getOnline());
-			ptst.setString(5, member.getUid());
+			ptst.setInt(5, member.getB_deleted());
+			ptst.setString(6, member.getUid());
 			ptst.executeUpdate();
+			result=true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			DatabaseTools.closeStatement(ptst);
 			DatabaseTools.closeConnection(conn);
 		}
+		return result;
 	}
 	
 	
@@ -270,14 +307,14 @@ public class MemberDao {
 		 * @param MemberInfo
 		 */
 		public static void saveMemberInfo(MemberInfo memberInfo){
-			Member member = memberInfo.getMember();
+			
 			String sql = "insert into cc_member_info(i_uid,s_occupation,s_name,s_mobile,s_address,"
 					+ "s_capacity,s_spec,s_education,s_create_time) values(?,?,?,?,?,?,?,?,?)";
 			Connection conn = DBPool.getInstance().getConnection();
 			PreparedStatement ptst = null;
 			try {
 				ptst = conn.prepareStatement(sql);
-				ptst.setString(1, member.getUid());
+				ptst.setString(1, memberInfo.getId());
 				ptst.setString(2, memberInfo.getOccupation());
 				ptst.setString(3, memberInfo.getName());
 				ptst.setString(4, memberInfo.getMobile());
@@ -287,6 +324,9 @@ public class MemberDao {
 				ptst.setString(8, memberInfo.getEducation());
 				ptst.setString(9, memberInfo.getCreatetime());
 				ptst.executeUpdate();
+				Member member = MemberDao.findMemberByID(memberInfo.getId());
+				member.setState(3);
+				MemberDao.updateMember(member);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{

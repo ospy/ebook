@@ -105,7 +105,7 @@ public class IndexService {
 			Connection connection = DBPool.getInstance().getConnection();
 			String sql="SELECT cc_member.s_loginid,count(*) as count FROM cc_integral "//
 					+ "LEFT JOIN cc_member on cc_integral.i_uid=cc_member.i_uid "//
-					+ "where cc_integral.s_type='下载文件' group  BY cc_integral.i_uid order by COUNT(*) desc limit 0, 10 ";
+					+ "where cc_integral.s_type='5' group  BY cc_integral.i_uid order by COUNT(*) desc limit 0, 10 ";
 			try {
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);

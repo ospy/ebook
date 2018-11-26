@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+
 import com.ebook.account.dao.Account;
 import com.ebook.detail.dao.DetailDao;
+import com.ebook.entity.FileInfo;
 
 
 /**
@@ -35,17 +38,24 @@ public class IsDownload extends HttpServlet {
 		 /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
 
-			 String  result =Account.IsDownload(uid, bookid);  
-			 if(!result.equals("0")){
-				 result = DetailDao.getDownload(bookid);
+			 String  downloadcount =Account.IsDownload(uid, bookid); 
+			 String result="";
+			 PrintWriter out = response.getWriter();
+			 try {
+				
+				 if(!downloadcount.equals("0")){
+					 result = DetailDao.getDownload(bookid);					 
+					 }
+				 else{
+					 result="0";	 
 				 }
-			try {
-				PrintWriter out = response.getWriter();
-				out.print(result);
-			} catch (Exception e) {
+				}
+			
+			 catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		out.print(result);	 
 	}
 
 }

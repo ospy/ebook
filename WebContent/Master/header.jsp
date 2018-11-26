@@ -27,19 +27,18 @@
         </div>
         <div class="loginright">
            
-           <nav> <ul class="loginright_ul nav-list">
-               
-                <li id="mycenter"><a class="active" href="/MyCenter/Myinfo.jsp">个人中心  <b class="tri"></b></a>
-                    <div id="dropdown_menu" class="menu"><ul>
-                        <li class="alt"><a href="/MyCenter/MyResourse.jsp">资源管理</a></li>
-                        <li class="alt"><a href="/MyCenter/MyAccount.jsp">账务中心</a></li>
-                        <li class="alt"><a href="/MyCenter/ChangePassword.jsp">修改密码</a></li>
-                    </ul></div>
-                </li>
-                <li><span id="login"><a href="<%=path %>/Member/login.jsp">登&nbsp;&nbsp;录</a></span></li>
-                <li><span id="regist"><a href="<%=path %>/Member/register.jsp">免费注册</a></span></li>
-            </ul>
-           </nav>
+			<ul id="mycenter" class="all">				
+				<li>个人中心<b class="tri"></b><ul>
+				      <li><a class="active" href="/MyCenter/Myinfo.jsp">个人信息</a></li>
+				      <li><a href="/MyCenter/MyResourse.jsp">资源管理</a></li>
+				      <li><a href="/MyCenter/MyAccount.jsp">账务中心</a></li>
+				      <li><a href="/MyCenter/ChangePassword.jsp">修改密码</a></li>
+				  </ul>
+				</li>
+				
+			</ul>
+           <span id="login"><a href="<%=path %>/Member/login.jsp">登&nbsp;&nbsp;录</a></span>
+		   <span id="regist"><a href="<%=path %>/Member/register.jsp">免费注册</a></span>
         </div>
     </div>
 
@@ -74,7 +73,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h2 class="modal-title">邮箱激活</h2>
+        <h2 class="modal-title">注册提示Tips：</h2>
       </div>
       <div class="modal-body">
         
@@ -86,9 +85,13 @@
   </div>
 </div>       
 <script type="text/javascript">
+		$(function(){	
+			$('.all>li').hover(function(e) {
+		        $(this).children("ul").stop().slideToggle()
+		    });
+		});
 
-
-			login();  
+	   login();  
 			
 
        function Search(){
@@ -102,7 +105,7 @@
     		  
     	  }
     	  else{
-    		  var url ="http://localhost:8080/SearchList/searchlist.jsp?search="+encodeURI(keys);
+    		  var url ="/SearchList/searchlist.jsp?search="+encodeURI(keys);
         	  window.location.href =url;
     	  }
        }
@@ -121,10 +124,13 @@
         	   $("#mycenter").css("display","block");
              $("#username").html("<a href='/MyCenter/Myinfo.jsp'>"+username+"</a>");
              $("#login").html('<a href="<%=path%>/LoginOut">注&nbsp;&nbsp;销</a>');
+             $("#regist").css("display","none");
            }
            else{
         	   $("#login").html('<a href="/Member/login.jsp">登&nbsp;&nbsp;录</a>');
         	   $("#username").html("游客");
+        	   $("#regist").css("display","inline-block");
+        	   
            }
            //判断邮箱是否激活
            if(state==1){

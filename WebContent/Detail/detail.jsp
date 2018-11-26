@@ -394,7 +394,7 @@
 	
 	}
 
-     	//获取书目变动信息
+     	//获取书目摘要信息
          function getAbstract(){
         	 var bookid =$.getUrlParam('id');
         	 
@@ -513,7 +513,7 @@
 	                data: {Uid:uid,BookId:bookid},
 	                success: function (result) {
 	                	
-	                	if (result != 0) {
+	                	if (result != "0") {
 	                		
 	                		for(var i in result){//遍历json数组时，这么写p为索引，0,1
 	                			   j=parseInt(i)+1;
@@ -569,7 +569,7 @@
 	        }   
          
          function DownloadFile(){
-        	 
+        	 $("#myModal").modal("hide");  
      	    var uid="<%=uid%>";   
      	    var bookid =$.getUrlParam('id');
 	           if(uid!=""&&uid!="null"){ 
@@ -581,28 +581,30 @@
 	                dataType: 'json',
 	                data: {uid:uid,bookid:bookid},
 	                success: function (result) {
-	                	
-	                	if (result!= "") {
+                       if (result=="-1") {                    	   
+                            alert("账户余额不足，请充值！");
+	                	}
+                       else if (result.length!=0) {
 	                		
-	                		$("#accountHead a").html(result[0].newbalance);
-	                		
-	                	
+	                		$("#accountHead a").html(result[0].newbalance);	                			                	
 	                		for(var i=0;i<result.length;i++){
-	                			
-	                		$("#downloadUrl .ItemContent").append("<p>下载地址"+i+"：<a target=_blank href="+result[i].s_path+">"+result[i].s_path+"</a><span>"+result[i].s_password+"</span></p>");
+	                			var j=i+1;
+	                		$("#downloadUrl .ItemContent").append("<p>下载地址"+j+"：<a target=_blank href="+result[i].s_path+">"+result[i].s_path+"</a><span>"+result[i].s_password+"</span></p>");
 	                		
 	                		}
 	                		
 	                		$("#downloadUrl").show();
-	                		$("#myModal").modal("hide"); 
+	                		
 	                	} else {
-	                        $("#account").html("查询余额有误，请联系客服！");
+	                        $("#account").html("下载文件时发生异常！请您联系管理员：imed120@163.com");
 	                    }
 	                },
-	                error: function () {
-	                    alert("获取下载地址异常！请您通知管理员：***@163.com");
-	                    return false;
-	                }
+	                error : function(XMLHttpRequest, textStatus) {
+						alert(XMLHttpRequest.status);  
+                    	alert(XMLHttpRequest.readyState);  
+                    	alert(textStatus);
+                    	$("#account").html("下载文件时发生异常！请您联系管理员：imed120@163.com");
+					}
 	             });	 
 	           }
 	        }   

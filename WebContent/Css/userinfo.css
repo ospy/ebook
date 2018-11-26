@@ -306,7 +306,7 @@ ol, ul {
     font-size: 14px;
     min-height: 30px;   
     padding-left: 30px;
-    width: 560px;
+    
 }
 
 div.form_item:nth-child(odd)
@@ -316,11 +316,12 @@ background:#F6F6F6;
     .form_item label {
         height: 40px;
         display: inline-block;
-        width: 80px;
+       
         padding-right: 10px;
         text-align: right;
         font: normal 14px/40px "Î¢ÈíÑÅºÚ";
         vertical-align: middle;
+        width: 100px;
     }
     .form_item .star{
         display: inline-block;

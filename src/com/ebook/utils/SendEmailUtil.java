@@ -26,15 +26,15 @@ import freemarker.template.TemplateException;
 public class SendEmailUtil {
 	private static final String CHECK_CODE = "checkCode";
 	
-	public static void sendEmail(String email,HttpServletRequest request) throws IOException, TemplateException{
-		Member member = MemberDao.findMemberByEmail(email);
+	public static boolean sendEmail(String email,HttpServletRequest request) throws IOException, TemplateException{
+		Member member = MemberDao.findNewMemberByEmail(email);
 		String loginid = member.getLoginid();
 		String uid = member.getUid();
 		String sql = "select count(1) from cc_activate where i_uid="+uid+" and b_deleted=0";
 		int count = DatabaseTools.getCount(sql);
 		if(count>0){//将b_deleted置为1
-			sql = "update cc_activate set b_deleted=1 where i_uid="+uid+" and b_deleted=0";
-			DatabaseTools.update(sql);
+			String sql1 = "update cc_activate set b_deleted=1 where i_uid="+uid+"";
+			DatabaseTools.update(sql1);
 		}
 		//插入新记录		
 		Activate activate = new Activate();
@@ -86,12 +86,13 @@ public class SendEmailUtil {
        } catch (UnsupportedEncodingException e) {
            LOG.error("邮件主题转码失败！", e);
        }
-       EmailUtils.sendEmail(session, new Date(), addressFrom, subject, context, type, null, null, address);
+       boolean result=false;
+       return result= EmailUtils.sendEmail(session, new Date(), addressFrom, subject, context, type, null, null, address);
        
        //发送之后，将cc_member表i_state置为1
-        member.setState(1);
+       //member.setState(1);
         //更新member
-        MemberDao.updateMember(member);
+        //MemberDao.updateMember(member);
 	}
 	
 	 /**

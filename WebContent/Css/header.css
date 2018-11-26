@@ -87,31 +87,16 @@ img {
     }
 .sitetop .loginright {
     float:right;
-    width: 540px;
+    width: 340px;
     margin-right:24px;
     text-align:center;
     }
 .accountbox{margin-left: 24px;}
 .loginright_ul{float: right;}
-.sitetop .loginright ul li {
-    float:left;
-    width:110px;
-    cursor: pointer;
-    display: block;
-    position: relative;
-    height:auto;
-    background:url(/Images/icons/index.png) no-repeat right 5px;
-    }
+
  /*下拉菜单*/
 #mycenter{display: none;}
-#mycenter:hover{
-    box-shadow: 0 0 10px #ccc;
-    border-radius:6px 6px 0 0;
-    background: #fff;}
-nav li, nav a {
-  text-decoration: none;
-  list-style: none;
-}
+
 
 #mycenter .tri {
     margin-left: 6px;
@@ -126,117 +111,56 @@ nav li, nav a {
     width: 0;
 }
 #mycenter:hover .tri{
+    margin-left: 6px;
     border-color: #ffffff #ffffff #666666;
     top: 10px;
 }
-nav ::-webkit-scrollbar {
-  display: none;
+//20181124
+* {
+    padding:0;
+    margin:0;
+    list-style:none;
 }
-nav .nav-list {
-  /*nav-list*/
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  float: right;
-  margin-right: 20px;
-}
-@media (max-width: 1200px) {
-  nav .nav-list {
-    position: fixed;
-    height: 100%;
-    top: 0;
-    padding-top: 10px;
-    width: 60%;
-    background: #fff;
-    left: -60%;
-    -webkit-transition: 1s;
-    transition: 1s;
-    -webkit-box-shadow: 3px 0px 10px #f0eded;
-    box-shadow: 3px 0px 10px #f0eded;
-  }
-}
-nav .nav-list > li {
-  position: relative;
-  list-style: none;
-  float: left;
-  text-align: center;
-}
-@media (max-width: 1200px) {
-  nav .nav-list > li {
-    width: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
-  nav .nav-list > li {
-    margin-bottom: 15px;
-  }
-}
-nav .nav-list > li .active {
-  
-}
-nav .nav-list > li a {
-  
-  display: inline-block;
-  line-height: 30px;
-  padding: 0 15px;
-  margin: 0 10px;
-  
-  text-decoration: none;
-}
-@media (max-width: 1200px) {
-  nav .nav-list > li a {
-    width: 100%;
-    border-radius: 0;
-    margin: 0;
-  }
-
-}
-nav .nav-list > li a:hover {
-    text-decoration: underline;
-  }
-nav .nav-list > li .menu a:hover {
-
-}
-nav .nav-list > li .menu {
-  min-width: 100px;
-  background: #fff;
-  
-  -webkit-box-shadow: 0 2px 10px #ccc;
-  box-shadow: 0 2px 10px #ccc;
-  position: absolute;
-  border-radius:0 0 5px 5px;
-  white-space: nowrap;
-  left: 0;
-  height: 0;
-  overflow: hidden;
-  -webkit-transition: 1s;
-  transition: 1s;
-}
-@media (max-width: 1200px) {
-  nav .nav-list > li .menu {
+.sitetop .loginright>ul>li {
+    float:left;
+    cursor: pointer;
+    display: block;
     position: relative;
-    width: 100%;
-    text-align: center;
-    border-radius: 0;
-    -webkit-box-shadow: 0 -1px 7px #ccc inset;
-    box-shadow: 0 -1px 7px #ccc inset;
-  }
+    height:auto;
+    background:url(/Images/icons/index.png) no-repeat right 5px;
+    }
+.sitetop .loginright span{
+    float:left;
+    width:110px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    height:auto;
+    background:url(/Images/icons/index.png) no-repeat right 5px;
+    }
+.all {
+    float: left;
+    width:110px;
+    height:30px;
+    padding-left:10px;
 }
-nav .nav-list > li .menu li{
-    line-height: 26px;
-  background-image: none;
+.all li {
+    width:110px;
+    height:30px;
+    background-color:#f6f6f6;
+    line-height:30px;
+    text-align:center;
+    float:left;
+    display:inline;
+    position:relative;
+    cursor:pointer;
 }
-nav .nav-list > li .menu li a {
-    line-height: 26px;
-    text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  
-  margin: 0;
+.all ul {
+    position:absolute;
+    left:0;
+    top:30px;
+    display:none;
 }
-nav .nav-list > li:hover .menu {
-  height: auto;
-}
-
 
 /*下拉菜单结束*/
 .logo {
@@ -409,12 +333,17 @@ nav .nav-list > li:hover .menu {
 }
 /**/
 
-#headmodal .modal-body{
+#headmodal .modal-body p{
     min-height: 120px;
-    font-size: 18px;
+    text-indent:2em; 
+    font-size: 16px;
     padding-top: 15px;
 }
-
+#headmodal .modal-body  a{
+    min-height: 120px;
+    font-size: 16px;
+    padding-top: 15px;
+}
 /*锟阶诧拷*/
 .bottom {
     margin-top:30px;

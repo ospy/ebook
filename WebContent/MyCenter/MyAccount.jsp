@@ -15,13 +15,13 @@
 </head>
 <body>
    <div class="listcontent">
-				<div class="limitbox">
+				<div class="location">
 					共找到&nbsp;<span id="total" style="color: red"></span>&nbsp;条记录</div>
 				</div>
-				<div id="AccountList" style="height: auto;">
+				<div id="AccountList" class="main" style="height: auto;">
 				</div>
 				   
-				<div id="Pager" style="width: 800px;"></div>
+				<div id="Pager" style="width: 800px;margin: 0 auto;"></div>
 			</div>
 </body>
  <script>
@@ -78,7 +78,7 @@
         	 }
         	 else{
         		 
-        		 alert("请登录！");
+        		 window.location.href="/Member/login.jsp";
         	 } 
          }
 		//获取已下载列表
@@ -98,12 +98,13 @@
 	                	if (result != 0) {
 	                	var str = "<table><tr style='line-height:30px;background: #f6f6f6;'><td style='width:10%;text-align:center;'>类型</td><td style='width:40%;text-align:center;'>备注</td><td style='width:10%;text-align:center;'>使用前</td><td style='width:10%;text-align:center;'>变动</td><td style='width:10%;text-align:center;'>使用后</td><td style='width:20%;text-align:center;'>下载时间</td></tr>";
 	                	for(var i=0;i < result.length;i++ ){
-	                		str += "<tr><td>"+result[i].s_type+"</td>";
+	                		var type=changeType(result[i].s_type);
+	                		str += "<tr><td align='middle'>"+type+"</td>";
 	                		str += "<td><a title='" +result[i].s_desc+ "' href='/Detail/detail.jsp?id=" + result[i].i_discuid + "' target='_blank'>"+ result[i].s_desc +"</a>" +result[i].s_message+"</td>";
-	                		str += "<td style='padding-left:24px;'>"+result[i].i_old_value+"</td>";
-	                		str += "<td style='padding-left:24px;'>"+result[i].i_value+"</td>";
-	                		str += "<td style='padding-left:24px;'>"+result[i].i_new_value+"</td>";
-	                		str += "<td style='text-align:center;' class=\"createTime\">"+ result[i].s_create_time+"</td>";
+	                		str += "<td align='middle'>"+result[i].i_old_value+"</td>";
+	                		str += "<td align='middle'>"+result[i].i_value+"</td>";
+	                		str += "<td align='middle'>"+result[i].i_new_value+"</td>";
+	                		str += "<td align='middle' class=\"createTime\">"+ result[i].s_create_time+"</td>";
 	
 						}
 	                	str += "</tr></table>";
@@ -122,6 +123,41 @@
 
 	
 	}
+       //用CSS控制奇偶行的颜色    
+         function changeType(type)    
+         {    
+        	 switch(type)
+        	 {
+        	 case "1":
+        	 return "用户注册";
+        	   break;
+        	 case "2":
+        	return "注册赠送";
+        	   break;
+        	 case "3":
+        	   return "管理员添加";
+        	   break;
+        	 case "4":
+          	   return "管理员减少";
+          	   break;
+        	 case "5":
+            	   return "下载文件";
+            	   break;
+        	 case "6":
+            	   return "微信支付";
+            	   break;
+        	 case "7":
+            	   return "微信支付";
+            	   break;
+        	 case "8":
+          	       return "奖励赠送";
+          	       break;
+        	 default:
+        		 return type;
+        	   
+        	 }  
+         }   
+		
        //用CSS控制奇偶行的颜色    
          function SetTableRowColor()    
          {    

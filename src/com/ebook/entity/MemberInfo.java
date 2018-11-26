@@ -2,7 +2,7 @@ package com.ebook.entity;
 
 public class MemberInfo {
 	String id ;
-	
+	Member member;
 	String occupation ;
 	String name ;
 	String email;
@@ -74,8 +74,10 @@ public class MemberInfo {
 		this.createtime = createtime;
 	}
 	public Member getMember() {
-		// TODO Auto-generated method stub
-		return null;
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 }

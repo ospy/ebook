@@ -72,24 +72,44 @@
             var Email = $("#reg_email").val();
             var Password = $("#reg_pwd").val();
             
+            checkEmail();
+            checkName();
+            checkPwd();
+            checkRePwd();
             checkCode();
             if (check1 && check2 && check3 && check4 && check5) {
                 $.ajax({
                     url: "<%=path%>/Member/Register",
                     type: 'post',
-              //      async: false,
-              //      dataType: 'json',
+                    async: false,
+                    dataType: 'text',
                     data: { Loginid: Loginid, Email: Email, Password: Password,ip:ip,city:city },
                     success: function (data) {
-                        location.href = "<%=path%>/Member/actmail.jsp?email="+Email;
+                    	if(data=="1"){
+                    		location.href = "<%=path%>/Member/actmail.jsp?email="+Email;
+                    	}
+                    	else if(data=="1.1"){
+                    		alert("邮件发送失败，请重新操作!");
+                    	}
+                    	else if(data=="2"){
+                    		alert("Email已被使用!");
+                    	}
+                    	else if(data=="3"){
+                    		alert("用户名已被使用!");
+                    	}
+                    	else{
+                    		alert("添加失败！请发送邮件联系管理员:imed120@163.com");
+                    	}
+                        
                     },
-                    error: function (xhr, type, exception) {
-                    	console.log("errorxhr:"+xhr.responseText);
-                    	console.log("errortype:");
-                    	console.log("errorexception:");
-                        alert("添加失败，请联系管理员");
-                        return false;
-                    }
+                    error:function(XMLHttpRequest, textStatus){  
+                    	
+                    	alert(XMLHttpRequest.status);  
+                    	alert(XMLHttpRequest.readyState);  
+                    	alert(textStatus);
+                    	 alert("添加失败！请发送邮件联系管理员:imed120@163.com");
+                    	 return;
+                    	}                    
                 });
             } else {
                 alert('注册信息填写错误！');
@@ -106,9 +126,9 @@
                 $("#reg_emailTip").addClass("onError").html("不可为空！");
                 check1 = false;
             } else {
-                var reg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-               // if (!reg.test(email)) {
-                if (1==2) {
+            	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+                if (!reg.test(email)) {
+                //if (1==2) {
                     $("#reg_emailTip").removeClass("onCorrect");
                     $("#reg_emailTip").addClass("onError").html("电子邮箱输入有误！");
                     check1 = false;

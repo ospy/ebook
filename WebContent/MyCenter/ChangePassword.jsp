@@ -147,14 +147,14 @@ function updatepsw(){
 					window.location.reload();
 					
 				} else {
-					$copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>修改失败！请发送问题至客服邮箱：****@163.com</div></div>");
+					$copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>修改失败！请发送问题至客服邮箱：imed120@163.com</div></div>");
 					$("body").find(".alert-tips").remove()
 							.end().append($copysuc);
 					$(".alert-tips").fadeOut(10000);
 				}
     		},
     		error : function() {
-    			alert("更新密码失败，请联系管理员！");
+    			alert("更新密码失败!请发送问题至客服邮箱：imed120@163.com");
     		}
     	});
     } 
@@ -163,7 +163,7 @@ function checklogin() {
 
 	var uid="<%=uid%>"; 
 	 if(uid==""||uid=="null"){
-		 alert("请登录！");
+		 window.location.href="/Member/login.jsp";
 		 return false;
 	 }
 }

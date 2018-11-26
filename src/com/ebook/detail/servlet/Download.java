@@ -18,6 +18,7 @@ import net.sf.json.JSONObject;
 
 import com.ebook.account.dao.Account;
 import com.ebook.detail.dao.DetailDao;
+import com.ebook.entity.FileInfo;
 import com.ebook.utils.DBPool;
 
 @WebServlet("/Download")
@@ -33,49 +34,54 @@ public class Download extends HttpServlet {
 		 /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
         String price="";
-		String result = DetailDao.getDownload(bookid);
+        String result="";
+        result = DetailDao.getDownload(bookid);
 		JSONArray jsonArray = JSONArray.fromObject(result);
 		JSONObject jsonObject = null;
 		
         jsonObject = jsonArray.getJSONObject(0);  
-        price= jsonObject.getString("i_base_price");  
-            
-              
-       
-		 
-		String balance = Account.Balance(uid);
-		
+        price= jsonObject.getString("i_base_price");
+	 
+		String balance = Account.Balance(uid);//获取账户余额
+		PrintWriter out = response.getWriter();
+		//如果账户余额大于扣除金额则扣除，否则返回余额不足
 	    if(Integer.parseInt(balance)>=Integer.parseInt(price)){
-		int newbalance = Integer.parseInt(balance)-Integer.parseInt(price);
-		String newvalue = String.valueOf(newbalance);
-		HttpSession session = request.getSession(); 
-		session.setAttribute("account",newvalue);
-		jsonObject.put("newbalance", newvalue);
-		jsonArray.set(0,jsonObject);
-		result=jsonArray.toString();
+			int newbalance = Integer.parseInt(balance)-Integer.parseInt(price);
+			String newvalue = String.valueOf(newbalance);
+			HttpSession session = request.getSession(); 
+			session.setAttribute("account",newvalue);
+			jsonObject.put("newbalance", newvalue);
+			jsonArray.set(0,jsonObject);
+			result=jsonArray.toString();
+		
 			try {
-				DetailDao.insertAccount(bookid, uid, price, balance, newvalue);				
-				PrintWriter out = response.getWriter();
-				out.print(result);
-				//下载次数加1
-				Connection conn = DBPool.getInstance().getConnection();
-				String sql = "{call AddDownTimes(?)}";
-				CallableStatement call= conn.prepareCall(sql);
-				//一次给存储过程传递参数，插入书目信息
-				call.setInt(1,Integer.parseInt(bookid));
-			
-				call.execute();
+				boolean check=DetailDao.insertAccount(bookid, uid, price, balance, newvalue);	
+				if(check){
 					
-				call.close(); 
-				conn.close(); 
+					//下载次数加1
+					Connection conn = DBPool.getInstance().getConnection();
+					String sql = "{call AddDownTimes(?)}";
+					CallableStatement call= conn.prepareCall(sql);
+					//一次给存储过程传递参数，插入书目信息
+					call.setInt(1,Integer.parseInt(bookid));
+				
+					call.execute();
+					call.close(); 
+					conn.close(); 
+				}
+				else{
+					result="0";
+				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
 	    else{
-	    	PrintWriter out = response.getWriter();
-			out.print("余额不足，请充值！");
+	    	
+	    	result="-1";
 	    }
+	    out.print(result);  
 	}
 }

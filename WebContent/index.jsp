@@ -226,7 +226,7 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 					</ul>
 					<ul>
 						<li class="dyntitle"><span class="s_loginid">用户名</span><span
-							class="s_type">类型</span><span class="s_right">下载豆</span></li>
+							class="s_type">类型</span><span class="s_right">下载点</span></li>
 
 						<%for(int i=0;i<NewAccounts.size();i++){  //循环显示新书start
 						Map Account = (Map)NewAccounts.get(i);				

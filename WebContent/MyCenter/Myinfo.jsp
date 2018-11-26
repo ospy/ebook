@@ -8,6 +8,7 @@
 <title>用户信息</title>
 <link type="text/css" rel="stylesheet" href="../Css/userinfo.css"/>
 </head>
+
 <body>
      <div class="navibar"><a href="#">首页</a> > 个人信息</div>
 <div class="reg_content">
@@ -16,16 +17,15 @@
                 <h2>个人信息</h2>
                 
                     <div class="form_item">
-                        <label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label> <span id="txtName"></span> <span id="reg_username" style="display:none;"></span>
+                        <label>姓名：</label> <span id="txtName"></span> <span id="reg_username" style="display:none;"></span>
                     </div>
                     <div class="form_item">
-                        <label>
-                            电子邮箱：</label>
+                        <label>电子邮箱：</label>
                         <span id="reg_email" class="text-input  typeahead" type="text"></span>&nbsp;&nbsp;<span
                             id="reg_emailTip"></span>
                     </div>
                     <div class="form_item">
-                        <label>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label> <input id="txtMobile" class="text-input  typeahead"
+                        <label><span class="red star">*</span>手机：</label> <input id="txtMobile" class="text-input  typeahead"
                                 type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
                     </div>
                 <div class="form_item">
@@ -34,7 +34,7 @@
 						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
 				</div>
                     <div class="form_item">
-					<label> 职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：</label> 
+					<label> 职业：</label> 
 					    <input id="occu1"  name="ocu"  type="radio"  value="1"  checked="checked"/>医务人员
 						<input id="occu2"   name="ocu"   type="radio"  value="2" />教师
 						<input id="occu3"   name="ocu"  type="radio"  value="3" />研发人员
@@ -312,7 +312,7 @@
         	 }
         	 else{
         		 
-        		 alert("请登录！");
+        		 window.location.href="/Member/login.jsp";
         	 }
            
 	
@@ -320,40 +320,40 @@
 	
 	           function updatememberinfo() {
 	        	   
-	        	   checkEmail();
+	        	   //checkEmail();
 	        	   checkMobile();
 	        	   checkSpe();
 	        	   checkLevel();
 	        	   checkUnit();
 	        	   
-	               if( state1&&state2&& state3&&state4&&state5){
+	               if( state2&& state3&&state4&&state5){
                      $.ajax({
                         url: "<%=path%>/UpdateMemberInfo",
 							type : 'post',
 							async : false,
 							dataType : 'text',
 							data : {
-								ocu : $("input[name=ocu]:checked").val(),
+								occupation : $("input[name=ocu]:checked").val(),
 								name : $("#txtName").html(),
 								mobile : $("#txtMobile").val(),
-								unit : $("#txt_unit").val(),
-								level : $("#txt_Level").val(),
-								spe : $("#txt_Spe").val(),
-								edu : $("input[name=edu]:checked").val()
+								address : $("#txt_unit").val(),
+								capacity : $("#txt_Level").val(),
+								speciality : $("#txt_Spe").val(),
+								education : $("input[name=edu]:checked").val()
 							},
 							success : function(data) {
 								if (data == "true") {
-									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！提交成功<span id='second'>6</span>秒钟后将自动跳转到登录页！</div></div>");
+									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！提交成功<span id='second'>6</span>秒钟后将自动跳转到首页！</div></div>");
 									$("body").find(".alert-tips").remove()
 											.end().append($copysuc);
 									timedCount();
-									$(".alert-tips").fadeOut(6000);
+									$(".alert-tips").fadeOut(10000);
 									
 								} else {
 									$copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>提交失败！请发送问题至客服邮箱：****@163.com</div></div>");
 									$("body").find(".alert-tips").remove()
 											.end().append($copysuc);
-									$(".alert-tips").fadeOut(6000);
+									$(".alert-tips").fadeOut(10000);
 								}
 							},
 							error : function(err) {
@@ -374,9 +374,9 @@
 				setTimeout("timedCount()", 1000);
 				
 			}
-			else{
-			 
-			}
+		    else{
+				 location.href = "<%=path%>/index.jsp";
+				}
 			}
 	</script>
 <body>

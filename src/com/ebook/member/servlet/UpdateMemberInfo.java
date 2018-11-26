@@ -19,7 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ebook.constant.Constant;
 import com.ebook.entity.Member;
@@ -51,7 +50,10 @@ public class UpdateMemberInfo extends HttpServlet {
 		String speciality = request.getParameter("speciality");
 		String tt = request.getParameter("education");
 		int education =Integer.parseInt(tt);
-		String uid=request.getParameter("id");
+		
+		HttpSession session = request.getSession();
+		String uid= (String)session.getAttribute("uid");
+		
 
 			
 			Connection conn = DBPool.getInstance().getConnection(); 
