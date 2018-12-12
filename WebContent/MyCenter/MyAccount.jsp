@@ -96,7 +96,7 @@
 	                success: function (result) {
 	                	$("#AccountList").html("");
 	                	if (result != 0) {
-	                	var str = "<table><tr style='line-height:30px;background: #f6f6f6;'><td style='width:10%;text-align:center;'>类型</td><td style='width:40%;text-align:center;'>备注</td><td style='width:10%;text-align:center;'>使用前</td><td style='width:10%;text-align:center;'>变动</td><td style='width:10%;text-align:center;'>使用后</td><td style='width:20%;text-align:center;'>下载时间</td></tr>";
+	                	var str = "<table><tr style='line-height:30px;background: #f6f6f6;'><td style='width:10%;text-align:center;'>类型</td><td style='width:40%;text-align:center;'>备注</td><td style='width:10%;text-align:center;'>使用前</td><td style='width:10%;text-align:center;'>变动</td><td style='width:10%;text-align:center;'>使用后</td><td style='width:20%;text-align:center;'>变动时间</td></tr>";
 	                	for(var i=0;i < result.length;i++ ){
 	                		var type=changeType(result[i].s_type);
 	                		str += "<tr><td align='middle'>"+type+"</td>";

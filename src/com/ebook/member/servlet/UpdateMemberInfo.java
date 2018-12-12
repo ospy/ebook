@@ -54,7 +54,7 @@ public class UpdateMemberInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		String uid= (String)session.getAttribute("uid");
 		
-
+		boolean result=false;
 			
 			Connection conn = DBPool.getInstance().getConnection(); 
 			  //修改下载文件信息
@@ -75,7 +75,7 @@ public class UpdateMemberInfo extends HttpServlet {
 						call1.execute();
 						call1.close();
 					    conn.close();
-					 
+					    result=true;
 			       
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -83,7 +83,7 @@ public class UpdateMemberInfo extends HttpServlet {
 				}
 		
 		PrintWriter out = response.getWriter();
-		out.print(true);
+		out.print(result);
 		//request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

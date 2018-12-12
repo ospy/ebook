@@ -73,6 +73,7 @@
 			$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 
 			$("#StartTime").prop("readonly", false).datepicker({
+				maxDate:new Date(),
 				showMonthAfterYear : true, // 月在年之后显示      
 				changeMonth : true, // 允许选择月份     
 				changeYear : true, // 允许选择年份     
@@ -84,6 +85,7 @@
 			});
 
 			$("#EndTime").prop("readonly", false).datepicker({
+				maxDate:new Date(),
 				showMonthAfterYear : true, // 月在年之后显示      
 				changeMonth : true, // 允许选择月份     
 				changeYear : true, // 允许选择年份     
@@ -126,9 +128,51 @@
 	
 </script>
 <body>
+<div href="javascript:;" id="backtop" title="回到顶部" style="text-align: center;"><br><br><span>回到</span><br><span>顶部</span></div>
+<script>window.onload = function(){
+    var obtn = document.getElementById('backtop');  //获取回到顶部按钮的ID
+    var clientHeight = document.documentElement.clientHeight;   //获取可视区域的高度
+    var timer = null; //定义一个定时器
+    var isTop = true; //定义一个布尔值，用于判断是否到达顶部
+
+    window.onscroll = function(){         //滚动条滚动事件
+
+        //获取滚动条的滚动高度
+        var osTop = document.documentElement.scrollTop || document.body.scrollTop; 
+
+        if(osTop >= clientHeight){  //如果滚动高度大于可视区域高度，则显示回到顶部按钮
+            obtn.style.display = 'block';
+        }else{         //否则隐藏
+            obtn.style.display = 'none';
+        }
+
+        //主要用于判断当 点击回到顶部按钮后 滚动条在回滚过程中，若手动滚动滚动条，则清除定时器
+        if(!isTop){
+
+            clearInterval(timer);
+        }
+        isTop = false;
+
+    }
+
+    obtn.onclick = function(){    //回到顶部按钮点击事件
+        //设置一个定时器
+        timer = setInterval(function(){
+            //获取滚动条的滚动高度
+            var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //用于设置速度差，产生缓动的效果
+            var speed = Math.floor(-osTop / 6);
+            document.documentElement.scrollTop = document.body.scrollTop = osTop + speed;
+            isTop =true;  //用于阻止滚动事件清除定时器
+            if(osTop == 0){
+                clearInterval(timer);
+            }
+        },30);
+    }
+}</script> 
 	<div class="main">
 	  <div class="location">
-        首页 &gt; 分类列表 &gt; &nbsp;&nbsp;<span class="limit_info" id="select"></span>&nbsp;<span id="time_limit"><span id="sTime"></span><span id="between"></span><span id="eTime"></span></span>
+        首页 &gt; 分类列表 &gt; &nbsp;&nbsp;<span class="limit_info" id="select"></span>&nbsp;<span class="limit_info" id="keyword"></span>&nbsp;<span id="time_limit" class="limit_info">时间：<span id="sTime"></span><span id="between"></span><span id="eTime"></span></span>
     </div>
 		<div class="col_left">
 
@@ -211,14 +255,9 @@
 			</div>
 		</div>
 
-
-
-
-
 		<div class="clear"></div>
 
 	</div>
-
 	
 	<script type="text/javascript">
 		
@@ -226,11 +265,12 @@
 		var pageListSize = 10;//每页显示调试
 		//var uType = 0;//uType=2管理员
 		var startTime = "";
-		var endTime = "";
+		var endtime = "";
         var classid =0;
         var urlinfo = window.location.href;//获取url
         var search = decodeURI(urlinfo.split("?")[1].split("=")[1]);//拆分url得到”=”后面的参数      
        
+        $("#keys").val(search);
         var where ="";
         var order ="";
 		$(function() {
@@ -253,10 +293,7 @@
 						pageSize : 10
 					});
 			 })
-   
-			           
-            
-			
+	
 			 GetSpec();
 			 selectClass(classid);
 			 
@@ -269,34 +306,7 @@
 			
 			 
 		});
-
-		//根据搜索条件筛选
-		function getClassListBySpid(i_spid) {
-			spid = i_spid;
-			//GetDepartment(dpid);
-			//$(".secondclass li a").removeClass("spec");
-			//$("." + dpid).addClass("spec");
-
-			//时间条件限定
-			startTime = $("#startTime").val();
-			var curr_time = new Date();
-			endTime = curr_time.getFullYear() + "-";
-			endTime += curr_time.getMonth() + 1 + "-";
-			endTime += curr_time.getDate();
-
-			if ($("#startTime").val() != "" && $("#endTime").val() == "") {
-				startTime = $("#startTime").val();
-				$("#sTime").html(startTime);
-			}
-			if ($("#endTime").val() != "") {
-				endTime = $("#endTime").val();
-				$("#eTime").html(endTime);
-			}
-			
-			getCount(classid);
-			
-		    
-		}
+		
 		 //获取全部分类
 	    function GetSpec() {
 	    	var content1="";
@@ -360,55 +370,82 @@
 	            }
 	        });
 	    }
+
 	  //选择分类
 		function selectClass(id){
 			classid=id;
 			$(".item a").removeClass("selected");
-			$("#"+classid).addClass("selected");
-			
-		    //面包屑限定条件样式
-			currlimit="";
-			if(classid==0||classid==""||classid==null){
-				currlimit="全部学科";
-			}
-			else if(classid==1){
-				currlimit="临床医学";
-			}
-			else if(classid==2){
-				currlimit="基础医学";
-			}
-			else if(classid==3){
-				currlimit="药学";
-			}
-			else{
-				if($(".selected").length!=0){
-				$(".selected").each(function(){
-					currlimit=$(this).html();			
-					});
-				 
-			    }
-				
-			}
-			$("#select").html(currlimit);
-         
-		 startTime = $("#StartTime").val();
-   		 endTime = $("#EndTime").val();
-            if ($("#StartTime").val() != "" || $("#EndTime").val() != "") {
-            	$("#time_limit").html(startTime+" 至 "+endTime);
-                $("#time_limit").addClass("limit_info");
-               // $("#time_limit").append('<a class="crumbDelete" onclick="ClearTime();"></a>')
-            }
-            else {
-                $("#time_limit").removeClass("limit_info");
-                $("#time_limit").html("");
-                //$("#time_limit .crumbDelete").remove();
-            }
+			$("#"+classid).addClass("selected");			
             getCount(classid);
+            getNavigation();
 		}
+		  //获取导航面包屑 
+		  function getNavigation(){
+			  //学科面包屑
+				var currlimit="";
+				if(classid==0||classid==""||classid==null){
+					currlimit="全部";
+				}
+				else if(classid==1){
+					currlimit="临床医学";
+				}
+				else if(classid==2){
+					currlimit="基础医学";
+				}
+				else if(classid==3){
+					currlimit="药学";
+				}
+				else{
+					if($(".selected").length!=0){
+					$(".selected").each(function(){
+						currlimit=$(this).html();			
+						});
+					 
+				    }
+					
+				}
+				$("#select").html("学科："+currlimit);
+		   //关键词面包屑
+		     if(search==""){
+		    	 $("#keyword").html("关键词：全部");
+		     }
+		     else{
+		    	 $("#keyword").html("关键词："+search);
+		    	 }
+		     
+		   //日期面包屑
+			 startTime = $("#StartTime").val();
+	 		 endTime = $("#EndTime").val();
+	          if (startTime!= ""&&endTime!= "") {
+	          	$("#sTime").html(startTime);
+	          	$("#between").html("至");
+	          	$("#eTime").html(endTime);
+	             // $("#time_limit").append('<a class="crumbDelete" onclick="ClearTime();"></a>')
+	          }
+	          else if (startTime!= ""&&endTime== "") {
+		          	$("#sTime").html(startTime);
+		          	$("#between").html("至");
+		          	$("#eTime").html("今");
+		             // $("#time_limit").append('<a class="crumbDelete" onclick="ClearTime();"></a>')
+		          }
+	          else if (startTime== ""&&endTime!= "") {
+		          	$("#sTime").html("");
+		          	$("#between").html("至");
+		          	$("#eTime").html(endTime);
+		             // $("#time_limit").append('<a class="crumbDelete" onclick="ClearTime();"></a>')
+		          }
+	          else {
+	        		$("#sTime").html("");
+		          	$("#between").html("全部");
+		          	$("#eTime").html("");
+	              //$("#time_limit .crumbDelete").remove();
+	          }
+	          
+		  }
 	    function getCount(classid){
        	      	
-       	 startTime = $("#startTime").val();
-   		 endTime = $("#endTime").val();
+       	 startTime = $("#StartTime").val();
+   		 endTime = $("#EndTime").val();
    		
 	            $.ajax({
 	                url: "<%=path%>/GetCount",
@@ -452,8 +489,8 @@
 		//获取图书列表
         function getClassList(classid,pageIndex){
 			
-       	 startTime = $("#startTime").val();
-			 endTime = $("#endTime").val();
+       	     startTime = $("#StartTime").val();
+			 endTime = $("#EndTime").val();
 			 
 		     order =$(".actived").attr("data");
 		    
@@ -471,7 +508,7 @@
 	                	for(var i=0;i < result.length;i++ ){
 	                		
 	                		str += "<div class=\"listtable\"><a title=\"" + result[i].s_desc + "\" class=\"pic\" href=\"/Detail/detail.jsp?id=/" + result[i].i_discuid + "\" target=\"_blank\">";
-							str += "<img title=\"" + result[i].s_desc + "\" src=\"/Pic/" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\">";
+							str += "<img title=\"" + result[i].s_desc + "src=\"" + result[i].s_imgurl + "\" style=\"height: 150px; width: 150px;\">";
 							str += "<span class=\"createTime\" style=\"display: none;\">"
 									+ result[i].s_create_time
 									+ "</span></a>";
@@ -484,16 +521,16 @@
 						
 							str += "<p class=\"others\"><span class=\"subtitle\">资源类型："
 									+ result[i].s_filetypes+"</p>";
-							str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
-									+ result[i].s_loginid+"</p>";
+							//str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
+									//+ result[i].s_loginid+"</p>";
 							str += "<p class=\"others\"><span class=\"subtitle\">点击次数："
 									+ result[i].i_click_times
 									+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">下载次数："
 									+ result[i].i_download_times + "</span></p>";
 
-							str += "<p class=\"others\"><span class=\"subtitle\">"+ result[i].s_spec+"</span></p>";
+							str += "<p class=\"others\"><span class=\"subtitle\">学科分类："+ result[i].s_spec+"</span></p>";
 							str += "<p><span class=\"price\">￥"
-									+ result[i].i_discuPrice
+									+ result[i].i_Price
 									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
 						}
 						$("#discuList").html(str);
@@ -510,52 +547,7 @@
 
 	
 	}
-		//时间筛选
-		function timeSearch() {
-			GetDepartment(dpid);
-			//时间条件限定
-			startTime = "2007-01-01";
 
-			var curr_time = new Date();
-			var endTime = curr_time.getFullYear() + "-";
-			endTime += curr_time.getMonth() + 1 + "-";
-			endTime += curr_time.getDate();
-
-			if ($("#startTime").val() != "" && $("#endTime").val() == "") {
-				startTime = $("#startTime").val();
-				$("#sTime").html(startTime);
-				$("#between").html("至今");
-			}
-
-			if ($("#endTime").val() != "") {
-				if ($("#startTime").val() != "") {
-					startTime = $("#startTime").val();
-				}
-				$("#sTime").html(startTime);
-				$("#eTime").html(endTime);
-				endTime = $("#endTime").val();
-				$("#between").html("至");
-				$("#eTime").html(endTime);
-			}
-			//面包屑限定条件样式
-			$("#time_limit").removeClass("limit_info");
-			$("#time_limit .crumbDelete").remove();
-			if ($("#startTime").val() != "" || $("#endTime").val() != "") {
-				$("#time_limit").addClass("limit_info");
-				$("#time_limit").append(
-						'<a class="crumbDelete" onclick="ClearTime();"></a>')
-			} else {
-				$("#time_limit").removeClass("limit_info");
-				$("#time_limit .crumbDelete").remove();
-			}
-
-			$("#foot").html("<img src='/images/loading.gif'/>");
-			
-			
-			//GetDiscuByPage(0, pageListSize, dpid, startTime, endTime);
-
-			$("#foot").html("");
-		}
 
 		//清除时间限定
 		function ClearTime() {
@@ -600,7 +592,7 @@
 				$("#eTime").html(endTime);
 			}
 			$(".secondclass li a").removeClass("spec");
-			$("#select").html("全部学科");
+			$("#select").html("学科："+"全部");
 			$("#foot").html("<img src='/images/loading.gif'/>");
 			GetDiscuCount(0);
 			//GetDiscuByPage(0, pageListSize, 0, startTime, endTime);
@@ -608,33 +600,7 @@
 			$("#foot").html("");
 		}
 
-		//根据学科编号获取学科名称
-		function GetDepartment(dpid) {
-			$
-					.ajax({
-						url : "/DiscuList/GetDepartment",
-						type : 'post',
-						async : false,
-						dataType : 'text',
-						data : {
-							dpid : dpid
-						},
-						success : function(result) {
-							if (result != "") {
-								$("#select")
-										.html(
-												result
-														+ '<a class="crumbDelete" onclick="ClearSpec();"></a>');
-							}
-						},
-						error : function(err) {
-							alert("获取学科异常，请联系管理员");
-							return false;
-						}
-					});
-
-		}
-
+	
 		//分类下最新发布图书
 		function getNewByClass(spid) {
 			
@@ -649,10 +615,11 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"60\" width=\"60\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
-											+ result[i].s_desc.substring(0, 40)
-											+ "</a></p> </li>";
+											+ result[i].s_desc.substring(0, 32)
+											+ "</a></p>";
+									str += 	"<p class='lefttime'>"+result[i].s_create_time.substring(0, 10)+"</p></li>";		
 								}
 								$("#latest_publish").append(str);
 							}
@@ -678,10 +645,11 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"60\" width=\"60\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
-											+ result[i].s_desc.substring(0, 40)
-											+ "</a></p> </li>";
+											+ result[i].s_desc.substring(0, 32)
+											+ "</a></p>";
+									str += 	"<p class='lefttime'>"+result[i].s_create_time.substring(0, 10)+"</p></li>";		
 								}
 								$("#max_download").append(str);
 							}
@@ -707,10 +675,11 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"60px\" width=\"60px\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/DiscuDetail/DiscuDetail/" + result[i].i_discuid + "\" target=\"_blank\">"
-											+ result[i].s_desc.substring(0, 40)
-											+ "</a></p> </li>";
+											+ result[i].s_desc.substring(0, 32)
+											+ "</a></p>";
+									str += 	"<p class='lefttime'>"+result[i].s_create_time.substring(0, 10)+"</p></li>";		
 								}
 								$("#latest_download").append(str);
 							}

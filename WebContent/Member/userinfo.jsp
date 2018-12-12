@@ -1,12 +1,4 @@
-<%@page import="com.ebook.entity.*"%>
-<%@page import="com.ebook.constant.*"%>
-<%@page import="com.ebook.constant.Constant"%>
-<%@page import="com.ebook.entity.Activate"%>
-<%@page import="com.ebook.entity.Member"%>
-<%@page import="com.ebook.member.dao.MemberDao"%>
-<%@page import="com.ebook.utils.DateUtils"%>
-<%@page import="com.ebook.utils.LOG"%>
-<%@page import="com.ebook.utils.Md5Util"%>
+
 <%--
  String spath = request.getContextPath(); 
  Member member  = (Member)request.getSession().getAttribute(Constant.SESSION_USER);
@@ -58,18 +50,34 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close back-index" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">激活提示</h4>
+        <h2 class="modal-title" id="myModalLabel">激活提示</h2>
       </div>
       <div class="modal-body" id="modal-body">
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default back-index" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default back-index" data-dismiss="modal">关闭</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close back-index" data-dismiss="modal" onclick="gologin();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">激活提示</h2>
+      </div>
+      <div class="modal-body" id="modal-body2">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="gologin();" class="btn btn-default back-index" data-dismiss="modal">登录网站</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<%
 		String checkResult = (String) request.getSession().getAttribute("checkResult");
 	    String actmail = (String) request.getSession().getAttribute("email");
@@ -92,7 +100,7 @@
 
 		
 		if (check == "已激活"||check=="激活成功") {
-                $('#modal-body').html("<b>邮箱已激活！请完善个人信息。<\/b>");
+                $('#modal-body').html("<h2>邮箱已激活！请完善个人信息。</h2>");
 				$('#myModal').modal('show');
 		} 
 		else{
@@ -153,14 +161,14 @@
 				</div>
 				
 				<div class="form_item">
-					<input value="提    交" type="button" class="submit"
+					<input id="save" value="提    交" type="button" class="submit"
 						onclick="check();"/>
 				</div>
 				<div class="form_item declare">
 					<label> 本站声明：</label> 
-					<p>1.请如实填写个人信息，本站所保存之用户个人信息仅供用户统计和联系使用，不会用于任何商业目的；</p>
+					<p>1.完整填写个人信息将获赠10下载点；</p>
 					<p>2.填写手机号码后可使用手机号码登录本站；</p>
-					<p>3.完整填写个人信息将获赠10下载点；</p>
+					<p>3.请如实填写个人信息，本站承诺所保存之用户个人信息仅供用户统计和联系使用，不会用于任何商业目的；</p>
 				</div>
 			</form>
 		</div>
@@ -292,6 +300,10 @@
 							type : 'post',
 							async : false,
 							dataType : 'text',
+		                    beforeSend: function () {
+						        // 禁用按钮防止重复提交
+						        $("#save").attr({ disabled: "disabled" });
+						    },
 							data : {
 								ocu : $("input[name=ocu]:checked").val(),
 								name : $("#txtName").val(),
@@ -303,12 +315,10 @@
 							},
 							success : function(data) {
 								if (data == "true") {
-									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！注册成功，请登录。<span id='second'>10</span>秒钟后将自动跳转到登录页！</div></div>");
-									$("body").find(".alert-tips").remove()
-											.end().append($copysuc);
-									timedCount();
-									$(".alert-tips").fadeOut(10000);
-									
+									var $copysuc = $("<h2>恭喜您！注册成功，请登录。<span id='second'>30</span>秒钟后将自动跳转到登录页！</h2>");
+									$("#modal-body2").empty().append($copysuc);
+									$('#myModal2').modal('show');
+									timedCount();									
 								}
 								else if (data == "会话过期") {						
 									alert("session已过期！请重新点击激活邮件中的链接");
@@ -317,6 +327,9 @@
 									alert("提交失败！请发送问题至客服邮箱：imed120@163.com");
 								}
 							},
+							complete: function () {
+						        $("#save").removeAttr("disabled");
+						    },
 							error : function(XMLHttpRequest, textStatus) {
 								alert(XMLHttpRequest.status);  
 		                    	alert(XMLHttpRequest.readyState);  
@@ -328,6 +341,7 @@
 				return;
 			}
 		}
+	          
 		function timedCount() {
 		    var c = $('#second').html(); 
 		    c--;
@@ -341,6 +355,9 @@
 			 location.href = "<%=path%>/Member/login.jsp";
 			}
 			}
+		function gologin() {
+			location.href = "<%=path%>/Member/login.jsp";
+		}
 	</script>
 	
 </body>

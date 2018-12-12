@@ -1,3 +1,5 @@
+<%@ page import="com.ebook.member.dao.MemberDao"%>
+<%@ page import="com.ebook.account.dao.Account"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,10 +15,12 @@
 <script src="/Js/jquery-ui.js"></script>
 
     <div class="sitetop">
-        <% String username = (String)session.getAttribute("username"); 
+        <% 
+         
+          String username = (String)session.getAttribute("username"); 
           String uid = (String)session.getAttribute("uid");
           String email = (String)session.getAttribute("email");
-          String account = (String)session.getAttribute("account");
+          String account = (String) Account.Balance(uid);;
           String state = (String)String.valueOf(session.getAttribute("state"));
           String level = (String)session.getAttribute("level");
 		%>
@@ -96,7 +100,7 @@
 
        function Search(){
     	  var keys =$("#keys").val();
-    	  alert(keys.length);
+    	  
     	  if(keys==""){
     	      alert("搜索条件不能为空！");
     	  }

@@ -7,12 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>分类列表</title>
 
-<link href="/Css/jquery-ui.css" rel="stylesheet" />
-<link href="../Css/classlist.css?v=20171223" rel="stylesheet" />
+
+
 <link href="/Css/page.css?v=20171214" rel="stylesheet" />
 <link href="/Css/bootstrap.css?v=20161214" rel="stylesheet" />
 <link href="/Css/jquery-ui.css" rel="stylesheet" />
 <link href="/Css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+<link href="/Css/classlist.css" rel="stylesheet" />
 
 <script  type="text/javascript" src="<%=path %>/Js/jquery-1.9.1.js" ></script>
 <script src="/Js/jquery-ui.js"></script>
@@ -97,6 +98,48 @@
 	
 </script>
 <body>
+<div href="javascript:;" id="backtop" title="回到顶部" style="text-align: center;"><br><br><span>回到</span><br><span>顶部</span></div>
+<script>window.onload = function(){
+    var obtn = document.getElementById('backtop');  //获取回到顶部按钮的ID
+    var clientHeight = document.documentElement.clientHeight;   //获取可视区域的高度
+    var timer = null; //定义一个定时器
+    var isTop = true; //定义一个布尔值，用于判断是否到达顶部
+
+    window.onscroll = function(){         //滚动条滚动事件
+
+        //获取滚动条的滚动高度
+        var osTop = document.documentElement.scrollTop || document.body.scrollTop; 
+
+        if(osTop >= clientHeight){  //如果滚动高度大于可视区域高度，则显示回到顶部按钮
+            obtn.style.display = 'block';
+        }else{         //否则隐藏
+            obtn.style.display = 'none';
+        }
+
+        //主要用于判断当 点击回到顶部按钮后 滚动条在回滚过程中，若手动滚动滚动条，则清除定时器
+        if(!isTop){
+
+            clearInterval(timer);
+        }
+        isTop = false;
+
+    }
+
+    obtn.onclick = function(){    //回到顶部按钮点击事件
+        //设置一个定时器
+        timer = setInterval(function(){
+            //获取滚动条的滚动高度
+            var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //用于设置速度差，产生缓动的效果
+            var speed = Math.floor(-osTop / 6);
+            document.documentElement.scrollTop = document.body.scrollTop = osTop + speed;
+            isTop =true;  //用于阻止滚动事件清除定时器
+            if(osTop == 0){
+                clearInterval(timer);
+            }
+        },30);
+    }
+}</script> 
      <div class="location">
         首页 &gt; 分类列表 &gt; &nbsp;&nbsp;<span class="limit_info" id="select"></span>&nbsp;<span id="time_limit"><span id="sTime"></span><span id="between"></span><span id="eTime"></span></span>
     </div>
@@ -105,9 +148,7 @@
 		<div class="col_left">
 
 			<div class="ranking_list">
-				<h3>
-					<a target="_blank" href="/RankingList/DownloadRanking.aspx"></a>最新书目
-				</h3>
+				<h3>最新书目</h3>
 				<ul id="latest_publish">
 
 				</ul>
@@ -523,10 +564,11 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"60\" width=\"60\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
-											+ result[i].s_desc.substring(0, 40)
-											+ "</a></p> </li>";
+											+ result[i].s_desc.substring(0, 32)
+											+ "</a></p> ";
+									str += 	"<p class='lefttime'>"+result[i].s_create_time.substring(0, 10)+"</p></li>";	
 								}
 								
 							}
@@ -553,10 +595,11 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"60\" width=\"60\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
-											+ result[i].s_desc.substring(0, 40)
-											+ "</a></p> </li>";
+											+ result[i].s_desc.substring(0, 32)
+											+ "</a></p>";
+									str += 	"<p class='lefttime'>"+result[i].s_create_time.substring(0, 10)+"</p></li>";		
 								}
 								$("#max_download").html(str);
 							}
@@ -582,10 +625,11 @@
 								var str = "";
 								for (var i = 0; i < result.length; i++) {
 									str += "<li><a class=\"img\" target=\"_blank\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" title=\"\">";
-									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_path + "\" height=\"150\" width=\"150\"></a>";
+									str += "<img title=\"" + result[i].s_desc + "\" alt=\"" + result[i].s_desc + "\" src=\"" + result[i].s_imgurl + "\" height=\"60\" width=\"60\"></a>";
 									str += "<p class=\"name\"> <a  title=\"" + result[i].s_desc + "\" href=\"/Detail/detail.jsp?id=" + result[i].i_discuid + "\" target=\"_blank\">"
-											+ result[i].s_desc.substring(0, 40)
-											+ "</a></p> </li>";
+											+ result[i].s_desc.substring(0, 32)
+											+ "</a></p>";
+									str += 	"<p class='lefttime'>"+result[i].s_create_time.substring(0, 10)+"</p></li>";
 								}
 								$("#latest_download").html(str);
 							}
@@ -685,16 +729,16 @@
 						
 							str += "<p class=\"others\"><span class=\"subtitle\">资源类型："
 									+ result[i].s_filetypes+"</p>";
-							str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
-									+ result[i].s_loginid+"</p>";
+							//str += "<p class=\"others\"><span class=\"subtitle\">发&nbsp;&nbsp;布&nbsp;&nbsp;者："
+									//+ result[i].s_loginid+"</p>";
 							str += "<p class=\"others\"><span class=\"subtitle\">点击次数："
 									+ result[i].i_click_times
 									+ "</span>&nbsp;&nbsp;&nbsp;<span class=\"subtitle\">下载次数："
 									+ result[i].i_download_times + "</span></p>";
 
-							str += "<p class=\"others\"><span class=\"subtitle\">"+ result[i].s_spec+"</span></p>";
+							str += "<p class=\"others\"><span class=\"subtitle\">学科分类："+ result[i].s_spec+"</span></p>";
 							str += "<p><span class=\"price\">￥"
-									+ result[i].i_discuPrice
+									+ result[i].i_Price
 									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
 						};
 						$("#discuList").html(str);

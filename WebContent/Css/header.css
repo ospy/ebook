@@ -93,6 +93,12 @@ img {
     }
 .accountbox{margin-left: 24px;}
 .loginright_ul{float: right;}
+.tips{
+    padding-left: 24px;
+    background:url(/Images/icons/onFocus.gif) no-repeat 0 3px;
+    text-align: left;
+    font-weight: bold;
+}
 
  /*ÏÂÀ­²Ëµ¥*/
 #mycenter{display: none;}

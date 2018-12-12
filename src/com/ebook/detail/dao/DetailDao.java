@@ -35,7 +35,7 @@ import com.ebook.utils.RsToJson;
 public class DetailDao {
 public static String getBasicInfo(String bookid) {
 
-	String sql = "SELECT i_discuid,s_desc,i_discuPrice,i_click_times,i_download_times,s_filetypes,s_loginid,s_imgurl,s_create_time  from cc_discu  where i_discuid ="+ bookid+ " and b_deleted=0";
+	String sql = "SELECT i_discuid,s_desc,i_Price,i_click_times,i_download_times,s_filetypes,s_loginid,s_imgurl,s_create_time  from cc_discu  where i_discuid ="+ bookid+ " and b_deleted=0";
 	Connection conn = DBPool.getInstance().getConnection();
 	
 	Statement stmt=null;
@@ -62,7 +62,7 @@ public static String getBasicInfo(String bookid) {
 			booklist.setS_filetypes(rs1.getString("s_filetypes"));    
 			booklist.setS_create_time(rs1.getString("s_create_time").substring(0,10));
 			booklist.setS_loginid(rs1.getString("s_loginid"));
-			booklist.setI_discuPrice(rs1.getInt("i_discuPrice"));
+			booklist.setI_Price(rs1.getInt("i_Price"));
 			
 			String discuid = rs1.getString("i_discuid");
 			String sqlsub = "SELECT s_spec,i_spid FROM cc_speciality_link_discu where i_discuid="+discuid+" and b_deleted=0 " ;
@@ -332,7 +332,7 @@ public static String getDownload(String bookid) throws UnsupportedEncodingExcept
 		
 		while(rs3.next()){
 			FileInfo fileinfo = new FileInfo();   		
-			fileinfo.setI_base_price(rs3.getString("i_discuPrice"));  
+			fileinfo.setI_base_price(rs3.getString("i_Price"));  
 			fileinfo.setS_filename(rs3.getString("s_filename")); 
 			fileinfo.setS_path(rs3.getString("s_path"));
 			fileinfo.setS_password(rs3.getString("s_password")); 

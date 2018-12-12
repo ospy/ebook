@@ -35,7 +35,7 @@ public class Download extends HttpServlet {
         response.setCharacterEncoding("UTF-8"); 
         String price="";
         String result="";
-        result = DetailDao.getDownload(bookid);
+        result = DetailDao.getDownload(bookid);//获取文件下载地址等
 		JSONArray jsonArray = JSONArray.fromObject(result);
 		JSONObject jsonObject = null;
 		

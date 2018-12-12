@@ -46,6 +46,7 @@ public class AddBook extends HttpServlet {
 
 		String s_desc=request.getParameter("title");
 		String s_img_url=request.getParameter("img_url");
+		int price=Integer.valueOf(request.getParameter("price"));
 		
 		BookAbstract bookabstract = new BookAbstract();
 	    
@@ -71,7 +72,7 @@ public class AddBook extends HttpServlet {
 		String spids=request.getParameter("spids");
 		String specs=request.getParameter("specs");
 		
-		int price=20;
+		
 		int uid=0;
 		String username="";
 

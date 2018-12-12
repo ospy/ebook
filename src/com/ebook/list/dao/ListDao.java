@@ -129,7 +129,7 @@ public class ListDao {
 //分类列表页查询	
 	public static String getBookList(String condition,String classid, String Time,	int pageIndex, int pageListSize, String order) {
 
-		String sql = "SELECT a.i_discuid,a.s_desc,a.i_discuPrice,a.i_click_times,a.i_download_times,a.s_filetypes,a.s_loginid,a.s_imgurl,a.s_create_time  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ classid+ ") "+condition+"  "+ Time+ "  "+ order+ " LIMIT "+ pageIndex+","+ pageListSize +"";
+		String sql = "SELECT a.i_discuid,a.s_desc,a.i_Price,a.i_click_times,a.i_download_times,a.s_filetypes,a.s_loginid,a.s_imgurl,a.s_create_time  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ classid+ ") "+condition+"  "+ Time+ "  "+ order+ " LIMIT "+ pageIndex+","+ pageListSize +"";
 		Connection conn = DBPool.getInstance().getConnection();
 		
 		Statement stmt=null;
@@ -155,7 +155,7 @@ public class ListDao {
 				booklist.setS_filetypes(rs1.getString("s_filetypes"));    
 				booklist.setS_create_time(rs1.getString("s_create_time").substring(0,10));
 				booklist.setS_loginid(rs1.getString("s_loginid"));
-				booklist.setI_discuPrice(rs1.getInt("i_discuPrice"));
+				booklist.setI_Price(rs1.getInt("i_Price"));
 				
 				String discuid = rs1.getString("i_discuid");
 				String sqlsub = "SELECT s_spec,i_spid FROM cc_speciality_link_discu where i_discuid="+discuid+" and b_deleted=0 " ;
@@ -217,7 +217,7 @@ public class ListDao {
 	//最新资源--按分类
 	public static String getNewByClass(String spid) {
 
-		String sql = "SELECT  a.i_discuid,a.s_desc,a.i_discuPrice,a.s_imgurl,a.i_download_times  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ spid+ ") order by a.s_create_time desc limit 10";
+		String sql = "SELECT  a.i_discuid,a.s_desc,a.i_Price,a.s_imgurl,a.i_download_times,a.s_create_time  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ spid+ ") order by a.s_create_time desc limit 10";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs2 = null;
@@ -261,7 +261,7 @@ public class ListDao {
 	//下载次数最多--按分类
 	public static String getHotByClass(String spid) {
 
-		String sql = "SELECT  a.i_discuid,a.s_desc,a.i_discuPrice,a.s_imgurl,a.i_download_times  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ spid+ ") order by a.i_download_times desc limit 10";
+		String sql = "SELECT  a.i_discuid,a.s_desc,a.i_Price,a.s_imgurl,a.i_download_times,a.s_create_time  from cc_discu a where i_discuid in (SELECT DISTINCT i_discuid from cc_speciality_link_discu b "	+ spid+ ") order by a.i_download_times desc limit 10";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs3 = null;
@@ -305,7 +305,7 @@ public class ListDao {
 	// 最近下载--按分类
 	public static String LatestDownByClass(String spid) {
 
-		String sql = "SELECT a.i_discuid,a.s_desc,a.i_discuPrice,a.s_imgurl,T.s_create_time from cc_discu a, (select distinct b.i_discuid,c.s_create_time from cc_speciality_link_discu b, cc_integral c where b.i_discuid=c.i_discuid and b.i_spid="+spid+" and c.s_type=‘下载文件’ ORDER BY c.s_create_time desc) T WHERE  T.i_discuid=a.i_discuid LIMIT 10";
+		String sql = "SELECT a.i_discuid,a.s_desc,a.i_Price,a.s_imgurl,a.s_create_time from cc_discu a, (select distinct b.i_discuid,c.s_create_time from cc_speciality_link_discu b, cc_integral c where b.i_discuid=c.i_discuid and b.i_spid="+spid+" and c.s_type=‘下载文件’ ORDER BY c.s_create_time desc) T WHERE  T.i_discuid=a.i_discuid LIMIT 10";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs4 = null;

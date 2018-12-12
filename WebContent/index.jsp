@@ -270,14 +270,14 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 					<div class="bd">
 						<ul>
 							<li style="display: list-item;"><a
-								href="http://www.SuperSlide2.com" target="_blank"><img
-									src="..//Images/focus1.png"></a></li>
+								href="#" target="_blank"><img
+									src="/Images/focus1.png"></a></li>
 							<li style="display: none;"><a
-								href="http://www.SuperSlide2.com" target="_blank"><img
-									src="..//Images/focus1.png"></a></li>
+								href="#" target="_blank"><img
+									src="/Images/focus1.png"></a></li>
 							<li style="display: none;"><a
-								href="http://www.SuperSlide2.com" target="_blank"><img
-									src="..//Images/pic3.jpg"></a></li>
+								href="#" target="_blank"><img
+									src="./Images/focus1.png"></a></li>
 						</ul>
 					</div>
 

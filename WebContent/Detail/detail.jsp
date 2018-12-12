@@ -15,9 +15,10 @@
 <link href="/Css/Detail.css" rel="stylesheet" />
 <link href="/Css/Login.css" rel="stylesheet" />
 
+
 <script src="/Js/bootstrap.js"></script>
 <script src="/Js/jquery-ui.js"></script>
-
+<script type="text/javascript" src="/Js/jquery.zclip.min.js"></script>
 
 </head>
 
@@ -30,13 +31,81 @@
 			var r = window.location.search.substr(1).match(reg);
 		if (r!=null) return unescape(r[2]); return null;
 			}
+			
 		
 	}(jQuery));
 	
+	//script部分
+           function zclip(){
+                if ( window.clipboardData ) {  
+                    $('.copy').click(function() { 
+                        window.clipboardData.setData("Text", $(this).siblings('span.psw').text());  
+                         //复制成功  
+					    var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>☺提取码:"+$(this).siblings('span.psw').text()+"复制成功!</div></div>");
+					    $("body").find(".copy-tips").remove().end().append($copysuc);
+					    $(".copy-tips").fadeOut(3000);
+                    });  
+                } else {  
+                    $(".copy").zclip({  
+                        path:'/Js/ZeroClipboard.swf',  
+                        copy:function(){
+                            return $(this).siblings('span.psw').text();
+                        },  
+                        afterCopy:function(){
+                            //粘结好后暂时修改span内容
+                        //复制成功  
+					    var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>☺提取码:"+$(this).siblings('span.psw').text()+"复制成功!</div></div>");
+					    $("body").find(".copy-tips").remove().end().append($copysuc);
+					    $(".copy-tips").fadeOut(3000);
+                        }  
+                    });  
+                }  
+           }
 	
 </script>
 <body>
-  
+  <div href="javascript:;" id="backtop" title="回到顶部" style="text-align: center;"><br><br><span>回到</span><br><span>顶部</span></div>
+<script>window.onload = function(){
+    var obtn = document.getElementById('backtop');  //获取回到顶部按钮的ID
+    var clientHeight = document.documentElement.clientHeight;   //获取可视区域的高度
+    var timer = null; //定义一个定时器
+    var isTop = true; //定义一个布尔值，用于判断是否到达顶部
+
+    window.onscroll = function(){         //滚动条滚动事件
+
+        //获取滚动条的滚动高度
+        var osTop = document.documentElement.scrollTop || document.body.scrollTop; 
+
+        if(osTop >= clientHeight){  //如果滚动高度大于可视区域高度，则显示回到顶部按钮
+            obtn.style.display = 'block';
+        }else{         //否则隐藏
+            obtn.style.display = 'none';
+        }
+
+        //主要用于判断当 点击回到顶部按钮后 滚动条在回滚过程中，若手动滚动滚动条，则清除定时器
+        if(!isTop){
+
+            clearInterval(timer);
+        }
+        isTop = false;
+
+    }
+
+    obtn.onclick = function(){    //回到顶部按钮点击事件
+        //设置一个定时器
+        timer = setInterval(function(){
+            //获取滚动条的滚动高度
+            var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //用于设置速度差，产生缓动的效果
+            var speed = Math.floor(-osTop / 6);
+            document.documentElement.scrollTop = document.body.scrollTop = osTop + speed;
+            isTop =true;  //用于阻止滚动事件清除定时器
+            if(osTop == 0){
+                clearInterval(timer);
+            }
+        },30);
+    }
+}</script> 
 	<div class="main">
 		<div class="col_left">
 
@@ -75,11 +144,11 @@
                             <li class="col"><label>资源大小：</label><span id="volume"></span></li>
                             <li class="col"><label>资源格式：</label><span id="format"></span></li>
                             <li class="col"><label>发布日期：</label><span id="date"></span></li>
-                            <li class="col"><label>资源学科：</label><span id="speciality"></span><span id="specid"></span></li>
-                            <li class="col"><label>资源页码：</label><span id="pages"></span> </li>
-                            <li class="col"><label>下载次数：</label><span id="downCount"></span> </li>
-                            <li class="col"><label>点击次数：</label><span id="clickCount"></span></li>
-                            <li class="col"><label>下载价格：</label><b><span class="download-price"></span>M币</b></li>
+                            <li class="col2"><label>资源学科：</label><span id="speciality"></span><span id="specid"></span></li>
+                            <li class="col"><label>资源页码：</label><span class="pages"></span> </li>
+                            <li class="col"><label>点击次数：</label><span id="clickCount"></span></li>                                 
+                            <li class="col2"><label>下载点数：</label><b class="price">￥<span class="download-price"></span></b></li>
+                            <li class="col" style="visibility:hidden;"><label>下载次数：</label><span id="downCount"></span></li>
                 </ul>
                 <br> 
                 <br>
@@ -138,7 +207,7 @@
                <li id="paper"><label>纸 张：</label><span></span></li>
                
                <li id="bookprice"><label>价格：</label><span></span></li>
-               <li id="pages"><label>页 数：</label><span></span></li>
+               <li><label>页 数：</label><span class="pages"></span></li>
                <li id="wordNumber"><label>字 数：</label><span></span></li>               
                <li id="ISBN"><label>ISBN:</label><span></span></li>
                
@@ -165,11 +234,14 @@
                 </div>
                 <div id="mymodal-body" class="modal-body">
                    <h2 class="booktitle"></h2>
-                   <p>下载本资源需要：<span class="download-price red"></span>下载点</p>
-                   <p>当前账户余额为：<span id="account"></span></p>
+                   <p>下载本资源需要：<span id="price" class="download-price red"></span> 下载点</p>
+                   <p>当前账户余额为：<span id="account"></span> 下载点</p>
+                   <br><br>
+                   <p id="downtips" class="tips"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="DownloadFile()">确 定</button>
+                    
+                    <button type="button" id="downsubmit" class="btn btn-primary" onclick="DownloadFile()">确 定</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
                 </div>
             </div>
@@ -236,10 +308,7 @@
 	
 	<script type="text/javascript">
 		
-       
-      
-   
-			           
+	           
              getDetail();
              
              getAbstract();
@@ -252,7 +321,7 @@
 			 
 			 getLatestDownByClass();
 			 		 		
-
+			
 		
 		//分类下最新发布图书
 		function getNewByClass() {
@@ -277,7 +346,7 @@
 							}
 						},
 						error : function(err) {
-							alert("获取最新发布帖子异常，请联系管理员");
+							alert("获取最新发布文档异常，请联系管理员");
 							return false;
 						}
 					});
@@ -306,7 +375,7 @@
 							}
 						},
 						error : function(err) {
-							alert("获取最新发布帖子异常，请联系管理员");
+							alert("分类下下载次数最多文档异常，请联系管理员");
 							return false;
 						}
 					});
@@ -335,7 +404,7 @@
 							}
 						},
 						error : function(err) {
-							alert("获取最新发布帖子异常，请联系管理员");
+							alert("分类下最新下载文档异常，请联系管理员");
 							return false;
 						}
 					});
@@ -369,12 +438,14 @@
 	                		$(".booktitle").html(result[0].s_desc);
 	                		$("#bookname").html(result[0].s_desc);
 	                		$("#discuId").html(result[0].i_discuid);
-	                		$("#s_spec1").html(result[0].s_spec);
+	                		$("#speciality").html(result[0].s_spec);
 	                        $("#specid").html(result[0].s_specid);
 	                		$("#format").html(result[0].s_filetypes);
 	                		
-	                    
-	                		$(".download-price").html(result[0].i_discuPrice);
+	                		$("#downCount").html(result[0].i_download_times);
+	                		$("#clickCount").html(result[0].i_click_times);
+	                		
+	                		$(".download-price").html(result[0].i_Price);
 	                		$("#date").html(result[0].s_create_time);
 	                		$("#clickCount").html(result[0].i_click_times);
 
@@ -437,7 +508,7 @@
 								break;
 								case "price":$("#bookprice span").html(result[0].price);
 								break;
-								case "pages":$("#pages span").html(result[0].pages);
+								case "pages":$(".pages").html(result[0].pages);
 								break;
 								case "wordNumber":$("#wordNumber span").html(result[0].wordNumber);
 								break;
@@ -470,31 +541,39 @@
          function checklogin() {
         	 var username = '<%=username%>';
              if(username!='null'){
-            	 
-            	 getBalance();
-            	 
-            	  $("#myModal").draggable({
-                      cursor: "move",
-                      handle: '.modal-header',
-                  });
-            	 
-            	                            
-            	  //modal居中  
-            	  $("#myModal").modal("show");  
-
-            	  
+            	 var isdownload=isDownload();
+            	 if(!isdownload){//没有下载过该文件
+            		 getBalance();
+                   	 
+               	  $("#myModal").draggable({
+                         cursor: "move",
+                         handle: '.modal-header',
+                     });
+              	                            
+               	  //modal居中  
+               	  $("#myModal").modal("show");
+               	  var account=$("#account").html();
+               	  var price=$("#price").html();
+               	  if(account>price){
+               		$("#downsubmit").attr('disabled',false);
+               	  }
+               	  else{
+               		$("#downtips").html("账户余额不足，请充值！");
+               		$("#downsubmit").attr('disabled',true); 
+               	  }
+            	 }
+            	 else{//下载过该文件
+            		 jumpto();
+            	 }
+            	            	  
              }
-             else{
-            	 
+             else{            	 
             	 $("#loginModal").draggable({
                      cursor: "move",
                      handle: '.modal-header',
-                 });
-           	 
-           	                            
+                 });   	                            
            	  //modal居中  
-           	  $("#loginModal").modal("show");  
-
+           	    $("#loginModal").modal("show");  
              }
          }
          
@@ -503,6 +582,7 @@
         	 
      	    var uid="<%=uid%>";   
      	    var bookid =$.getUrlParam('id');
+     	    var isdownload=false;
      	   if(uid!=""&&uid!="null"){
 	            $.ajax({
 	                url: "<%=path%>/IsDownload",
@@ -511,28 +591,31 @@
 	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	                dataType: 'json',
 	                data: {Uid:uid,BookId:bookid},
-	                success: function (result) {
-	                	
+	                success: function (result) {	                	
 	                	if (result != "0") {
-	                		
+	                		var content="";
 	                		for(var i in result){//遍历json数组时，这么写p为索引，0,1
 	                			   j=parseInt(i)+1;
-	                			   $("#downloadUrl .ItemContent").append("<p>下载地址"+j+"：<a target=_blank href="+result[i].s_path+">"+result[i].s_path+"</a><span>"+result[i].s_password+"</span></p>");	
+	                		       content+="<p>下载地址"+j+"：<a target=_blank href="+result[i].s_path+">"+result[i].s_path+"</a>  提取码：<span class='psw'>"+result[i].s_password+"</span> <a class='copy'>复制</a></p>";
+	                			   	
 	                			}
-	                              		
-	                		$("#downloadUrl").show();
-	                	
+	                		$("#downloadUrl .ItemContent").empty().append(content);
+	                		$("#downloadUrl").show();	                	
 	                		$("#downbtn").attr("onclick","jumpto();");
+	                		isdownload= true;
+	                		zclip();  
 	                	}
 	                	else{
-	                		
+	                		 $("#downloadUrl .ItemContent").empty();
+	                		 $("#downloadUrl").hide();
 	                	}
 	                },
 	                error: function () {
 	                    alert("获取下载历史信息异常！");
-	                    return false;
+	                    return;
 	                }
-	            });	 
+	            });	
+	            return isdownload;
      	      }
 	        }   
          
@@ -552,8 +635,8 @@
 		                success: function (result) {
 		                	
 		                	if (result != "") {
-		                		array = result.split("|");
-		                		$("#account").html(array[0]);
+		                		
+		                		$("#account").html(result);
 	
 		                	} else {
 		                        $("#account").html("查询余额有误，请联系客服！");
@@ -589,15 +672,16 @@
 	                		$("#accountHead a").html(result[0].newbalance);	                			                	
 	                		for(var i=0;i<result.length;i++){
 	                			var j=i+1;
-	                		$("#downloadUrl .ItemContent").append("<p>下载地址"+j+"：<a target=_blank href="+result[i].s_path+">"+result[i].s_path+"</a><span>"+result[i].s_password+"</span></p>");
+	                		$("#downloadUrl .ItemContent").append("<p>下载地址"+j+"：<a target=_blank href="+result[i].s_path+">"+result[i].s_path+"</a>  提取码：<span class='psw'>"+result[i].s_password+"</span> <a class='copy'>复制</a></p>");
 	                		
-	                		}
-	                		
+	                		}	                		
 	                		$("#downloadUrl").show();
-	                		
+	                		zclip();
+	                		             		
 	                	} else {
 	                        $("#account").html("下载文件时发生异常！请您联系管理员：imed120@163.com");
 	                    }
+                       window.location.reload();
 	                },
 	                error : function(XMLHttpRequest, textStatus) {
 						alert(XMLHttpRequest.status);  
@@ -722,7 +806,7 @@
 		 }
 	
 	}
-	
+
     //折叠菜单
     $(".folder").click(function () {
 
@@ -740,6 +824,9 @@
         };
     });
 	
+  
+
+
 </script>
 </body>
 </html>

@@ -1,11 +1,4 @@
 
-.main {
-    width:1200px;
-    margin:0 auto;
-    height:auto;
-    overflow:hidden;
-    border:1px solid #eee;
-}
 .col_left {
     float: left;
     height: 100%;
@@ -44,7 +37,7 @@
     line-height: 34px;
     width: 50px;
 }
-.ranking_list li ul li {
+.ranking_list  ul li {
     height: auto;
     overflow: hidden;
     border-bottom: 1px solid #f0e4e4;
@@ -52,7 +45,10 @@
     padding: 15px 0;
     vertical-align: middle;
 }
-.ranking_list li ul li .img {
+.ranking_list  ul li p{
+    margin: 0;
+}
+.ranking_list  ul li .img {
     border: 1px solid #d1d1d1;
     float: left;
     height: 56px;
@@ -60,20 +56,22 @@
     overflow: hidden;
     width: 56px;
 }
-.ranking_list li ul li .price {
+.ranking_list  ul li .price {
     color: #333333;
     line-height: 12px;
     margin-top: 3px;
 }
-.ranking_list li ul li .price img {
+.ranking_list  ul li .price img {
     vertical-align: text-top;
 }
-.ranking_list li ul li .img img {
+.ranking_list  ul li .img img {
     display: block;
     height: 56px;
     width: 56px;
 }
-
+.ranking_list  ul li .lefttime{
+    color: #ccc;
+}
 /*限定条件*/
 .limit_info {
     
@@ -449,3 +447,7 @@ span.activeImage {
     border:2px solid #f0f0f0;
     box-shadow:none;
 }
+#backtop {width:30px; height:40px; position:fixed; right:25px; bottom:120px; display:none; background:url(/Images/icons/backtop1.png) no-repeat left top;}
+#backtop:hover {
+    cursor: pointer;
+    background:url(/Images/icons/backtop2.png) no-repeat 0 0;}

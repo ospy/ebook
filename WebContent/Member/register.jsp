@@ -53,7 +53,7 @@
                         &nbsp;&nbsp;<span id="reg_ValidateCodeTip"></span>
                     </div>
                     <div class="form_item">
-                        <input value="注    册" type="button" class="submit" onclick="Sign();" />
+                        <input value="注    册" id="save" type="button" class="submit" onclick="Sign();" />
                     </div>
                 </form>
             </div>
@@ -84,6 +84,10 @@
                     async: false,
                     dataType: 'text',
                     data: { Loginid: Loginid, Email: Email, Password: Password,ip:ip,city:city },
+                    beforeSend: function () {
+				        // 禁用按钮防止重复提交
+				        $("#save").attr({ disabled: "disabled" });
+				    },
                     success: function (data) {
                     	if(data=="1"){
                     		location.href = "<%=path%>/Member/actmail.jsp?email="+Email;
@@ -102,6 +106,9 @@
                     	}
                         
                     },
+                    complete: function () {
+				        $("#save").removeAttr("disabled");
+				    },
                     error:function(XMLHttpRequest, textStatus){  
                     	
                     	alert(XMLHttpRequest.status);  

@@ -86,7 +86,7 @@ public class MemberDao {
 	 */
 		public static Member findMemberByID(String uid){
 			Member member = new Member();
-			String sql = "select * from cc_member where i_uid='"+uid+"'";
+			String sql = "select * from cc_member where i_uid='"+uid+"' and b_deleted=0";
 			Connection conn = DBPool.getInstance().getConnection();
 			Statement stmt;
 			ResultSet rs = null;

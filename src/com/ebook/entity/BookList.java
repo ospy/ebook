@@ -14,7 +14,7 @@ package com.ebook.entity;
 		private int i_click_times;
 		private int i_download_times;
 		private String s_create_time;
-		private int i_discuPrice;
+		private int i_Price;
 		private String s_filetypes;
 		
 		
@@ -54,11 +54,12 @@ package com.ebook.entity;
 		public void setS_create_time(String s_create_time) {
 			this.s_create_time = s_create_time;
 		}
-		public int getI_discuPrice() {
-			return i_discuPrice;
+		
+		public int getI_Price() {
+			return i_Price;
 		}
-		public void setI_discuPrice(int i_discuPrice) {
-			this.i_discuPrice = i_discuPrice;
+		public void setI_Price(int i_Price) {
+			this.i_Price = i_Price;
 		}
 		public String getS_filetypes() {
 			return s_filetypes;

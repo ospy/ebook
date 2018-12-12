@@ -34,16 +34,17 @@ public class GetAccount extends HttpServlet {
 		String bookid = request.getParameter("BookId");
 		 /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
-		String result = Account.Balance(uid);
-			   
+		String result = "";
+		PrintWriter out = response.getWriter();	   
 			   
 			try {
-				PrintWriter out = response.getWriter();
-				out.print(result);
+				result=Account.Balance(uid);				
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		out.print(result);
 	}
 
 }

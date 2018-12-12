@@ -678,7 +678,7 @@
 
 							str += "<p class=\"others\"><span class=\"subtitle\">"+ result[i].s_spec+"</span></p>";
 							str += "<p><span class=\"price\">￥"
-									+ result[i].i_discuPrice
+									+ result[i].i_Price
 									+ "点</span>&nbsp;&nbsp;&nbsp;&nbsp;</p></div>";
 						};
 						$("#discuList").html(str);

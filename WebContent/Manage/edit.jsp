@@ -95,7 +95,26 @@
 						id="DetailTip" style="display: none; color: #cc3300;"> 获取中</span></li>
 					<!--                        <a href="/help/upload_help.html" target="_blank" class="helplink">使用帮助</a> -->
 
-
+                    <li><label><span style="color: red">*</span>价格：</label>
+					      <span style="margin-left:76px;width:18px;overflow:hidden;">
+					       <select id="PriceInput" style="width:235px;margin-left:-80px;height:31px;" onchange="combox()">
+					             <option value="10" >10</option>
+					             <option value="20" selected>20</option>
+					             <option value="30">30</option>
+					             <option value="40">40</option>
+					             <option value="50">50</option>
+					        </select>
+					        </span>  
+					        <input type="text" value ="20" placeholder="请在这里输入下载价格" id="units" name="units" style="width: 215px;margin-left: -239px;height: 31px;color:#000;">
+							<script type="text/javascript">
+							 
+							     //用于单位选择更换赋值给文本框
+							     function combox(){
+							          var text=$("#PriceInput").val();
+							          $("#units").val(text);
+							     }
+							</script>
+                     </li>
 				</ul>
 			</div>
 			<div class="clear"></div>

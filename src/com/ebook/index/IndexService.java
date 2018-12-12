@@ -52,7 +52,7 @@ public class IndexService {
 	//3.最近访问（实际是最近下载，避免未登陆人员查看）
 	public static List getNewVisit(){ 
 		Connection connection = DBPool.getInstance().getConnection();
-		String sql="select cc_member.s_loginid,cc_discu.s_desc,cc_discu.i_discuid,cc_discu.s_imgurl,cc_integral.s_create_time from (cc_integral left join cc_member on cc_integral.i_uid=cc_member.i_uid) left join cc_discu on cc_integral.i_discuid=cc_discu.i_discuid where cc_integral.s_type='下载文件' order by cc_integral.s_create_time desc limit 0, 15";
+		String sql="select cc_member.s_loginid,cc_discu.s_desc,cc_discu.i_discuid,cc_discu.s_imgurl,cc_integral.s_create_time from (cc_integral left join cc_member on cc_integral.i_uid=cc_member.i_uid) left join cc_discu on cc_integral.i_discuid=cc_discu.i_discuid where cc_integral.s_type=5 order by cc_integral.s_create_time desc limit 0, 15";
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);

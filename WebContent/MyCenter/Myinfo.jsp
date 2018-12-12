@@ -14,16 +14,17 @@
 <div class="reg_content">
      <div class="reg_form">
                 <form name="frmEmp" id="frmEmp">
-                <h2>个人信息</h2>
-                
-                    <div class="form_item">
-                        <label>姓名：</label> <span id="txtName"></span> <span id="reg_username" style="display:none;"></span>
-                    </div>
-                    <div class="form_item">
+                <h2>个人信息<span id="reg_username" style="display:none;"></span></h2>
+                <div class="form_item">
                         <label>电子邮箱：</label>
                         <span id="reg_email" class="text-input  typeahead" type="text"></span>&nbsp;&nbsp;<span
                             id="reg_emailTip"></span>
                     </div>
+                    <div class="form_item">
+                        <label>姓名：</label><input id="txtName" class="text-input  typeahead"
+                                type="text" onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
+                    </div>
+                    
                     <div class="form_item">
                         <label><span class="red star">*</span>手机：</label> <input id="txtMobile" class="text-input  typeahead"
                                 type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
@@ -63,7 +64,7 @@
 					<input id="edu5" name="edu"  type="radio"   value="5"  checked="checked"/>其它
 				</div>
                     <div class="form_item">
-                        <input value="保  存" type="button" class="submit" onclick="updatememberinfo();" />
+                        <input value="保  存" type="button" id="save" class="submit" onclick="updatememberinfo();" />
                     </div>
                 </form>
             </div>
@@ -131,7 +132,7 @@
 
           }
       }
-/* 	   function checkName(){
+function checkName(){
 	       var name = $("#txtName").val();
             if (name == "" || name == null) {
                 $("#txtNameTip").removeClass("onCorrect").addClass("onError").html("输入不能小于2个字符！");
@@ -144,7 +145,7 @@
              state1 = true;
             }
 	   
-	   } */
+	   } 
 	
 	  	   function checkUnit(){
 	  	   
@@ -253,7 +254,7 @@
 	                //address,capacity,education,member,mobile,name,occupation,speciality	
 	                	if (result != 0) {
 	                		$("#reg_username").html(result[0].id);
-	                		$("#txtName").html(result[0].name);
+	                		$("#txtName").val(result[0].name);
 	                		$("#reg_email").html(result[0].email);
 	                		$("#txtMobile").val(result[0].mobile);
 	                		$("#txt_Spe").val(result[0].speciality);
@@ -334,13 +335,17 @@
 							dataType : 'text',
 							data : {
 								occupation : $("input[name=ocu]:checked").val(),
-								name : $("#txtName").html(),
+								name : $("#txtName").val(),
 								mobile : $("#txtMobile").val(),
 								address : $("#txt_unit").val(),
 								capacity : $("#txt_Level").val(),
 								speciality : $("#txt_Spe").val(),
 								education : $("input[name=edu]:checked").val()
 							},
+							beforeSend: function () {
+						        // 禁用按钮防止重复提交
+						        $("#save").attr({ disabled: "disabled" });
+						    },
 							success : function(data) {
 								if (data == "true") {
 									var $copysuc = $("<div class='alert-tips'><div class='alert-tips-wrap'>恭喜您！提交成功<span id='second'>6</span>秒钟后将自动跳转到首页！</div></div>");
@@ -356,8 +361,13 @@
 									$(".alert-tips").fadeOut(10000);
 								}
 							},
-							error : function(err) {
-
+							complete: function () {
+						        $("#save").removeAttr("disabled");
+						    },
+						    error : function(XMLHttpRequest, textStatus) {
+								alert(XMLHttpRequest.status);  
+		                    	alert(XMLHttpRequest.readyState);  
+		                    	alert(textStatus);
 							}
 						});
 
