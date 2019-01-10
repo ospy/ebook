@@ -25,6 +25,7 @@
 			</div>
 </body>
  <script>
+   checklogin();
   var uid="<%=uid%>";       	
 	 var totalPage = 0;
 	var pageListSize = 10;//每页显示调试
@@ -144,13 +145,13 @@
             	   return "下载文件";
             	   break;
         	 case "6":
-            	   return "微信支付";
+            	   return "支付宝充值";
             	   break;
         	 case "7":
-            	   return "微信支付";
+            	   return "微信充值";
             	   break;
         	 case "8":
-          	       return "奖励赠送";
+          	       return "充值赠送";
           	       break;
         	 default:
         		 return type;

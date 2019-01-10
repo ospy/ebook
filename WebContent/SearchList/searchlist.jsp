@@ -27,6 +27,7 @@
 </head>
 
 <script type="text/javascript">
+    getsession();
 	(function($) {
 
 		$(function() {
@@ -700,5 +701,6 @@
 
 
 	</script>
+	<%@ include file="/Master/footer.jsp"%>
 </body>
 </html>

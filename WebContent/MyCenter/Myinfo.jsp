@@ -72,7 +72,7 @@
 
   <%@ include file="/Master/footer.jsp"%>
 	<script type="text/javascript">
-
+      checklogin();
 	  getMemberInfo();
 	  var state1=false;
  	  var state2=false;

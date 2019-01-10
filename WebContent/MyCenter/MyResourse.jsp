@@ -44,6 +44,7 @@
 
 </div>
   <script>
+  checklogin();
   var uid="<%=uid%>";       	
 	 var totalPage = 0;
 	var pageListSize = 10;//每页显示调试

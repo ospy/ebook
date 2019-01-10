@@ -27,6 +27,7 @@
 </head>
 
 <script type="text/javascript">
+  
 	(function($) {
 
 		$(function() {
@@ -758,5 +759,6 @@
 
 
 	</script>
+	<%@ include file="/Master/footer.jsp"%>
 </body>
 </html>

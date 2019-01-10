@@ -14,7 +14,7 @@
 
     <div class="sitetop">
         <div class="loginleft">
-            <span id="guest">游客</span><label id="username"></label>,欢迎来到MedPdf网站！
+            <span id="guest">游客</span><label id="username"></label>,欢迎来到imed120网站！
             <label style="display: none" id="tips"></label>
         </div>
         <div class="loginright">

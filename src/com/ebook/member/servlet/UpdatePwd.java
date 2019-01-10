@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.ebook.entity.MemberInfo;
 import com.ebook.utils.DBPool;
 
@@ -47,7 +49,7 @@ public class UpdatePwd extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String result="0";
 		if(!uid.equals("null")&&uid!=null){
-		
+		 pwd=DigestUtils.md5Hex(pwd);
 		 Connection conn = DBPool.getInstance().getConnection(); 
 			String sql1 = "{call updatepwd(?,?)}";
 			CallableStatement call1;

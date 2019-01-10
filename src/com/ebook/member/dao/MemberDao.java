@@ -30,14 +30,14 @@ public class MemberDao {
 	 * @param uid
 	 * @return
 	 */
-	public static ArrayList<Member> userLogin(String uid,String pwd){
+	public static Member userLogin(String uid,String pwd){
 	
 		Member member = new Member();
 		String sql = "select i_uid,s_mail,s_loginid,s_password,s_level,i_state,s_mobile from m_userlist where (s_loginid='"+uid+"' or s_mail='"+uid+"' or s_mobile='"+uid+"') and s_password ='"+pwd+"' and b_deleted=0";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs = null;
-		ArrayList<Member> list=new ArrayList<Member>();
+		
 		try {
 			stmt = conn.createStatement();
 			 rs = stmt.executeQuery(sql);
@@ -51,7 +51,7 @@ public class MemberDao {
 				 member.setS_level(rs.getString("s_level"));
 				 //member.setOnline(rs.getInt("i_online"));
 			 }
-			 list.add(member); 
+			 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +75,7 @@ public class MemberDao {
 				e.printStackTrace();
 			}
 	}
-		return list;
+		return member;
 	}
 	
 

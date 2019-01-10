@@ -18,6 +18,9 @@
     padding:10px;
     background:#f6f6f6;
 }
+#newcontent img{
+    text-align: center;
+}
 .Newsbox p {
        
         text-indent:2em;
@@ -45,6 +48,7 @@
 }
 #newsdetail{
     width:960px;
+    padding: 20px;
     border: 1px solid #eee;
     border-radius: 6px;
     

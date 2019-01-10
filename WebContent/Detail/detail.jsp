@@ -153,7 +153,7 @@
                 <br> 
                 <br>
                 <br>
-                <input id="downbtn" type="button" value="下载文件" onclick="checklogin();">                   
+                <input id="downbtn" type="button" value="下载文件" onclick="checkaccount();">                   
 	        </div>
 	         
 	    </div>
@@ -307,8 +307,7 @@
 
 	
 	<script type="text/javascript">
-		
-	           
+	       
              getDetail();
              
              getAbstract();
@@ -538,7 +537,7 @@
 	            });	 
 	
 	}
-         function checklogin() {
+         function checkaccount() {
         	 var username = '<%=username%>';
              if(username!='null'){
             	 var isdownload=isDownload();
@@ -554,7 +553,7 @@
                	  $("#myModal").modal("show");
                	  var account=$("#account").html();
                	  var price=$("#price").html();
-               	  if(account>price){
+               	  if(parseInt(account)>parseInt(price)){
                		$("#downsubmit").attr('disabled',false);
                	  }
                	  else{
@@ -828,5 +827,6 @@
 
 
 </script>
+<%@ include file="/Master/footer.jsp"%>
 </body>
 </html>

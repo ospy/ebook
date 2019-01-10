@@ -6,18 +6,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <%@ include file="/Master/header.jsp"%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
-<script type="text/javascript"
-	src="<%=path%>/Js/jquery.SuperSlide.2.1.1.source.js"></script>
-<link type="text/css" rel="stylesheet" href="<%=path%>/Css/index.css" />
+<script type="text/javascript"	src="/Js/jquery.SuperSlide.2.1.1.source.js"></script>
+<link type="text/css" rel="stylesheet" href="/Css/index.css" />
 </head>
+
 <%
 List newBooks = IndexService.getNewBooks();//1.新书速递
 List hotDownloads = IndexService.getHotDownload();//2.热门下载
 List newVisits = IndexService.getNewVisit();//3.最近访问
-System.out.println(newVisits.size());
 List newRegisters = IndexService.getNewRegister();//1.最新注册
 List NewAccounts = IndexService.getNewAccount();//2.账户变化
 List topDownloads = IndexService.getTopDownload();//3.下载排行
@@ -157,14 +157,6 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 						</ul>
 					</div>
 
-					<div class="classify">
-						<ul>
-							
-							
-						
-						</ul>
-					</div>
-
 				</div>
 			</div>
 			<div class="drugclass leftitem">
@@ -225,16 +217,15 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 
 					</ul>
 					<ul>
-						<li class="dyntitle"><span class="s_loginid">用户名</span><span
-							class="s_type">类型</span><span class="s_right">下载点</span></li>
+						<li class="dyntitle"><span class="s_loginid">用户名</span><span class="s_right">下载点</span></li>
 
 						<%for(int i=0;i<NewAccounts.size();i++){  //循环显示新书start
 						Map Account = (Map)NewAccounts.get(i);				
 					%>
 
 						<li><span class="s_loginid"><%=Account.get("s_loginid") %></span>
-							<span class="s_type"><%=Account.get("s_type") %></span> <span
-							class="s_value"><%=Account.get("i_value") %></span></li>
+							
+							 <span class="s_right"><%=Account.get("i_value") %></span></li>
 						<%} %>
 					</ul>
 					<ul>
@@ -435,7 +426,7 @@ List topDownloads = IndexService.getTopDownload();//3.下载排行
 
 	</div>
 	<script>
-	
+	getsession();
 	getnews();
 	
 	function getnews() {

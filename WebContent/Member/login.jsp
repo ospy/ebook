@@ -66,6 +66,7 @@
     <%@ include file="/Master/footer.jsp"%>
 </body>
 <script type="text/javascript">
+    getsession();
 	var state1 = false;
 	var state2 = false;
 	var state3 = false;
@@ -149,7 +150,18 @@
 	                success: function (result) {
 	                    if (result == 1) {
 	                        location.href = "/index.jsp";
-	                    } else {
+	                    }
+	                    if (result ==-1) {
+	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("重复登录！");
+	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("重复登录！");
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
+	                    }
+	                    if (result ==-2) {
+	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("该用户已经在异地登录！");
+	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("该用户已经在异地登录！");
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
+	                    }
+	                    else {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
 	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
 	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
@@ -168,7 +180,11 @@
 	
 	}
 	
-	
+	 $("body").keydown(function (event) {
+         if (event.which == 13) {
+        	 login();
+         }
+     });
 	
 </script>
 </html>

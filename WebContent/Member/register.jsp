@@ -60,6 +60,8 @@
 </div>
   <%@ include file="/Master/footer.jsp"%>
 <script type="text/javascript">
+          getsession()
+        checklogined();
         var check1 = false;
         var check2 = false;
         var check3 = false;
@@ -294,9 +296,8 @@
             if (arr != null) return unescape(arr[2]); return null;
         }
 
-
-
-
+    	
+        
         $("body").keydown(function (event) {
             if (event.which == 13) {
                 Sign();

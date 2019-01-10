@@ -1,0 +1,264 @@
+@CHARSET "UTF-8";
+
+.mod-title {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 1px solid #ddd;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+.mod-title .ico-alipay {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/alipay-pay.png") no-repeat scroll 0 -115px;
+    display: inline-block;
+    height: 36px;
+    margin-right: 7px;
+    vertical-align: middle;
+    width: 41px;
+}
+.mod-title .ico-wechat {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/wechat-pay.png") no-repeat scroll 0 0;
+    display: inline-block;
+    height: 36px;
+    margin-right: 7px;
+    vertical-align: middle;
+    width: 41px;
+}
+.mod-title .text {
+    color: #333;
+    font-size: 20px;
+    font-weight: normal;
+    vertical-align: middle;
+}
+.orderbox{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #f7f7f7 none repeat scroll 0 0;
+    height: 100%;
+}
+.mod-ct {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #fff url("/Images/icons/wave.png") repeat-x scroll center top;
+    border-color:transparent  #e5e5e5;
+    border-image: none;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    color: #333;
+    margin: 15px auto 0;
+    
+    width: 610px;
+}
+.mod-ct .order {
+    font-size: 20px;
+    padding-top: 30px;
+}
+.mod-ct .amount {
+    width: 320px;
+    margin: 0 auto;
+    font-size: 32px; 
+    
+}
+.mod-ct .amount>span{
+   
+    height: 49px;
+    line-height: 49px;
+    
+}
+#changebtn{
+    height: 40px;
+    width: 60px;
+}
+.title{
+    float: left;
+    vertical-align: middle;
+    
+    font-size: 18px;
+    color: #999;
+}
+#price{
+    display: inline-block;
+}
+.mod-ct .amount #point{
+    color: #666;   
+}
+.mod-ct .amount #plus{
+    color: #CC3300;   
+}
+
+.mod-ct .order-amount{
+    font-size: 32px;
+    margin: 0 auto;
+    text-align: center; 
+}
+.mod-ct .pic{
+    height: auto;
+    overflow: hidden;
+}
+.mod-ct .ql-image {
+    margin-left: 10px;
+    border: 3px solid #eee;
+    margin-top: 30px;
+    float: left;
+}
+.mod-ct .qr-image {
+    margin-right: 10px;
+    border: 3px solid #eee;
+    margin-top: 30px;
+    float: right;
+}
+#qrcode{
+    margin: 30px auto 10px;
+    text-align: center;   
+}
+#qrcode img{
+   border: 5px solid #eee;
+}
+#qrcode .countdown{
+    line-height: 40px;
+    font-size: 14px;
+    color: #999;
+}
+.mod-ct .picture{
+    position:relative;
+}
+.mod-ct .picture img {
+    margin: 10px;
+    width: 260px;
+}
+.mod-ct .picture:hover{
+   cursor:pointer;
+   border: 3px solid #666;
+}
+.mod-ct .selected{
+    border: 3px solid #666;
+}
+.mod-ct .selected .right{
+   display: block;
+   width: 25px;
+   height: 25px;
+   background: url("/Images/logoes/selected.png") no-repeat;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.mod-ct .detail {
+    margin: 30px 0;
+    text-align: center;
+}
+.mod-ct .detail .submit{
+    background: #f77813 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    height: 36px;
+    line-height: 30px;
+    width: 260px;
+}
+.mod-ct .detail .submit:hover{
+   background: #ff811d none repeat scroll 0 0; 
+   cursor: pointer;
+}
+.mod-ct .detail .arrow .ico-arrow {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/alipay-pay.png") no-repeat scroll -25px -100px;
+    display: inline-block;
+    height: 11px;
+    width: 20px;
+}
+.mod-ct .detail .detail-ct {
+    display: none;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: right;
+}
+.mod-ct .detail .detail-ct dt {
+    float: left;
+    width: 40%;
+    text-align: right;
+}
+.mod-ct .detail .detail-ct dd {
+    text-indent: 1em;
+    text-align: left;
+}
+.mod-ct .detail-open {
+    
+}
+.mod-ct .detail .arrow {
+    border: 1px solid #e5e5e5;
+    padding: 6px 34px;
+}
+.mod-ct .detail .arrow .ico-arrow {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/alipay-pay.png") no-repeat scroll -25px -100px;
+    display: inline-block;
+    height: 11px;
+    width: 20px;
+}
+.mod-ct .detail-open .arrow .ico-arrow {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/alipay-pay.png") no-repeat scroll 0 -100px;
+    display: inline-block;
+    height: 11px;
+    width: 20px;
+}
+.mod-ct .detail-open .detail-ct {
+    display: block;
+}
+.mod-ct .tip {
+    text-align: center;
+    border-bottom: 1px dashed #e5e5e5;
+    position: relative;
+}
+.mod-ct .tip .ico-scan {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/alipay-pay.png") no-repeat scroll 0 0;
+    display: inline-block;
+    height: 55px;
+    vertical-align: middle;
+    width: 56px;
+}
+.mod-ct .tip .tip-text {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: left;
+    vertical-align: middle;
+}
+.mod-ct .tip .dec {
+    background: rgba(0, 0, 0, 0) url("/Images/icons/alipay-pay.png") no-repeat scroll 0 -55px;
+    display: inline-block;
+    height: 45px;
+    position: absolute;
+    bottom: -23px;
+    width: 22px;
+}
+.mod-ct .tip .dec-left {
+    background-position: 0 -55px;
+    left: 0;
+}
+.mod-ct .tip .dec-right {
+    background-position: -25px -55px;
+    right: 0;
+}
+.btn-group, .btn-group-vertical {
+    margin-left: 12px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.mod-ct .tip-text{
+    padding: 0 20px;
+}
+.mod-ct .tip-text p{
+    padding-left: 24px;
+}
+.succ{
+    display: inline-block;
+    height: 25px;
+    width: 50px;
+    vertical-align: text-bottom;
+    background: url("/Images/logoes/selected.png") no-repeat 0 0;
+}
+.booktitle{
+    line-height: 60px;
+}

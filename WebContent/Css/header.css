@@ -58,7 +58,6 @@ img {
    margin: 0 auto;
     width:1200px;
     height: auto;
-    overflow: hidden;
 }
 .location {
     clear:both;
@@ -178,7 +177,7 @@ img {
     width:860px;
 }
 .searchbox {
-    margin-top:44px;   
+    margin-top:30px;   
 }
 .search_txtbox {
     float:left;
@@ -209,6 +208,7 @@ img {
 .clear {
     clear:both;
 }
+
 /*����navi*/
 #navibar {
     height:38px;
@@ -367,16 +367,17 @@ img {
 .bottom ul{
      margin: 20px auto;
     overflow: hidden;
-    width: 324px;
+    width: 244px;
 }
 .bottom ul li {
-    background:url(/Images/icons/index.png) 30px 0 no-repeat;
+    
     display:inline-block;
     width:80px;
     float:left;
     list-style:none;
     }
 .bottom p{
+    margin: 0;
 	line-height: 22px;
 	color: #666;
 	

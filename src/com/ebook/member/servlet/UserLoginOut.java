@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
+import com.ebook.Session.SessionListener;
 
 @WebServlet("/LoginOut")
 public class UserLoginOut extends HttpServlet {
@@ -24,14 +26,9 @@ public class UserLoginOut extends HttpServlet {
 	        if(session == null){  
 	            response.sendRedirect("/index.jsp");  
 	            return;  
-	        }  
-
-	        session.removeAttribute("username"); 
-	        session.removeAttribute("account");
-	        session.removeAttribute("uid");
-	        session.removeAttribute("email");
-	        session.removeAttribute("state");
-	        response.sendRedirect("/index.jsp");  
+	        }              
+	        session.invalidate();
+	        response.sendRedirect("/Member/login.jsp");
 	}
 
 

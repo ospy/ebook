@@ -96,9 +96,7 @@
 		actmail="<%=actmail%>";
 		i_uid="<%=i_uid%>";
 		loginid="<%=loginid%>";
-		
 
-		
 		if (check == "已激活"||check=="激活成功") {
                 $('#modal-body').html("<h2>邮箱已激活！请完善个人信息。</h2>");
 				$('#myModal').modal('show');

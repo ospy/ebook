@@ -44,10 +44,11 @@
             </div>
 </div>
 <script type="text/javascript">
+checklogin();
 var check1 = false;
 var check2 = false;
 var check3 = false;
-checklogin();
+
 function checkPwd() {
     var pwd = $("#reg_pwd").val();
     if (pwd == "" || pwd == null) {
@@ -159,18 +160,7 @@ function updatepsw(){
     	});
     } 
 }
-function checklogin() {
-
-	var uid="<%=uid%>"; 
-	 if(uid==""||uid=="null"){
-		 window.location.href="/Member/login.jsp";
-		 return false;
-	 }
-}
-
-    	 
-    
-
+	 
 </script>
 </body>
 </html>

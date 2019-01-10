@@ -50,4 +50,42 @@ public class LoginHistory {
 	
      
     }
+	
+	public static void loginout(String loginid) {
+		String date=DateUtils.format(null);	
+		String sql = "update login_history set outtime='"+date+"',b_deleted=1  where loginid='"+loginid+"' and b_deleted=0";
+		Connection conn = DBPool.getInstance().getConnection();
+		
+		Statement stmt=null;
+	   
+	   
+		try {
+
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+
+			}
+			  
+		 catch (SQLException e) {
+			e.printStackTrace();		
+		}
+
+	 finally{
+	    	   try {
+	    		 
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	   try {	    		 
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	       }	
+		
+	     
+	    }
 }

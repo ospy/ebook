@@ -3,13 +3,12 @@
 
 <div class="bottom">
 	<ul class="rightline">
-		<li><a href="#">网站简介</a></li>
-		<li><a href="#">客服中心</a></li>
+		
+		<li><a href="/Service/CSC.jsp">客户服务</a></li>
 		<li><a href="#">影响因子</a></li>
 		<li  class="endline"><a href="#">友情链接</a></li>
-		<li></li>
+		
 	</ul>
-	<p> www.medbook123.com</p>
-	<p>Copyright (C) 2017</p>
-	
+	<p> Copyright © 2018 imed120.com All Rights Reserved.</p>
+	<script src="https://s23.cnzz.com/z_stat.php?id=1275648819&web_id=1275648819" language="JavaScript"></script>
 </div>

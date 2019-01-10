@@ -19,6 +19,7 @@
 </head>
 
 <script type="text/javascript">
+    getsession();
 	(function($) {
 
 			$.getUrlParam = function(name)

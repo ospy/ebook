@@ -26,6 +26,7 @@
 </head>
 
 <script type="text/javascript">
+   
 	(function($) {
 
 		$(function() {

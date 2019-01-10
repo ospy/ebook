@@ -12,7 +12,9 @@
   border-radius:6px 0 0 0; 
   background: #317082;
 }
-
+.bioclass,.drugclass,.dynanmic{
+    margin-top: 10px;
+}
 .leftcontent{
 	padding: 5px 0;
 }
@@ -270,16 +272,14 @@
 }
 .slideTxtBox .hd {
     margin-top: 10px;
-    border-bottom: 1px solid #ddd;
     height: 30px;
     line-height: 30px;
-    padding: 0 10px 0 20px;
     position: relative;
+    border-bottom: 1px solid #ddd;
 }
 .slideTxtBox .hd ul {
     float: left;
     height: 32px;
-    left: 20px;
     position: absolute;
     top: -1px;
 }
@@ -305,6 +305,11 @@
 .slideTxtBox .hd ul li.on a{
     color: #fff;
 }
+
+.slideTxtBox .bd {
+    border-bottom: 1px solid #eee;
+}
+.s
 .slideTxtBox .bd ul {
     padding: 0 15px;
 }
@@ -354,9 +359,12 @@
 .s_value{
 	width: 58px;
 	text-align: right;
-display: inline-block;
+    display: inline-block;
 }
 .s_right{
+    margin-right: 12px;
+    width: 90px;
+    text-align: right;
 	display: inline-block;
 	float: right;
 }

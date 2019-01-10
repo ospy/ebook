@@ -1,27 +1,41 @@
 package com.ebook.member.servlet;
 
-import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.ebook.account.dao.Account;
 import com.ebook.entity.Member;
 import com.ebook.member.dao.LoginHistory;
 import com.ebook.member.dao.MemberDao;
-import com.ebook.account.dao.Account;
+
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.ServletContext;
 
 @WebServlet("/UserLogin")
 public class UserLogin extends HttpServlet {
+	    /**
+	 * 用户和Session绑定关系
+	 */
+	public static final Map<String, HttpSession> USER_SESSION=new HashMap<String, HttpSession>();
+	
+	/**
+	 * seeionId和用户的绑定关系
+	 */
+	public static final Map<String, String> SESSIONID_USER=new HashMap<String, String>();
+
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,27 +52,45 @@ public class UserLogin extends HttpServlet {
 		String url = request.getParameter("url");
 		String md5pwd = DigestUtils.md5Hex(pwd);
 		
-		ArrayList<Member> result = MemberDao.userLogin(username, md5pwd);
-		
-		
-	        if(result.get(0).getLoginid()!=null){
+		Member result = MemberDao.userLogin(username.trim(), md5pwd);
+		PrintWriter out = response.getWriter();
+	        if(result!=null){
 	        HttpSession session = request.getSession(); 
-	        session.setAttribute("username", result.get(0).getLoginid()); 
-	        session.setAttribute("uid", result.get(0).getUid()); 
-	        session.setAttribute("email", result.get(0).getEmail());
-	        session.setAttribute("level", result.get(0).getS_level());
-	        session.setAttribute("state", result.get(0).getState());
-	        String balance = Account.Balance(result.get(0).getUid());
+	        ServletContext application=session.getServletContext();
+            Map<String, String> loginMap = (Map<String, String>)application.getAttribute("loginMap");
+	            if(loginMap==null){
+	                loginMap = new HashMap<>();
+	            }
+	            for(String key:loginMap.keySet()) {
+	                if (username.trim().equals(key)) {
+	                    if(session.getId().equals(loginMap.get(key))) {
+	                    	out.print(-1);//重复登录  
+	                        return;
+	                    }else{
+	                    	out.print(-2);//异地已经登录	                      
+	                        return;
+	                    }
+	                }
+	            }
+            loginMap.put(username.trim(),session.getId());
+            application.setAttribute("loginMap", loginMap);
+                        	        
+	        session.setAttribute("username", result.getLoginid()); 
+	        session.setAttribute("uid", result.getUid()); 
+	        session.setAttribute("email", result.getEmail());
+	        session.setAttribute("level", result.getS_level());
+	        session.setAttribute("state", result.getState());
+	        String balance = Account.Balance(result.getUid());
 	        session.setAttribute("account", balance); 
-	        LoginHistory.loginin(result.get(0).getUid(),ip,city);
-			PrintWriter out = response.getWriter();
-			out.print(1);
+	        out.print(1);
+			System.out.println("登录成功！");
+	        //session.setAttribute(Constant.SESSION_USER,result);
+	        LoginHistory.loginin(result.getLoginid(),ip,city);				
 		}
-	        else{
-	        	PrintWriter out = response.getWriter();
+	        else{	        	
 				out.print(0);
 	        }
 	
 	}
-
+	
 }
