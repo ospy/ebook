@@ -5,9 +5,6 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <session-config>
     <session-timeout>15</session-timeout>
@@ -15,4 +12,19 @@
   <listener>
     <listener-class>com.ebook.Session.SessionListener</listener-class>
   </listener>
+  <filter>
+    <filter-name>xssFilter</filter-name>
+    <filter-class>com.ebook.Xss.XssFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>xssFilter</filter-name>
+    <url-pattern>/Member/Register</url-pattern>
+    <url-pattern>/UserLogin</url-pattern>
+    <url-pattern>/UpdatePwd</url-pattern>
+    <url-pattern>/UpdateMemberInfo</url-pattern>
+    <url-pattern>/SaveMemberInfo</url-pattern>
+    <url-pattern>/UpdateMemberInfo</url-pattern>
+    <url-pattern>/GeneOrder</url-pattern>
+    <url-pattern>/FindPsd</url-pattern>
+  </filter-mapping>
 </web-app>

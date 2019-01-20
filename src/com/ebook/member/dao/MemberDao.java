@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import javax.sound.midi.MetaEventListener;
 import javax.servlet.http.HttpSession;
 
+import org.apache.xpath.operations.And;
+
 import com.ebook.constant.Constant;
 import com.ebook.entity.Activate;
 import com.ebook.entity.BookList;
@@ -33,7 +35,7 @@ public class MemberDao {
 	public static Member userLogin(String uid,String pwd){
 	
 		Member member = new Member();
-		String sql = "select i_uid,s_mail,s_loginid,s_password,s_level,i_state,s_mobile from m_userlist where (s_loginid='"+uid+"' or s_mail='"+uid+"' or s_mobile='"+uid+"') and s_password ='"+pwd+"' and b_deleted=0";
+		String sql = "select i_uid,s_mail,s_loginid,s_level,i_state from m_userlist where (s_loginid='"+uid+"' or s_mail='"+uid+"' or s_mobile='"+uid+"') and s_password ='"+pwd+"' and b_deleted=0";
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt=null;
 		ResultSet rs = null;
@@ -41,15 +43,12 @@ public class MemberDao {
 		try {
 			stmt = conn.createStatement();
 			 rs = stmt.executeQuery(sql);
-			 if(rs.next()){
-					
+			 if(rs.next()){					
 				 member.setUid(rs.getString("i_uid"));
 				 member.setEmail(rs.getString("s_mail"));
-				 member.setLoginid(rs.getString("s_loginid"));
-				 member.setPassword(rs.getString("s_password"));
+				 member.setLoginid(rs.getString("s_loginid"));				
 				 member.setState(rs.getInt("i_state"));
 				 member.setS_level(rs.getString("s_level"));
-				 //member.setOnline(rs.getInt("i_online"));
 			 }
 			 
 		} catch (SQLException e) {
@@ -75,7 +74,7 @@ public class MemberDao {
 				e.printStackTrace();
 			}
 	}
-		return member;
+	return member;	
 	}
 	
 
@@ -131,7 +130,7 @@ public class MemberDao {
 			 member.setLoginid(rs.getString("s_loginid"));
 			 member.setPassword(rs.getString("s_password"));
 			 member.setState(rs.getInt("i_state"));
-			 member.setB_deleted(rs.getInt("i_state"));
+			 member.setB_deleted(rs.getInt("b_deleted"));
 			 //member.setOnline(rs.getInt("i_online"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -146,10 +145,11 @@ public class MemberDao {
 public static Member findNewMemberByEmail(String email){
 	//查询新插入用户记录，如果邮件发送成功才将状态设置为可用i_state=1 and b_deleted=0
 	Member member = new Member();
-	String sql = "select * from cc_member where s_mail='"+email+"' and i_state=0 and b_deleted=1 ORDER BY i_uid desc LIMIT 1";
+	String sql = "select * from cc_member where s_mail='"+email+"' and i_state<2  ORDER BY i_uid desc LIMIT 1";
 	Connection conn = DBPool.getInstance().getConnection();
 	Statement stmt;
 	ResultSet rs = null;
+	
 	try {
 		stmt = conn.createStatement();
 		 rs = stmt.executeQuery(sql);
@@ -159,10 +159,15 @@ public static Member findNewMemberByEmail(String email){
 		 member.setLoginid(rs.getString("s_loginid"));
 		 member.setPassword(rs.getString("s_password"));
 		 member.setState(rs.getInt("i_state"));
-		 member.setB_deleted(rs.getInt("i_state"));
+		 member.setB_deleted(rs.getInt("b_deleted"));
 		 //member.setOnline(rs.getInt("i_online"));
+		 rs.close();
+		 stmt.close();
 	} catch (SQLException e) {
 		e.printStackTrace();
+	}
+	finally{
+		DatabaseTools.closeConnection(conn);
 	}
 	return member;
 }
@@ -260,7 +265,7 @@ public static Member findNewMemberByEmail(String email){
 				stmt = conn.createStatement();
 				 rs = stmt.executeQuery(sql);
 				 rs.next();
-				 activate.setId(rs.getLong("i_id"));
+				 activate.setId(rs.getInt("i_id"));
 				 activate.setCreateTime(rs.getString("s_create_time"));
 				 activate.setCode(rs.getString("s_act_code"));
 			} catch (SQLException e) {
@@ -300,7 +305,26 @@ public static Member findNewMemberByEmail(String email){
 			}
 			
 		}
-		
+		/**
+		 * 淇濆瓨activate
+		 * @param activate
+		 */
+		public static void delActivate(String uid){
+			//将使用过的激活码删除
+			String sql = "update cc_activate set b_deleted=1 where b_deleted=0 and i_uid="+uid;
+			Connection conn = DBPool.getInstance().getConnection();
+			PreparedStatement ptst = null;
+			try {
+				ptst = conn.prepareStatement(sql);
+				ptst.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				DatabaseTools.closeStatement(ptst);
+				DatabaseTools.closeConnection(conn);
+			}
+			
+		}	
 		
 		/**
 		 * 淇濆瓨MemberInfo

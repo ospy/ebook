@@ -30,10 +30,9 @@ domain = "http://mail."+domain;
                 <div class="act_tips">
                         <h3>Tips:</h3>
                         <ul>
-		                        <li>1. 检查Email地址是否填写错误？<a href="register.jsp">重新申请</a></li>								
-								<li>2. 过几分钟后再重新查看收件箱，还没有收到？<a href="#">重发邮件</a></li>
-								<li>2. 看看是否在邮箱的"垃圾箱"里?</li>
-								<li>4. 发送邮件给我们查找原因,email：imed120@163.com</li>
+		                        <li>1. 检查Email地址是否填写错误？<a href="register.jsp">重新填写邮箱地址申请</a></li>							
+								<li>2. 看看激活邮件是否在邮箱的<b>"垃圾箱"</b>里。</li>
+								<li>3. 发送邮件到：imed120@163.com ,帮助我们查找原因。</li>
 					  </ul>
                     </div>
             </div>

@@ -1,19 +1,21 @@
 package com.ebook.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import com.ebook.constant.Constant;
 import com.ebook.entity.Activate;
@@ -22,66 +24,67 @@ import com.ebook.member.dao.MemberDao;
 
 import freemarker.template.TemplateException;
 
-
-public class SendEmailUtil {
-	private static final String CHECK_CODE = "checkCode";
-	
-	public static boolean sendEmail(String email,HttpServletRequest request) throws IOException, TemplateException{
-		Member member = MemberDao.findNewMemberByEmail(email);
-		String loginid = member.getLoginid();
+public class SendPsd {
+	public static String sendEmail(String email,String Loginid,String IP,String city) throws IOException, TemplateException{
+		
+		Member member = MemberDao.findMemberByEmail(email);
 		String uid = member.getUid();
-		String sql = "select count(1) from cc_activate where i_uid="+uid+" and b_deleted=0";
+		String memo=city+":"+IP;
+		String sql = "select count(1) from cc_findpsw where s_loginid="+Loginid+" and s_dest='"+email+"' and b_deleted=0";
 		int count = DatabaseTools.getCount(sql);
 		if(count>0){//将b_deleted置为1
-			String sql1 = "update cc_activate set b_deleted=1 where i_uid="+uid+"";
+			String sql1 = "update cc_findpsw set b_deleted=1 where i_uid="+uid+"";
 			DatabaseTools.update(sql1);
-		}
-		//插入新记录		
-		Activate activate = new Activate();
-		activate.setCreateTime(DateUtils.format(""));
-		activate.setMember(member);
-		activate.setStype("MAIL");
-		activate.setBdeleted(0);
-		activate.setBoverdue(0);
-		activate.setBsend(1);
-		activate.setSdest(member.getEmail());
-		activate.setSloginid(loginid);
-		activate.setSname("");
-		// 邮箱激活验证码
-		activate.setCode(StringUtil.getvalidcode());
-		String checkCode = Md5Util.execute(member.getUid()+ ":"+ activate.getCode());
-		// 发送邮件链接地址
-		String url =  getServiceHostnew(request)+"activateAccount?activationid="   
-		        + member.getUid() + "&" + CHECK_CODE + "=" + checkCode; 
-		LOG.info("邮箱激活连接："+url);
+		};
+		// 重置的密码
+		String actcode = StringUtil.getvalidcode();
 		
-		//保存验证码
-		LOG.info("保存验证码");
-		MemberDao.saveActivate(activate);
+		// 发送邮件链接地址
+		String psd = "重置密码为：" +actcode; 
+		LOG.info(psd);
+		//插入找回密码记录表
+		String sql2 = "insert into cc_findpsw(i_uid,s_loginid,s_dest,s_act_code,s_type,memo,b_send,s_create_time,b_deleted) values (?,?,?,?,?,?,?,?,?)";
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement ptst = null;
+		try {
+			ptst = conn.prepareStatement(sql2);
+			ptst.setInt(1,Integer.parseInt(uid));
+			ptst.setString(2, Loginid);
+			ptst.setString(3, email);
+			ptst.setString(4, actcode);
+			ptst.setString(5, "MAIL");
+			ptst.setString(6, memo);
+			ptst.setString(7, "1");
+			ptst.setString(8, DateUtils.format(""));
+			ptst.setInt(9, 0);
+			ptst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DatabaseTools.closeStatement(ptst);			
+		}
+		//保存重置密码
+		LOG.info("保存密码");
+		
 		//发送内容
 		Map<String, String> map = new HashMap<String, String>();
-        if (loginid == null || loginid.equals("")) {
+        if (Loginid == null || Loginid.equals("")) {
             map.put("name", "亲爱的用户");
         } else {
-            map.put("name", loginid);
+            map.put("name", Loginid);
         }
-        map.put("emailActiveUrl", url);
-        String[] msg = getEmailResources("account-activate.ftl",map);
+        map.put("emailActiveUrl", psd);
+        String[] msg = getEmailResources("findpsd.ftl",map);
         String subject = "imed120.com帐号激活邮件";
         String context = msg[1];
         String []address = {email};
         // 发送邮件
         final Properties props = PropertiesUtils.loadProps("/config/user/emailInfo.properties");
         final String addressFrom = props.getProperty("mailname");
-       Session session = Session.getInstance(props, new Authenticator() {
-           @Override
-           protected PasswordAuthentication getPasswordAuthentication() {
-               return new PasswordAuthentication(addressFrom, props.getProperty("mailpassword"));
-           }
-       });
        
        String type ="text/html;charset="+ Constant.CHARSET_DEFAULT;
        boolean sendresult = false;
+       boolean changeresult=false;
       //sendresult = EmailUtils.sendEmail(session, new Date(), addressFrom, subject, context, type, null, null, address);
        if(!sendresult){
     	   try {
@@ -91,40 +94,47 @@ public class SendEmailUtil {
 			e.printStackTrace();
 		}
        }
-       if(!sendresult){
+       else if(!sendresult){
     	   try {
     		   sendresult =	EmailUtils.sendmail(type,email,new Date(),"imed120@sohu.com","smtp.sohu.com", subject, context);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}   
+		}
+       }; 
+    	 //邮件发送成功重置密码  
+    	if(sendresult==true){    		
+    		String newpwd=DigestUtils.md5Hex(actcode);
+     			String sql3 = "{call updatepwd(?,?)}";
+     			CallableStatement call1;
+     			try {
+     				call1 = conn.prepareCall(sql3);
+     				call1.setString(1,uid);
+     				call1.setString(2,newpwd);
+     				call1.execute();
+     				call1.close();    				
+     				changeresult=true;			
+     			    
+     			} catch (SQLException e) {
+     				// TODO Auto-generated catch block
+     				e.printStackTrace();
+     			}
+     			finally{
+     				DatabaseTools.closeConnection(conn);
+     			}	
+    	};   
+  		 
+       if(sendresult==true&&changeresult==true){
+    	   //发送邮件成功并且修改密码成功
+    	   return "1";
        }
-
-       return sendresult;
+       else{
+    	   return "0";}
        //发送之后，将cc_member表i_state置为1
        //member.setState(1);
         //更新member
         //MemberDao.updateMember(member);
-	}
-	
-	 /**
-     * 获取服务器的域名（包含端口号）
-     * 
-     * @param request   请求
-     * @return          域名
-     */
-    public static String getServiceHostnew(HttpServletRequest request) {
-        String serverPort = "";
-        if (request.getServerPort() != 80) {
-            serverPort = ":" + request.getServerPort();
-        }
-        String path = request.getContextPath();
-        String basePath = request.getScheme() + "://" + request.getServerName()
-                + serverPort + path + "/";
-        return basePath;
-    }
-    
- 
+	} 
     
     /**
      * 得到邮件资源
@@ -150,5 +160,4 @@ public class SendEmailUtil {
         return new String[] { msg.substring(0, index - 1),
                 msg.substring(index + 1) };
     }
-
 }

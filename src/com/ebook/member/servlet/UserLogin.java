@@ -54,7 +54,7 @@ public class UserLogin extends HttpServlet {
 		
 		Member result = MemberDao.userLogin(username.trim(), md5pwd);
 		PrintWriter out = response.getWriter();
-	        if(result!=null){
+	        if(result.getUid()!=null&&result.getState()>1){
 	        HttpSession session = request.getSession(); 
 	        ServletContext application=session.getServletContext();
             Map<String, String> loginMap = (Map<String, String>)application.getAttribute("loginMap");
@@ -87,6 +87,9 @@ public class UserLogin extends HttpServlet {
 	        //session.setAttribute(Constant.SESSION_USER,result);
 	        LoginHistory.loginin(result.getLoginid(),ip,city);				
 		}
+	        else if(result.getState()==1){
+	        	out.print(-3);//未激活邮箱
+	        }
 	        else{	        	
 				out.print(0);
 	        }

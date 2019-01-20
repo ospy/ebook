@@ -30,6 +30,7 @@ public class ActivateAccount extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		String checkCode1  = request.getParameter(CHECK_CODE);
+		//System.out.print("checkCode1:"+checkCode1);
 		String uid = request.getParameter("activationid");
 		String sql = "select * from cc_activate where i_uid="+uid+" and b_deleted=0 limit 1";
 		Member member = MemberDao.findMemberByID(uid);
@@ -46,6 +47,7 @@ public class ActivateAccount extends HttpServlet {
 			request.getSession().setAttribute("email",member.getEmail());
 			Activate activate = MemberDao.findActiveBySQL(sql);
 			String checkCode2 = Md5Util.execute(member.getUid() + ":"+ activate.getCode());
+			//System.out.print("checkCode2:"+checkCode2);
 			String format = "yyyy-MM-dd HH:mm:ss"; 
 			Calendar todayStart = Calendar.getInstance();  
 			todayStart.set(Calendar.HOUR_OF_DAY, 0);  
@@ -73,6 +75,7 @@ public class ActivateAccount extends HttpServlet {
 							request.getSession().setAttribute("checkResult", "激活成功");
 //							response.sendRedirect("Member/userinfo.jsp");
     					    request.getRequestDispatcher("/Member/userinfo.jsp?checkCode="+checkCode1+"&actid="+uid).forward(request, response);
+    					    MemberDao.delActivate(member.getUid());//删除使用过的激活码
 						}else {//激活失败
 							request.getSession().setAttribute("checkResult", "激活失败");
 //							response.sendRedirect("Member/userinfo.jsp");

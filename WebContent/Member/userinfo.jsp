@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -98,7 +98,7 @@
 		loginid="<%=loginid%>";
 
 		if (check == "已激活"||check=="激活成功") {
-                $('#modal-body').html("<h2>邮箱已激活！请完善个人信息。</h2>");
+                $('#modal-body').html("<h2>邮箱已激活！请完善个人信息，完整填写将获赠10下载点。</h2>");
 				$('#myModal').modal('show');
 		} 
 		else{
@@ -162,11 +162,11 @@
 					<input id="save" value="提    交" type="button" class="submit"
 						onclick="check();"/>
 				</div>
-				<div class="form_item declare">
-					<label> 本站声明：</label> 
-					<p>1.完整填写个人信息将获赠10下载点；</p>
+				<div class="declare">
+					<h2> 本站声明：</h2> 
+					<p>1.请如实填写个人信息，完整填写将获赠10下载点；</p>
 					<p>2.填写手机号码后可使用手机号码登录本站；</p>
-					<p>3.请如实填写个人信息，本站承诺所保存之用户个人信息仅供用户统计和联系使用，不会用于任何商业目的；</p>
+					<p>3.本站承诺所保存之用户个人信息仅供用户统计和联系使用，不会用于其它商业目的。</p>
 				</div>
 			</form>
 		</div>

@@ -378,7 +378,7 @@ public static String getDownload(String bookid) throws UnsupportedEncodingExcept
 	return result;
 
     }
-
+//正常下载扣除下载点
 public static boolean insertAccount(String bookid,String uid,String price,String balance,String newvalue) throws UnsupportedEncodingException {
 	String date = DateUtils.format(null);
 	

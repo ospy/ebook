@@ -77,9 +77,9 @@ public class LoginRegisterService {
 		String sql = "SELECT COUNT(1) FROM cc_member_info WHERE i_uid='"+i_uid+"' and b_deleted=0";
 		int count= DatabaseTools.getCount(sql);
 		if (count > 0) {
-			bool = false;
+			bool = false;//cc_member_info表有记录
 		}
-		return bool;
+		return bool;//cc_member_info表无记录
 	}
 	
 	public static Member  registerSave(String loginid,String email,String password,String ip,String city) {
@@ -126,7 +126,7 @@ public class LoginRegisterService {
 			int uid=Integer.valueOf(member.getUid());
 			String date = DateUtils.format(null);
 			//注册时建立新账户,初始账户0点
-			String sql1 = "insert into cc_integral(i_uid,i_value,s_type,i_old_value,i_new_value,s_create_time) values(?,?,?,?,?,?)";
+			String sql1 = "insert into cc_integral(i_uid,i_value,s_type,i_old_value,i_new_value,s_create_time,s_message) values(?,?,?,?,?,?,?)";
 			Connection connection1  = DBPool.getInstance().getConnection();
 			PreparedStatement  ptst1 = null;
 			try {
@@ -137,6 +137,7 @@ public class LoginRegisterService {
 				ptst1.setInt(4, 0);
 				ptst1.setInt(5, 0);
 				ptst1.setString(6, date);
+				ptst1.setString(7, "用户注册");
 				ptst1.executeUpdate();
 				result=true;
 			} catch (SQLException e) {

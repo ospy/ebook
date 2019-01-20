@@ -77,7 +77,7 @@
         </div>
         
  <!-- Modal -->
-<div class="modal fade" id="headmodal" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="headmodal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,6 +123,7 @@
     	   var email="<%=email%>";
     	   var account = "<%=account%>";   	  
     	   var level="<%=level%>";
+    	   var state="<%=state%>";
     	   
            if(username!="null"){
         	   $("#accountHead").html("账户余额：<a href='/MyCenter/MyAccount.jsp'>"+account+"资源点</a>");
@@ -131,6 +132,7 @@
              $("#regist").hide();
              $("#recharge").html('<a href="/DoOrder/OrderSelect.jsp">充&nbsp;&nbsp;值</a>');
              $("#login").html('<a href="<%=path%>/LoginOut">注&nbsp;&nbsp;销</a>');
+              
            }
            else{
         	   $("#accountHead").html("");
@@ -143,31 +145,11 @@
        }
        function checklogin(){
     	   var username = "<%=username%>";
-    	   var state="<%=state%>";
-    	   
+	   
            if(username=="null"||username==""){        	  
         	   location.href="/Member/login.jsp";
            }
-           //判断邮箱是否激活
-           if(state==1){
-        	   $("#headmodal").draggable({
-                   cursor: "move",
-                   handle: '.modal-header',
-               });    	                            
-         	  //modal居中  
-        	   $("#headmodal .modal-body").html("<p>请到注册的个人邮箱:  "+email+"  中激活账户！</p>");
-        	   $("#headmodal").modal("show");
-    	   }
-         //判断个人信息是否完善
-           if(state==2){
-        	   $("#headmodal").draggable({
-                   cursor: "move",
-                   handle: '.modal-header',
-               });    	                            
-         	  //modal居中  
-        	   $("#headmodal .modal-body").html("<p>请您<a target='_blank' href='/MyCenter/Myinfo.jsp'>完善个人信息！</a></p>");
-        	   $("#headmodal").modal("show");
-    	   }  
+           
        }
        function checklogined(){
      	   var username = "<%=username%>";

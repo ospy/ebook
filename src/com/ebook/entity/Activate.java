@@ -12,6 +12,7 @@ public class Activate {
 	private int bsend;
 	private int bdeleted;
 	private String code;
+	private String memo;
 	private  String createTime;
 	public long getId() {
 		return id;
@@ -78,6 +79,12 @@ public class Activate {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 	
 }

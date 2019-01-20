@@ -447,9 +447,7 @@
 	                		$(".download-price").html(result[0].i_Price);
 	                		$("#date").html(result[0].s_create_time);
 	                		$("#clickCount").html(result[0].i_click_times);
-
-
-					
+			
 	                	} else {
 	                        $("#book_intro").html("<div class='no_record'>抱歉！没有找到符合限定条件的记录。</div>");
 	                    }
@@ -459,9 +457,7 @@
 	                    return false;
 	                }
 	            });	 
-		 
 
-	
 	}
 
      	//获取书目摘要信息
@@ -553,12 +549,13 @@
                	  $("#myModal").modal("show");
                	  var account=$("#account").html();
                	  var price=$("#price").html();
-               	  if(parseInt(account)>parseInt(price)){
+               	  if(parseInt(account)>=parseInt(price)){
                		$("#downsubmit").attr('disabled',false);
                	  }
                	  else{
                		$("#downtips").html("账户余额不足，请充值！");
-               		$("#downsubmit").attr('disabled',true); 
+               		$("#downsubmit").attr('disabled',true);
+               		$("#downsubmit").hide(); 
                	  }
             	 }
             	 else{//下载过该文件

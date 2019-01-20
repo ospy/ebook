@@ -19,10 +19,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.ebook.constant.Constant;
 import com.ebook.entity.Member;
 import com.ebook.entity.MemberInfo;
+import com.ebook.member.LoginRegisterService;
 import com.ebook.member.dao.MemberDao;
 import com.ebook.utils.DBPool;
 import com.ebook.utils.DateUtils;
@@ -42,24 +44,26 @@ public class UpdateMemberInfo extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		MemberInfo memberInfo = new MemberInfo();
-		String occupation  = request.getParameter("occupation");
-		String username = request.getParameter("name");
-		String mobile = request.getParameter("mobile");
-		String address = request.getParameter("address");
-		String capacity = request.getParameter("capacity");
-		String speciality = request.getParameter("speciality");
-		String tt = request.getParameter("education");
-		int education =Integer.parseInt(tt);
+		String occupation  = request.getParameter("occupation").trim();
+		String username = request.getParameter("name").trim();
+		String mobile = request.getParameter("mobile").trim();
+		String address = request.getParameter("address").trim();
+		String capacity = request.getParameter("capacity").trim();
+		String speciality = request.getParameter("speciality").trim();
+		String edu = request.getParameter("education");
+		int education =Integer.parseInt(edu);
 		
 		HttpSession session = request.getSession();
 		String uid= (String)session.getAttribute("uid");
 		
-		boolean result=false;
-			
+		String result="";
+if(uid!=null&&uid!=""){		
+		Member member = MemberDao.findMemberByID(uid);
+		boolean checkMemberInfoUid=LoginRegisterService.checkMemberInfoUid(uid);	
 			Connection conn = DBPool.getInstance().getConnection(); 
-			  //修改下载文件信息
-			  try {
-			 
+			if(member.getState()==3&&checkMemberInfoUid==false){
+			//修改下载文件信息
+			  try {			 
 						String sql1 = "{call UpdateMemberInfo(?,?,?,?,?,?,?,?)}";
 						CallableStatement call1= conn.prepareCall(sql1);
 						//一次给存储过程传递参数，插入书目信息
@@ -75,16 +79,35 @@ public class UpdateMemberInfo extends HttpServlet {
 						call1.execute();
 						call1.close();
 					    conn.close();
-					    result=true;
+					    result="1";
 			       
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		if(member.getState()==2&&checkMemberInfoUid==true){
+			memberInfo.setId(member.getUid());
+			memberInfo.setAddress(address);
+			memberInfo.setCapacity(capacity);
+			memberInfo.setEducation(edu);
+			//memberInfo.setMember(member);
+			memberInfo.setMobile(mobile);
+			memberInfo.setName(username);
+			memberInfo.setSpeciality(speciality);
+			memberInfo.setOccupation(occupation);
+			memberInfo.setCreatetime(DateUtils.format(null));
+			
+			MemberDao.saveMemberInfo(memberInfo);
+			String newaward = com.ebook.account.dao.Account.Proc_Account(member.getUid(),"system",2,"+", 10, "完整填写个人信息，奖励10下载点");	
+			if(newaward.equals("succ")){
+				result="2";
+			}
 		
+		}
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		//request.getRequestDispatcher("index.jsp").forward(request, response);
+	  }
 	}
-
 }

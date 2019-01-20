@@ -14,6 +14,7 @@ public class Member {
 	private int online;
 	private int b_deleted;
 	
+	private  Member member;
 	public String getUid() {
 		return uid;
 	}
@@ -80,5 +81,11 @@ public class Member {
 	}
 	public void setB_deleted(int b_deleted) {
 		this.b_deleted = b_deleted;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 }

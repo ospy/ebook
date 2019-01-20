@@ -112,7 +112,7 @@
 	            success: function (result) {
 	                if (result !=null&&result !="") {
 	                	for(var i=0;i < result.length;i++ ){
-	                		var src='/Images/'+type+'/'+price+'/'+result[i].real_price+".png";
+	                		var src='/Images/'+type+'/'+price+'/'+type+result[i].real_price+".png";
 	                		$("#qrcode img").attr('src',src);
 	                		$("#qrcode img").attr('title',result[i].real_price);
 	                		$("#productName").html("账户充值"+price*10+"下载点");
@@ -148,7 +148,7 @@
                 	   alert("超出价格范围，请5分钟后重新生成！"); 
                    }else{
                 	   for(var i=0;i < result.length;i++ ){
-                   		var src='/Images/'+type+'/'+price+'/'+result[i].real_price+".png";
+                   		var src='/Images/'+type+'/'+price+'/'+type+result[i].real_price+".png";
                    		$("#qrcode img").attr('src',src);
                    		$("#qrcode img").attr('title',result[i].real_price);
                    		$("#productName").html("账户充值"+price*10+"下载点");

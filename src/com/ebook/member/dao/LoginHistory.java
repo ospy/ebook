@@ -57,8 +57,7 @@ public class LoginHistory {
 		Connection conn = DBPool.getInstance().getConnection();
 		
 		Statement stmt=null;
-	   
-	   
+   
 		try {
 
 			stmt = conn.createStatement();

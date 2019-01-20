@@ -42,7 +42,7 @@ public class SaveMemberInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member member= (Member) session.getAttribute(Constant.SESSION_USER);
 		PrintWriter out = response.getWriter();
-		if(member!=null){
+		if(member.getUid()!=null){
 		boolean checkMemberInfoUid=LoginRegisterService.checkMemberInfoUid(member.getUid());
 			if(member.getUid()!=null&&checkMemberInfoUid==true){
 				memberInfo.setId(member.getUid());

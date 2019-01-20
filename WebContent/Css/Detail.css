@@ -199,6 +199,7 @@ ul.info_list li {
 }
 #downtips{
     font-weight: bold;
+    padding-left: 24px;
 }
 
 /*обтьм╪╠Й*/
@@ -314,7 +315,9 @@ ul.info_list li {
 #bookabstract .ItemContent{
 	padding:10px;
 }
-
+#bookabstract .ItemContent p{
+    margin:0;
+}
 #publishinfo{
 	margin-top:30px;
 }

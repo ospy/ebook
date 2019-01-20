@@ -45,7 +45,6 @@
 
 .login-form {
   margin: 20px auto;
-  padding: 10px;
   width:420px;
 }
 .login-form .fieldset {
@@ -194,6 +193,22 @@
 	line-height: 36px;
 	margin:0 0 0 80px;
 	padding-left: 24px;
+}
+.login-form .addfieldset{
+    
+    margin-top: 10px;
+    line-height: 36px;
+    width: 75%;
+    margin-left: 64px;
+}
+.login-form .addfieldset a{
+    color: #999;
+}
+.login-form .addfieldset a:hover{
+    color: #333;
+}
+.login-form .addfieldset a.right{
+    float:right;
 }
 .onError
 {

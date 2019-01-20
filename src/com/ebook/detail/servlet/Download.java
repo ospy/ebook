@@ -30,11 +30,15 @@ public class Download extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String bookid = request.getParameter("bookid");
-		String uid = request.getParameter("uid");
 		 /*设置字符集为'UTF-8'*/
         response.setCharacterEncoding("UTF-8"); 
         String price="";
         String result="";
+        HttpSession session = request.getSession();
+		String uid= (String)session.getAttribute("uid");
+		PrintWriter out = response.getWriter();
+		
+   if(uid!=null&&uid!=""){
         result = DetailDao.getDownload(bookid);//获取文件下载地址等
 		JSONArray jsonArray = JSONArray.fromObject(result);
 		JSONObject jsonObject = null;
@@ -43,12 +47,11 @@ public class Download extends HttpServlet {
         price= jsonObject.getString("i_base_price");
 	 
 		String balance = Account.Balance(uid);//获取账户余额
-		PrintWriter out = response.getWriter();
+		
 		//如果账户余额大于扣除金额则扣除，否则返回余额不足
 	    if(Integer.parseInt(balance)>=Integer.parseInt(price)){
 			int newbalance = Integer.parseInt(balance)-Integer.parseInt(price);
-			String newvalue = String.valueOf(newbalance);
-			HttpSession session = request.getSession(); 
+			String newvalue = String.valueOf(newbalance);			 
 			session.setAttribute("account",newvalue);
 			jsonObject.put("newbalance", newvalue);
 			jsonArray.set(0,jsonObject);
@@ -83,5 +86,10 @@ public class Download extends HttpServlet {
 	    	result="-1";
 	    }
 	    out.print(result);  
+      }
+	 else{
+		out.print("0");   
+		   }
+	   
 	}
 }

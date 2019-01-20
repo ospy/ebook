@@ -49,7 +49,7 @@ public class Account {
 
 				stmt = conn.createStatement();
 				stmt.executeUpdate(sql);
-				result="成功"; 
+				result="succ"; 
 				}
 				  
 			 catch (SQLException e) {

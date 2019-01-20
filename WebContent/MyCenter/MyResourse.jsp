@@ -26,7 +26,6 @@
   <div id="tab_btn_box">
 	  <ul id="tab_btn">
 	    <li><a href="#tabs-1">已下载</a></li>
-	    <li><a href="#tabs-2">已收藏</a></li>
 	  </ul>
    </div>
   <div id="tabs-1">
