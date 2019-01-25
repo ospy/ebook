@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ebook.utils.DBPool;
+import com.ebook.utils.DatabaseTools;
 
 /**
  * Servlet implementation class AccountCount
@@ -39,12 +40,13 @@ public class AccountCount extends HttpServlet {
 	String uid = request.getParameter("Uid");
 	String AcountCount="";
 	
-
+	Connection conn = DBPool.getInstance().getConnection(); 
+	CallableStatement call1=null;
 		try {
 		
-			Connection conn = DBPool.getInstance().getConnection(); 
+		
 			String sql1 = "{call GetAccount(?,?)}";
-			CallableStatement call1= conn.prepareCall(sql1);
+			call1= conn.prepareCall(sql1);
 			call1.registerOutParameter(2,Types.INTEGER); 
 			call1.setString(1,uid);
 			//一次给存储过程传递参数，插入书目信息
@@ -52,11 +54,14 @@ public class AccountCount extends HttpServlet {
 			call1.execute();
 			AcountCount=call1.getString(2); 
 			
-			call1.close();
-		    conn.close();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally{
+			DatabaseTools.closeStatement(call1);
+			DatabaseTools.closeConnection(conn);
 		}
 		PrintWriter out = response.getWriter();
 		out.print(AcountCount);   

@@ -62,7 +62,7 @@ public class CheckSucc extends HttpServlet {
 		String uid=(String) session.getAttribute("uid");
 		
 		PrintWriter out = response.getWriter();
-		if(uid!=null){
+	if(uid!=null){
 		String sql = "select * from orderlist where i_uid='"+uid+"' and order_id="+orderid;
 		 
 		Connection conn = DBPool.getInstance().getConnection();

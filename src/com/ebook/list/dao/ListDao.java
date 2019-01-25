@@ -52,8 +52,7 @@ public class ListDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       finally{
-    	 
+       finally{   	 
     	   try {
 			rs.close();
 		} catch (SQLException e) {

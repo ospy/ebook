@@ -21,21 +21,21 @@
                             id="reg_emailTip"></span>
                     </div>
                     <div class="form_item">
-                        <label>姓名：</label> <input id="txtName" class="text-input  typeahead"
-                                type="text" onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
+                        <label><span class="red star">*</span>姓名：</label> <input id="txtName" class="text-input  typeahead"
+                                type="text" onblur="checkName();" placeholder="输入不能小于2个字符！" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
                     </div>
                     
                     <div class="form_item">
                         <label><span class="red star">*</span>手机：</label> <input id="txtMobile" class="text-input  typeahead"
-                                type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
+                                type="text" onblur="checkMobile();" placeholder="请输入手机号！"/>&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
                     </div>
                 <div class="form_item">
-					<label> 学科专业：</label> <input id="txt_Spe"
+					<label><span class="red star">*</span>学科专业：</label> <input id="txt_Spe"
 						class="text-input  typeahead" type="text"
-						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
+						onblur="checkSpe();" placeholder="输入不能小于2个字符！"/>&nbsp;&nbsp;<span id="txt_SpeTip"></span>
 				</div>
                     <div class="form_item">
-					<label> 职业：</label> 
+					<label><span class="red star">*</span>职业：</label> 
 					    <input id="occu1"  name="ocu"  type="radio"  value="1" checked="checked" />医务人员
 						<input id="occu2"   name="ocu"   type="radio"  value="2" />教师
 						<input id="occu3"   name="ocu"  type="radio"  value="3" />研发人员
@@ -45,18 +45,18 @@
 
                     
 				<div class="form_item">
-					<label> 工作单位：</label> <input id="txt_unit"
-						class="text-input  typeahead" type="text"  value="" onblur="checkUnit();" />&nbsp;&nbsp;<span
+					<label><span class="red star">*</span>工作单位：</label> <input id="txt_unit"
+						class="text-input  typeahead" type="text"  value="" onblur="checkUnit();" placeholder="输入不能小于6个字符！"/>&nbsp;&nbsp;<span
 						id="txt_unitTip"></span>
 				</div>
 				<div class="form_item">
-					<label> 职务职称：</label> <input id="txt_Level"
-						class="text-input  typeahead" type="text" onblur="checkLevel();" />&nbsp;&nbsp;<span
+					<label><span class="red star">*</span>职务职称：</label> <input id="txt_Level"
+						class="text-input  typeahead" type="text" onblur="checkLevel();" placeholder="输入不能小于2个字符！"/>&nbsp;&nbsp;<span
 						id="txt_LevelTip"></span>
 				</div>
 
 				<div class="form_item">
-					<label> 最高学历：</label> 
+					<label><span class="red star">*</span>最高学历：</label> 
 					<input id="edu1" name="edu"  type="radio"  value="1" />专科
 					<input id="edu2" name="edu"  type="radio"  value="2" checked="checked"/>本科
 					<input id="edu3" name="edu"  type="radio"  value="3" />硕士
@@ -64,10 +64,10 @@
 					<input id="edu5" name="edu"  type="radio"   value="5"  />其它
 				</div>
 				<div class="form_item">
-                        <label>验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
+                        <label>验证码：</label>
                         <input id="reg_ValidateCode" class="text-input  typeahead validatecode" type="text" onblur="checkCode();" />&nbsp;&nbsp;&nbsp;&nbsp;
                         <img src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
-                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" />
+                            onclick="this.src='../code.do?name=user_reg&id='+encodeURI(new Date());" />
                         &nbsp;&nbsp;<span id="reg_ValidateCodeTip"></span>
                     </div>
                     <div class="form_item">
@@ -158,7 +158,7 @@ function checkName(){
                 $("#btnSendVerCode").attr("disabled", "disabled");
                
             } else {
-                var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+                var reg = /^(0|86|17951)?(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[0-9])[0-9]{8}$/;
                 if (!reg.test(mobile)) {
                     $("#txtMobileTip").removeClass("onCorrect").html("");
                     $("#txtMobileTip").addClass("onError").html("手机号输入错误！");
@@ -376,7 +376,7 @@ function checkCode() {
 						         		//关闭模态框后清除模态框数据
 						          		location.href = "<%=path%>/index.jsp";
 						         		});
-						          	 $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+						          	 $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
 								}
 							},
 							complete: function () {

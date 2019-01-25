@@ -17,7 +17,7 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
         //在session销毁的时候 把loginMap中保存的键值对清除
-    	System.out.println("注销ID:"+event.getSession().getId().toString());
+    	
     	String sessionID = event.getSession().getId().toString();
     	String username="";
     	if(event.getSession().getAttribute("username")!=null){
@@ -30,9 +30,10 @@ public class SessionListener implements HttpSessionListener {
             	loginMap.remove(username);
                 event.getSession().getServletContext().setAttribute("loginMap",loginMap);
                 LoginHistory.loginout(username);
-            }                      
+            }  
+            System.out.println("注销ID："+sessionID+"用户名："+username);
         }
-        System.out.println("注销ID"+sessionID+"用户名："+username);
+       
     }
 
 }

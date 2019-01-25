@@ -55,25 +55,10 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 		finally{
-		try {
-				rs.close();			
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			DatabaseTools.closeResultset(rs);
+			DatabaseTools.closeStatement(stmt);
+			DatabaseTools.closeConnection(conn);
 			}
-	    try {	    		
-	    	stmt.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    try {	    		 
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
 	return member;	
 	}
 	
@@ -87,7 +72,7 @@ public class MemberDao {
 			Member member = new Member();
 			String sql = "select * from cc_member where i_uid='"+uid+"' and b_deleted=0";
 			Connection conn = DBPool.getInstance().getConnection();
-			Statement stmt;
+			Statement stmt = null;
 			ResultSet rs = null;
 			try {
 				stmt = conn.createStatement();
@@ -107,6 +92,11 @@ public class MemberDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			finally{
+				DatabaseTools.closeResultset(rs);
+				DatabaseTools.closeStatement(stmt);
+				DatabaseTools.closeConnection(conn);
+				}
 			return member;
 		}
 	
@@ -119,7 +109,7 @@ public class MemberDao {
 		Member member = new Member();
 		String sql = "select * from cc_member where s_mail='"+email+"' and b_deleted=0";
 		Connection conn = DBPool.getInstance().getConnection();
-		Statement stmt;
+		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
@@ -135,6 +125,11 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally{
+			DatabaseTools.closeResultset(rs);
+			DatabaseTools.closeStatement(stmt);
+			DatabaseTools.closeConnection(conn);
+			}
 		return member;
 	}
 	/**
@@ -147,7 +142,7 @@ public static Member findNewMemberByEmail(String email){
 	Member member = new Member();
 	String sql = "select * from cc_member where s_mail='"+email+"' and i_state<2  ORDER BY i_uid desc LIMIT 1";
 	Connection conn = DBPool.getInstance().getConnection();
-	Statement stmt;
+	Statement stmt = null;
 	ResultSet rs = null;
 	
 	try {
@@ -161,14 +156,14 @@ public static Member findNewMemberByEmail(String email){
 		 member.setState(rs.getInt("i_state"));
 		 member.setB_deleted(rs.getInt("b_deleted"));
 		 //member.setOnline(rs.getInt("i_online"));
-		 rs.close();
-		 stmt.close();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 	finally{
+		DatabaseTools.closeResultset(rs);
+		DatabaseTools.closeStatement(stmt);
 		DatabaseTools.closeConnection(conn);
-	}
+		}
 	return member;
 }
 	
@@ -211,7 +206,7 @@ public static Member findNewMemberByEmail(String email){
 		Activate activate = new Activate();
 		String sql = "select * from cc_activate where s_mail='"+email+"' order by i_id desc";
 		Connection conn = DBPool.getInstance().getConnection();
-		Statement stmt;
+		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
@@ -223,6 +218,11 @@ public static Member findNewMemberByEmail(String email){
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally{
+			DatabaseTools.closeResultset(rs);
+			DatabaseTools.closeStatement(stmt);
+			DatabaseTools.closeConnection(conn);
+			}
 		return activate;
 	}
 	
@@ -236,7 +236,7 @@ public static Member findNewMemberByEmail(String email){
 			Activate activate = new Activate();
 			String sql = "select * from cc_activate where i_uid='"+uid+"' order by i_id desc";
 			Connection conn = DBPool.getInstance().getConnection();
-			Statement stmt;
+			Statement stmt = null;
 			ResultSet rs = null;
 			try {
 				stmt = conn.createStatement();
@@ -248,6 +248,11 @@ public static Member findNewMemberByEmail(String email){
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			finally{
+				DatabaseTools.closeResultset(rs);
+				DatabaseTools.closeStatement(stmt);
+				DatabaseTools.closeConnection(conn);
+				}
 			return activate;
 		}
 		
@@ -259,7 +264,7 @@ public static Member findNewMemberByEmail(String email){
 		public static Activate findActiveBySQL(String sql){
 			Activate activate = new Activate();
 			Connection conn = DBPool.getInstance().getConnection();
-			Statement stmt;
+			Statement stmt = null;
 			ResultSet rs = null;
 			try {
 				stmt = conn.createStatement();
@@ -271,6 +276,11 @@ public static Member findNewMemberByEmail(String email){
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			finally{
+				DatabaseTools.closeResultset(rs);
+				DatabaseTools.closeStatement(stmt);
+				DatabaseTools.closeConnection(conn);
+				}
 			return activate;
 		}
 		

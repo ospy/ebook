@@ -8,7 +8,7 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
 %> 
 <link href="<%=path %>/Css/header.css" rel="stylesheet" />
-<link href="<%=path %>/Css/main.css" rel="stylesheet" />
+
 <link href="<%=path %>/Css/bootstrap.css" rel="stylesheet" />
 <script  type="text/javascript" src="<%=path %>/Js/jquery-1.9.1.js" ></script>
 <script src="/Js/bootstrap.js"></script>
@@ -173,6 +173,7 @@
          		});
             }
         }
+
        function shutdown() {     
    		//判断是否为ie
            if (navigator.userAgent.indexOf("MSIE") > 0) {

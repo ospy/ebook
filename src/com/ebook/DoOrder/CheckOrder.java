@@ -75,10 +75,8 @@ public class CheckOrder extends HttpServlet {
 		ArrayList<Order> list=new ArrayList<Order>();
 		SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
-
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			
+			rs = stmt.executeQuery(sql);			
 			while(rs.next()){
 				if(rs.getString("recharge_price").equals(price)){
 					Order order=new Order();   
@@ -91,15 +89,13 @@ public class CheckOrder extends HttpServlet {
 					order.setPay_state(rs.getString("pay_state"));
 					order.setGenerate_time(rs.getString("generate_time"));
 					order.setDeadline_time(rs.getString("deadline_time"));
-					order.setPay_time(rs.getString("pay_state"));
-					
+					order.setPay_time(rs.getString("pay_state"));					
 					try {
 						  long now = new Date().getTime();
 						  long deadline = simdate.parse(rs.getString("deadline_time")).getTime();
 						  int leftsecond = (int)((deadline - now) / 1000);
 						  order.setLeft_time(String.valueOf(leftsecond));
-						  System.out.printf("lefttime："+leftsecond);
-						
+						  //System.out.printf("lefttime："+leftsecond);						
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

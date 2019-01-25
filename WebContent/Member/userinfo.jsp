@@ -119,27 +119,27 @@
                     </div>
                      <div class="form_item">
                         <label><span class="red star">*</span>手机：</label> <input id="txtMobile" class="text-input  typeahead"
-                                type="text" onblur="checkMobile();" />&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
+                                type="text" onblur="checkMobile();" placeholder="请输入手机号！"/>&nbsp;&nbsp;<span id="txtMobileTip" class="TipItem"></span>
                     </div>
 				<div class="form_item">
                         <label><span class="red star">*</span>姓名：</label> <input id="txtName" class="text-input  typeahead"
-                                type="text"  onblur="checkName();" />&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
+                                type="text"  onblur="checkName();" placeholder="输入不能小于2个字符！"/>&nbsp;&nbsp;<span id="txtNameTip" class="TipItem"></span>
                     </div>
                    
 				<div class="form_item">
 					<label> <span class="red star">*</span>工作单位：</label> <input id="txt_unit"
-						class="text-input  typeahead" type="text"  value="" onblur="checkUnit();" />&nbsp;&nbsp;<span
+						class="text-input  typeahead" type="text"  value="" onblur="checkUnit();" placeholder="输入不能小于6个字符，例如：xx医院xx科！"/>&nbsp;&nbsp;<span
 						id="txt_unitTip"></span>
 				</div>
 				<div class="form_item">
 					<label><span class="red star">*</span>职务职称：</label> <input id="txt_Level"
-						class="text-input  typeahead" type="text" onblur="checkLevel();" />&nbsp;&nbsp;<span
+						class="text-input  typeahead" type="text" onblur="checkLevel();" placeholder="输入不能小于2个字符，例如：主治医师！"/>&nbsp;&nbsp;<span
 						id="txt_LevelTip"></span>
 				</div>
 				<div class="form_item">
 					<label><span class="red star">*</span>学科专业：</label> <input id="txt_Spe"
 						class="text-input  typeahead" type="text"
-						onblur="checkSpe();" />&nbsp;&nbsp;<span id="txt_SpeTip"></span>
+						onblur="checkSpe();" placeholder="输入不能小于2个字符，例如：心内科！"/>&nbsp;&nbsp;<span id="txt_SpeTip"></span>
 				</div>
 				<div class="form_item">
 					<label><span class="red star">*</span>职业：</label> 

@@ -201,67 +201,42 @@ public static String getExtraInfo(String bookid) throws UnsupportedEncodingExcep
 		 
 		JSONObject obj = new JSONObject();
 		String ptids="";
-		while(rs2.next()){
-			   
-//			bookabstract.setI_discuid(rs2.getInt("i_discuid"));    
-//			bookabstract.setI_ptid(rs2.getInt("i_ptid"));    
-//			bookabstract.setT_value(rs2.getString("t_value"));    
-			
-			String temp = rs2.getString("s_value");  
-			
-			
-			
+		while(rs2.next()){     			
+			String temp = rs2.getString("s_value");  		
 			switch (rs2.getInt("i_ptid")) {
-			case 51:bookabstract.setAuthorName(temp);
-			   
+			case 51:bookabstract.setAuthorName(temp);			   
 				break;
-			case 52:bookabstract.setAuthorIntro(temp);
-			
+			case 52:bookabstract.setAuthorIntro(temp);			
 			     break;
-			case 17:bookabstract.setContentIntro(temp);
-			      
+			case 17:bookabstract.setContentIntro(temp);			      
 			     break;
-			case 16:bookabstract.setContentIndex(temp);
-			     
-			break;
-			case 18:bookabstract.setPublishTime(temp);
-			   
-			break;
-			case 31:bookabstract.setPrice(temp);
-					
-			break;
-			case 56:bookabstract.setSeriesName(temp);
-				
-					break;
-			case 57:bookabstract.setPressName(temp);
-				
+			case 16:bookabstract.setContentIndex(temp);			     
+			     break;
+			case 18:bookabstract.setPublishTime(temp);	   
+			     break;
+			case 31:bookabstract.setPrice(temp);		
+			     break;
+			case 56:bookabstract.setSeriesName(temp);	
+				 break;
+			case 57:bookabstract.setPressName(temp);				
 					break;
 			case 59:bookabstract.setPages(temp);
-					
 					break;
-			case 60:bookabstract.setWordNumber(temp);
-					
+			case 60:bookabstract.setWordNumber(temp);					
 					break;
-			case 61:bookabstract.setEdition(temp);
-					
+			case 61:bookabstract.setEdition(temp);					
 					break;
-			case 62:bookabstract.setPrintingTime(temp);
-					
+			case 62:bookabstract.setPrintingTime(temp);					
 					break;
-			case 63:bookabstract.setImpression(temp);
-					
+			case 63:bookabstract.setImpression(temp);					
 					break;
-			case 64:bookabstract.setBookSize(temp);
-					
+			case 64:bookabstract.setBookSize(temp);					
 				break;
-			case 65:bookabstract.setPack(temp);
-				
+			case 65:bookabstract.setPack(temp);				
 				break;
-			case 66:bookabstract.setPaper(temp);
-					
+			case 66:bookabstract.setPaper(temp);					
 				break;
-			case 67:bookabstract.setISBN(temp);
-					
+			case 67:bookabstract.setISBN(temp);					
 				break;
 			default:
 				break;
@@ -273,30 +248,22 @@ public static String getExtraInfo(String bookid) throws UnsupportedEncodingExcep
 			JSONArray jsonArray = JSONArray.fromObject(list);
 //			ptids=ptids.substring(0,ptids.lastIndexOf(","));
 //			obj.put("ptid",ptids);
-//			jsonArray.add(obj); 
-			
-			
+//			jsonArray.add(obj); 			
 			result = jsonArray.toString();
-
-		}
-		
-	  
+		}			  
 	 catch (SQLException e) {
 		e.printStackTrace();
 	}
 
- finally{
-      	 
-    	   try {
-    		
+ finally{     	 
+    	   try {    		
 			rs2.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	   try {
-    		 
+    	   try {    		 
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -328,8 +295,7 @@ public static String getDownload(String bookid) throws UnsupportedEncodingExcept
 
 		stmt = conn.createStatement();
 		rs3 = stmt.executeQuery(sql);
-		 
-		
+		 	
 		while(rs3.next()){
 			FileInfo fileinfo = new FileInfo();   		
 			fileinfo.setI_base_price(rs3.getString("i_Price"));  
@@ -389,7 +355,6 @@ public static boolean insertAccount(String bookid,String uid,String price,String
 	boolean result=false;
 
 	try {
-
 		stmt = conn.createStatement();
 		stmt.executeUpdate(sql);
 		result = true;
@@ -400,8 +365,7 @@ public static boolean insertAccount(String bookid,String uid,String price,String
 	}
 
  finally{
-    	   try {
-    		 
+    	   try {   		 
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -12,6 +12,10 @@
   border-radius:6px 0 0 0; 
   background: #317082;
 }
+.leftitem{
+    height: auto;
+    overflow: hidden;
+}
 .bioclass,.drugclass,.dynanmic{
     margin-top: 10px;
 }

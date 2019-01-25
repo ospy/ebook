@@ -70,7 +70,22 @@ img {
     border-bottom:1px solid #eee;
     
 }
-
+.main {
+    margin:5px auto;
+    width:1200px;
+    height: auto;
+    overflow: hidden;
+    background:#fff;
+    color:#2e2e2e;
+}
+.navibar{
+    text-indent: 1em;
+    margin: 0 auto;
+    height: 30px;
+    line-height: 30px;
+    width: 1200px;
+    
+}
 .sitetop {
     margin:0 auto;
     width:1200px;

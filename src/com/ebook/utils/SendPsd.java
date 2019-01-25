@@ -60,11 +60,12 @@ public class SendPsd {
 			ptst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			DatabaseTools.closeStatement(ptst);			
-		}
+		}finally{			
+			DatabaseTools.closeStatement(ptst);
+			
+			}
 		//保存重置密码
-		LOG.info("保存密码");
+		//LOG.info("保存密码");
 		
 		//发送内容
 		Map<String, String> map = new HashMap<String, String>();
@@ -106,13 +107,13 @@ public class SendPsd {
     	if(sendresult==true){    		
     		String newpwd=DigestUtils.md5Hex(actcode);
      			String sql3 = "{call updatepwd(?,?)}";
-     			CallableStatement call1;
+     			CallableStatement call1 = null;
      			try {
      				call1 = conn.prepareCall(sql3);
      				call1.setString(1,uid);
      				call1.setString(2,newpwd);
      				call1.execute();
-     				call1.close();    				
+     				  				
      				changeresult=true;			
      			    
      			} catch (SQLException e) {
@@ -120,7 +121,8 @@ public class SendPsd {
      				e.printStackTrace();
      			}
      			finally{
-     				DatabaseTools.closeConnection(conn);
+     				DatabaseTools.closeStatement(call1); 
+  				   DatabaseTools.closeConnection(conn);
      			}	
     	};   
   		 

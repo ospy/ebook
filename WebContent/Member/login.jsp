@@ -44,8 +44,8 @@
 						<p class="fieldset">
 							<span class=title>验证码：</span> <input id="txt_ValidateCode"
 								class="text-input validatecode" onblur="checkCode();"
-								type="text">&nbsp;&nbsp;&nbsp;&nbsp;<img id="validimg" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: top; font-size: 12px;"
-                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" /> <span id="codetip"></span>
+								type="text">&nbsp;&nbsp;&nbsp;&nbsp;<img id="validimg" href="javascript:void(0)" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: top; font-size: 12px;"
+                            onclick="this.src='/code.do?name=user_reg&id='+encodeURI(new Date());return false;" /> <span id="codetip"></span>
 						</p>
 						<p id="tip-validatecode" class="tip"></p>
 						<p class="fieldset" >
@@ -151,17 +151,17 @@
 	                    else if (result ==-1) {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("重复登录！");
 	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("重复登录！");
-	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+encodeURI(new Date()));
 	                    }
 	                    else if (result ==-2) {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("该用户已经在异地登录！");
 	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("该用户已经在异地登录！");
-	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+encodeURI(new Date()));
 	                    }
 	                    else if (result ==-3) {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("请登录注册邮箱点击激活链接！");
 	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("请登录注册邮箱点击激活链接！");
-	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+encodeURI(new Date()));
 	                    }
 	                    else {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");

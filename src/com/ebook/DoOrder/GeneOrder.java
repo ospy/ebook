@@ -89,9 +89,10 @@ public class GeneOrder extends HttpServlet {
 		    String date = DateUtils.format(null);       		
 		    SimpleDateFormat datef = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  		
 			List<Double> findresult = new ArrayList<Double>();
+			Connection conn = DBPool.getInstance().getConnection();
 				try {
 					String sql = "select real_price from orderlist where  type='"+type+"' and recharge_price="+price+" and pay_state=1 order by real_price ASC" ;			 
-					Connection conn = DBPool.getInstance().getConnection();
+					
 					Statement stmt=null;
 					ResultSet rs = null;
 					stmt = conn.createStatement();
@@ -102,15 +103,13 @@ public class GeneOrder extends HttpServlet {
 						findresult.add(Double.valueOf(rs.getString(1)));	//已占用价格二维码存入数组						
 					} 
 					stmt.close();
-					conn.close();
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
 				//处理插入订单记录 2种情况：1该价格下无占用二维码2该价格下有占用二维码
-				Connection conn  = DBPool.getInstance().getConnection();
-
 				String sql1 = "{call InsertOrder(?,?,?,?,?,?,?,?,?)}";
 				int orderid = 0;
 				Timestamp genetime;
@@ -157,7 +156,7 @@ public class GeneOrder extends HttpServlet {
             			e.printStackTrace();
             		}finally{
             			DatabaseTools.closeStatement(ptst);
-            			DatabaseTools.closeConnection(conn);
+            			
             		}
                 }			
                 else{ //2该价格下有占用二维码            	
@@ -199,14 +198,14 @@ public class GeneOrder extends HttpServlet {
 	            			e.printStackTrace();
 	            		}finally{
 	            			DatabaseTools.closeStatement(ptst);
-	            			DatabaseTools.closeConnection(conn);
+	            			
 	            		}
             		 }
             		 else{
             			 result="-1";
             		 }
                 }
-	    
+		DatabaseTools.closeConnection(conn);
 		out.print(result);		   
 	   }       		    
 		else{

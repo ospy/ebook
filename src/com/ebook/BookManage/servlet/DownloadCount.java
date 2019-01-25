@@ -40,10 +40,6 @@ public class DownloadCount extends HttpServlet {
 	String uid = request.getParameter("Uid");
 	String DownloadCount="";
 	
-	
- 
-     
-
 		try {
 		
 			Connection conn = DBPool.getInstance().getConnection(); 
@@ -52,10 +48,8 @@ public class DownloadCount extends HttpServlet {
 			call1.registerOutParameter(2,Types.INTEGER); 
 			call1.setString(1,uid);
 			//一次给存储过程传递参数，插入书目信息
-
 			call1.execute();
-			DownloadCount=call1.getString(2); 
-			
+			DownloadCount=call1.getString(2); 			
 			call1.close();
 		    conn.close();
 		} catch (Exception e) {

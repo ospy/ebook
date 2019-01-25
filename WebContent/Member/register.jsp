@@ -28,19 +28,19 @@
                     <div class="form_item">
                         <label>
                             用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
-                        <input id="reg_username" class="text-input  typeahead" type="text" onblur="checkName()" />&nbsp;&nbsp;<span
+                        <input id="reg_username" class="text-input  typeahead" type="text" onblur="checkName()" placeholder="6-30位字母或数字"/>&nbsp;&nbsp;<span
                             id="reg_usernameTip"></span>
                     </div>
                     <div class="form_item">
                         <label>
                             密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
-                        <input id="reg_pwd" class="text-input  typeahead" type="password" onblur="checkPwd()" />&nbsp;&nbsp;<span
+                        <input id="reg_pwd" class="text-input  typeahead" type="password" onblur="checkPwd()" placeholder="6-30位字母或数字"/>&nbsp;&nbsp;<span
                             id="reg_pwdTip"></span>
                     </div>
                     <div class="form_item">
                         <label>
                             确认密码：</label>
-                        <input id="reg_pwd2" class="text-input  typeahead" type="password" onblur="checkRePwd()" />&nbsp;&nbsp;<span
+                        <input id="reg_pwd2" class="text-input  typeahead" type="password" onblur="checkRePwd()" placeholder="6-30位字母或数字"/>&nbsp;&nbsp;<span
                             id="reg_pwd2Tip"></span>
                     </div>
 
@@ -49,7 +49,7 @@
                             验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
                         <input id="reg_ValidateCode" class="text-input  typeahead validatecode" type="text" onblur="checkCode();" />&nbsp;&nbsp;&nbsp;&nbsp;
                         <img src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
-                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" />
+                            onclick="this.src='../code.do?name=user_reg&id='+encodeURI(new Date());" />
                         &nbsp;&nbsp;<span id="reg_ValidateCodeTip"></span>
                     </div>
                     <div class="form_item">
@@ -96,19 +96,19 @@
                     		location.href = "<%=path%>/Member/actmail.jsp?email="+Email;
                     	}
                     	else if(data=="1.1"){
-                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
                     		alert("邮件发送失败，请重新操作!");                   		
                     	}
                     	else if(data=="2"){
-                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
                     		alert("Email已被使用!");	
                     	}
                     	else if(data=="3"){                    		
-                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
                     		 alert("用户名已被使用!");
                     	}
                     	else{
-                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
                     		alert("添加失败！请发送邮件联系管理员:imed120@163.com");
                     	}
                         
@@ -186,7 +186,7 @@
                 $("#reg_usernameTip").addClass("onError").html("不可为空！");
                 check2 = false;
             } else {
-                if (userName.length > 4 && userName.length < 31) {
+                if (userName.length > 5 && userName.length < 31) {
                     var reg = /([^0-9](.)*)/;
                     if (!reg.test(userName)) {
                         $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("须使用字母+数字！");
@@ -215,7 +215,7 @@
                         });
                     }
                 } else {
-                    $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("输入长度限制为4-30！");
+                    $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("输入长度限制为6-30！");
                     check2 = false;
                 }
 

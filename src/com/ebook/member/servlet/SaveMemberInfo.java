@@ -64,7 +64,7 @@ public class SaveMemberInfo extends HttpServlet {
 			}
 			else{
 				out.print(false);
-			  }
+			  };
 		}
 		else{
 			out.print("会话过期");

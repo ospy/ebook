@@ -157,6 +157,27 @@ ul.info_list li {
 .basicinfo li.col label,.basicinfo li.col2 label{
    font-weight: normal;
 }
+.referlink{
+    margin-left: 5px;
+    padding-left: 25px;
+    vertical-align: text-top;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    background: url("/Images/icons/referlink.png") no-repeat;
+}
+.dangdang{
+    background-position: 0 0; 
+}
+.jd{
+    background-position: 0 -26px; 
+}
+.amazon{
+    background-position: 0 -50px; 
+}
+.douban{
+    background-position: 0 -74px; 
+}
 .price{
    color: #f40;
 }
@@ -310,7 +331,6 @@ ul.info_list li {
     padding: 0;
     text-indent: 2em;
     line-height: 22px;
-    height: 20px;
 }
 #bookabstract .ItemContent{
 	padding:10px;

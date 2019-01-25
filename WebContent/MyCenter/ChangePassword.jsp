@@ -22,25 +22,25 @@
          <div class="form_item">
                         <span class="red star">*</span><label>
                             请输入旧密码：</label>
-                        <input id="old_pwd" class="text-input  typeahead" type="password" onblur="checkOldPwd()" />&nbsp;&nbsp;<span
+                        <input id="old_pwd" class="text-input  typeahead" type="password" onblur="checkOldPwd()" placeholder="6-30位字母或数字"/>&nbsp;&nbsp;<span
                             id="old_pwdTip"></span>
                     </div>
                     <div class="form_item">
                         <span class="red star">*</span><label>
                             请输入新密码：</label>
-                        <input id="reg_pwd" class="text-input  typeahead" type="password" onblur="checkPwd()" />&nbsp;&nbsp;<span
+                        <input id="reg_pwd" class="text-input  typeahead" type="password" onblur="checkPwd()" placeholder="6-30位字母或数字"/>&nbsp;&nbsp;<span
                             id="reg_pwdTip"></span>
                     </div>
                     <div class="form_item">
                         <span class="red star">*</span><label>确认新密码：</label> 
-                            <input id="reg_pwd2" class="text-input  typeahead" type="password" onblur="checkRePwd()" />&nbsp;&nbsp;<span
+                            <input id="reg_pwd2" class="text-input  typeahead" type="password" onblur="checkRePwd()" placeholder="6-30位字母或数字"/>&nbsp;&nbsp;<span
                             id="reg_pwd2Tip"></span>
                     </div>
                     <div class="form_item">
 						<span class="red star">*</span><label>验证码：</label> <input id="txt_ValidateCode"
 								class="text-input validatecode" onblur="checkCode();"
 								type="text">&nbsp;&nbsp;&nbsp;&nbsp;<img id="validimg" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: top; font-size: 12px;"
-                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" /> <p id="tip-validatecode" class="tip red"></p>
+                            onclick="this.src='../code.do?name=user_reg&id='+encodeURI(new Date());" /> <p id="tip-validatecode" class="tip red"></p>
 					</div>
                     <div class="form_item">
                         <input value="确定" type="button" class="submit" onclick="updatepsw();" />
@@ -178,7 +178,7 @@ function updatepsw(){
                 else if(data=="-1"){
                 	$("#old_pwdTip").removeClass("onCorrect");
                     $("#old_pwdTip").addClass("onError").html("旧密码输入错误！");
-                    $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+                    $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
 				}
                 else {
 					var $copysuc = $("<p>修改失败！请发送问题至客服邮箱：imed120@163.com</p>");

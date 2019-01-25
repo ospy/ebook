@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.ebook.entity.BookList;
 import com.ebook.entity.News;
 import com.ebook.utils.DBPool;
+import com.ebook.utils.DatabaseTools;
 import com.ebook.utils.RsToJson;
 
 import org.json.*;
@@ -27,7 +28,6 @@ public class NewsDao {
 		String result="";
 		ArrayList<News> list=new ArrayList<News>();
 		try {
-
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -38,38 +38,15 @@ public class NewsDao {
 				news.setDatetime(rs.getString("datetime"));
 				list.add(news);
 			        }
-					
-				 
-	
-			JSONArray jsonArray = JSONArray.fromObject(list);
-			
-			result = jsonArray.toString();
-           
-				
+			JSONArray jsonArray = JSONArray.fromObject(list);			
+			result = jsonArray.toString();			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			
+			e.printStackTrace();		
 		}
-       finally{
-    	 
-    	   try {
-			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	   try {
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	   try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+       finally{   	  
+   			DatabaseTools.closeResultset(rs);
+   			DatabaseTools.closeStatement(stmt);
+   			DatabaseTools.closeConnection(conn);  			
        }
 		  return result;
    }
@@ -97,26 +74,10 @@ public class NewsDao {
 			e.printStackTrace();
 		}
        finally{
-    	 
-    	   try {
-			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	   try {
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	   try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+   			DatabaseTools.closeResultset(rs);
+   			DatabaseTools.closeStatement(stmt);
+   			DatabaseTools.closeConnection(conn);
        }
-		  return result;
+	   return result;
    }
 }

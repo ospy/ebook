@@ -37,7 +37,7 @@
                             验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
                         <input id="reg_ValidateCode" class="text-input  typeahead validatecode" type="text" onblur="checkCode();" />&nbsp;&nbsp;&nbsp;&nbsp;
                         <img src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: middle; font-size: 12px;"
-                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" />
+                            onclick="this.src='../code.do?name=user_reg&id='+encodeURI(new Date());" />
                         &nbsp;&nbsp;<span id="reg_ValidateCodeTip"></span>
                     </div>
                     <div class="form_item">
@@ -96,12 +96,12 @@
 				         		});
                     	}
                     	else if(data=="-1"){
-                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());
+                    		 $("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));
                     		 $("#reg_emailTip").removeClass("onCorrect").addClass("onError").html("邮箱地址与用户名不匹配！");
                     		 $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("邮箱地址与用户名不匹配！");
                     	}
                     	else if(data=="-1.1"){
-                    	$("#validimg").attr("src","/code.do?name=user_reg&id="+new Date());	
+                    	$("#validimg").attr("src","/code.do?name=user_reg&id="+encodeURI(new Date()));	
                    		 $("#reg_emailTip").removeClass("onCorrect").addClass("onError").html("30天内只能修改密码3次！");
                    		 $("#reg_usernameTip").removeClass("onCorrect").addClass("onError").html("30天内只能修改密码3次！");
                    	}

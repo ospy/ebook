@@ -149,6 +149,8 @@
                             <li class="col"><label>点击次数：</label><span id="clickCount"></span></li>                                 
                             <li class="col2"><label>下载点数：</label><b class="price">￥<span class="download-price"></span></b></li>
                             <li class="col" style="visibility:hidden;"><label>下载次数：</label><span id="downCount"></span></li>
+                            <li class="col2"><label>参考链接：</label><a class="referlink dangdang" onclick="goRefer(1);">当当</a><a class="referlink jd" onclick="goRefer(2);">京东</a><a class="referlink amazon" onclick="goRefer(3);">亚马逊</a><a class="referlink douban" onclick="goRefer(4);">豆瓣</a></li> 
+                            
                 </ul>
                 <br> 
                 <br>
@@ -281,7 +283,7 @@
 							<span class=title>验证码：</span> <input id="txt_ValidateCode"
 								class="text-input validatecode" onblur="checkCode();"
 								type="text">&nbsp;&nbsp;&nbsp;&nbsp;<img id="validimg" src="../code.do?name=user_reg" alt="看不清?换一张" style="cursor: pointer; vertical-align: top; font-size: 12px;"
-                            onclick="this.src='../code.do?name=user_reg&id='+new Date();" /> <span id="codetip"></span>
+                            onclick="this.src='../code.do?name=user_reg&id='+encodeURI(new Date());" /> <span id="codetip"></span>
 						</p>
 						<p id="tip-validatecode" class="tip red"></p>
 						<!-- 					<p class="fieldset remember"> -->
@@ -787,7 +789,7 @@
 	                    } else {
 	                    	$("#tip-username").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
 	                        $("#tip-password").removeClass("onCorrect").addClass("onError").html("用户名或密码错误！");
-	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+new Date());
+	                        $('#validimg').attr("src",'../code.do?name=user_reg&id='+encodeURI(new Date()));
 	                    }
 	                },
 	                error: function () {
@@ -819,10 +821,51 @@
             $(this).children("img").attr("src", "/Images/icons/show.png");
         };
     });
-	
-  
-
-
+	function goRefer(key){
+	    var title=$("h1.booktitle").html();
+		switch (key) {
+		case 1:
+			var url="http://search.dangdang.com/?key="+title+"&rd_flag=noresult";
+	        window.open(url);
+			break;
+		case 2:
+			var url="http://search.jd.com/Search?keyword="+title+"&enc=utf-8";
+            window.open(url);
+			break;
+		case 3:
+			var url="http://www.amazon.cn/gp/search/ref=sr_hi_2?&keywords="+title;
+	        window.open(url);
+	        break;
+		case 4:
+			var url="https://book.douban.com/subject_search?search_text="+title;
+	        window.open(url);
+	        break;
+		default:
+			break;
+		}
+	}
+</script>
+<script>
+//百度自动收录
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+//360自动收录
+(function(){
+var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?bff6f99cac950f127c9c635467ce528c":"https://jspassport.ssl.qhimg.com/11.0.1.js?bff6f99cac950f127c9c635467ce528c";
+document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
 </script>
 <%@ include file="/Master/footer.jsp"%>
 </body>

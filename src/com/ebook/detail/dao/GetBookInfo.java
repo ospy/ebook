@@ -120,7 +120,6 @@ public static String getDD(String url) {
 	        	String name2=mMatcher2.group(1).trim().toString();
 	        	
 	        	switch(name2){  
-
 	            case "版 次":  
 	            	bookabstract.setEdition(mMatcher2.group(2)); 
 	                break;  

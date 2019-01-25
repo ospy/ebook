@@ -16,7 +16,7 @@
 <body>
        
       <h1 class="mod-title">
-		<span id="paylogo" class="ico-wechat"></span><span class="text">微信支付</span>
+		<span class="ico-wechat paylogo"></span><span class="text">微信支付</span>
 	  </h1>
 	  <div class="orderbox">
 		<div class="mod-ct">
@@ -27,6 +27,7 @@
 			<div id="qrcode"  title="">
 	          <img style="display: initial;" src="" width="160px" height="160px">
 	          <div class="countdown">订单关闭倒计时：<span id="minute_show"></span>分<span id="second_show"></span>秒</div>
+	         
 	         </div>
 			<div class="tip">
 				<span class="dec dec-left"></span>
@@ -34,9 +35,9 @@
 				<div class="ico-scan"></div>
 				<div class="tip-text">
 				<p>请使用手机<span class="payname"></span>扫一扫</p>
-				<p>扫描二维码完成支付</p>
+				<p>扫描二维码完成支付</p>			
 				</div>
-			
+			<p class="failtip"><span class="failicon"></span>如发生充值未到账情况，请将您的<b>用户名、订单号(支付宝)或转账单号(微信)</b>发送至客服邮箱：imed120@163.com ，我们将及时为您处理！</p>
 			</div> 
 			<div id="orderDetail" class="detail detail-open">
 				<dl style="display: block;" class="detail-ct">
@@ -44,7 +45,7 @@
 					<dd id="storeName">imed120.com</dd>
 					<dt>购买物品：</dt>
 					<dd id="productName"></dd>
-					<dt>商户订单号：</dt>
+					<dt>流水号：</dt>
 					<dd id="billId"></dd>
 					<dt>创建时间：</dt>
 					<dd id="createTime"></dd>
@@ -89,12 +90,12 @@
 		//alert(fromurl);
 		$(function() {           
               if(type=="wechat"){           	 
-            	  $("#paylogo").removeClass().addClass("ico-wechat");
+            	  $(".paylogo").removeClass().addClass("ico-wechat");
             	  $(".mod-title .text").html("微信支付");
             	  $(".payname").html("微信");
               }
               if(type=="alipay"){           	 
-            	  $("#paylogo").removeClass().addClass("ico-alipay");
+            	  $(".paylogo").removeClass().addClass("ico-alipay");
             	  $(".mod-title .text").html("支付宝支付");
             	  $(".payname").html("支付宝");
               }
@@ -203,45 +204,44 @@
             data: {orderid:orderid},
             success: function (result) {
             	if(result==0){
-            		alert("获取订单ID失败，请发送邮件至：imed120@163.com！");
+            		var $copysuc = $("<p>获取订单ID失败，请发送邮件至：imed120@163.com！</p>");
+    	           	  //modal居中  
+    	          	   $("#headmodal .modal-body").html($copysuc);
+    	          	   $("#headmodal").modal("show");
+    	          	 $('#headmodal').on("hidden.bs.modal", function () {
+    	         		//关闭模态框后清除模态框数据
+    	          		shutdown();
+    	         		});
             	}
             	else if(result[0].pay_state==2){
-            		alert("订单已超时关闭！");
-            		shutdown();
+            		
+            	var $copysuc = $("<p>订单已超时关闭！</p>");
+  	           	  //modal居中  
+  	          	   $("#headmodal .modal-body").html($copysuc);
+  	          	   $("#headmodal").modal("show");
+  	          	 $('#headmodal').on("hidden.bs.modal", function () {
+  	         		//关闭模态框后清除模态框数据
+  	          		shutdown();
+  	         		});
             	}
             	else if (result[0].pay_state==3&&result[0].pay_time!="") {
             		$("#myModal").modal("show");
                 	} 
             },
             error: function () {
-                alert("获取有效订单错误，请发送邮件至：imed120@163.com！");
+            	var $copysuc = $("<p>获取有效订单错误，请发送邮件至：imed120@163.com！</p>");
+	           	  //modal居中  
+	          	   $("#headmodal .modal-body").html($copysuc);
+	          	   $("#headmodal").modal("show");
+	          	 $('#headmodal').on("hidden.bs.modal", function () {
+	         		//关闭模态框后清除模态框数据
+	          		location.href = "<%=path%>/index.jsp";
+	         		});
                 return;
             }
         });	 	
 	}
-	function shutdown() {     
-		//判断是否为ie
-        if (navigator.userAgent.indexOf("MSIE") > 0) {
-            //判断是否为ie6
-            if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
-                window.opener = null; window.close();
-            }
-            else {
-                window.open('', '_top');
-                window.top.close();
-            }
-        }
-        //判断是否为firefox
-        else if (navigator.userAgent.indexOf("Firefox") > 0) {
-        	window.close();
-        }
-        //其他非firefox等主流浏览器如chrome,safari
-        else {
-            window.opener = null; 
-            window.open('', '_self', '');
-            window.close();
-        }
-	}
+	
 	$('#myModal').on("hidden.bs.modal", function () {
 		//关闭模态框后清除模态框数据
 		shutdown();
